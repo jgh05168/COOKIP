@@ -1,0 +1,220 @@
+## A. 기획 발표 (PJT1)
+
+### a. 발표 자료
+
+### b. 발표 대본
+
+- 스크립트
+    
+    # 1
+    
+    ```
+    **안녕하세요!
+    다들 식사는 맛있게 하셨죠??
+    제가 오늘은 점심을 먹지 않아서 잘 모르는데 오늘 어떤 메뉴가 나왔나요?
+    
+    찜닭 부대찌개 돈마호크 볶음밥 대게라면
+    
+    음 여러분들 자취 많이 하시죠? 
+    저같은 경우에 요리를 정말 좋아하지만 싸피를 마치고 집에 돌아가게 되면 저녁 메뉴를 고민할 여유가 없어 요즘에는 스팸 햇반 닭가슴살같이 간편식을 많이 먹게 되었는데요
+    
+    여러분들, 이 재료들 잘 요리하면 오늘 점심에 드셨던 대부분의 메뉴를 집에서 드실 수 있디는 것 눈치채셨나요?
+    
+    이제 사설은 마치고 저희의 야심작, "쿠킵"에 대해서 발표 시작하겠습니다**
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/b21a3e69-9252-4e5d-9dfc-d3c6a92e18c9/Untitled.png)
+    
+    # 2
+    
+    ```
+    발표는 다음과 같이 기획 배경과 목표에 대해서 말씀드리고 
+    개발에 사용 될 기술들과 구현에 대한 프로토타입을 소개해드리며 마무리하겠습니다.
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/117aad9e-f46a-474d-94ed-e67ca0c7fa44/Untitled.png)
+    
+    # 3
+    
+    ```
+    먼저 기획 배경에 대해서 말씀드리겠습니다. 
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/5e85d69f-73a4-42bb-b46a-b6496cde7e1b/Untitled.png)
+    
+    # 4
+    
+    ```
+    저희는 기획에 앞써 브레인스토밍을 진행하였는데요
+    
+    냉장고에 재료가 있음에도 어떤 요리를 할지 고민했던 경험,
+    레시피에 나와 있는 재료들의 한 컵이, 한 큰술이 얼마나 되는지 가늠이 안되어 레시피를 따라하기 어려웠던 경험,
+    레시피를 따라하며 요리하랴, 레시피 넘기랴 손이 불편한 상황이 빈번했던 경험 등
+    
+    각자 요리를 하며 헸던 고민들과 어렵고 불편했던 경험들을 공유하는 시간을 가졋습니다. 
+    
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/64b5ef39-f640-406f-818a-4bb5f5c7e0a5/Untitled.png)
+    
+    # 5
+    
+    ```
+    이에 저희는 냉장고 재고 현황과 개인 선호도에 따른 레시피 추천 시스템을 고안하게 되었습니다.
+    
+    구현 할 기능들은 다음과 같습니다!
+    
+    우선 빔프로젝터를 활용하여 실제 재료를 시각화하고
+    회원가입 시 수집된 정보와 냉장고 데이터를 바탕으로 레시피를 추천하여 사용자 맞춤 레시피 컬렉션을 만들 수 있으며 
+    카메라를 이용한 재료 계량 및 제스처 인식을 통해 퍼스널 요리 레시피 기록 기능을 제공할 예정입니다.  
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/2e193b7c-42fb-4801-b1f2-3eaef3e3d718/Untitled.png)
+    
+    # 6
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/109f7f66-1409-4cf7-9e79-4acadc1a01c7/Untitled.png)
+    
+    # 7
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/6a74544a-ac13-476e-8a99-c9e39a988b6b/Untitled.png)
+    
+    # 8
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/ee716f0b-3067-4bed-85fd-f0158d41cb23/Untitled.png)
+    
+    # 9
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/e8793bca-b493-45cd-9fce-0848735167d3/Untitled.png)
+    
+    # 10
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/08bd8baf-247c-45e7-a325-154c295b198b/Untitled.png)
+    
+    # 11
+    
+    ```
+    로그인 이후의 최초 화면에서 냉장고 재료와 사용자 데이터 기반으로 추천된 레시피 리스트를 볼 수 있습니다. 
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/f1fbca32-4baf-47be-8ee2-34d9eba2c237/Untitled.png)
+    
+    # 12
+    
+    ```
+    실제 사이즈의 손질된 재료들의 사진을 보여주고  해당 과정을 마치면 제스쳐를 통해 다음 단계로 넘어갈 수 있습니다. 
+    만약 시간 조절이 생명인 요리라면 타이머 기능을 통해 간편하게 시간을 맞출 수 있습니다.
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/0f70be63-f16b-4f66-876e-194a23d40b39/Untitled.png)
+    
+    # 13
+    
+    ```
+    이렇게 요리의 모든 과정이 끝나게 된다면 해냈다는 메시지와 함께 레시피를 만든 쉐프와 해당 레시피에 대한 좋아요를 표시 할 수 있는 창이 뜨게됩니다. 
+    이때 요리 전 과정에서 제스쳐를 통해 녹화 또는 촬영 기능을 이용할 수 있게 됩니다.
+    사용자가 나만의 레시피 만들기 설정을 했다면 해당 과정이 하나의 레시피로 생성 되어 나만의 레시피가 하나 추가된 상태로 마무리하게 됩니다. 
+    이 부분에 대해서는 추후 예정된 중간 발표에서 구체화된 내용을 자세히 말씀드리겠습니다.
+    여기까지 들으셨지만 아직 쿠킵이 어떻게 요리에 도움이 될지 모호하시죠? 
+    
+    그래서! 
+    간략하게나마 시각자료를 준비했습니다!
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/9706705b-759f-4743-9fe2-722f46bfe4ec/Untitled.png)
+    
+    # 14
+    
+    ```
+    우선 종이뭉치를 재료라 가정하고 영상은 시작됩니다.
+    실제 요리에 사용되는 양과 동일한 크기임을 확인하고 사용자는 요리를 진행할 수 있습니다.
+    
+    저렇게 칼질하면 다칩니다..! 
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/d08c77b6-f3c9-4296-8d53-596a1126ba15/Untitled.png)
+    
+    # 15
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/e31386bb-5ffb-431e-9c50-2093f7f9bc33/Untitled.png)
+    
+    # 16
+    
+    ```
+    효율적인 추천 알고리즘을 개발해서 제공하기 위하여 다음과 같이 체계적으로 db를 구축 예정이구요
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/f1892d9b-1f8b-43b1-9117-3910100031e9/Untitled.png)
+    
+    # 17
+    
+    ```
+    구상했던 모든 기능들을 빠짐없이 구현하기 위해서 다음과 같이 기능 명세서를 작성하여 우선순위에 따라 작업을 할 예정입니다.
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/2d4d487e-8273-423b-8dcd-7b6153b5b1fb/Untitled.png)
+    
+    # 18
+    
+    ```
+    끝으로 앞서소개해드린 저희 프로젝트 예상 결과물의 차별점과 기대효과에 대해 말씀드리면서 마무리 하겠습니다.
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/3b5a024a-e5aa-4500-a8d3-f17c0a45e3bc/Untitled.png)
+    
+    # 19
+    
+    ```
+    최초 회원가입 시에 조사된 설문 내용을 바탕으로 사용자의 알러지 정보나 선호도를 바탕으로 냉장고에 있는 재고들로 만들 수 있는 레시피를 제시해주고
+    
+    제스처를 통한 제품 컨트롤로 하여금 사용자에게 편의성을 제공하며
+    
+    빔 프로젝트를 활용한 디스플레이로 휴대성과 활용성을 극대화 할 수 있으며 조명에 민감한 디스플레이 특성에 맞추어 추후 조명 컨트롤도 가능하게 할 예정입니다.
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/af3f5487-956f-43c0-a3bb-f38112332b20/Untitled.png)
+    
+    # 20
+    
+    ```
+    Keep cooking 여러분들은 그냥 요리만 하시면 됩니다! 
+    복잡하고 번거로운 절차들은 맡겨주세요! 
+    저희 목표는 언젠가 저희의 기능을 삼성
+    발표는 여기까지구요, 쿠킵에 대해 질문 받겠습니다! 여러분의 질문은 저희에게 좋은 양분이 될것입니다.
+    지금 까지 쿠킵이었습니다. 감사합니다
+    ```
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/ee1fe2c1-7827-44a0-b5eb-190e263b4676/108bbee3-e39a-4516-aeb3-71bd34805884/Untitled.png)
+    
+
+### c. 질의응답 및 발표 피드백
+
+- 질의응답
+    1. 타겟층 확실히 하기 
+        - 자취생만을 타겟으로 한 것이 아닌 주부
+        - 요리하고 싶은 사람들이 타겟임
+        
+        → 우리가 정리 잘 하면 해결될 문제
+        
+    2. 로그인이 굳이 필요한 이유가 있을까?
+        - 로그인을 이용해서 smarthings 냉장고랑 연동할 수 있고 개인적인 선호도, 팔로우, 등을 고려해야해서 로그인이 필요함. 이는 1회만 하는 것이라서 불편하지 않음
+    
+    1. 공간 및 비용적인 제약
+        - 조리하는곳은 한정적, 오븐과 같은 곳은 타이머 등 이용
+    
+    1. 차별점 확실히 정하자
+        - **팀원 개개인이 이해하는 범위가 살짝 다른 것 같음.**
+        - **한번 정리가 필요한 것 같다.**
+    2. 음성, 제스처 등의 차별점 좀 더 구체적으로
+    
+    1. 요리를 하면서 이동할 때의 문제점
+        
+        설치형 임
+        
+    2. 상세 기능 확실히 정리
+    
+- 발표 피드백
+    1. 팀원 간의 공유 및 개인의 이해 중요
+    2. 엄마에게 이야기 하듯 , 모르는 사람들에게 설명
+    3. 최종 때도 처음듣는 사람에게 설명 하듯, 빔 프로젝터를 같이 제공하는가어 
+    4. 복장 및 촿영 장소 (유리창 응용)
