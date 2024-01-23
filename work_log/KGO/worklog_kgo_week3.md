@@ -55,7 +55,7 @@
 |---|---|---|
 |:white_check_mark:|DB Table의 이름과 Table 열의 이름이 헷갈려서 대문자, 소문자로 구분|
 |:white_check_mark:|DB Table의 자동삭제 만들기|
-|:white_check_mark:|use schema_name 대신 더블클릭으로 스키마 선택하기|
+|:white_check_mark:|use schema_name 대신 더블클릭으로 스키마 선택하기.|
 
 ### 익일 예정 사항
 
