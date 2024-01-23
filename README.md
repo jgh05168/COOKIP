@@ -88,6 +88,8 @@
 
 ![flowchart](/resources/CookipFlow.png)
 
+스토리 이슈코드 커밋 확인용
+
 ### UI 설계
 
 ### REST_API
