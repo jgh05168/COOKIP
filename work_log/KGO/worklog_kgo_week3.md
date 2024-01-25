@@ -92,22 +92,22 @@
 
 ### 금일 실시 사항
 
-- 오전 : 
+- 오전 : mysql module
  
-    - 
-    - 
+    - mysql module 을 이용해서 웹에 DB 값을 띄울 수 있다
+    - dependencies 을 이용해 자동화 설치가 가능하다
+    - mysql module의 query문을 이용해 query 명령문을 작성할 수 있다 
 
-- 오후 : 
+- 오후 : express이해 검색 후 DB insert
 
-    - 
-    - 
-    - 
+    - express 라우터를 이용해서 웹에 접근할 수 있다
+    - ejs를 이용해서 웹의 구상을 객체지향적으로 구상할 수 있다 (Embedded web system)
+    - planetscale을 이용하면 DB server를 구축할 수 있다
 
 ### 문제 분석 및 해결
 
 ||원인|해결|
 |---|---|---|
-|:white_check_mark:||
 |:white_check_mark:||
 
 
@@ -115,9 +115,9 @@
 
 |Todo List||
 |---|---|
-|:black_square_button: | |
-|:black_square_button:| |
-|:black_square_button: | |
+|:black_square_button: |타팀,팀원 평가|
+|:black_square_button:|자소서 소스 뽑기, 구상|
+|:black_square_button: |https://www.youtube.com/watch?v=GDOACxOQAaY&t=4s 시청 후 노션 정리|
 
 <br>
 
