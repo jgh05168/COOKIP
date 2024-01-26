@@ -77,7 +77,7 @@
 
 ||원인|해결|
 |---|---|---|
-|:white_check_mark:||
+|:white_check_mark:|coding convention|
 
 
 ### 익일 예정 사항
@@ -125,10 +125,11 @@
 
 ### 금일 실시 사항
 
-- 오전 : 
+- 오전 : 팀평가 및 DB 데이터 불러오기
+    - planetscale 사용으로 DB 넣고 뺴기
  
-
-- 오후 : 
+- 오후 : git 백업
+    - .md 파일 markdown 사용법
 
 ### 문제 분석 및 해결
 
