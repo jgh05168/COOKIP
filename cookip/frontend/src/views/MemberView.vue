@@ -7,9 +7,16 @@
         </h2>
         <h2>아니면 저장된 사용자로 바로 음성검색 및 추천 서비스를 사용할 수 있도록 합니다</h2>
     </div>
+    <MemberList />
+    <CreateMemberQR />
+    <RouterLink :to="{name:'home'}">사용자 home 으로 가기</RouterLink>
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router';
+import MemberList from '@/components/member/MemberList.vue';
+import CreateMemberQR from '@/components/create/CreateMemberQR.vue';
+
 
 </script>
 

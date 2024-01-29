@@ -3,8 +3,11 @@
     <div>
       <h1>hello, APP.vue</h1>
     </div>
-    <RouterLink :to="{name:'/'}"></RouterLink>
-    <div>
+    <RouterLink :to="{name:'main'}">main</RouterLink> |
+    <RouterLink :to="{name:'member'}">member</RouterLink> |
+    <RouterLink :to="{name:'home'}">home</RouterLink> |
+    <RouterLink :to="{name:'my-profile'}">my-profile</RouterLink> |
+    <div class="screen">
       <RouterView />
     </div>
 </div>
@@ -16,5 +19,6 @@ import { RouterView, RouterLink } from 'vue-router';
 </script>
 
 <style scoped>
+
 
 </style>
