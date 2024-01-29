@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>기본 UI 입니다</h1>
+        <h1>멤버 상세정보 관리 페이지 입니다</h1>
     </div>
 </template>
 
