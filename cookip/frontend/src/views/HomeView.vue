@@ -5,6 +5,12 @@
             사용자 맞춤형 페이지
         </h2>
         <RouterLink :to="{name:'my-favorite'}">즐겨찾기</RouterLink>
+
+        <div>
+            
+        </div>
+
+
         <RouterLink :to="{name:'recipe'}">레시피</RouterLink>
 
 
