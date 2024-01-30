@@ -4,8 +4,9 @@
         <h2>추천 레시피, 즐겨찾기, 검색 등 다양한 기능을 이용할 수 있는 
             사용자 맞춤형 페이지
         </h2>
-        <RouterLink :to="{name:'my-favorite'}">즐겨찾기</RouterLink>
-        <RouterLink :to="{name:'recipe'}">레시피</RouterLink>
+        <RouterLink :to="{name:'my-favorite'}">즐겨찾기</RouterLink> |
+        <RouterLink :to="{name:'recipe'}">레시피</RouterLink> |
+        <RouterLink :to="{name:'recipe-detail'}">레시피디테일</RouterLink>
     </div>
 </template>
 
