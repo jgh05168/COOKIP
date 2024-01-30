@@ -40,8 +40,8 @@ const routes = [
     component: MyProfileView,
   },
   {
-    path: "/recipe/detail", // Example of dynamic route parameter
-    name: "recipe-detail",
+    path: '/recipe/detail', // Example of dynamic route parameter
+    name : 'recipe-detail',
     component: RecipeDetailView,
   },
   {
