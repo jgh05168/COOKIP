@@ -6,17 +6,12 @@
         </h2>
         <RouterLink :to="{name:'my-favorite'}">즐겨찾기</RouterLink>
         <RouterLink :to="{name:'recipe'}">레시피</RouterLink>
-
-
     </div>
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
-
-
+import { RouterLink } from "vue-router";
 </script>
 
 <style scoped>
-
 </style>
