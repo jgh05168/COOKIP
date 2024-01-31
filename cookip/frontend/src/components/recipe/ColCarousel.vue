@@ -1,52 +1,74 @@
 <template>
-    <v-carousel height="800px" hide-delimiters class="vertical-carousel">
-      <!-- 캐로셀 상하 조작 버튼-->
-      <template v-slot:prev="{ props }">
-        <v-btn @click="props.onClick">Prev</v-btn>
-      </template>
-  
-      <template v-slot:next="{ props }">
-        <v-btn @click="props.onClick">Next</v-btn>
-      </template>
+  <VueSlickCarousel v-bind="settings" :style="{ height: '372px' }">
+    <div v-for="(recipe, idx) in props.recipeList" :key="idx" class="card-item">
+      <div class="cardcontainer">
+        <!-- 카드 플립 기능 -->
+        <v-card class="the-card">
+          <!-- 카드 앞면 표시 내용 -->
+          <CardFront class="card-front" :recipe="recipe" />
+          <!-- 카드 뒷면 표시 내용 구현하기 -->
+          <CardBack class="card-back" :recipe="recipe" />
+        </v-card>
+      </div>
+    </div>
+  </VueSlickCarousel>
+</template>
 
-      <!-- ------------------ -->
-      <v-carousel-item
-        v-for="(recipe, idx) in props.recipeList"
-        :key="idx"
-        class="vertical-carousel-item"
-      >
-        <FlipCard 
-        :recipe="recipe"
-        />
-        
-      </v-carousel-item>
+<script setup>
+import { defineProps } from "vue";
+import CardFront from "@/components/recipe/CardFront.vue";
+import CardBack from "@/components/recipe/CardBack.vue";
 
-    </v-carousel>
-  </template>
-  
-  <script setup>
-  import { defineProps } from 'vue';
-  import FlipCard from "@/components/recipe/FlipCard.vue"
+const props = defineProps({
+  recipeList: Array,
+});
 
-  const props = defineProps({
-    recipeList:Array,
-  })
+const settings = {
+  dots: true,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  vertical: true,
+  verticalSwiping: true,
+};
+</script>
 
-  </script>
-  
-  <style scoped>
-  .vertical-carousel {
-    transform: rotate(90deg); /* 90도 회전하여 세로로 슬라이드되도록 함 */
-    width: 400px; /* 높이와 너비를 서로 교체하여 크기 조절 */
-  }
-  
-  .vertical-carousel-item {
-    transform: rotate(
-      -90deg
-    ); /* 각 슬라이드 아이템을 다시 90도 회전하여 정상적으로 표시 */
-  }
-  
+<style scoped>
+.cardcontainer {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  perspective: 10000px;
+}
 
+.the-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 1.5s ease;
+  background-color: black;
+}
 
-  </style>
-  
+.card-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: aqua;
+  transform: translateZ(30px);
+}
+
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: antiquewhite;
+  transform: rotateY(180deg) translateZ(-30px);
+}
+
+.the-card:hover {
+  transform: rotateY(180deg);
+}
+</style>

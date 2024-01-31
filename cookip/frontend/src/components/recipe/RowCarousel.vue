@@ -1,27 +1,28 @@
 <template>
-  <v-carousel height="800px" hide-delimiters class="">
-    <!-- 캐로셀 상하 조작 버튼-->
-    <template v-slot:prev="{ props }">
-      <v-btn @click="props.onClick">Prev</v-btn>
-    </template>
-
-    <template v-slot:next="{ props }">
-      <v-btn @click="props.onClick">Next</v-btn>
-    </template>
-    <!-- ---------열 방향 캐로셀 받아오기----------->
-    <v-carousel-item
-      v-for="(recipe_list, idx) in recipe_category"
-      :key="idx"
-      class="vertical-carousel-item"
-    >
+  <VueSlickCarousel v-bind="settings">
+    <div v-for="(recipe_list, idx) in recipe_category" :key="idx">
       <ColCarousel :recipe-list="recipe_list" />
-    </v-carousel-item>
-  </v-carousel>
+    </div>
+    <v-btn @click="showNext()">show me the next</v-btn>
+  </VueSlickCarousel>
+
+  <FlipCard />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import ColCarousel from "./ColCarousel.vue";
+import FlipCard from "./FlipCard.vue";
+
+const settings = ref({
+  centerMode: true,
+  centerPadding: "20px",
+  focusOnSelect: true,
+  infinite: true,
+  slidesToShow: 3,
+  speed: 500,
+  arrows: true,
+});
 
 const recipe_category = ref([
   [{ name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }],
@@ -29,6 +30,7 @@ const recipe_category = ref([
   [{ name: "9" }, { name: "10" }, { name: "11" }, { name: "12" }],
   [{ name: "13" }, { name: "14" }, { name: "15" }, { name: "16" }],
 ]);
+
 </script>
 
 <style scoped></style>
