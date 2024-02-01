@@ -1,63 +1,101 @@
 <template>
-  <v-carousel height="400" hide-delimiters class="vertical-carousel">
-    <!-- 캐로셀 상하 조작 버튼-->
-    <template v-slot:prev="{ props }">
-      <v-btn  @click="props.onClick">Prev</v-btn>
-    </template>
-
-    <template v-slot:next="{ props }">
-      <v-btn @click="props.onClick">Next</v-btn>
-    </template>
-    <!-- ------------------ -->
-    <v-carousel-item
-      v-for="(slide, idx) in slides"
-      :key="idx"
-      class="vertical-carousel-item"
+  <Carousel
+    ref="rowCarousel"
+    :itemsToShow="3.95"
+    :wrapAround="true"
+    :transition="500"
+    style="height: 1000px"
+  >
+    <Slide
+      class="test"
+      v-for="(recipe_list, slide) in recipe_category"
+      :key="slide"
+      style="height: 1000px"
     >
-      <v-card class="vertical-item-card" :title="slide.title">
-        <v-img :src="slide.img"></v-img>
-        <v-card-actions> </v-card-actions>
-      </v-card>
-    </v-carousel-item>
-  </v-carousel>
+      <div class="carousel__item">
+        <ColCarousel :recipe-list="recipe_list" />
+      </div>
+    </Slide>
+
+    <template #addons>
+      <Pagination />
+    </template>
+  </Carousel>
+
+  <div>
+    <button @click="nextpage()">Next</button>
+    <input type="number" min="0" max="3" v-model="currentSlide" />
+    <button @click="prevpage()">Prev</button>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { Carousel, Pagination, Slide } from "vue3-carousel";
+import "vue3-carousel/dist/carousel.css";
+import ColCarousel from "./ColCarousel.vue";
 
-const slides = ref();
+const rowCarousel = ref(null);
 
-slides.value = [
-  {
-    title: "김치순두부찌개",
-    img: "https://static.wtable.co.kr/image/production/service/recipe/1074/d3c0b5c1-2671-483e-9bbf-76496bb443fd.jpg?size=800x800",
-  },
-  {
-    title: "채식순두부찌개",
-    img: "https://static.wtable.co.kr/image/production/service/recipe/1766/76081be7-350a-490b-9a97-4ff00ec3d5ce.jpg?size=500x500",
-  },
-  {
-    title: "해물순두부찌개",
-    img: "https://static.wtable.co.kr/image/production/service/recipe/363/257408c4-6701-45ed-a86b-3a6af4a67ffc.jpg?size=500x500",
-  },
-];
+const nextpage = () => {
+  rowCarousel.value.next();
+};
+
+const prevpage = () => {
+  rowCarousel.value.prev();
+};
+
+const recipe_category = ref([
+  [{ name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }],
+  [{ name: "5" }, { name: "6" }, { name: "7" }, { name: "8" }],
+  [{ name: "9" }, { name: "10" }, { name: "11" }, { name: "12" }],
+  [{ name: "13" }, { name: "14" }, { name: "15" }, { name: "16" }],
+]);
 </script>
 
 <style scoped>
-.vertical-carousel {
-  transform: rotate(90deg); /* 90도 회전하여 세로로 슬라이드되도록 함 */
-  width: 400px; /* 높이와 너비를 서로 교체하여 크기 조절 */
+.test {
+}
+.colcarousel {
 }
 
-.vertical-carousel-item {
-  transform: rotate(
-    -90deg
-  ); /* 각 슬라이드 아이템을 다시 90도 회전하여 정상적으로 표시 */
+.carousel__slide {
+  padding: 5px;
 }
 
-.vertical-item-card {
-  transform: rotate(
-    -90deg
-  ); /* 각 슬라이드 아이템의 텍스트도 원래대로 90도 회전 */
+.carousel__viewport {
+  perspective: 2000px;
+}
+
+.carousel__track {
+  transform-style: preserve-3d;
+}
+
+.carousel__slide--sliding {
+  transition: 0.5s;
+}
+
+.carousel__slide {
+  opacity: 0.9;
+  transform: rotateY(-20deg) scale(0.9);
+}
+
+.carousel__slide--active ~ .carousel__slide {
+  transform: rotateY(20deg) scale(0.9);
+}
+
+.carousel__slide--prev {
+  opacity: 1;
+  transform: rotateY(-10deg) scale(0.95);
+}
+
+.carousel__slide--next {
+  opacity: 1;
+  transform: rotateY(10deg) scale(0.95);
+}
+
+.carousel__slide--active {
+  opacity: 1;
+  transform: rotateY(0) scale(1.1);
 }
 </style>
