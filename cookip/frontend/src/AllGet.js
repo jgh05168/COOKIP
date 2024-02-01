@@ -74,6 +74,25 @@ class accountService {
       });
   }
 
+
+  static getUserstepofstepById(id) {
+    const url = `http://localhost:5000/stepofstep/${id}`;
+    return axios.get(url)
+      .then((res) => {
+        const data = res.data;
+        return data.stepofstep_recipeId.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  // ...
+
+
+// ...
+
+
   // 계정 추가
   // static insertAccounts(text) {
   //   return axios.post(url, { text });
