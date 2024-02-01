@@ -28,7 +28,7 @@
 }
 
 .header-content {
-  width: 1718px;
+  width: 1500px;
   align-self: stretch;
   padding: 20px;
   background: white;

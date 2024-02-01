@@ -1,7 +1,7 @@
 <template>
   <v-container class="recipe-guide-container">
     <div class="recipe-guide-header">
-      <!-- <GuideHeaderVue /> -->
+      <GuideHeaderVue />
     </div>
 
     <div class="recipe-guide-body">
@@ -11,8 +11,9 @@
 </template>
 
 <script setup>
+import GuideHeaderVue from "@/components/recipe/guide/GuideHeader.vue";
 import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
-// import GuideHeaderVue from "@/components/recipe/guide/GuideHeader.vue";
+
 </script>
 
 <style scoped>
