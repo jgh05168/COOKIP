@@ -1,9 +1,9 @@
 <template>
-  <v-card class="vertical-item-card">
+  <v-card class="d">
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
         <v-card-title class="text-h5">
-          {{ props.frontInfo.name }}
+          {{ props.recipe.name }}
         </v-card-title>
 
         <v-card-subtitle>Card_Front</v-card-subtitle>
@@ -21,8 +21,9 @@
 import { defineProps } from "vue";
 
 const props = defineProps({
-  frontInfo: Object,
+  recipe: Object,
 });
+
 </script>
 
 <style scoped></style>
