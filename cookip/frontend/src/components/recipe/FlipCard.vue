@@ -1,16 +1,28 @@
 <template>
-  <VueSlickCarousel ref="carousel">
-    <div><h3>1</h3></div>
-    /*...*/
-  </VueSlickCarousel>
-  <button @click="showNext">show me the next</button>
+  <!-- 카드 플립 기능 -->
+  <v-card class="the-card">
+    {{ props.recipe }}
+    <!-- 카드 앞면 표시 내용 -->
+    <!-- <CardFront class="card-front" :recipe="recipe" /> -->
+    <!-- 카드 뒷면 표시 내용 구현하기 -->
+    <!-- <CardBack class="card-back" :recipe="recipe" /> -->
+  </v-card>
 </template>
-<script>
-  export default {
-    methods: {
-      showNext() {
-        this.$refs.carousel.next()
-      },
-    },
-  }
+
+<script setup>
+import { defineProps } from "vue";
+// import CardFront from "@/components/recipe/CardFront.vue";
+// import CardBack from "@/components/recipe/CardBack.vue";
+const props = defineProps({
+  recipe: Object,
+});
 </script>
+
+<style scoped>
+.the-card {
+  width: 100%;
+  height: 100%;
+  background-color: blanchedalmond;
+
+}
+</style>
