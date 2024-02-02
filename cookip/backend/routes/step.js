@@ -34,7 +34,7 @@ router.get("/:recipe_id", async (req, res) => {
     const reciepNum = req.params.recipe_id;
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = `SELECT step_tip,cook_tool FROM step where recipe_id = ${reciepNum}`;
+      let sql = `SELECT method,cook_tool FROM step where recipe_id = ${reciepNum}`;
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({
@@ -57,7 +57,7 @@ router.get("/:recipe_id/:step_id", async (req, res) => {
     const stepNum = req.params.step_id;
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = `SELECT step_tip,cook_tool FROM step where recipe_id = ${reciepNum} and step = ${stepNum}`;
+      let sql = `SELECT method,cook_tool FROM step where recipe_id = ${reciepNum} and step = ${stepNum}`;
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({

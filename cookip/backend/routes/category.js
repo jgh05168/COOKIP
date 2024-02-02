@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     try {
       // db.query 메소드가 제대로 정의되어 있는지 확인
       if (db && typeof db.query === 'function') {
-        let sql = "SELECT * FROM category";
+        let sql = "SELECT * FROM Category";
         db.query(sql, (err, results) => {
           if (err) throw err.message;
           res.json({
@@ -34,7 +34,7 @@ router.get("/:category_id", async (req, res) => {
       const category_id = req.params.category_id;
       // db.query 메소드가 제대로 정의되어 있는지 확인
       if (db && typeof db.query === 'function') {
-        let sql = `SELECT * FROM category where category_id = ${category_id}`;
+        let sql = `SELECT * FROM Category where category_id = ${category_id}`;
         db.query(sql, (err, results) => {
           if (err) throw err.message;
           res.json({
