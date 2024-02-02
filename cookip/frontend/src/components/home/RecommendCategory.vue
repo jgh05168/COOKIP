@@ -31,6 +31,7 @@ import { ref,watch,provide } from 'vue';
 import { Carousel, Pagination, Slide } from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
 
+
 const selectedRecipeName = ref("");
 provide("selectedRecipeName", selectedRecipeName);
 
