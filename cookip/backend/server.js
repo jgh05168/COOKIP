@@ -22,9 +22,6 @@ app.use("/ingredient", ingredient);  //이거는 json파일 이 저장되는 url
 const stepofstep = require("./routes/stepofstep");
 app.use("/stepofstep", stepofstep);  //이거는 json파일 이 저장되는 url
 
-const category = require("./routes/category");
-app.use("/category", category);  //이거는 json파일 이 저장되는 url
-
 // Port
 const port = process.env.PORT || 5000;
 
