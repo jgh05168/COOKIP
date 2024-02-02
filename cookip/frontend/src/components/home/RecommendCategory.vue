@@ -31,6 +31,7 @@ import { ref,watch,provide } from 'vue';
 import { Carousel, Pagination, Slide } from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
 
+
 const selectedRecipeName = ref("");
 provide("selectedRecipeName", selectedRecipeName);
 
@@ -50,7 +51,7 @@ const nextpage = () => {
 
 const prevpage = () => {
   rowCarousel.value.prev();
-};
+};``
 
 const recommend_category = ref([
     { name: "인기추천" }, { name: "기본추천" }, { name: "맞춤추천" },{ name: "카테추천" },{ name: "아무추천" },{ name: "비건추천" }

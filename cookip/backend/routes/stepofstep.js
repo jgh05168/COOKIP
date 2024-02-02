@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
   try {
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = "SELECT * FROM stepofstep";
+      let sql = "SELECT * FROM stepOfstep";
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({
@@ -35,7 +35,7 @@ router.get("/:recipe_id", async (req, res) => {
     const recipeNum = req.params.recipe_id;
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = `SELECT step, stepofstep_tip, tip_img FROM stepofstep where recipe_id = ${recipeNum}`;
+      let sql = `SELECT step, stepOfstep_tip, tip_img FROM stepOfstep where recipe_id = ${recipeNum}`;
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({
@@ -58,7 +58,7 @@ router.get("/:recipe_id/:step_id", async (req, res) => {
     const stepNum = req.params.step_id;
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = `SELECT step, stepofstep_tip, tip_img FROM stepofstep where recipe_id = ${recipeNum} and step = ${stepNum}`;
+      let sql = `SELECT step, stepofstep_tip, tip_img FROM stepOfstep where recipe_id = ${recipeNum} and step = ${stepNum}`;
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({
@@ -82,7 +82,7 @@ router.get("/:recipe_id/:step_id/:stepofstep_id", async (req, res) => {
     const stepofstepNum = req.params.stepofstep_id
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = `SELECT step, stepofstep_tip, tip_img FROM stepofstep where recipe_id = ${recipeNum} and step = ${stepNum} and stepOfstep = ${stepofstepNum}`;
+      let sql = `SELECT step, stepofstep_tip, tip_img FROM stepOfstep where recipe_id = ${recipeNum} and step = ${stepNum} and stepOfspte_id = ${stepofstepNum}`;
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({

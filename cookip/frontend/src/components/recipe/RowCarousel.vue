@@ -1,4 +1,7 @@
 <template>
+  <div>
+    {{ recipe }}
+  </div>
   <Carousel
     ref="rowCarousel"
     :itemsToShow="3"
@@ -32,6 +35,10 @@ import { ref } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ColCarousel from "./ColCarousel.vue";
+import { useRecipeStore } from "@/store/recipe"
+
+const recipestore = useRecipeStore()
+const recipe = recipestore.recipes
 
 const rowCarousel = ref(null);
 

@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
   try {
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = "SELECT * FROM ingredient";
+      let sql = "SELECT * FROM Ingredient";
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({
@@ -34,7 +34,7 @@ router.get("/:ingredient_id", async (req, res) => {
     const ingredientNum = req.params.ingredient_id;
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
-      let sql = `SELECT * FROM ingredient where ingredient_id = ${ingredientNum}`;
+      let sql = `SELECT * FROM Ingredient where ingredient_id = ${ingredientNum}`;
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({
