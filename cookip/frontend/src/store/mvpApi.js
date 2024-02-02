@@ -5,20 +5,9 @@ const urlrecipe_ingredient = "http://localhost:5000/recipe_ingredient";
 const urlstep = "http://localhost:5000/step";
 const urlingredient = "http://localhost:5000/ingredient";
 const urlcategory = "http://localhost:5000/category";
-const urlsetpofstep = "http://localhost:5000/stepofstep";
+const urlstepofstep = "http://localhost:5000/stepofstep"
 
 class accountService {
-  // 사용자 정보 가져오기
-  // static getUser() {
-  //   return axios.get(url)
-  //     .then((res) => {
-  //       const data = res.data;
-  //       return data.User.map((guild_owner) => ({ ...guild_owner }));
-  //     })
-  //     .catch((error) => {
-  //       throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
-  //     });
-  // }
 
   static getUserRecipe() {
     return axios.get(urlRecipe)
@@ -65,7 +54,7 @@ class accountService {
   }
 
   static getUserstepofstep() {
-    return axios.get(urlsetpofstep)
+    return axios.get(urlstepofstep)
       .then((res) => {
         const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
         return data.stepofstep.map((guild_owner) => ({ ...guild_owner }));
@@ -99,16 +88,7 @@ class accountService {
       });
   }
 
-  // ...
 
-
-// ...
-
-
-  // 계정 추가
-  // static insertAccounts(text) {
-  //   return axios.post(url, { text });
-  // }
 }
 
 export default accountService;
