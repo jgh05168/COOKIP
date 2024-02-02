@@ -2,8 +2,8 @@
     <div class="preview-list grid grid-cols-3">
 
     <div v-for="(recipe, index) in recipes.slice(parseInt(selectedRecipeName), parseInt(selectedRecipeName)+6)" :key="index">
-      <h2>{{ recipe.Name }}</h2>
-      <img :src="getBufferImage(recipe.Thumbnail)" alt="Recipe Thumbnail" />
+      <h2>{{ recipe.name }}</h2>
+      <img :src="getBufferImage(recipe.thumbnail)" alt="Recipe Thumbnail" />
     </div>
 
     

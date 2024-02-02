@@ -20,10 +20,6 @@
         레시피 추천 카테고리 캐로셀 선택된 추천 카테고리를 기준으로 아래 요리
         미리보기 제공
       </div>
-      <div>
-        <RecommendPreview />
-        선택된 레시피 기준 대표 6개 요리 보여주기
-      </div>
     </div>
     <RouterLink :to="{ name: 'recipe' }"
       >아래로 이동하여 추천 리스트 보기</RouterLink
