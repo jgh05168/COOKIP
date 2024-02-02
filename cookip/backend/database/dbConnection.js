@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const cc = require('kleur');
 
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "i10c101.p.ssafy.io",
   port: "3306",
   user: "root",
   password: "0000",
