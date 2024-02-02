@@ -1,28 +1,21 @@
 <template>
   <v-col>
-    <v-stepper r v-model="steps.step" :items="steps.items" show-actions>
+    <v-stepper v-model="steps.step" :items="steps.items" show-actions>
       <template v-slot:[`item.1`]>
         <v-row>
-          <v-col class="stepper-contents">
-            <h3 class="text-h6">Step 4.</h3>
+          <v-col cols="8">
+            <h3 class="text-h6">Step {{ steps.step }}.</h3>
             <br />
             <v-sheet border>
-              <v-table>
-                <thead>
-                  <tr>
-                    <th>Ingredient</th>
-                    <th class="text-end">Quantity</th>
-                    <th class="text-end">Unit</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(ingredient, index) in steps.ingredients" :key="index">
-                    <td>{{ ingredient.name }}</td>
-                    <td class="text-end">{{ ingredient.quantity }}</td>
-                    <td class="text-end">{{ ingredient.unit }}</td>
-                  </tr>
-                </tbody>
-              </v-table>
+              <v-data-table
+                :headers="[
+                  { text: 'Ingredient', value: 'name' },
+                  { text: 'Quantity', align: 'end', value: 'quantity' },
+                  { text: 'Unit', align: 'end', value: 'unit' },
+                ]"
+                :items="steps.ingredients"
+              >
+              </v-data-table>
             </v-sheet>
             <br />
             <v-sheet border>
@@ -32,10 +25,12 @@
               ></v-textarea>
             </v-sheet>
           </v-col>
-          <v-col class="stepper-main-gallery">
+          <v-col cols="4">
             <v-img
               class="stepper-main-gallery-img"
-              src="@/assets/image/item_green.png"
+              :src="mainImage"
+              contain
+              aspect-ratio="1.5"
             />
           </v-col>
           <IngredientsGalleryVue />
@@ -44,49 +39,153 @@
     </v-stepper>
   </v-col>
 </template>
-
 <script setup>
-import { ref } from 'vue'
+import { reactive } from "vue";
 import IngredientsGalleryVue from "@/components/recipe/guide/Stepper/IngredientsGallery.vue";
 
-const steps = ref({
-  step: 1,
-  items: ["요리 준비하기", "재료 손질", "요리 마무리"],
-  ingredients: [
+const mainImage = "@/assets/image/recipe_main.png";
+
+const steps = reactive({
+
+  step: [
     {
-      name: "감자",
-      unit: 10,
-      quantity: 2,
-      image: "@/assets/image/item_green.png",
+      id: 1,
+      item: "재료 손질",
+      ingredients: [
+        {
+          id: 1,
+          name: "감자",
+          unit: 10,
+          quantity: 2,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 2,
+          name: "고구마",
+          unit: 15,
+          quantity: 50,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 3,
+          name: "양파",
+          unit: 5,
+          quantity: 3,
+          image: "@/assets/image/item_yellow.png",
+        },
+        {
+          id: 4,
+          name: "당근",
+          unit: 8,
+          quantity: 1,
+          image: "@/assets/image/item_orange.png",
+        },
+      ],
     },
     {
-      name: "고구마",
-      unit: 15,
-      quantity: 10,
-      image: "@/assets/image/item_green.png",
+      id: 2,
+      item: "요리 준비하기",
+      ingredients: [
+        {
+          id: 1,
+          name: "감자",
+          unit: 10,
+          quantity: 2,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 2,
+          name: "고구마",
+          unit: 15,
+          quantity: 50,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 3,
+          name: "양파",
+          unit: 5,
+          quantity: 3,
+          image: "@/assets/image/item_yellow.png",
+        },
+        {
+          id: 4,
+          name: "당근",
+          unit: 8,
+          quantity: 1,
+          image: "@/assets/image/item_orange.png",
+        },
+      ],
     },
     {
-      name: "고구마",
-      unit: 15,
-      quantity: 10,
-      image: "@/assets/image/item_green.png",
+      id: 4,
+      item: "요리 준비하기",
+      ingredients: [
+        {
+          id: 1,
+          name: "감자",
+          unit: 10,
+          quantity: 2,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 2,
+          name: "고구마",
+          unit: 15,
+          quantity: 50,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 3,
+          name: "양파",
+          unit: 5,
+          quantity: 3,
+          image: "@/assets/image/item_yellow.png",
+        },
+        {
+          id: 4,
+          name: "당근",
+          unit: 8,
+          quantity: 1,
+          image: "@/assets/image/item_orange.png",
+        },
+      ],
     },
     {
-      name: "고구마",
-      unit: 15,
-      quantity: 10,
-      image: "@/assets/image/item_green.png",
-    },
-    {
-      name: "고구마",
-      unit: 15,
-      quantity: 10,
-      image: "@/assets/image/item_green.png",
-    },
-  ],
-  cookingTip: "",
-})
+      id: 5,
+      item: "요리 준비하기",
+      ingredients: [
+        {
+          id: 1,
+          name: "감자",
+          unit: 10,
+          quantity: 2,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 2,
+          name: "고구마",
+          unit: 15,
+          quantity: 50,
+          image: "@/assets/image/item_green.png",
+        },
+        {
+          id: 3,
+          name: "양파",
+          unit: 5,
+          quantity: 3,
+          image: "@/assets/image/item_yellow.png",
+        },
+        {
+          id: 4,
+          name: "당근",
+          unit: 8,
+          quantity: 1,
+          image: "@/assets/image/item_orange.png",
+        },
+      ],
+    }
+  ]
+});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

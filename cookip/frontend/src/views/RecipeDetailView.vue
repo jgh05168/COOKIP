@@ -18,45 +18,34 @@ import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
 
 <style scoped>
 .recipe-guide-container {
-  width: 100%;
-  height: 100%;
+  width: 1920px;
+  height: 1080px;
   gap: 30px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 30px;
   background: #534645;
   display: flex;
   flex-direction: column;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: flex-end;
+}
+
+.recipe-guide-header,
+.recipe-guide-body {
+  width: 99%;
+  padding: 20px;
+  background: #fdf8ec;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 20px;
+  display: inline-flex;
 }
 
 .recipe-guide-header {
   height: 165px;
-  width: 99%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  background: #fdf8ec;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 20px;
-  display: inline-flex;
 }
-
 .recipe-guide-body {
   height: 825px;
-  width: 99%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  background: #fdf8ec;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 20px;
-  display: inline-flex;
-}
+  }
 </style>
