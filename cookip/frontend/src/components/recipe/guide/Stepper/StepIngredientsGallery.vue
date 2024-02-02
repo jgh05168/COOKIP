@@ -1,10 +1,9 @@
 <template>
-  <div>
     <Carousel
       :items-to-show="3"
       :wrap-around="true"
       ref="colCarousel"
-      class="vertical-carousel"
+      class="vertical-carousel carousel__viewport"
     >
       <Slide
         class="vertical-carousel-slide sub-img"
@@ -14,18 +13,35 @@
         <v-img src="@/assets/image/item_green.png" />
       </Slide>
     </Carousel>
-  </div>
 </template>
   
 <script setup>
+import { ref } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+
+const colCarousel = ref(null);
+
+// const nextpage = () => {
+//   colCarousel.value.next();
+// };
+
+// const prevpage = () => {
+//   colCarousel.value.prev();
+// };
 </script>
   
 <style scoped>
 .vertical-carousel {
   transform: rotate(0.25turn);
-  width: 100%;
+  height: 100px;
+}
+
+.carousel__viewport {
+  background-color: rgb(4, 255, 255);
+  height: 150px;
+  width: 800px;
+  gap: 10px;
 }
 
 .vertical-carousel-slide {
