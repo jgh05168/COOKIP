@@ -24,48 +24,48 @@
 </template>
 
 <script setup>
-// import { ref } from "vue";
+import { ref } from "vue";
 import StepInfosVue from "./Stepper/StepInfos.vue";
 import StepImageGalleryVue from "./Stepper/StepImageGallery.vue";
 import StepIngredientsGalleryVue from "./Stepper/StepIngredientsGallery.vue";
 
-// const recipe_steps = ref({
-//   step: 1,
-//   items: ["요리 준비하기", "재료 손질", "요리 마무리"],
-//   ingredients: [
-//     {
-//       name: "감자",
-//       unit: 10,
-//       quantity: 2,
-//       image: "@/assets/image/item_green.png",
-//     },
-//     {
-//       name: "고구마",
-//       unit: 15,
-//       quantity: 10,
-//       image: "@/assets/image/item_green.png",
-//     },
-//     {
-//       name: "고구마",
-//       unit: 15,
-//       quantity: 10,
-//       image: "@/assets/image/item_green.png",
-//     },
-//     {
-//       name: "고구마",
-//       unit: 15,
-//       quantity: 10,
-//       image: "@/assets/image/item_green.png",
-//     },
-//     {
-//       name: "고구마",
-//       unit: 15,
-//       quantity: 10,
-//       image: "@/assets/image/item_green.png",
-//     },
-//   ],
-//   cookingTip: "",
-// });
+const recipe_steps = ref({
+  step: 1,
+  items: ["요리 준비하기", "재료 손질", "요리 마무리"],
+  ingredients: [
+    {
+      name: "감자",
+      unit: 10,
+      quantity: 2,
+      image: "@/assets/image/item_green.png",
+    },
+    {
+      name: "고구마",
+      unit: 15,
+      quantity: 10,
+      image: "@/assets/image/item_green.png",
+    },
+    {
+      name: "고구마",
+      unit: 15,
+      quantity: 10,
+      image: "@/assets/image/item_green.png",
+    },
+    {
+      name: "고구마",
+      unit: 15,
+      quantity: 10,
+      image: "@/assets/image/item_green.png",
+    },
+    {
+      name: "고구마",
+      unit: 15,
+      quantity: 10,
+      image: "@/assets/image/item_green.png",
+    },
+  ],
+  cookingTip: "",
+});
 </script>
 
 

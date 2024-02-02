@@ -1,4 +1,5 @@
 <template>
+  <v-col>
     <Carousel
       :items-to-show="3"
       :wrap-around="true"
@@ -13,6 +14,12 @@
         <v-img src="@/assets/image/item_green.png" />
       </Slide>
     </Carousel>
+    <div>
+      <button @click="nextpage()">다음</button>
+      <v-divider></v-divider>
+      <button @click="prevpage()">이전</button>
+    </div>
+  </v-col>
 </template>
   
 <script setup>
@@ -22,13 +29,13 @@ import "vue3-carousel/dist/carousel.css";
 
 const colCarousel = ref(null);
 
-// const nextpage = () => {
-//   colCarousel.value.next();
-// };
+const nextpage = () => {
+  colCarousel.value.next();
+};
 
-// const prevpage = () => {
-//   colCarousel.value.prev();
-// };
+const prevpage = () => {
+  colCarousel.value.prev();
+};
 </script>
   
 <style scoped>
