@@ -12,7 +12,7 @@
 
 <script setup>
 import { ref,watch,onMounted,inject } from 'vue'; // import reactive and onMounted from vue
-import accountService from '../../AllGet';
+import accountService from '@/store/mvpApi';
 
 const recipes = ref([]);
 const error = ref("");

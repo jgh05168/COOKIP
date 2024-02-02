@@ -4,7 +4,7 @@ const urlRecipe = "http://localhost:5000/recipe";
 const urlrecipe_ingredient = "http://localhost:5000/recipe_ingredient";
 const urlstep = "http://localhost:5000/step";
 const urlingredient = "http://localhost:5000/ingredient";
-const urlsetpofstep = "http://localhost:5000/stepofstep";
+const urlcategory = "http://localhost:5000/category";
 
 class accountService {
   // 사용자 정보 가져오기
@@ -81,6 +81,17 @@ class accountService {
       .then((res) => {
         const data = res.data;
         return data.stepofstep_recipeId.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getUsercategory() {
+    return axios.get(urlcategory)
+      .then((res) => {
+        const data = res.data;
+        return data.category.map((guild_owner) => ({ ...guild_owner }));
       })
       .catch((error) => {
         throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
