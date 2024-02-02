@@ -5,6 +5,7 @@ const urlrecipe_ingredient = "http://localhost:5000/recipe_ingredient";
 const urlstep = "http://localhost:5000/step";
 const urlingredient = "http://localhost:5000/ingredient";
 const urlcategory = "http://localhost:5000/category";
+const urlsetpofstep = "http://localhost:5000/stepofstep";
 
 class accountService {
   // 사용자 정보 가져오기
