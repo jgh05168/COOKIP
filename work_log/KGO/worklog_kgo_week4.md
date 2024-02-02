@@ -270,6 +270,8 @@ node-record-lpcm16 모듈을 최신 버전으로 업데이트해보세요.
 ||develop에서 git pull 할때 feature에서 pull 을 받으면 된다. = git pull origin feature/stt, pull을 받을 때는 local에서 branch와 원격의 branch와 이름이 같아야 한다.|:white_check_mark:|
 ||branch를 switch할때 pull을 먼저 받고 switch 해야한다.|:white_check_mark:|
 ||commit convention은 git commit 을 치면 알아서 넘어간다. 제목, 본문, footer만 넣으면 된다.|:white_check_mark:|
+||mysql과 ec2를 연결할때 ssh host 이름이 달라서 연결이 안될수있다.|:white_check_mark:|
+||mysql workbench, connection method에서 standard tcp/ip, standard tcpip over ssh의 차이점은 보안성이다. over ssh를 택하면 .pem의 private-key가 넣어서 보안성이 강화되지만 db에 접근이 어려워진다. over ssh를 택하지 않는다면 db의 접근이 쉬워지지만 보안성이 떨어진다. |:white_check_mark:|
 
 ### 익일 예정 사항
 
@@ -283,20 +285,23 @@ node-record-lpcm16 모듈을 최신 버전으로 업데이트해보세요.
 
 ### 금일 실시 사항
 
-- 오전 : 
-    - 
+- 오전 : stt py에서 구현 
  
-- 오후 : 
-    - 
+- 오후 : stt py에서 구현
+  
+  - stt py로 구현
 
 ### 문제 분석 및 해결
 
 ||원인|해결|
 |---|---|---|
+||동작이 겹친다. 손동작 인식을 돌릴때 연산이 많고 쌓인다. => 제약사향(손인식이 시작될때 인공지능 연산 시작, 인식이 끝나면 연산이 쌓인 데이터 초기화) 효과 x||
+||모션인식이 멀리서 하게되면 점이 작아져서 잘 안보이게되어서 인식에 오히려 방해가됨 -> 초음파 센서로 멀리서는 인식할 수 없도록 만들자.||
+||stt 구현에 라이브러리가 import가 안된다.||
 
 
 ### 익일 예정 사항
 
 |Todo List||
 |---|---|
-|:black_square_button: | |
+|:black_square_button: |가상환경을 만들거나 다른 보드를 이용하자|
