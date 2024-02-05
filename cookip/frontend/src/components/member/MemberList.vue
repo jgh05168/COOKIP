@@ -68,9 +68,9 @@ watchEffect(() => {
   console.log(motionStore.motion_data);
   if (motionStore.motion_data.swipe !== null) {
     if (motionStore.motion_data.swipe == "SwipeLeft") {
-      prevpage();
-    } else if (motionStore.motion_data.swipe == "SwipeRight") {
       nextpage();
+    } else if (motionStore.motion_data.swipe == "SwipeRight") {
+      prevpage();
     }
 
     // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
