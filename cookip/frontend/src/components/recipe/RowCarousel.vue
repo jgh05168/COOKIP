@@ -1,25 +1,26 @@
 <template>
+  <div>
+    {{ recipe }}
+  </div>
   <Carousel
     ref="rowCarousel"
-    :itemsToShow="3.95"
+    :itemsToShow="3"
     :wrapAround="true"
     :transition="500"
-    style="height: 1000px"
+    class="row-carousel"
   >
     <Slide
-      class="test"
+      class="row-carousel-slide"
       v-for="(recipe_list, slide) in recipe_category"
       :key="slide"
-      style="height: 1000px"
+      viewport="1080px"
     >
-      <div class="carousel__item">
-        <ColCarousel :recipe-list="recipe_list" />
-      </div>
+      <ColCarousel :recipe-list="recipe_list" />
     </Slide>
-
+    <!-- 
     <template #addons>
       <Pagination />
-    </template>
+    </template> -->
   </Carousel>
 
   <div>
@@ -31,9 +32,13 @@
 
 <script setup>
 import { ref } from "vue";
-import { Carousel, Pagination, Slide } from "vue3-carousel";
+import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ColCarousel from "./ColCarousel.vue";
+import { useRecipeStore } from "@/store/recipe"
+
+const recipestore = useRecipeStore()
+const recipe = recipestore.recipes
 
 const rowCarousel = ref(null);
 
@@ -54,48 +59,17 @@ const recipe_category = ref([
 </script>
 
 <style scoped>
-.test {
-}
-.colcarousel {
+.row-carousel {
+  width: 100%;
+  height: 1080px;
 }
 
-.carousel__slide {
-  padding: 5px;
+.row-carousel-slide {
+  height: 100%;
+  width: 100%;
 }
 
 .carousel__viewport {
-  perspective: 2000px;
-}
-
-.carousel__track {
-  transform-style: preserve-3d;
-}
-
-.carousel__slide--sliding {
-  transition: 0.5s;
-}
-
-.carousel__slide {
-  opacity: 0.9;
-  transform: rotateY(-20deg) scale(0.9);
-}
-
-.carousel__slide--active ~ .carousel__slide {
-  transform: rotateY(20deg) scale(0.9);
-}
-
-.carousel__slide--prev {
-  opacity: 1;
-  transform: rotateY(-10deg) scale(0.95);
-}
-
-.carousel__slide--next {
-  opacity: 1;
-  transform: rotateY(10deg) scale(0.95);
-}
-
-.carousel__slide--active {
-  opacity: 1;
-  transform: rotateY(0) scale(1.1);
+  height: 1080px;
 }
 </style>
