@@ -1,16 +1,17 @@
 <template>
-  <v-row class="recipe-container">
-    <v-img class="recipe-guide-user" src="@/assets/image/임채진.png" />
+  <v-row class="recipe-guide-header">
+    
+    <v-img class="guide-user-image" src="@/assets/image/임채진.png" />
+
     <div class="header-content">
       <div class="step-info">
-        <div class="step-number">{{ stepNumber }}</div>
-        <div class="step-description">{{ stepDescriptionDetail }}</div>
+        <div class="step-number">Step {{ props.recipeSteps[0].step }}.</div>
+        <div class="step-description">{{ props.recipeSteps[0].title }}</div>
       </div>
       <div class="time-info">
-        <div class="time">{{ time }}</div>
         <div class="recipe-info">
-          <div class="recipe-name">{{ recipeName }}</div>
-          <div class="recipe-status">{{ recipeStatus }}</div>
+          <div class="recipe-name">{{ props.recipeSteps[0].recipeName }}</div>
+          <div class="recipe-status"> 만드는 중...</div>
         </div>
       </div>
     </div>
@@ -18,12 +19,12 @@
 </template>
 
 <script setup>
-// const userImage = "@/src/assets/image/임채진.png";
-const stepNumber = "step 4. (1/1)";
-const stepDescriptionDetail = "순두부를 넣고 끓여주세요.";
-const time = "09:53";
-const recipeName = "순두부찌개";
-const recipeStatus = "만드는 중...";
+import { defineProps } from "vue";
+
+const props = defineProps({
+  userInfos: Object,
+  recipeSteps: Object
+});
 </script>
 
 <style scoped>

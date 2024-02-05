@@ -1,6 +1,6 @@
 <template>
   <div class="stepper-main-gallery">
-    <v-img src="@/assets/image/item_green.png" />
+    <v-img src="@/assets/image/item_onion.png" />
   </div>
 </template>
   
@@ -10,7 +10,7 @@
   
 <style scoped>
 .stepper-main-gallery {
-  height: auto;
+  height: 500px;
 }
 </style>
   
