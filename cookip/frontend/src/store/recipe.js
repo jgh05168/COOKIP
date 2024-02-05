@@ -57,7 +57,10 @@ export const useRecipeStore = defineStore('recipe', () => {
     {category : 4, recipe_list: category_4},
     {category : 5, recipe_list: category_5},
   ])
+
+  const selected_category = ref(0)
   
-    return { recipes, ingredients, user_ingredients,recommend_category, recommend_list}
+    return { recipes, ingredients, user_ingredients,recommend_category, recommend_list, 
+    selected_category, }
   }, { persist: true })
   

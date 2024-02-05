@@ -1,28 +1,12 @@
 <template>
-  <div class="grid grid-cols-3 gap-10">
+  <div class="grid grid-cols-5 gap-10">
     <div
       v-for="(item, idx) in recipeStore.recommend_list[selectedSlide]
         .recipe_list[selectedSlide]"
       :key="idx"
-      class="max-w-sm rounded overflow-hidden shadow-lg preview-list"
-      style="color: white; background-color: bisque"
+      class="rounded overflow-hidden shadow-lg preview-list"
+      style="color: #111111;+"
     >
-      <div class="preview-item">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-        </div>
-        <div class="px-6 pt-4 pb-2">
-          <span
-            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-            >#photography</span
-          >
-          <span
-            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-            >#travel</span
-          >
-        </div>
-      </div>
-
       <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
     </div>
   </div>
@@ -62,18 +46,22 @@ const getBufferImage = (buffer) => {
 <style scoped>
 .preview-list {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  /* width: 400px; */
+  margin: 10px auto;
 }
 .preview-item {
   border: 2px solid bisque;
   background-color: bisque;
   border-radius: 5%;
-  width: 320px;
-  height: 180px;
+  width: 250px;
+  height: 250px;
   margin: auto auto;
 }
 
 .preview-img {
-  width: 200px;
+  width: 360px;
+  height: 360px;
+  border-radius: 10%;
 }
 </style>

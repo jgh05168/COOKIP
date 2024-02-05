@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
 import RowCarousel from "@/components/recipe/RowCarousel.vue";
 </script>
 

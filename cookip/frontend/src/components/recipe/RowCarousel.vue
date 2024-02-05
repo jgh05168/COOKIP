@@ -13,11 +13,11 @@
   >
     <Slide
       class="row-carousel-slide"
-      v-for="(recipe_list, slide) in recipe_category"
+      v-for="(recipe_col, slide) in recipe_category"
       :key="slide"
       viewport="1080px"
     >
-      <ColCarousel :recipe-list="recipe_list" />
+      <ColCarousel :recipe-list="recipe_col" />
     </Slide>
   </Carousel>
 
@@ -35,9 +35,11 @@ import "vue3-carousel/dist/carousel.css";
 import ColCarousel from "./ColCarousel.vue";
 import { useRecipeStore } from "@/store/recipe";
 
-const recipestore = useRecipeStore();
+const currentSlide = ref(0)
 
-const recipe_category = recipestore.recipes;
+const recipeStore = useRecipeStore();
+
+const recipe_category = recipeStore.recommend_list[recipeStore.selected_category].recipe_list;
 
 const rowCarousel = ref(null);
 

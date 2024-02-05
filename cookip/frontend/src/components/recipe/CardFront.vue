@@ -3,7 +3,7 @@
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
         <v-card-title class="text-h5">
-          {{ props.recipe.name }}
+          {{ props.recipeFront.name }}
         </v-card-title>
 
         <v-card-subtitle>Card_Front</v-card-subtitle>
@@ -21,7 +21,7 @@
 import { defineProps } from "vue";
 
 const props = defineProps({
-  recipe: Object,
+  recipeFront: Object,
 });
 
 </script>

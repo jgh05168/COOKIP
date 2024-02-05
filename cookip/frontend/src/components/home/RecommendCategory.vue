@@ -5,9 +5,13 @@
     :itemsToShow="3"
     :wrapAround="true"
     :transition="500"
+    class="category-carousel"
   >
-    <Slide v-for="(category, slide) in recommend_category" :key="slide">
-      <div class="title" @click="selectCategory(slide)">
+    <Slide
+      v-for="(category, slide) in recommend_category"
+      :key="slide"
+    >
+      <div class="category" @click="selectCategory(slide)">
         {{ category.title }}
       </div>
     </Slide>
@@ -22,9 +26,7 @@
     <button @click="prevpage()">Prev</button>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
-  <RecommendPreview 
-  :selected-slide="selectedSlide" 
-  />
+  <RecommendPreview :selected-slide="selectedSlide" />
 </template>
 
 <script setup>
@@ -65,6 +67,7 @@ const currentSlide = ref(0); // 초기 슬라이드 인덱스 설정
 watch(currentSlide, (newVal) => {
   console.log("Current Slide Changed:", newVal);
   selectedSlide.value = newVal;
+  recipeStore.selected_category = newVal
 });
 
 const rowCarousel = ref(null);
@@ -100,7 +103,6 @@ const recommend_category = recipeStore.recommend_category;
 
 const selectedSlide = ref(0);
 
-
 const selectCategory = (slide) => {
   // 클릭한 카테고리의 정보를 가져오기
   const selectedCategory = recommend_category[slide];
@@ -109,18 +111,24 @@ const selectCategory = (slide) => {
 </script>
 
 <style scoped>
-.title {
-  height: 100px;
-  width: 100px;
-  color: aliceblue;
-  background-color: black;
+.category-carousel {
+  height: 300px;
 }
+
+.category {
+  height: 200px;
+  width: 400px;
+  color: aliceblue;
+  border: 2px solid bisque;
+}
+
 .carousel__slide {
   padding: 5px;
 }
 
 .carousel__viewport {
   perspective: 2000px;
+  height: 400px;
 }
 
 .carousel__track {

@@ -56,7 +56,7 @@ const prevpage = () => {
 }
 
 .vertical-carousel-slide {
-  /* transform: rotate(-0.25turn); */
+  transform: rotate(-0.25turn);
   width: 100%;
   height: 1080px;
 }
@@ -70,9 +70,11 @@ const prevpage = () => {
 }
 
 .flip-card {
-  width: 360px;
-  height: 600px;
+  width: 640px;
+  height: 360px;
   border: 2px solid red;
   margin: 10%;
+  padding: 0 0;
+  /* transform: rotate(-0.25turn); */
 }
 </style>
