@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 // import { ref, computed } from 'vue'
 // import axios from 'axios'
 import { ref } from "vue";
