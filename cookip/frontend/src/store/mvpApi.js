@@ -7,6 +7,7 @@ const urlstep = "http://localhost:5000/step";
 const urlingredient = "http://localhost:5000/ingredient";
 const urlsetpofstep = "http://localhost:5000/stepofstep";
 const urlcategory = "http://localhost:5000/category";
+const urluser = "http://localhost:5000/user";
 
 class accountService {
 
@@ -209,6 +210,17 @@ class accountService {
       .then((res) => {
         const data = res.data;
         return data.category_id.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getUser() {
+    return axios.get(urluser)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.user.map((guild_owner) => ({ ...guild_owner }));
       })
       .catch((error) => {
         throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
