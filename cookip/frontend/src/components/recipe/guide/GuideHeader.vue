@@ -1,7 +1,7 @@
 <template>
   <v-row class="recipe-guide-header">
     
-    <v-img class="guide-user-image" src="@/assets/image/임채진.png" />
+    <v-img class="guide-user-image" src="@/assets/image/ICJ.png" />
 
     <div class="header-content">
       <div class="step-info">
