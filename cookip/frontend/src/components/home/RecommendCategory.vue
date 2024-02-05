@@ -81,6 +81,23 @@ const prevpage = () => {
 const recipeStore = useRecipeStore();
 const recommend_category = recipeStore.recommend_category;
 
+// 고려 인자
+
+// 1.보유식자재 + 유통기한
+
+// 2.쉐프팔로우
+
+// 3.선호카테고리, 재료
+
+// 4.평점
+
+// 5.알러지
+
+// 오늘의 추천 -> 무작위
+// 인기추천 -> 평점,~
+// 즐겨찾기는 -> 즐겨찾기 한거
+// 맞춤추천
+
 const selectedSlide = ref(0);
 
 

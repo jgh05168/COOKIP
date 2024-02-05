@@ -66,7 +66,6 @@ app.post('/contactProc', (req, res) => { // => 랑 function 이랑 같은 말이
        console.log('자료 1개를 삽입하였습니다.');
        res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>"); 
    })
-
 })
 
 app.get('/contactDelete', (req, res) => { // 문의사항 지우기

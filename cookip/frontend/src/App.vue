@@ -24,6 +24,7 @@ import accountService from "@/store/mvpApi";
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8000");
 
+
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
@@ -73,7 +74,7 @@ const handleWebSocketMessage = async (e) => {
     if (e !== null && e !== undefined) {
       //   console.log(e.data)
       const result = await JSON.parse(e.data);
-      console.log(result["data"]);
+      // console.log(result["data"]);
       // 데이터 다음과 같이 받아옴 type 이 뭔지에 따라서 motion, stt store 에 저장
       //   {
       //     "type": "Motion",

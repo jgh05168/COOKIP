@@ -1,124 +1,70 @@
 <template>
-  <v-col class="recipe-guide-container">
-    <GuideHeaderVue class="recipe-guide-header" :user-infos="user_infos" :recipe-steps="recipe_steps" />
-    <GuideStepperVue class="recipe-guide-body" :user-infos="user_infos" :recipe-steps="recipe_steps" />
-  </v-col>
-</template> 
+  <v-stepper v-model="selectedStep">
+    <v-stepper-header>
+      <v-stepper-item
+        v-for="(guide, index) in recipe_steps.guide"
+        :key="index"
+        :title="guide.title"
+        :value="guide.step"
+        :complete="guide.step <= selectedStep"
+      >
+      </v-stepper-item>
+        <GuideHeaderVue
+          class="recipe-guide-header"
+          :user-infos="user_infos"
+          :selected-step="guide"
+          v-if="guide.step === index + 1"
+        />
+    </v-stepper-header>
+    <v-stepper-content class="grid grid-cols-3">
+      <div v-for="(guide, index) in recipe_steps.guide" :key="index">
+        <GuideStepperVue class="recipe-guide-body" :selected-step="guide" v-if="guide.step === selectedStep" />
+      </div>
+    </v-stepper-content>
+    <v-stepper-actions
+      :disabled="disabled"
+      @click:prev="prev"
+      @click:next="next"
+    ></v-stepper-actions>
+  </v-stepper>
+</template>
 
 <script setup>
 import { ref } from "vue";
+import { useRecipeStore } from "@/store/recipe";
 import GuideHeaderVue from "@/components/recipe/guide/GuideHeader.vue";
 import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
 
+// Get recipe information
+const store = useRecipeStore();
+const recipe_steps = store.recipe_steps[0];
+const selectedStep = ref(1); // Default to the first step
+
+// Get user information
 const user_infos = ref({
   userName: "임채진",
   userImage: "../../assets/image/임채진.png",
-  recipeName: "감자고구마볶음",
 });
-const recipe_steps = ref([
-  {
-    step: 1,
-    title: "재료 준비하기",
-    ingredients: [
-      {
-        id: 1,
-        name: "감자",
-        unit: 10,
-        quantity: 2,
-        image: "@/assets/image/item_pepper.png",
-      },
-      {
-        id: 2,
-        name: "고구마",
-        unit: 15,
-        quantity: 50,
-        image: "@/assets/image/item_pepper.png",
-      },
-      {
-        id: 3,
-        name: "양파",
-        unit: 5,
-        quantity: 3,
-        image: "@/assets/image/item_pepper.png",
-      },
-      {
-        id: 4,
-        name: "당근",
-        unit: 8,
-        quantity: 1,
-        image: "@/assets/image/item_pepper.png",
-      },
-    ],
-  },
-  {
-    step: 2,
-    title: "요리 준비하기",
-    ingredients: [
-      {
-        id: 1,
-        name: "감자",
-        unit: 10,
-        quantity: 2,
-        image: "@/assets/image/item_green.png",
-      },
-      {
-        id: 2,
-        name: "고구마",
-        unit: 15,
-        quantity: 50,
-        image: "@/assets/image/item_green.png",
-      },
-      {
-        id: 3,
-        name: "양파",
-        unit: 5,
-        quantity: 3,
-        image: "@/assets/image/item_yellow.png",
-      },
-      {
-        id: 4,
-        name: "당근",
-        unit: 8,
-        quantity: 1,
-        image: "@/assets/image/item_orange.png",
-      },
-    ],
-  },
-  {
-    step: 5,
-    title: "요리 준비하기",
-    ingredients: [
-      {
-        id: 1,
-        name: "감자",
-        unit: 10,
-        quantity: 2,
-        image: "../../assets/image/item_green.png",
-      },
-      {
-        id: 2,
-        name: "고구마",
-        unit: 15,
-        quantity: 50,
-        image: "@/assets/image/item_green.png",
-      },
-      {
-        id: 3,
-        name: "양파",
-        unit: 5,
-        quantity: 3,
-        image: "@/assets/image/item_yellow.png",
-      },
-      {
-        id: 4,
-        name: "당근",
-        unit: 8,
-        quantity: 1,
-        image: "@/assets/image/item_orange.png",
-      },
-    ],
-  },
-]);
+
+const disabled = () => {
+  return selectedStep.value === 1
+    ? "prev"
+    : selectedStep.value === recipe_steps.length
+    ? "next"
+    : undefined;
+};
+
+const prev = () => {
+  if (selectedStep.value > 1) {
+    selectedStep.value -= 1;
+  }
+};
+
+const next = () => {
+  if (selectedStep.value < recipe_steps.length) {
+    selectedStep.value += 1;
+  }
+};
 </script>
 
 <style scoped>

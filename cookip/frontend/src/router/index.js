@@ -60,6 +60,8 @@ const routes = [
     component: MyFavoriteView,
   },
 
+  
+
   // Mobile views
   {
     path: "/mobile/createmember",
