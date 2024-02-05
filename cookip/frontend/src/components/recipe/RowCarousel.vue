@@ -1,7 +1,8 @@
 <template>
-  <div>
-    {{ recipe }}
+  <div v-for="(recipe, idx) in recipestore.recipes" :key="idx">
+    <img :src="getBufferImage(recipe.thumbnail)" alt="">
   </div>
+  
   <Carousel
     ref="rowCarousel"
     :itemsToShow="3"
@@ -38,7 +39,7 @@ import ColCarousel from "./ColCarousel.vue";
 import { useRecipeStore } from "@/store/recipe"
 
 const recipestore = useRecipeStore()
-const recipe = recipestore.recipes
+
 
 const rowCarousel = ref(null);
 
@@ -48,6 +49,15 @@ const nextpage = () => {
 
 const prevpage = () => {
   rowCarousel.value.prev();
+};
+
+const getBufferImage = (buffer) => {
+  if (buffer && buffer.data instanceof Array) {
+    const uint8Array = new Uint8Array(buffer.data);
+    const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+    return URL.createObjectURL(blob);
+  }
+  return null;
 };
 
 const recipe_category = ref([
