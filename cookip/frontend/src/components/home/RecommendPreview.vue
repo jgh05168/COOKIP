@@ -1,46 +1,58 @@
 <template>
-    <div class="preview-list grid grid-cols-3">
+  <div class="grid grid-cols-3 gap-10">
+    <div
+      v-for="(item, idx) in recipeStore.recommend_list[selectedSlide]
+        .recipe_list[selectedSlide]"
+      :key="idx"
+      class="max-w-sm rounded overflow-hidden shadow-lg preview-list"
+      style="color: white; background-color: bisque"
+    >
+      <div class="preview-item">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+          <span
+            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+            >#photography</span
+          >
+          <span
+            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+            >#travel</span
+          >
+        </div>
+      </div>
 
-    <div v-for="(recipe, index) in recipes.slice(parseInt(selectedRecipeName), parseInt(selectedRecipeName)+6)" :key="index">
-      <h2>{{ recipe.name }}</h2>
-      <img :src="getBufferImage(recipe.thumbnail)" alt="Recipe Thumbnail" />
+      <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
     </div>
-
-    
-    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref,watch,onMounted,inject } from 'vue'; // import reactive and onMounted from vue
-import accountService from '@/store/mvpApi';
+import { watch, defineProps } from "vue"; // import reactive and onMounted from vue
+import { useRecipeStore } from "@/store/recipe";
 
-const recipes = ref([]);
-const error = ref("");
-const selectedRecipeName = inject('selectedRecipeName',ref(''));
+const recipeStore = useRecipeStore();
 
-if(selectedRecipeName.value==undefined){
-  selectedRecipeName.value=0;
-}
-
-watch(() => selectedRecipeName.value, (newVal) => {
-  console.log('Selected Recipe Name Changed_reciv:', newVal);
-  // 여기서 변경된 값에 대한 로직을 추가할 수 있습니다.
+const props = defineProps({
+  selectedSlide: Number,
 });
 
-onMounted(async () => {
-  try {
-    const recipeData = await accountService.getUserRecipe();
-    console.log(recipeData);
-    recipes.value = recipeData;
-  } catch (err) {
-    error.value = err.message;
+// console.log(props.selectedSlide);
+console.log(recipeStore.recommend_list[props.selectedSlide].recipe_list);
+
+watch(
+  () => props.selectedSlide,
+  (newVal) => {
+    console.log("Selected Recipe Name Changed_reciv:", newVal);
+    // 여기서 변경된 값에 대한 로직을 추가할 수 있습니다.
   }
-});
+);
 
 const getBufferImage = (buffer) => {
   if (buffer && buffer.data instanceof Array) {
     const uint8Array = new Uint8Array(buffer.data);
-    const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+    const blob = new Blob([uint8Array], { type: "image/jpeg" });
     return URL.createObjectURL(blob);
   }
   return null;
@@ -49,6 +61,19 @@ const getBufferImage = (buffer) => {
 
 <style scoped>
 .preview-list {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+.preview-item {
+  border: 2px solid bisque;
+  background-color: bisque;
+  border-radius: 5%;
+  width: 320px;
+  height: 180px;
+  margin: auto auto;
+}
+
+.preview-img {
+  width: 200px;
 }
 </style>

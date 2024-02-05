@@ -1,8 +1,9 @@
 <template>
-  <div v-for="(recipe, idx) in recipestore.recipes" :key="idx">
-    <img :src="getBufferImage(recipe.thumbnail)" alt="">
-  </div>
-  
+  <!-- <div v-for="(recipe, idx) in recipestore.recipes" :key="idx">
+    {{ recipe }}
+    <img  :src="getBufferImage(recipe.thumbnail)" alt="" />
+  </div> -->
+
   <Carousel
     ref="rowCarousel"
     :itemsToShow="3"
@@ -18,10 +19,6 @@
     >
       <ColCarousel :recipe-list="recipe_list" />
     </Slide>
-    <!-- 
-    <template #addons>
-      <Pagination />
-    </template> -->
   </Carousel>
 
   <div>
@@ -36,10 +33,11 @@ import { ref } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ColCarousel from "./ColCarousel.vue";
-import { useRecipeStore } from "@/store/recipe"
+import { useRecipeStore } from "@/store/recipe";
 
-const recipestore = useRecipeStore()
+const recipestore = useRecipeStore();
 
+const recipe_category = recipestore.recipes;
 
 const rowCarousel = ref(null);
 
@@ -51,21 +49,14 @@ const prevpage = () => {
   rowCarousel.value.prev();
 };
 
-const getBufferImage = (buffer) => {
-  if (buffer && buffer.data instanceof Array) {
-    const uint8Array = new Uint8Array(buffer.data);
-    const blob = new Blob([uint8Array], { type: 'image/jpeg' });
-    return URL.createObjectURL(blob);
-  }
-  return null;
-};
-
-const recipe_category = ref([
-  [{ name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }],
-  [{ name: "5" }, { name: "6" }, { name: "7" }, { name: "8" }],
-  [{ name: "9" }, { name: "10" }, { name: "11" }, { name: "12" }],
-  [{ name: "13" }, { name: "14" }, { name: "15" }, { name: "16" }],
-]);
+// const getBufferImage = (buffer) => {
+//   if (buffer && buffer.data instanceof Array) {
+//     const uint8Array = new Uint8Array(buffer.data);
+//     const blob = new Blob([uint8Array], { type: "image/jpeg" });
+//     return URL.createObjectURL(blob);
+//   }
+//   return null;
+// };
 </script>
 
 <style scoped>
