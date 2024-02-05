@@ -15,7 +15,7 @@
 
 <script setup>
 import { RouterView, RouterLink } from "vue-router";
-import { onMounted, onBeforeUnmount, onBeforeMount, ref } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import accountService from '@/store/mvpApi';
@@ -27,30 +27,42 @@ const socket = new WebSocket("ws://localhost:8000");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
-const recipes = ref([]);
-const error = ref("");
-  
-  onBeforeMount(async () => {
-    try {
-      const recipeData = await accountService.getUserRecipe();
-      recipes.value = recipeData;
-      recipestore.recipes = recipes.value
-      console.log(recipes.value)
-    } catch (err) {
-      error.value = err.message;
-    }
-  });
 
-  onBeforeMount(async () => {
-    try {
-      const recipeData = await accountService.getUserRecipe();
-      recipes.value = recipeData;
-      recipestore.recipes = recipes.value
-      console.log(recipes.value)
-    } catch (err) {
-      error.value = err.message;
+const error = ref("");
+
+
+const get_all_recipes = async () => {
+  try {
+    const recipeData = await accountService.getUserRecipe();
+    recipeData.forEach((recipe) => {
+    if (!Object.prototype.hasOwnProperty.call(recipe, 'ingredient')) {
+      recipe.ingredient = []; 
     }
   });
+    recipestore.recipes = recipeData;
+  } catch (err) {
+    error.value = err.message;
+  }
+}
+
+const get_all_recipes_ingredients = async () => {
+  try {
+    const recipe_ingredientData = await accountService.getUserrecipe_ingredient();
+    recipe_ingredientData.forEach((ingredient) => {
+    const matchingRecipe = recipestore.recipes.find((recipe) => recipe.recipe_id === ingredient.recipe_id);
+    matchingRecipe.ingredient.push(ingredient.ingredient_id); 
+    });
+    console.log(recipestore.recipes)
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+onMounted( async () => {
+  await get_all_recipes(),
+  await get_all_recipes_ingredients()
+});
+
 const handleWebSocketMessage = async (e) => {
   try {
     if (e !== null && e !== undefined) {
