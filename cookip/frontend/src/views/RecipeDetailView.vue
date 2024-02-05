@@ -1,5 +1,6 @@
 <template>
   <v-col class="recipe-guide-container">
+    <h1>dd</h1>
     <GuideHeaderVue class="recipe-guide-header" :user-infos="user_infos" :recipe-steps="recipe_steps" />
     <GuideStepperVue class="recipe-guide-body" :user-infos="user_infos" :recipe-steps="recipe_steps" />
   </v-col>
@@ -7,118 +8,20 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRecipeStore } from "@/store/recipe";
 import GuideHeaderVue from "@/components/recipe/guide/GuideHeader.vue";
 import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
 
+// 유저 정보를 가져오는 부분
 const user_infos = ref({
   userName: "임채진",
   userImage: "../../assets/image/임채진.png",
   recipeName: "감자고구마볶음",
 });
-const recipe_steps = ref([
-  {
-    step: 1,
-    title: "재료 준비하기",
-    ingredients: [
-      {
-        id: 1,
-        name: "감자",
-        unit: 10,
-        quantity: 2,
-        image: "@/assets/image/item_pepper.png",
-      },
-      {
-        id: 2,
-        name: "고구마",
-        unit: 15,
-        quantity: 50,
-        image: "@/assets/image/item_pepper.png",
-      },
-      {
-        id: 3,
-        name: "양파",
-        unit: 5,
-        quantity: 3,
-        image: "@/assets/image/item_pepper.png",
-      },
-      {
-        id: 4,
-        name: "당근",
-        unit: 8,
-        quantity: 1,
-        image: "@/assets/image/item_pepper.png",
-      },
-    ],
-  },
-  {
-    step: 2,
-    title: "요리 준비하기",
-    ingredients: [
-      {
-        id: 1,
-        name: "감자",
-        unit: 10,
-        quantity: 2,
-        image: "@/assets/image/item_green.png",
-      },
-      {
-        id: 2,
-        name: "고구마",
-        unit: 15,
-        quantity: 50,
-        image: "@/assets/image/item_green.png",
-      },
-      {
-        id: 3,
-        name: "양파",
-        unit: 5,
-        quantity: 3,
-        image: "@/assets/image/item_yellow.png",
-      },
-      {
-        id: 4,
-        name: "당근",
-        unit: 8,
-        quantity: 1,
-        image: "@/assets/image/item_orange.png",
-      },
-    ],
-  },
-  {
-    step: 5,
-    title: "요리 준비하기",
-    ingredients: [
-      {
-        id: 1,
-        name: "감자",
-        unit: 10,
-        quantity: 2,
-        image: "../../assets/image/item_green.png",
-      },
-      {
-        id: 2,
-        name: "고구마",
-        unit: 15,
-        quantity: 50,
-        image: "@/assets/image/item_green.png",
-      },
-      {
-        id: 3,
-        name: "양파",
-        unit: 5,
-        quantity: 3,
-        image: "@/assets/image/item_yellow.png",
-      },
-      {
-        id: 4,
-        name: "당근",
-        unit: 8,
-        quantity: 1,
-        image: "@/assets/image/item_orange.png",
-      },
-    ],
-  },
-]);
+
+// 레시피 정보를 가져오는 부분
+const store = useRecipeStore();
+const recipe_steps = store.recipe_steps;
 </script>
 
 <style scoped>

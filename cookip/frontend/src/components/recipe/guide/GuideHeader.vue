@@ -1,41 +1,39 @@
+<!-- 레시피 가이드 해당 스텝 헤더 컴포넌트 -->
 <template>
   <v-row class="recipe-guide-header">
-    
-    <v-img class="guide-user-image" src="@/assets/image/임채진.png" />
-
-    <div class="header-content">
-      <div class="step-info">
-        <div class="step-number">Step {{ props.recipeSteps[0].step }}.</div>
-        <div class="step-description">{{ props.recipeSteps[0].title }}</div>
-      </div>
-      <div class="time-info">
-        <div class="recipe-info">
-          <div class="recipe-name">{{ props.recipeSteps[0].recipeName }}</div>
-          <div class="recipe-status"> 만드는 중...</div>
-        </div>
-      </div>
+    <!-- 레시피 가이드 스텝 메인 이미지 -->
+    <div class="step-header-image">
+      <v-img src="@/assets/image/임채진.png" />
     </div>
+
+    <!-- 레시피 가이드 스텝 정보 및 경과 시간 -->
+    <v-row class="step-header-content">
+      <StepInfo :step="props.recipeSteps[0].step" :title="props.recipeSteps[0].title" />
+      <RecipeInfo :recipeName="props.recipeSteps[0].recipeName" />
+    </v-row>
   </v-row>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
+import StepInfo from "@/components/recipe/guide/header/StepInfo.vue";
+import RecipeInfo from "@/components/recipe/guide/header/RecipeInfo.vue";
 
 const props = defineProps({
   userInfos: Object,
-  recipeSteps: Object
+  recipeSteps: Object,
 });
 </script>
 
 <style scoped>
-.recipe-container {
+.recipe-guide-header {
 }
-.recipe-guide-user {
+.step-header-image {
   width: 140px;
   height: 140px;
 }
 
-.header-content {
+.step-header-content {
   width: 1250px;
   height: 140px;
   padding: 20px;

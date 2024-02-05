@@ -1,3 +1,4 @@
+<!-- 레시피 가이드 해당 스텝 상세 컨텐츠, 액션을 포함하는 컴포넌트 -->
 <template>
   <v-stepper v-model="selectedStep">
     <v-stepper-header>
@@ -32,9 +33,9 @@
 
 <script setup>
 import { defineProps, ref } from "vue";
-import StepInfos from "./Stepper/StepInfos.vue";
-import StepImageGallery from "./Stepper/StepImageGallery.vue";
-import StepIngredientsGallery from "./Stepper/StepIngredientsGallery.vue";
+import StepInfos from "@/components/recipe/guide/stepper/StepInfos.vue";
+import StepImageGallery from "@/components/recipe/guide/stepper/StepImageGallery.vue";
+import StepIngredientsGallery from "@/components/recipe/guide/stepper/StepIngredientsGallery.vue";
 const disabled = () => {
   return selectedStep.value === 1
     ? "prev"
