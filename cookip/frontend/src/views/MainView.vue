@@ -92,24 +92,31 @@
         <h1>여기서 사용자 얼굴인식을 통하여 현재 사용자 정보를 저장해 둡니다</h1>
         <h1>여기서는 STT와 모션인식을 통해 다른 화면이나 기능으로 넘어갈 수 있습니다</h1>
         <LoginRequired />
-        <SignedIn />
+        <SignedIn /> -->
+        <LoginRequired :visible="showModal"/>
     </div>
 </template>
 
 <script setup>
 import LoginRequired from '@/components/main/LoginRequired.vue'
-import SignedIn from '@/components/main/SignedIn.vue'
-import router from '@/router';
+// import SignedIn from '@/components/main/SignedIn.vue'
+// import router from '@/router';
 import { useMotionStore } from '@/store/motion';
 import { watchEffect } from 'vue'
+import { ref } from 'vue';
 
 const motionStore = useMotionStore()
+const showModal = ref(false);
 
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
 // 동작 수행 후 store에 저장되어 있는 motion 초기화
-watchEffect(motionStore.motion_data, () => {
+watchEffect( () => {
     if (motionStore.motion_data.swipe !== null) {
         // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
+        console.log(motionStore.motion_data)
+        if (motionStore.motion_data.swipe == "SwipeUp") {
+            showModal.value = true
+        }
         motionStore.motion_data = {
                 swipe: null,
                 page: null,
@@ -117,13 +124,29 @@ watchEffect(motionStore.motion_data, () => {
                 zoom: null,
                 flip: null,
             }
-        router.push({name:"home" ,params : {}, query:{}})
     } 
 });
+
 
 
 </script>
 
 <style scoped>
+.member_background {
+  /* 백그라운드 이미지 설정 */
+  background-image: url('@/assets/image/home_background.png'); /* @는 src 경로를 나타냅니다. */
+  /* 이미지가 꽉 채우도록 설정 */
+  background-size: cover;
+  /* 이미지가 반복되지 않도록 설정 */
+  background-repeat: no-repeat;
+  /* 이미지가 가운데 정렬되도록 설정 */
+  background-position: center;
+  /* 배경 색상 fallback 설정 (이미지가 로드되지 않을 경우) */
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+
 
 </style>
