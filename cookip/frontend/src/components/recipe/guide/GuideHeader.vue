@@ -8,25 +8,26 @@
 
     <!-- 레시피 가이드 스텝 정보 및 경과 시간 -->
     <v-row class="step-header-content">
-      <StepInfo :step="props.recipeSteps[0].step" :title="props.recipeSteps[0].title" />
-      <RecipeInfo :recipeName="props.recipeSteps[0].recipeName" />
+      <HeaderStepInfo :step="props.selectedStep[props.selectedStep.step]" :title="props.selectedStep.title" />
+      <!-- <HeaderRecipeInfo :recipeName="props.selectedStep.name" /> -->
     </v-row>
   </v-row>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
-import StepInfo from "@/components/recipe/guide/header/StepInfo.vue";
-import RecipeInfo from "@/components/recipe/guide/header/RecipeInfo.vue";
+import HeaderStepInfo from "./HeaderStepInfo.vue";
+// import HeaderRecipeInfo from "./HeaderRecipeInfo.vue";
 
 const props = defineProps({
   userInfos: Object,
-  recipeSteps: Object,
+  selectedStep: Object,
 });
 </script>
 
 <style scoped>
 .recipe-guide-header {
+  width: max-content;
 }
 .step-header-image {
   width: 140px;

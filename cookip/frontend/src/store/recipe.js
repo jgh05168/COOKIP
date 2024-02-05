@@ -12,7 +12,7 @@ export const useRecipeStore = defineStore(
     const recipes = ref([]);
     const error = ref("");
 
-    const recipe_steps = ref(recipeStepsData[0]);
+    const recipe_steps = ref(recipeStepsData);
 
     onBeforeMount(async () => {
       try {

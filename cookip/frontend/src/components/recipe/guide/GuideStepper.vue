@@ -1,66 +1,21 @@
 <!-- 레시피 가이드 해당 스텝 상세 컨텐츠, 액션을 포함하는 컴포넌트 -->
 <template>
-  <v-stepper v-model="selectedStep">
-    <v-stepper-header>
-      <v-stepper-item
-        v-for="(step, index) in props.recipeSteps"
-        :key="index"
-        :title="step.title"
-        :value="index + 1"
-        :complete="index + 1 <= selectedStep"
-      ></v-stepper-item>
-    </v-stepper-header>
-
-    <v-stepper-content class="grid grid-cols-3">
-      <template >
-        <div v-for="(step, index) in recipeSteps" :key="index">
-        <StepInfos :step="step" v-if="selectedStep === index + 1" />
-        <StepImageGallery :step="step" v-if="selectedStep === index + 1" />
-        <StepIngredientsGallery
-          :step="step"
-          v-if="selectedStep === index + 1"
-        />
-      </div>
-      </template>
-    </v-stepper-content>
-    <v-stepper-actions
-      :disabled="disabled"
-      @click:prev="prev"
-      @click:next="next"
-    ></v-stepper-actions>
-  </v-stepper>
+  <div>
+    <StepInfos :step="props.selectedStep" />
+    <StepImageGallery :step="props.selectedStep"  />
+    <StepIngredientsGallery :step="props.selectedStep" />
+  </div>
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
-import StepInfos from "@/components/recipe/guide/stepper/StepInfos.vue";
-import StepImageGallery from "@/components/recipe/guide/stepper/StepImageGallery.vue";
-import StepIngredientsGallery from "@/components/recipe/guide/stepper/StepIngredientsGallery.vue";
-const disabled = () => {
-  return selectedStep.value === 1
-    ? "prev"
-    : selectedStep.value === props.recipeSteps.length
-    ? "next"
-    : undefined;
-};
-
-const prev = () => {
-  if (selectedStep.value > 1) {
-    selectedStep.value -= 1;
-  }
-};
-
-const next = () => {
-  if (selectedStep.value < props.recipeSteps.length) {
-    selectedStep.value += 1;
-  }
-};
+import { defineProps } from "vue";
+import StepInfos from "@/components/recipe/guide/StepInfos.vue";
+import StepImageGallery from "@/components/recipe/guide/StepImageGallery.vue";
+import StepIngredientsGallery from "@/components/recipe/guide/StepIngredientsGallery.vue";
 
 const props = defineProps({
-  userInfos: Object,
-  recipeSteps: Object,
+  selectedStep: Object,
 });
-const selectedStep = ref(1);
 </script>
 
 <style scoped>
