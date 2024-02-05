@@ -8,9 +8,14 @@ const urlingredient = "http://localhost:5000/ingredient";
 const urlsetpofstep = "http://localhost:5000/stepofstep";
 const urlcategory = "http://localhost:5000/category";
 const urluser = "http://localhost:5000/user";
+const urlscore = "http://localhost:5000/score";
+const urlfavorite_category = "http://localhost:5000/favorite_category";
+const urlfavorite_ingredient = "http://localhost:5000/favorite_ingredient";
+const urlfavorite_recipe = "http://localhost:5000/favorite_recipe";
+const urlallergy = "http://localhost:5000/allergy";
+const urlfollow = "http://localhost:5000/follow";
 
 class accountService {
-
 
   static getUserRecipe() {
     return axios.get(urlRecipe)
@@ -227,8 +232,71 @@ class accountService {
       });
   }
 
+  static getScore() {
+    return axios.get(urlscore)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.score.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getAllergy() {
+    return axios.get(urlallergy)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.allergy.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getFollow() {
+    return axios.get(urlfollow)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.follow.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getFavorite_category() {
+    return axios.get(urlfavorite_category)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.favorite_category.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getFavorite_ingredient() {
+    return axios.get(urlfavorite_ingredient)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.favorite_ingredient.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getFavorite_recipe() {
+    return axios.get(urlfavorite_recipe)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.favorite_recipe.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
 }
 
 export default accountService;
-
-
