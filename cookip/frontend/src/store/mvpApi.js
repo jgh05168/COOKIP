@@ -7,7 +7,6 @@ const urlstep = "http://localhost:5000/step";
 const urlingredient = "http://localhost:5000/ingredient";
 const urlsetpofstep = "http://localhost:5000/stepofstep";
 const urlcategory = "http://localhost:5000/category";
-
 class accountService {
 
 
