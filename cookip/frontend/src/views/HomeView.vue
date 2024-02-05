@@ -14,7 +14,7 @@
       레시피님 안녕하세요!
     </div>
     <br>
-    <div>
+    <div>;
       <div>
         <RecommendCategory />
         레시피 추천 카테고리 캐로셀 선택된 추천 카테고리를 기준으로 아래 요리

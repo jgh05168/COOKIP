@@ -1,19 +1,16 @@
 <template>
-    <div>
-        <h1>여기서는 멤버리스트를 보여줍니다</h1>
-
-        <h2>기본적으로 메인페이지에서 저장된 사용자 프로필이 선택되어있게 표시가 됩니다
-            사용자가 프로필을 선택하여 다음화면으로 넘어갈 수 있도록 합니다.
-        </h2>
-        <h2>아니면 저장된 사용자로 바로 음성검색 및 추천 서비스를 사용할 수 있도록 합니다</h2>
+    <div class="member_background">
+        <div style="text-align: center; margin: 100px auto;">
+            <h1 class="text">Choose a profile through hand motions</h1>
+        </div>
+        <MemberList />
+        <CreateMemberQR />
+        <!-- <RouterLink :to="{name:'home'}">사용자 home 으로 가기</RouterLink> -->
     </div>
-    <MemberList />
-    <CreateMemberQR />
-    <RouterLink :to="{name:'home'}">사용자 home 으로 가기</RouterLink>
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+// import { RouterLink } from 'vue-router';
 import MemberList from '@/components/member/MemberList.vue';
 import CreateMemberQR from '@/components/create/CreateMemberQR.vue';
 
@@ -21,5 +18,24 @@ import CreateMemberQR from '@/components/create/CreateMemberQR.vue';
 </script>
 
 <style scoped>
+.member_background {
+  /* 백그라운드 이미지 설정 */
+  background-image: url('@/assets/image/member_background.png'); /* @는 src 경로를 나타냅니다. */
+  /* 이미지가 꽉 채우도록 설정 */
+  background-size: cover;
+  /* 이미지가 반복되지 않도록 설정 */
+  background-repeat: no-repeat;
+  /* 이미지가 가운데 정렬되도록 설정 */
+  background-position: center;
+  /* 배경 색상 fallback 설정 (이미지가 로드되지 않을 경우) */
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
 
+
+.text {
+    color: #B6A57B; 
+    font-size: xx-large;
+}
 </style>
