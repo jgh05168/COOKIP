@@ -3,7 +3,7 @@
   <v-row class="recipe-guide-header">
     <!-- 레시피 가이드 스텝 메인 이미지 -->
     <div class="step-header-image">
-      <v-img src="@/assets/image/임채진.png" />
+      <v-img src="/src/assets/image/임채진.png" />
     </div>
 
     <!-- 레시피 가이드 스텝 정보 및 경과 시간 -->

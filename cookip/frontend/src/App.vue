@@ -15,42 +15,60 @@
 
 <script setup>
 import { RouterView, RouterLink } from "vue-router";
-import { onMounted, onBeforeUnmount, onBeforeMount, ref } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
-import accountService from '@/store/mvpApi';
-import { useRecipeStore } from "@/store/recipe"
+import { useRecipeStore } from "@/store/recipe";
+import accountService from "@/store/mvpApi";
 
-const recipestore = useRecipeStore()
-const socket = new WebSocket("ws://localhost:8002");
+const recipestore = useRecipeStore();
+const socket = new WebSocket("ws://localhost:8000");
+
 
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
-const recipes = ref([]);
 const error = ref("");
-  
-  onBeforeMount(async () => {
-    try {
-      const recipeData = await accountService.getUserRecipe();
-      recipes.value = recipeData;
-      recipestore.recipes = recipes.value
-      console.log(recipes.value)
-    } catch (err) {
-      error.value = err.message;
-    }
-  });
 
-  onBeforeMount(async () => {
-    try {
-      const recipeData = await accountService.getUserRecipe();
-      recipes.value = recipeData;
-      recipestore.recipes = recipes.value
-      console.log(recipes.value)
-    } catch (err) {
-      error.value = err.message;
-    }
-  });
+const get_all_recipes = async () => {
+  try {
+    const recipeData = await accountService.getUserRecipe();
+    recipeData.forEach((recipe) => {
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
+    recipestore.recipes = recipeData;
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+const get_all_ingredients = async () => {
+  try {
+    const all_ingredients = await accountService.getUseringredients();
+    recipestore.ingredients = all_ingredients;
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+const get_all_recipes_ingredients = async () => {
+  try {
+    const recipe_ingredientData =
+      await accountService.getUserrecipe_ingredient();
+    recipe_ingredientData.forEach((ingredient) => {
+      const matchingRecipe = recipestore.recipes.find(
+        (recipe) => recipe.recipe_id === ingredient.recipe_id
+      );
+      matchingRecipe.ingredient.push(ingredient.ingredient_id);
+    });
+    console.log(recipestore.recipes);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
 const handleWebSocketMessage = async (e) => {
   try {
     if (e !== null && e !== undefined) {
@@ -81,9 +99,12 @@ const handleWebSocketMessage = async (e) => {
   }
 };
 
-onMounted(() => {
-  // 컴포넌트가 마운트된 후 실행되는 로직
-  console.log("App Mount");
+onMounted(async () => {
+  await get_all_recipes(),
+    await get_all_recipes_ingredients(),
+    await get_all_ingredients(),
+    // 컴포넌트가 마운트된 후 실행되는 로직
+    console.log("App Mount");
 
   // 웹소켓 연결 설정
   socket.onopen = () => {
@@ -110,5 +131,7 @@ onBeforeUnmount(() => {
 .screen {
   width: 1920px;
   height: 1080px;
+  background-color: #534645;
+  color: white;
 }
 </style>

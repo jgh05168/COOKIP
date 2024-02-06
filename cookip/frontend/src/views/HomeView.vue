@@ -47,12 +47,6 @@ watchEffect(motionStore.motion_data, () => {
           router.push({name:"recipe" ,params : {}, query:{}})
         } else if (value == "SwipeUp") {
           router.push({name:"my-favorite" ,params : {}, query:{}})
-        // } else if (value == "SwipeLeft") {
-         
-        // } else if (value == "SwipeRight") {
-
-        // }
-  
       } 
     }
     // 초기화

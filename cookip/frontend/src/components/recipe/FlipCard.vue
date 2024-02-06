@@ -1,11 +1,11 @@
 <template>
   <!-- 카드 플립 기능 -->
   <v-card class="the-card">
-    {{ props.recipe }}
+    <h1>test</h1>
     <!-- 카드 앞면 표시 내용 -->
-    <!-- <CardFront class="card-front" :recipe="recipe" /> -->
+    <CardFront class="card-front" :recipe-front="cardFront" />
     <!-- 카드 뒷면 표시 내용 구현하기 -->
-    <!-- <CardBack class="card-back" :recipe="recipe" /> -->
+    <CardBack class="card-back" :recipe-back="cardBack" />
   </v-card>
 </template>
 
@@ -16,13 +16,14 @@ import { defineProps } from "vue";
 const props = defineProps({
   recipe: Object,
 });
+
+const cardFront = { name: props.recipe.name };
+const cardBack = { ingredients: props.recipe.ingredients };
 </script>
 
 <style scoped>
 .the-card {
-  width: 100%;
-  height: 100%;
-  background-color: blanchedalmond;
-
+  width: 500px;
+  height: 300px;
 }
 </style>
