@@ -7,8 +7,56 @@
     <RouterLink :to="{ name: 'member' }">member</RouterLink> |
     <RouterLink :to="{ name: 'home' }">home</RouterLink> |
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
+    
     <div class="screen">
-      <RouterView />
+      <div v-if="motionStore.motion_data=='SwipeUp'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterUp"
+          @enter="motionStore.enterUp"
+          @leave="motionStore.leaveUp"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else-if="motionStore.motion_data=='SwipeDown'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterDown"
+          @enter="motionStore.enterDown"
+          @leave="motionStore.leaveDown"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else-if="motionStore.motion_data=='SwipeLeft'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterLeft"
+          @enter="motionStore.enterLeft"
+          @leave="motionStore.leaveLeft"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else-if="motionStore.motion_data=='SwipeRight'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterRight"
+          @enter="motionStore.enterRight"
+          @leave="motionStore.leaveRight"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else>
+        
+        <RouterView />
+      </div>
     </div>
   </div>
 </template>
@@ -22,9 +70,7 @@ import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
 
 const recipestore = useRecipeStore();
-const socket = new WebSocket("ws://localhost:8000");
-
-
+const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
@@ -125,6 +171,8 @@ onBeforeUnmount(() => {
   socket.close();
   console.log("앱 Unmount");
 });
+
+
 </script>
 
 <style scoped>
@@ -134,4 +182,6 @@ onBeforeUnmount(() => {
   background-color: #534645;
   color: white;
 }
+
+
 </style>
