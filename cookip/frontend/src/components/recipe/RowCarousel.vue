@@ -5,6 +5,7 @@
   </div> -->
 
   <Carousel
+    v-model="currentSlide"
     ref="rowCarousel"
     :itemsToShow="3"
     :wrapAround="true"
@@ -16,8 +17,12 @@
       v-for="(recipe_col, slide) in recipe_category"
       :key="slide"
       viewport="1080px"
+      :class="{
+        'active-row': slide === currentSlide,
+        'deactive-row': slide !== currentSlide,
+      }"
     >
-      <ColCarousel :recipe-list="recipe_col" />
+      <ColCarousel :recipe-list="recipe_col" :row-slide="slide" />
     </Slide>
   </Carousel>
 
@@ -29,17 +34,18 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ColCarousel from "./ColCarousel.vue";
 import { useRecipeStore } from "@/store/recipe";
 
-const currentSlide = ref(0)
+const currentSlide = ref(0);
 
 const recipeStore = useRecipeStore();
 
-const recipe_category = recipeStore.recommend_list[recipeStore.selected_category].recipe_list;
+const recipe_category =
+  recipeStore.recommend_list[recipeStore.selected_category].recipe_list;
 
 const rowCarousel = ref(null);
 
@@ -59,6 +65,10 @@ const prevpage = () => {
 //   }
 //   return null;
 // };
+watch(currentSlide, (newVal) => {
+  console.log("Current Row:", newVal);
+  recipeStore.currentRowSlide = newVal;
+});
 </script>
 
 <style scoped>
@@ -74,5 +84,12 @@ const prevpage = () => {
 
 .carousel__viewport {
   height: 1080px;
+}
+
+.active-row {
+}
+
+.deactive-row {
+  z-index: 0;
 }
 </style>
