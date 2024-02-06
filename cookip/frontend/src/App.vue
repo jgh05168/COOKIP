@@ -15,21 +15,48 @@
 
 <script setup>
 import { RouterView, RouterLink } from "vue-router";
-import { onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount, onBeforeMount, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
+import accountService from '@/store/mvpApi';
+import { useRecipeStore } from "@/store/recipe"
 
-const socket = new WebSocket("ws://localhost:8000");
+const recipestore = useRecipeStore()
+const socket = new WebSocket("ws://localhost:8002");
 
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
+const recipes = ref([]);
+const error = ref("");
+  
+  onBeforeMount(async () => {
+    try {
+      const recipeData = await accountService.getUserRecipe();
+      recipes.value = recipeData;
+      recipestore.recipes = recipes.value
+      console.log(recipes.value)
+    } catch (err) {
+      error.value = err.message;
+    }
+  });
+
+  onBeforeMount(async () => {
+    try {
+      const recipeData = await accountService.getUserRecipe();
+      recipes.value = recipeData;
+      recipestore.recipes = recipes.value
+      console.log(recipes.value)
+    } catch (err) {
+      error.value = err.message;
+    }
+  });
 const handleWebSocketMessage = async (e) => {
   try {
     if (e !== null && e !== undefined) {
       //   console.log(e.data)
       const result = await JSON.parse(e.data);
-      console.log(result["data"]);
+      // console.log(result["data"]);
       // 데이터 다음과 같이 받아옴 type 이 뭔지에 따라서 motion, stt store 에 저장
       //   {
       //     "type": "Motion",

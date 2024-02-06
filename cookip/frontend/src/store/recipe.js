@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
 // import { ref, computed } from 'vue'
 // import axios from 'axios'
-import accountService from "@/store/mvpApi";
-import { ref, onBeforeMount } from "vue";    
-import recipeStepsData from './recipeDemo.json';
+import { ref } from "vue";
 
 
 export const useRecipeStore = defineStore(
@@ -17,7 +15,6 @@ export const useRecipeStore = defineStore(
     onBeforeMount(async () => {
       try {
         const recipeData = await accountService.getUserRecipe();
-        console.log("recipeData", recipeData);
         recipes.value = recipeData;
       } catch (err) {
         error.value = err.message;
