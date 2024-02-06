@@ -11,6 +11,8 @@
       <RouterView />
     </div>
   </div>
+  <!-- <input v-model="text" type="text" />
+  <img :src="qrcode" alt=""> -->
 </template>
 
 <script setup>
@@ -20,7 +22,11 @@ import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import accountService from '@/store/mvpApi';
 import { useRecipeStore } from "@/store/recipe"
-
+// import { useQRCode } from '@vueuse/integrations/useQRCode'
+ 
+// `qrcode` will be a ref of data URL
+// const text = ref('text-to-encode')
+// const qrcode = useQRCode(text)
 const recipestore = useRecipeStore()
 const socket = new WebSocket("ws://localhost:8000");
 

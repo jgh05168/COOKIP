@@ -12,25 +12,27 @@
           <div class="div">
             <div class="div-2">
               <div class="div-3">
-                <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
+                <v-img class="color" alt="Color" src="../../assets/login_icon/email.png" 
                     @mouseover="handleMouseOver"
                     @mouseleave="handleMouseLeave"/>
-                <div class="basic-details">Login</div>
+                <div class="basic-details">Get going with email</div>
               </div>
-              <div class="to-sign-up-you-need">Please login to continue.</div>
+              <div class="to-sign-up-you-need">It’s helpful to provide a good reason for why the email address is required.</div>
             </div>
             <v-form @submit.prevent class="div-4">
                 
                 <v-text-field
-        v-model="id"
+        v-model="email"
         :rules="rules"
-        label="ID" style="width: 100%;"
+        label="Email" style="width: 100%;"
       ></v-text-field>
-      <v-text-field
-        v-model="password"
-        :rules="rules"
-        label="Password" style="width: 100%;"
-      ></v-text-field>
+
+        <v-checkbox
+        v-model="checkbox"
+        :label="`Stay up to date with the latest news and resources delivered directly to your inbox : ${checkbox.toString()}`"
+        ></v-checkbox>
+
+
               <div style="width: 100%;">
                 <v-btn
               class="continue"
@@ -64,6 +66,8 @@ const handleMouseLeave = () => {
 onMounted(() => {
   colorElement.value = document.querySelector('.color');
 });
+
+const checkbox = ref(true);
   </script>
   
   <style>

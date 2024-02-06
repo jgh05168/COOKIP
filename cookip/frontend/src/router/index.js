@@ -9,14 +9,15 @@ import RecipeDetailView from "@/views/RecipeDetailView.vue";
 import RecipeView from "@/views/RecipeView.vue";
 import UserProfileView from "@/views/UserProfileView.vue";
 import MyFavoriteView from "@/views/MyFavoriteView.vue";
-
 // Mobile views
+import GetstartView from "@/views/mobile/GetStartView.vue"
 import CreateMemberView from "@/views/mobile/CreateMemberView.vue";
 import EditProfileView from "@/views/mobile/EditProfileView.vue";
 import LoginView from "@/views/mobile/LoginView.vue";
 import MemberViewMobile from "@/views/mobile/MemberView.vue";
 import SignUpView from "@/views/mobile/SignUpView.vue";
 import MemberDetailView from "@/views/mobile/MemberDetailView";
+import MobileHomeView from "@/views/mobile/MobileHomeView"
 
 const routes = [
   {
@@ -61,6 +62,16 @@ const routes = [
   },
 
   // Mobile views
+  {
+    path: "/mobile/home",
+    name: "mobile-home",
+    component: MobileHomeView,
+  },
+  {
+    path: "/mobile/start",
+    name: "get-start",
+    component: GetstartView,
+  },
   {
     path: "/mobile/createmember",
     name: "create-member",
