@@ -1,32 +1,40 @@
 <template>
-  <v-stepper v-model="selectedStep">
-    <v-stepper-header>
-      <v-stepper-item
-        v-for="(guide, index) in recipe_steps.guide"
-        :key="index"
-        :title="guide.title"
-        :value="guide.step"
-        :complete="guide.step <= selectedStep"
-      >
-      </v-stepper-item>
-        <GuideHeaderVue
-          class="recipe-guide-header"
-          :user-infos="user_infos"
-          :selected-step="guide"
-          v-if="guide.step === index + 1"
-        />
-    </v-stepper-header>
-    <v-stepper-content class="grid grid-cols-3">
-      <div v-for="(guide, index) in recipe_steps.guide" :key="index">
-        <GuideStepperVue class="recipe-guide-body" :selected-step="guide" v-if="guide.step === selectedStep" />
-      </div>
-    </v-stepper-content>
-    <v-stepper-actions
-      :disabled="disabled"
-      @click:prev="prev"
-      @click:next="next"
-    ></v-stepper-actions>
-  </v-stepper>
+  <div class="recipe-guide-container">
+    <v-stepper v-model="selectedStep">
+      <v-stepper-header class="grid grid-cols-3">
+        <v-stepper-item
+          v-for="(guide, index) in recipe_steps.guide"
+          :key="index"
+          :title="guide.title"
+          :value="guide.step"
+          :complete="guide.step <= selectedStep"
+        >
+        </v-stepper-item>
+      </v-stepper-header>
+      <v-stepper-content>
+      <v-divider></v-divider>
+        <div class="recipe-guide" v-for="(guide, index) in recipe_steps.guide" :key="index">
+          <GuideHeaderVue
+            class="recipe-guide-header"
+            :recipe="recipe_steps"
+            :now_step="guide"
+            v-if="guide.step === selectedStep"
+          />
+          <GuideStepperVue
+            class="recipe-guide-body"
+            :recipe="recipe_steps"
+            :now_step="guide"
+            v-if="guide.step === selectedStep"
+          />
+        </div>
+      </v-stepper-content>
+      <v-stepper-actions
+        :disabled="disabled"
+        @click:prev="prev"
+        @click:next="next"
+      ></v-stepper-actions>
+    </v-stepper>
+  </div>
 </template>
 
 <script setup>
@@ -39,13 +47,8 @@ import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
 const store = useRecipeStore();
 const recipe_steps = store.recipe_steps[0];
 const selectedStep = ref(1); // Default to the first step
-
-// Get user information
-const user_infos = ref({
-  userName: "임채진",
-  userImage: "../../assets/image/임채진.png",
-});
-
+console.log(recipe_steps);
+console.log(recipe_steps.guide[0]);
 const disabled = () => {
   return selectedStep.value === 1
     ? "prev"
@@ -68,6 +71,12 @@ const next = () => {
 </script>
 
 <style scoped>
+.recipe-guide{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #534645;
+}
 .recipe-guide-container {
   width: 1920px;
   height: 1080px;
@@ -76,7 +85,12 @@ const next = () => {
   background: #534645;
 }
 
-.recipe-guide-header,
+.recipe-guide-header{
+  width: 99%;
+  padding: 20px;
+  background: #fdf8ec;
+  border-radius: 0px 0px 50px 50px;
+}
 .recipe-guide-body {
   width: 99%;
   padding: 20px;

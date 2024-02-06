@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <div class="step-ingredients-gallery">
     <Carousel
       :items-to-show="3"
       :wrap-around="true"
@@ -12,15 +12,13 @@
         :key="index"
       >
         <v-img src="@/assets/image/ingredient/item_greenonion.jpg" />
-
       </Slide>
     </Carousel>
     <div>
       <button @click="nextpage()">다음</button>
-      <v-divider></v-divider>
       <button @click="prevpage()">이전</button>
     </div>
-  </v-col>
+  </div>
 </template>
   
 <script setup>
@@ -40,16 +38,21 @@ const prevpage = () => {
 </script>
   
 <style scoped>
+.step-ingredients-gallery{
+  display: flex;
+  flex-direction: column;
+}
 .vertical-carousel {
   transform: rotate(0.25turn);
-  height: 100px;
+  width: 1080px;
+  height: 1080px;
 }
 
 .carousel__viewport {
-  background-color: rgb(4, 255, 255);
   height: 150px;
   width: 800px;
   gap: 10px;
+  margin-top: 200px;
 }
 
 .vertical-carousel-slide {
@@ -58,6 +61,7 @@ const prevpage = () => {
 
 .sub-img {
   height: 120px;
+
   width: 120px;
 }
 </style>

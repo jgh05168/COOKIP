@@ -17,6 +17,7 @@ export const useRecipeStore = defineStore(
     onBeforeMount(async () => {
       try {
         const recipeData = await accountService.getUserRecipe();
+        console.log("recipeData", recipeData);
         recipes.value = recipeData;
       } catch (err) {
         error.value = err.message;

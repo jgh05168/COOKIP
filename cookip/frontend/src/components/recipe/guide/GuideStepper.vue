@@ -1,25 +1,32 @@
 <!-- 레시피 가이드 해당 스텝 상세 컨텐츠, 액션을 포함하는 컴포넌트 -->
 <template>
-  <div>
-    <StepInfos :step="props.selectedStep" />
-    <StepImageGallery :step="props.selectedStep"  />
-    <StepIngredientsGallery :step="props.selectedStep" />
+  <div class="stepper-content ">
+    <StepInfos :recipe="recipe" :step="props.now_step" />
+    <!-- <v-img class="stepper-main-gallery" :src="imagePath" /> -->
+    <StepIngredientsGallery :recipe="recipe" :step="props.now_step" />
   </div>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
 import StepInfos from "@/components/recipe/guide/StepInfos.vue";
-import StepImageGallery from "@/components/recipe/guide/StepImageGallery.vue";
 import StepIngredientsGallery from "@/components/recipe/guide/StepIngredientsGallery.vue";
 
 const props = defineProps({
-  selectedStep: Object,
+  recipe: Object,
+  now_step: Object,
 });
-</script>
 
+// const imagePath = ref("");
+// watchEffect(() => {
+//   imagePath.value = require(`../../assets/image/recipe/1/${props.now_step.step_image}`);
+// });
+</script>
 <style scoped>
 .stepper-content {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+
 }
 </style>
