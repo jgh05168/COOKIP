@@ -80,6 +80,7 @@ watch(currentSlide, (newVal) => {
 .row-carousel-slide {
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 .carousel__viewport {
@@ -87,9 +88,11 @@ watch(currentSlide, (newVal) => {
 }
 
 .active-row {
+  z-index: 1;
 }
 
 .deactive-row {
   z-index: 0;
+  opacity: 0.7;
 }
 </style>
