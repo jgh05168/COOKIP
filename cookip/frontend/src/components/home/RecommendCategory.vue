@@ -7,12 +7,13 @@
     :transition="500"
     class="category-carousel"
   >
-    <Slide
-      v-for="(category, slide) in recommend_category"
-      :key="slide"
-    >
+    <Slide v-for="(category, slide) in recommend_category" :key="slide">
       <div class="category" @click="selectCategory(slide)">
-        {{ category.title }}
+        <div>{{ category.title }}</div>
+        {{ category.img }}
+        <div>
+          <img :src="`@/assets/image/${category.img}`" alt="" />
+        </div>
       </div>
     </Slide>
 
@@ -67,7 +68,7 @@ const currentSlide = ref(0); // 초기 슬라이드 인덱스 설정
 watch(currentSlide, (newVal) => {
   console.log("Current Slide Changed:", newVal);
   selectedSlide.value = newVal;
-  recipeStore.selected_category = newVal
+  recipeStore.selected_category = newVal;
 });
 
 const rowCarousel = ref(null);
