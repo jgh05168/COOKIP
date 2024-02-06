@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref} from 'vue'
+import { ref } from 'vue'
 // import axios from 'axios'
 
 
@@ -18,7 +18,76 @@ export const useMotionStore = defineStore('motion', () => {
     flip: null,
   })
 
-   
-  return {motion_data}
-  }, { persist: true })
-  
+  const transition_dir = ref('slide-up')
+
+  const beforeEnterUp = (el) => {
+    el.style.transform = "translateY(100%)";
+  };
+
+  const enterUp = (el, done) => {
+    el.offsetHeight; // trigger reflow
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateY(0)";
+    done();
+  };
+
+  const leaveUp = (el, done) => {
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateY(100%)";
+    done();
+  };
+
+  const beforeEnterDown = (el) => {
+    el.style.transform = "translateY(-100%)";
+  };
+
+  const enterDown = (el, done) => {
+    el.offsetHeight; // trigger reflow
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateY(0)";
+    done();
+  };
+
+  const leaveDown = (el, done) => {
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateY(-100%)";
+    done();
+  };
+
+  const beforeEnterLeft = (el) => {
+    el.style.transform = "translateX(-100%)";
+  };
+
+  const enterLeft = (el, done) => {
+    el.offsetHeight; // trigger reflow
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateX(0)";
+    done();
+  };
+
+  const leaveLeft = (el, done) => {
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateX(-100%)";
+    done();
+  };
+
+  const beforeEnterRight = (el) => {
+    el.style.transform = "translateX(100%)";
+  };
+
+  const enterRight = (el, done) => {
+    el.offsetHeight; // trigger reflow
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateX(0)";
+    done();
+  };
+
+  const leaveRight = (el, done) => {
+    el.style.transition = "transform 0.5s";
+    el.style.transform = "translateX(100%)";
+    done();
+  };
+
+  return { motion_data, transition_dir, beforeEnterUp, enterUp, leaveUp, beforeEnterDown, enterDown, leaveDown, 
+    beforeEnterLeft, enterLeft, leaveLeft, beforeEnterRight, enterRight, leaveRight}
+}, { persist: true })
