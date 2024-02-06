@@ -13,6 +13,7 @@
         'active-slide':
           props.rowSlide == recipeStore.currentRowSlide &&
           slide == currentSlide,
+        'deactive-slide': slide !== currentSlide,
       }"
       v-for="(recipe, slide) in props.recipeList"
       :key="slide"
@@ -108,12 +109,16 @@ watch(currentSlide, (newVal) => {
 .active-slide {
   transition: transform 0.5s ease-out;
   transform-origin: 50% 50%;
-  transform: scale(2);
+  transform: scale(2.2);
+  z-index: 2;
+}
+
+.deactive-slide {
+  opacity: 0.7;
 }
 
 .flip-card {
   transform: rotate(-0.25turn);
-  border: 2px solid red;
   width: 480px;
   height: 270px;
 }

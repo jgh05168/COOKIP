@@ -7,6 +7,8 @@
     <RouterLink :to="{ name: 'member' }">member</RouterLink> |
     <RouterLink :to="{ name: 'home' }">home</RouterLink> |
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
+    <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
+
     
     <div class="screen">
       <div v-if="motionStore.motion_data=='SwipeUp'">

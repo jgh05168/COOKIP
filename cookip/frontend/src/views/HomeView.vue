@@ -14,7 +14,7 @@
       레시피님 안녕하세요!
     </div>
     <br>
-    <div>;
+    <div>
       <div>
         <RecommendCategory />
         레시피 추천 카테고리 캐로셀 선택된 추천 카테고리를 기준으로 아래 요리
@@ -44,9 +44,9 @@ watchEffect(motionStore.motion_data, () => {
         let value = motionStore.motion_data.swipe
         // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
         if (value == "SwipeDown") {
-          router.push({name:"recipe" ,params : {}, query:{}})
+          router.push({name:"recipe"})
         } else if (value == "SwipeUp") {
-          router.push({name:"my-favorite" ,params : {}, query:{}})
+          router.push({name:"my-favorite"})
       } 
     }
     // 초기화
