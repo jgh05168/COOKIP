@@ -11,56 +11,16 @@
 
     
     <div class="screen">
-      <div v-if="motionStore.motion_data=='SwipeUp'">
+      <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
+        <p>{{ motionStore.transition_dir }}</p>
         <transition
           :name="motionStore.transition_dir"
           mode="out-in"
-          @before-enter="motionStore.beforeEnterUp"
-          @enter="motionStore.enterUp"
-          @leave="motionStore.leaveUp"
           >
           <RouterView />
         </transition>
       </div>
-      <div v-else-if="motionStore.motion_data=='SwipeDown'">
-        <transition
-          :name="motionStore.transition_dir"
-          mode="out-in"
-          @before-enter="motionStore.beforeEnterDown"
-          @enter="motionStore.enterDown"
-          @leave="motionStore.leaveDown"
-          >
-          <RouterView />
-        </transition>
-      </div>
-      <div v-else-if="motionStore.motion_data=='SwipeLeft'">
-        <transition
-          :name="motionStore.transition_dir"
-          mode="out-in"
-          @before-enter="motionStore.beforeEnterLeft"
-          @enter="motionStore.enterLeft"
-          @leave="motionStore.leaveLeft"
-          >
-          <RouterView />
-        </transition>
-      </div>
-      <div v-else-if="motionStore.motion_data=='SwipeRight'">
-        <transition
-          :name="motionStore.transition_dir"
-          mode="out-in"
-          @before-enter="motionStore.beforeEnterRight"
-          @enter="motionStore.enterRight"
-          @leave="motionStore.leaveRight"
-          >
-          <RouterView />
-        </transition>
-      </div>
-      <div v-else>
-        
-        <RouterView />
-      </div>
-    </div>
-  </div>
+  </div> 
   <!-- <input v-model="text" type="text" />
   <img :src="qrcode" alt=""> -->
 </template>
@@ -184,5 +144,22 @@ onBeforeUnmount(() => {
   color: white;
 }
 
+
+.slide-up-enter-from {
+  transform: translateY(100%);
+}
+.slide-down-enter-from {
+  transform: translateY(-100%);
+}
+.slide-left-enter-from {
+  transform: translateX(100%);
+}
+.slide-right-enter-from {
+  transform: translateX(-100%);
+}
+.slide-up-enter-active, .slide-down-enter-active,
+.slide-left-enter-active, .slide-right-enter-active {
+  transition: transform 0.5s ease-in-out;
+}
 
 </style>
