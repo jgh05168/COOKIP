@@ -14,7 +14,9 @@
       </div>
   
       <!-- RouterLink를 버튼으로 스타일링 -->
-      <button @click="submitSurvey" class="submit-button">Continue</button>
+      <router-link :to="{ name: 'mobile-home' }">
+        <button @click="submitSurvey" class="submit-button">Continue</button>
+      </router-link>
       <!-- <router-link :to="{ name: 'create-member' }">
         <button class="submit-button">Coutinue</button>
       </router-link> -->
@@ -28,7 +30,7 @@
 
   const recipeStore = useRecipeStore();
   
-  console.log("설문조사창",recipeStore.ingredient_servey);
+  //console.log("재료설문조사창",recipeStore.ingredient_servey);
 
 
   // 재료 정보 배열

@@ -24,7 +24,7 @@ export const useRecipeStore = defineStore('recipe', () => {
       ingredient_name: item.ingredient_name
     }));
   });
-  // console.log("카테고리",user_category,user_ingredients,recipes);
+  console.log("카테고리",user_category,user_ingredients,recipes);
 
   // 추천 카테고리
   const recommend_category = ref([

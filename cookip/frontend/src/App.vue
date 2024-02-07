@@ -56,8 +56,8 @@ const get_all_recipes = async () => {
 
 const get_all_ingredients = async () => {
   try {
-    const all_ingredients = await accountService.getUseringredients();
-    recipestore.ingredients = all_ingredients;
+    const all_ingredients = await accountService.getUseringredient();
+    recipestore.user_ingredients = all_ingredients;
   } catch (err) {
     error.value = err.message;
   }

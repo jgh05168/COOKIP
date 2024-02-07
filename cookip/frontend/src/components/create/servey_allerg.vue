@@ -23,7 +23,7 @@
 
   const recipeStore = useRecipeStore();
   
-  console.log("설문조사창22",recipeStore.ingredient_servey);
+  //console.log("설문조사창22",recipeStore.ingredient_servey);
   
   const items = ['땅콩', '호두', '복숭아', '새우', '연어', '우유'];
   const selectedItems = ref(Array(items.length).fill(false));
@@ -33,22 +33,54 @@
   };
 
 
-//   const submitSurvey = () => {
+  const submitSurvey = () => {
+    // 설문 선택된 항목(재료이름)
+    const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
+
+    // 선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
+    const selectedCategoryIds = selectedChoices.map(choice => {
+    const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+    return ingredient ? ingredient.ingredient_id : null;
+    });
+
+
+    console.log(selectedChoices,selectedCategoryIds);
+    // Axios를 사용하여 POST 요청 보내기
+    axios.post('http://localhost:5000/user/allergy', {
+        ingredients: selectedCategoryIds.map((ingredient_id, index) => ({
+            ingredient_id,
+            allergy_name: selectedChoices[index] // 선택된 재료 이름
+        }))
+    })
+    .then(response => {
+        console.log('서버 응답:', response.data);
+        // alert("선호도 조사 완료");
+        // POST 요청 성공 시 수행할 작업 추가
+    })
+    .catch(error => {
+        console.error('POST 요청 오류:', error);
+        // POST 요청 실패 시 수행할 작업 추가
+    });
+};
+
+// const submitSurvey = () => {
 //     // 설문 선택된 항목(재료이름)
 //     const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
 
 //     // 선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
 //     const selectedCategoryIds = selectedChoices.map(choice => {
-//     const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-//     return ingredient ? ingredient.ingredient_id : null;
+//         const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+//         return ingredient ? ingredient.ingredient_id : null;
 //     });
-
 
 //     // Axios를 사용하여 POST 요청 보내기
 //     axios.post('http://localhost:5000/user/allergy', {
-//         ingredients: selectedCategoryIds.map((ingredient_id, index) => ({
+//         ingredients: selectedCategoryIds.map(ingredient_id => ({
 //             ingredient_id,
-//             allergy_name: selectedChoices[index] // 선택된 재료 이름
+//             allergy_name: selectedChoices.find(choice => {
+//                 const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+//                 return ingredient && ingredient.ingredient_id === ingredient_id;
+//             })
 //         }))
 //     })
 //     .then(response => {
@@ -61,7 +93,6 @@
 //         // POST 요청 실패 시 수행할 작업 추가
 //     });
 // };
-
 
 
 
@@ -90,27 +121,27 @@
 // };
 
 
-const submitSurvey = async (selectedChoices) => {
-    try {
-        const selectedIngredientIds = selectedChoices.map(choice => {
-            const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-            return ingredient ? ingredient.ingredient_id : null;
-        });
+// const submitSurvey = async (selectedChoices) => {
+//     try {
+//         const selectedIngredientIds = selectedChoices.map(choice => {
+//             const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+//             return ingredient ? ingredient.ingredient_id : null;
+//         });
 
-        const response = await axios.post('http://localhost:5000/user/categoryFollow', {
-          ingredients: selectedIngredientIds.map((ingredient_id, index) => ({
-            ingredient_id,
-            allergy_name: selectedChoices[index] // 선택된 재료 이름
-        }))
-        });
+//         const response = await axios.post('http://localhost:5000/user/categoryFollow', {
+//           ingredients: selectedIngredientIds.map((ingredient_id, index) => ({
+//             ingredient_id,
+//             allergy_name: selectedChoices[index] // 선택된 재료 이름
+//         }))
+//         });
 
-        console.log('서버 응답:', response.data);
-        // 성공적으로 요청이 완료된 후 수행할 작업 추가
-    } catch (error) {
-        console.error('POST 요청 오류:', error);
-        // 요청이 실패한 경우 수행할 작업 추가
-    }
-};
+//         console.log('서버 응답:', response.data);
+//         // 성공적으로 요청이 완료된 후 수행할 작업 추가
+//     } catch (error) {
+//         console.error('POST 요청 오류:', error);
+//         // 요청이 실패한 경우 수행할 작업 추가
+//     }
+// };
 
 
 
