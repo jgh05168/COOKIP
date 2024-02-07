@@ -75,7 +75,7 @@
         <button type="submit">Submit</button>
     </form> -->
 
-    <form action="http://localhost:5000/user/score" method="post">
+    <!-- <form action="http://localhost:5000/user/score" method="post">
         <label for="recipe_id">recipe_id:</label>
         <input type="text" id="recipe_id" name="recipe_id">
         <label for="profile_id">profile_id:</label>
@@ -85,7 +85,7 @@
         <label for="user_id">user_id:</label>
         <input type="text" id="user_id" name="user_id">
         <button type="submit">Submit</button>
-    </form> -->
+    </form> --> 
 
         <div>
             <h1>기본페이지입니다</h1>

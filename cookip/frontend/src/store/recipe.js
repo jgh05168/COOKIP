@@ -79,7 +79,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   //console.log("보내지는창",ingredient_servey, category_servey);
   const selected_category = ref(0)
   
-    return { recipes, ingredients, user_ingredients,recommend_category, recommend_list, 
-    selected_category, }
+  return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,Favorite_recipe,recommend_category, recommend_list, 
+    selected_category,ingredient_servey,user_category }
   }, { persist: true })
   

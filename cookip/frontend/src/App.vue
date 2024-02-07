@@ -7,7 +7,7 @@
     <RouterLink :to="{ name: 'member' }">member</RouterLink> |
     <RouterLink :to="{ name: 'home' }">home</RouterLink> |
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-    <RouterLink :to="{ name: 'create-member' }">create-member</RouterLink> |
+    <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> |
     <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
 
     
@@ -63,6 +63,19 @@ const get_all_ingredients = async () => {
     error.value = err.message;
   }
 };
+
+
+const get_all_category = async () => {
+  try {
+    const categoryData = await accountService.getUsercategory();
+    console.log("getgeyget",categoryData);
+    recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
+    console.log("get_확인",recipestore.user_category);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
 
 const get_all_recipes_ingredients = async () => {
   try {
