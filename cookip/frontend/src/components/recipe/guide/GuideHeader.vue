@@ -3,7 +3,7 @@
   <div>
     <div class="recipe-guide-header">
       <!-- 레시피 가이드 스텝 메인 이미지 -->
-      <v-img class="step-header-image" src="@/assets/image/임채진.png" />
+      <!-- <v-img class="step-header-image" src="@/assets/image/임채진.png" /> -->
       <!-- 레시피 가이드 스텝 정보 및 경과 시간-->
       <div class="step-header-content">
           <HeaderStepInfo :recipe="props.recipe" :step="props.now_step" />

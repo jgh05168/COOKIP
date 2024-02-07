@@ -39,15 +39,17 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRecipeStore } from "@/store/recipe";
+import { useRecipeStore } from "@/store/demoRecipe";
 import GuideHeaderVue from "@/components/recipe/guide/GuideHeader.vue";
 import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
 
 // Get recipe information
 const store = useRecipeStore();
 const recipe_steps = store.recipe_steps[0];
+const my_tmp = store.recipes;
 const selectedStep = ref(1); // Default to the first step
 console.log(recipe_steps);
+console.log(my_tmp);
 console.log(recipe_steps.guide[0]);
 const disabled = () => {
   return selectedStep.value === 1
