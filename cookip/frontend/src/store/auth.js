@@ -1,32 +1,32 @@
-import axios from "axios";
-import { defineStore } from 'pinia'
-// import { ref, computed } from 'vue'
-// import axios from 'axios'
-import { ref } from "vue";
+import { defineStore } from 'pinia';
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
-export const useUserStore = defineStore('user', () => {
+const urlUser = 'http://localhost:5000/User';
+const urlUserProfile = 'http://localhost:5000/Users_Profile';
 
-    const user_id = ref([]);
-    const state = ref(0);
-    const users = ref([]);
+export const useAuthStore = defineStore('auth', () => {
+  const memberList = ref([]);
+  const userProfileList = ref([]);
 
-    return { user_id, state, users }
-  }, { persist: true })
+  const fetchUserData = async () => {
+    try {
+      const userResponse = await axios.get(urlUser);
+      const userProfileResponse = await axios.get(urlUserProfile);
 
-const urluser = "http://localhost:5000/user";
+      memberList.value = userResponse.data;
+      userProfileList.value = userProfileResponse.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-class Userservice {
-    static getUser() {
-        return axios.get(urluser)
-          .then((res) => {
-            const data = res.data;
-            return data.Recipe.map((guild_owner) => ({ ...guild_owner }));
-          })
-          .catch((error) => {
-            throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
-          });
-      }
-}
+  onMounted(() => {
+    fetchUserData();
+  });
 
-export default Userservice;
-
+  return {
+    memberList,
+    userProfileList,
+  };
+}, { persist: true });

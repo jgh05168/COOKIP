@@ -7,8 +7,58 @@
     <RouterLink :to="{ name: 'member' }">member</RouterLink> |
     <RouterLink :to="{ name: 'home' }">home</RouterLink> |
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
+    <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
+
+    
     <div class="screen">
-      <RouterView />
+      <div v-if="motionStore.motion_data=='SwipeUp'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterUp"
+          @enter="motionStore.enterUp"
+          @leave="motionStore.leaveUp"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else-if="motionStore.motion_data=='SwipeDown'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterDown"
+          @enter="motionStore.enterDown"
+          @leave="motionStore.leaveDown"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else-if="motionStore.motion_data=='SwipeLeft'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterLeft"
+          @enter="motionStore.enterLeft"
+          @leave="motionStore.leaveLeft"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else-if="motionStore.motion_data=='SwipeRight'">
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          @before-enter="motionStore.beforeEnterRight"
+          @enter="motionStore.enterRight"
+          @leave="motionStore.leaveRight"
+          >
+          <RouterView />
+        </transition>
+      </div>
+      <div v-else>
+        
+        <RouterView />
+      </div>
     </div>
   </div>
   <!-- <input v-model="text" type="text" />
@@ -20,22 +70,15 @@ import { RouterView, RouterLink } from "vue-router";
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
-import accountService from '@/store/mvpApi';
-import { useRecipeStore } from "@/store/recipe"
-// import { useQRCode } from '@vueuse/integrations/useQRCode'
- 
-// `qrcode` will be a ref of data URL
-// const text = ref('text-to-encode')
-// const qrcode = useQRCode(text)
-const recipestore = useRecipeStore()
-const socket = new WebSocket("ws://localhost:8000");
+import { useRecipeStore } from "@/store/recipe";
+import accountService from "@/store/mvpApi";
 
+const recipestore = useRecipeStore();
+const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
-
 const error = ref("");
-
 
 const get_all_recipes = async () => {
   try {
@@ -74,7 +117,7 @@ const handleWebSocketMessage = async (e) => {
     if (e !== null && e !== undefined) {
       //   console.log(e.data)
       const result = await JSON.parse(e.data);
-      console.log(result["data"]);
+      // console.log(result["data"]);
       // 데이터 다음과 같이 받아옴 type 이 뭔지에 따라서 motion, stt store 에 저장
       //   {
       //     "type": "Motion",
@@ -99,9 +142,12 @@ const handleWebSocketMessage = async (e) => {
   }
 };
 
-onMounted(() => {
-  // 컴포넌트가 마운트된 후 실행되는 로직
-  console.log("App Mount");
+onMounted(async () => {
+  await get_all_recipes(),
+    await get_all_recipes_ingredients(),
+    await get_all_ingredients(),
+    // 컴포넌트가 마운트된 후 실행되는 로직
+    console.log("App Mount");
 
   // 웹소켓 연결 설정
   socket.onopen = () => {
@@ -122,11 +168,17 @@ onBeforeUnmount(() => {
   socket.close();
   console.log("앱 Unmount");
 });
+
+
 </script>
 
 <style scoped>
 .screen {
   width: 1920px;
   height: 1080px;
+  background-color: #534645;
+  color: white;
 }
+
+
 </style>

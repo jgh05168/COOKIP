@@ -1,29 +1,54 @@
 <template>
-  <v-card class="d">
-    <div class="d-flex flex-no-wrap justify-space-between">
-      <div>
-        <v-card-title class="text-h5">
-          {{ props.recipe.name }}
-        </v-card-title>
-
-        <v-card-subtitle>Card_Front</v-card-subtitle>
-        <v-card-text>재료 데이터</v-card-text>
-        <v-card-actions>
-          <v-btn class="ms-2" icon="mdi-play" variant="text"></v-btn>
-        </v-card-actions>
+  <div class="card max-w-sm rounded overflow-hidden">
+    <div class="card-info">
+      <div class="px-6 py-4">
+        <div class="font-bold text-2xl mb-2 text-slate-800">
+          {{ props.recipeFront.name }}
+        </div>
       </div>
-      <v-img>음식 이미지</v-img>
+      <div class="px-6 pt-4 pb-2">
+        <span
+          class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+          >#photography</span
+        >
+      </div>
     </div>
-  </v-card>
+    <div class="thumbnail">
+      <img :src="getBufferImage(recipeFront.thumbnail)" alt="음식이미지" />
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
 
 const props = defineProps({
-  recipe: Object,
+  recipeFront: Object,
 });
 
+const getBufferImage = (buffer) => {
+  if (buffer && buffer.data instanceof Array) {
+    const uint8Array = new Uint8Array(buffer.data);
+    const blob = new Blob([uint8Array], { type: "image/jpeg" });
+    return URL.createObjectURL(blob);
+  }
+  return null;
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.card-info {
+}
+
+.thumbnail {
+  width: 80%;
+  height: 80%;
+}
+</style>

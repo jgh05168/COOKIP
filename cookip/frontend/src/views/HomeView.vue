@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <!-- <h1>사용자 선택후 넘어가는 기본 페이지 입니다</h1>
     <h2>
       추천 레시피, 즐겨찾기, 검색 등 다양한 기능을 이용할 수 있는 사용자 맞춤형
@@ -44,15 +44,9 @@ watchEffect(motionStore.motion_data, () => {
         let value = motionStore.motion_data.swipe
         // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
         if (value == "SwipeDown") {
-          router.push({name:"recipe" ,params : {}, query:{}})
+          router.push({name:"recipe"})
         } else if (value == "SwipeUp") {
-          router.push({name:"my-favorite" ,params : {}, query:{}})
-        // } else if (value == "SwipeLeft") {
-         
-        // } else if (value == "SwipeRight") {
-
-        // }
-  
+          router.push({name:"my-favorite"})
       } 
     }
     // 초기화
@@ -74,4 +68,6 @@ watchEffect(motionStore.motion_data, () => {
   color:aqua;
   background-color: brown;
 }
+
+
 </style>
