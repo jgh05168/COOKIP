@@ -9,6 +9,8 @@ import RecipeDetailView from "@/views/RecipeDetailView.vue";
 import RecipeView from "@/views/RecipeView.vue";
 import UserProfileView from "@/views/UserProfileView.vue";
 import MyFavoriteView from "@/views/MyFavoriteView.vue";
+import SearchView from "@/views/SearchView.vue";
+
 
 // Mobile views
 import CreateMemberView from "@/views/mobile/CreateMemberView.vue";
@@ -58,6 +60,11 @@ const routes = [
     path: "/favorite", // Example of dynamic route parameter
     name: "my-favorite",
     component: MyFavoriteView,
+  },
+  {
+    path: "/search", // Example of dynamic route parameter
+    name: "search",
+    component: SearchView,
   },
 
   
