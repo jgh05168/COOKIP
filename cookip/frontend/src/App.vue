@@ -8,10 +8,22 @@
     <RouterLink :to="{ name: 'home' }">home</RouterLink> |
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
     <RouterLink :to="{ name: 'create-member' }">create-member</RouterLink> |
+    <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
+
+    
     <div class="screen">
-      <RouterView />
-    </div>
-  </div>
+      <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
+        <p>{{ motionStore.transition_dir }}</p>
+        <transition
+          :name="motionStore.transition_dir"
+          mode="out-in"
+          >
+          <RouterView />
+        </transition>
+      </div>
+  </div> 
+  <!-- <input v-model="text" type="text" />
+  <img :src="qrcode" alt=""> -->
 </template>
 
 <script setup>
@@ -23,9 +35,7 @@ import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
 
 const recipestore = useRecipeStore();
-const socket = new WebSocket("ws://localhost:8000");
-
-
+const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
@@ -35,70 +45,33 @@ const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();
     recipeData.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
+    if (!Object.prototype.hasOwnProperty.call(recipe, 'ingredient')) {
+      recipe.ingredient = []; 
+    }
+  });
     recipestore.recipes = recipeData;
   } catch (err) {
     error.value = err.message;
   }
 };
 
-// const get_id1_recipes = async() => {
-//   try{
-//     const recipeData = await accountService
-//   }
-//   catch (err){
-//     error.value = err.message;
-//   }
-// }
-
-// const get_id2_recipes = async() => {
-
-// }
-
-
-
 const get_all_ingredients = async () => {
   try {
-    const recipeData = await accountService.getUseringredient();
-    recipeData.forEach((ingredient) => {
-      if (!Object.prototype.hasOwnProperty.call(ingredient, "ingredient")) {
-        ingredient.ingredient = [];
-      }
-    });
-    recipestore.user_ingredients = recipeData; // 이거 스토어 recipe.js와 같아야함
+    const all_ingredients = await accountService.getUseringredients();
+    recipestore.ingredients = all_ingredients;
   } catch (err) {
     error.value = err.message;
   }
 };
-
-
-const get_all_category = async () => {
-  try {
-    const categoryData = await accountService.getUsercategory();
-    console.log("getgeyget",categoryData);
-    recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
-    console.log("get_확인",recipestore.user_category);
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-
 
 const get_all_recipes_ingredients = async () => {
   try {
-    const recipe_ingredientData =
-      await accountService.getUserrecipe_ingredient();
+    const recipe_ingredientData = await accountService.getUserrecipe_ingredient();
     recipe_ingredientData.forEach((ingredient) => {
-      const matchingRecipe = recipestore.recipes.find(
-        (recipe) => recipe.recipe_id === ingredient.recipe_id
-      );
-      matchingRecipe.ingredient.push(ingredient.ingredient_id);
+    const matchingRecipe = recipestore.recipes.find((recipe) => recipe.recipe_id === ingredient.recipe_id);
+    matchingRecipe.ingredient.push(ingredient.ingredient_id); 
     });
-    console.log(recipestore.recipes);
+    console.log(recipestore.recipes)
   } catch (err) {
     error.value = err.message;
   }
@@ -286,6 +259,8 @@ onBeforeUnmount(() => {
   socket.close();
   console.log("앱 Unmount");
 });
+
+
 </script>
 
 <style scoped>
@@ -295,4 +270,23 @@ onBeforeUnmount(() => {
   background-color: #534645;
   color: white;
 }
+
+
+.slide-up-enter-from {
+  transform: translateY(100%);
+}
+.slide-down-enter-from {
+  transform: translateY(-100%);
+}
+.slide-left-enter-from {
+  transform: translateX(100%);
+}
+.slide-right-enter-from {
+  transform: translateX(-100%);
+}
+.slide-up-enter-active, .slide-down-enter-active,
+.slide-left-enter-active, .slide-right-enter-active {
+  transition: transform 0.5s ease-in-out;
+}
+
 </style>

@@ -28,10 +28,11 @@ export const useRecipeStore = defineStore('recipe', () => {
 
   // 추천 카테고리
   const recommend_category = ref([
-    {id:1, title:"맞춤 추천"}, // 모든 고려인자 (노션에 디테일하게 있음)
-    {id:2, title:"인기 음식"}, // 좋아요, 평점
-    {id:3, title:"냉장고에 있는 재료로 만들기 + 유통 기한"}, // 현재 냉장고에 있는 재료로
-    {id:4, title:"오늘의 추천"}, // 난수
+    {id:1, title:"냉장고에 있는 재료로 만들기"}, // 지금 냉장고에 있는 재료로
+    {id:2, title:"실시간 인기 음식"}, // 실시간 인기 음식(좋아요 순)
+    {id:3, title:"유통기한 임박 재료"}, // 유통기한 적게 남은 순
+    {id:4, title:"난이도 맞춤 추천"}, // 
+    {id:5, title:"조리시간 별 추천"}, // 
   ])
 
   // 지금 냉장고에 있는 재료
@@ -67,7 +68,7 @@ export const useRecipeStore = defineStore('recipe', () => {
  
   // 추천 카테고리 별로 데이터 쪼개기
   const recommend_list = ref([
-    {category : 1, recipe_list: category_1},
+    {category : 1, recipe_list: category_1 },
     {category : 2, recipe_list: category_2},
     {category : 3, recipe_list: category_3},
     {category : 4, recipe_list: category_4},
@@ -77,8 +78,8 @@ export const useRecipeStore = defineStore('recipe', () => {
 
   //console.log("보내지는창",ingredient_servey, category_servey);
   const selected_category = ref(0)
-
-  return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,Favorite_recipe,recommend_category, recommend_list, 
-    selected_category,ingredient_servey,user_category }
+  
+    return { recipes, ingredients, user_ingredients,recommend_category, recommend_list, 
+    selected_category, }
   }, { persist: true })
   

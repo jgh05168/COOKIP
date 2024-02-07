@@ -1,11 +1,18 @@
 <template>
-    <div>
-        <h1>회원가입 페이지 입니다.</h1>
-        대표계정 한개만 존재합니다
+    <div style="width: 360px;">
+        <PhoneNumberForm />
+        <NewLoginForm />
+        <EmailForm />
+        <BasicForm />
     </div>
 </template>
 
 <script setup>
+
+import PhoneNumberForm from "@/components/auth/PhoneNumberForm.vue";
+import NewLoginForm from "@/components/auth/NewLoginForm.vue";
+import EmailForm from "@/components/auth/EmailForm.vue";
+import BasicForm from "@/components/auth/BasicForm.vue";
 
 </script>
 
