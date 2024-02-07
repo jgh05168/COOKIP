@@ -56,6 +56,7 @@ sed eiusmod tempor incididunt.</div>
   
   <script setup>
   import { ref, onMounted, defineProps } from "vue";
+  import axios from 'axios'; // Axios 라이브러리 가져오기
 import { useAuthStore } from '@/store/auth'
 const store = useAuthStore()
 
@@ -72,6 +73,18 @@ const userpost = () => {
   store.signup.lastname = last_name.value
   store.signup.birthday = birthday.value
   console.log(store.signup)
+  axios.post('http://localhost:5000/user/insertUser', {
+      User_loginData:store.signup
+    })
+    .then(response => {
+        console.log('서버 응답:', response.data);
+        // alert("선호도 조사 완료");
+        // POST 요청 성공 시 수행할 작업 추가
+    })
+    .catch(error => {
+        console.error('POST 요청 오류:', error);
+        // POST 요청 실패 시 수행할 작업 추가
+    });
 }
 const colorElement = ref(null);
 const handleMouseOver = () => {

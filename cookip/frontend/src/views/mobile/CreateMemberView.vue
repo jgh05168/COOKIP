@@ -17,6 +17,7 @@
   </template>
   
   <script setup>
+  //모바일스타트
   import axios from 'axios'; // Axios 라이브러리 가져오기
   import { ref } from 'vue';
   import { useRecipeStore } from "@/store/recipe";
@@ -32,29 +33,64 @@
   };
 
 
-  const submitSurvey = () => {
-    //설문 선택된 항목(재료이름)
-    const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
+//   const submitSurvey = () => {
+//     //설문 선택된 항목(재료이름)
+//     const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
 
-    //선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
-    const selectedCategoryIds = selectedChoices.map(choice => {
-    const ingredient = recipeStore.user_category.find(item => item.category === choice);
-    return ingredient ? ingredient.category_id : null;
-    });
-    // Axios를 사용하여 POST 요청 보내기
-    axios.post('http://localhost:5000/user/categoryFollow', {
-      category_id: selectedCategoryIds
-    })
-    .then(response => {
+//     //선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
+//     const selectedCategoryIds = selectedChoices.map(choice => {
+//     const ingredient = recipeStore.user_category.find(item => item.category === choice);
+//     return ingredient ? ingredient.category_id : null;
+//     });
+//     console.log("aaaaaaaaaaaaaaaaaa",selectedChoices,selectedCategoryIds)
+//     // Axios를 사용하여 POST 요청 보내기
+//     axios.post('http://localhost:5000/user/categoryFollow', {
+//       category_id: selectedCategoryIds
+//     })
+//     .then(response => {
+//         console.log('서버 응답:', response.data);
+//         //alert("선호도 조사 완료");
+//         // POST 요청 성공 시 수행할 작업 추가
+//     })
+//     .catch(error => {
+//         console.error('POST 요청 오류:', error);
+//         // POST 요청 실패 시 수행할 작업 추가
+//     });
+// };
+
+
+const submitSurvey = async (selectedChoices) => {
+    try {
+        const selectedIngredientIds = selectedChoices.map(choice => {
+            const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+            return ingredient ? ingredient.ingredient_id : null;
+        });
+
+        const response = await axios.post('http://localhost:5000/user/categoryFollow', {
+            category_id: selectedIngredientIds
+        });
+
         console.log('서버 응답:', response.data);
-        //alert("선호도 조사 완료");
-        // POST 요청 성공 시 수행할 작업 추가
-    })
-    .catch(error => {
+        // 성공적으로 요청이 완료된 후 수행할 작업 추가
+    } catch (error) {
         console.error('POST 요청 오류:', error);
-        // POST 요청 실패 시 수행할 작업 추가
-    });
+        // 요청이 실패한 경우 수행할 작업 추가
+    }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </script>
   
   <style scoped>
