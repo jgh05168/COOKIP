@@ -18,7 +18,7 @@ export const useMotionStore = defineStore('motion', () => {
     flip: null,
   })
 
-  const transition_dir = ref('slide-up')
+  const transition_dir = ref('')
 
   const beforeEnterUp = (el) => {
     el.style.transform = "translateY(100%)";
