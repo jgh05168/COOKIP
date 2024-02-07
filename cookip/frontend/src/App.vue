@@ -94,6 +94,15 @@ const get_all_recipes = async () => {
   }
 }
 
+const get_all_ingredients = async () => {
+  try {
+    const ingredientsData = await accountService.getUseringredient();
+    recipestore.ingredients = ingredientsData;
+  } catch (err) {
+    error.value = err.message;
+  }
+}
+
 const get_all_recipes_ingredients = async () => {
   try {
     const recipe_ingredientData = await accountService.getUserrecipe_ingredient();
@@ -106,11 +115,6 @@ const get_all_recipes_ingredients = async () => {
     error.value = err.message;
   }
 };
-
-onMounted( async () => {
-  await get_all_recipes(),
-  await get_all_recipes_ingredients()
-});
 
 const handleWebSocketMessage = async (e) => {
   try {

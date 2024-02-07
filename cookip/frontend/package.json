@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vueuse/integrations": "^10.7.2",
+    "all": "^0.0.0",
     "autoprefixer": "^10",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.2",

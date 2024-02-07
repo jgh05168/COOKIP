@@ -16,8 +16,4 @@ const vuetify = createVuetify({
     directives,
   })
 
-//bootstrap
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-
 createApp(App).use(createPinia()).use(router).use(vuetify).mount('#app')
