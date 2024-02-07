@@ -58,6 +58,8 @@ sed eiusmod tempor incididunt.</div>
   import { ref, onMounted, defineProps } from "vue";
   import axios from 'axios'; // Axios 라이브러리 가져오기
 import { useAuthStore } from '@/store/auth'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const store = useAuthStore()
 
 
@@ -72,7 +74,7 @@ const userpost = () => {
   store.signup.firstname = first_name.value
   store.signup.lastname = last_name.value
   store.signup.birthday = birthday.value
-  console.log(store.signup)
+  // console.log(store.signup)
   axios.post('http://localhost:5000/user/insertUser', {
       User_loginData:store.signup
     })
@@ -85,6 +87,7 @@ const userpost = () => {
         console.error('POST 요청 오류:', error);
         // POST 요청 실패 시 수행할 작업 추가
     });
+  router.push({name:'login'})
 }
 const colorElement = ref(null);
 const handleMouseOver = () => {
