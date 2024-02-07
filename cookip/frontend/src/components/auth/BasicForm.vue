@@ -57,6 +57,8 @@ sed eiusmod tempor incididunt.</div>
   <script setup>
   import { ref, onMounted, defineProps } from "vue";
 import { useAuthStore } from '@/store/auth'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const store = useAuthStore()
 
 
@@ -71,7 +73,8 @@ const userpost = () => {
   store.signup.firstname = first_name.value
   store.signup.lastname = last_name.value
   store.signup.birthday = birthday.value
-  console.log(store.signup)
+  // console.log(store.signup)
+  router.push({name:'login'})
 }
 const colorElement = ref(null);
 const handleMouseOver = () => {

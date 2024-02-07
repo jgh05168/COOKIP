@@ -70,7 +70,7 @@ const login = async function(){
   else{
     error.value = 0
     useAuthStore.login_info = user
-    router.push({ name:'member'})
+    router.push({ name:'main'})
   }
 }
 const goback = function(){
