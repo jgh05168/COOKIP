@@ -70,6 +70,7 @@ const login = async function(){
   else{
     error.value = 0
     useAuthStore.login_info = user
+    localStorage.setItem('loginFlag', 1);
     router.push({ name:'main'})
   }
 }
