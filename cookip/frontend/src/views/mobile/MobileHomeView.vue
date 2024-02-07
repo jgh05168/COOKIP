@@ -3,6 +3,7 @@
       <div class="overlap-group">
         <div class="status-bar">
           <div class="content">
+            
             <v-img
             class="items"
             :src="require('../../assets/login_image/cookip_back.png')"

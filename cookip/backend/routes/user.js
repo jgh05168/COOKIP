@@ -29,6 +29,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id/:password", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const password = req.params.password;
+    // db.query 메소드가 제대로 정의되어 있는지 확인
+    if (db && typeof db.query === 'function') {
+      let sql = `SELECT * FROM User where login_id = '${id}' and password = '${password}'`;
+      db.query(sql, (err, results) => {
+        if (err) throw err.message;
+        res.json({
+          User: results,//이거가 allget 에 변수로감
+        });
+        console.log(cc.green("Users retrieved!"));
+      });
+    } else {
+      throw new Error("db.query is not a function");
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 // 회원가입하기
 router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말이다 
   //const user_id = req.body.user_id;

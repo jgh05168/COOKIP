@@ -10,7 +10,6 @@
     <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> |
     <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
 
-    
     <div class="screen">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
         <p>{{ motionStore.transition_dir }}</p>
@@ -280,8 +279,8 @@ onBeforeUnmount(() => {
 .screen {
   width: 1920px;
   height: 1080px;
-  background-color: #534645;
-  color: white;
+  /* background-color: #534645; */
+  /* color: white; */
 }
 
 

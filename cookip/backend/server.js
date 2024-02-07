@@ -12,8 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false })) // req를 받기위한 api �
 // Middle ware dependencies
 // app.use(express.json());
 // app.use(cors());
-// app.use(cookieParser());
-// app.use(bodyParser.json())
+// // app.use(bodyParser.json())
 // const jwtKey = "abc1234567";
 
 const recipe = require("./routes/recipe");
