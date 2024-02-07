@@ -2,7 +2,7 @@
     <div class="frame">
       <div class="div-wrapper">
           <div class="icon">
-            <v-img class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
+            <v-img @click="goback" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
             @mouseover="handleMouseOver"
             @mouseleave="handleMouseLeave"/>
           </div>
@@ -33,6 +33,7 @@
       ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
+                @click.prevent="login"
               class="continue"
               color="#007aff"
               dark
@@ -41,6 +42,9 @@
             >
               </div>
             </v-form>
+            <div v-show="error" style="color: red;">
+              id, password를 잘못 입력했습니다.
+            </div>
           </div>
         </div>
       </div>
@@ -49,7 +53,30 @@
   
   <script setup>
   import { ref, onMounted } from 'vue';
+  import accountService from "@/store/mvpApi";
+  import { useAuthStore } from "@/store/auth";
+  import { useRouter } from "vue-router"
 
+  const router = useRouter()
+const id = ref('')
+const password = ref('')
+const error = ref(0)
+
+const login = async function(){
+  const user = await accountService.getLogin(id.value, password.value)
+  if(user.length === 0){
+    error.value = 1
+  }
+  else{
+    error.value = 0
+    useAuthStore.login_info = user
+    localStorage.setItem('loginFlag', 1);
+    router.push({ name:'main'})
+  }
+}
+const goback = function(){
+  router.go(-1)
+}
 const colorElement = ref(null);
 const handleMouseOver = () => {
   // 이미지에 마우스 호버 시 크기를 확대
