@@ -54,8 +54,10 @@ watchEffect( () => {
       prevpage();
     }
     else if (value == "SwipeDown") {
+      motionStore.transition_dir = "slide-down"
       router.push({name:"recipe" ,params : {}, query:{}})
     } else if (value == "SwipeUp") {
+      motionStore.transition_dir = "slide-up"
       router.push({name:"my-favorite" ,params : {}, query:{}})
     } 
   }
