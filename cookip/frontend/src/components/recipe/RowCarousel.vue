@@ -34,14 +34,15 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, watchEffect } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ColCarousel from "./ColCarousel.vue";
 import { useRecipeStore } from "@/store/recipe";
+import { useMotionStore } from "@/store/motion";
 
 const currentSlide = ref(0);
-
+const motionStore = useMotionStore();
 const recipeStore = useRecipeStore();
 
 const recipe_category =
@@ -56,6 +57,27 @@ const nextpage = () => {
 const prevpage = () => {
   rowCarousel.value.prev();
 };
+
+
+watchEffect( () => {
+  if (motionStore.motion_data.swipe !== null) {
+    let value = motionStore.motion_data.swipe;
+    // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
+    if (value == "SwipeLeft") {
+      nextpage();
+    } else if (value == "SwipeRight") {
+      prevpage();
+    }
+  }
+  // 초기화
+  motionStore.motion_data = {
+    swipe: null,
+    page: null,
+    rating: null,
+    zoom: null,
+    flip: null,
+  };
+});
 
 // const getBufferImage = (buffer) => {
 //   if (buffer && buffer.data instanceof Array) {
