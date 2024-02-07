@@ -54,12 +54,12 @@ router.get("/:id/:password", async (req, res) => {
 // 회원가입하기
 router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말이다 
   //const user_id = req.body.user_id;
-  const login_id = req.body.login_id;
-  const password = req.body.password;
-  const username = req.body.username;
-  const email = req.body.email;
-  const age = req.body.age;
-  const phone_number = req.body.phone_number;
+  const UserData = req.body.User_loginData;
+  // const password = req.body.password;
+  // const username = req.body.username;
+  // const email = req.body.email;
+  // const age = req.body.age;
+  // const phone_number = req.body.phone_number;
   // const is_superuser= req.body.is_superuser;
   // contact.ejs에서 받은 값을 req로 받아온다
   // body 대신 query로 받아오면 undefined 이라고 뜬다
@@ -68,7 +68,7 @@ router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말�
   // body-parser 를 설치해야 한다
   var sql = `insert into User(login_id,password,username,email,age,phone_number,is_superuser)
   values(?,?,?,?,?,?,?)` // ? 를 통해 '' 와 같은 특수기호도 넣을 수 있다. DB에 특수기호가 보안상 이유로 잘들어가지지 않는다. 치환문 이용
-  var values = [login_id,password,username,email,age,phone_number,0]; // 위 ? 위치에 들어가는 배열 지정하기
+  var values = [UserData.id,UserData.password,UserData.firstname+UserData.lastname,UserData.email,UserData.birthday,UserData.phonenumber,0]; // 위 ? 위치에 들어가는 배열 지정하기
 
   db.query(sql, values, function (err, result){
       if(err) throw err; 

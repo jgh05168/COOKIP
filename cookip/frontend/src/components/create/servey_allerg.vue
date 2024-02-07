@@ -1,6 +1,11 @@
 <template>
     <div class="survey-container">
       <h1 class="survey-title">알러지 정보 조사</h1>
+      <div class="search-container">
+      <input type="text" v-model="searchQuery" placeholder="재료를 검색하세요..." class="search-input">
+      <button @click="addSelectedIngredient" class="add-button" v-show="searchQuery">Add</button>
+      </div>
+
       <div v-for="(item, index) in items" :key="index" class="survey-item">
         <button
           :class="{ 'active': selectedItems[index] }"
@@ -22,7 +27,9 @@
   import { useRecipeStore } from "@/store/recipe";
 
   const recipeStore = useRecipeStore();
-  
+  const searchQuery = ref('');
+  const selectedChoices = ref([]);
+
   //console.log("설문조사창22",recipeStore.ingredient_servey);
   
   const items = ['땅콩', '호두', '복숭아', '새우', '연어', '우유'];
@@ -32,13 +39,22 @@
     selectedItems.value[index] = !selectedItems.value[index];
   };
 
+  const addSelectedIngredient = () => {
+  if (searchQuery.value.trim() !== '') {
+    selectedChoices.value.push(searchQuery.value.trim());
+    searchQuery.value = '';
+  }
+};
+
+console.log("4444444444444444",selectedItems);
 
   const submitSurvey = () => {
     // 설문 선택된 항목(재료이름)
-    const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
+    //const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
+    const allSelectedIngredients = [...selectedChoices.value, ...items.filter((item, index) => selectedItems.value[index])];
 
     // 선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
-    const selectedCategoryIds = selectedChoices.map(choice => {
+    const selectedCategoryIds = allSelectedIngredients.map(choice => {
     const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
     return ingredient ? ingredient.ingredient_id : null;
     });
@@ -47,6 +63,8 @@
     console.log(selectedChoices,selectedCategoryIds);
     // Axios를 사용하여 POST 요청 보내기
     axios.post('http://localhost:5000/user/allergy', {
+        // user_id:user_id,
+        // profile_id:profile_id,
         ingredients: selectedCategoryIds.map((ingredient_id, index) => ({
             ingredient_id,
             allergy_name: selectedChoices[index] // 선택된 재료 이름
@@ -221,5 +239,24 @@ body {
   .submit-button:hover {
     background-color: #1b1bdd;
   }
+
+  .search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+}
+.add-button{
+  width: calc(300px * 2 / 3); /* 현재 크기의 3/2로 조정 */
+  padding: calc(10px * 2 / 3);
+  background-color: #1b1bdd;
+  border-radius: 14px;
+  color: white;
+}
   </style>
   

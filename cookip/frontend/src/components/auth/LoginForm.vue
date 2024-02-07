@@ -52,6 +52,7 @@
   </template>
   
   <script setup>
+  //import axios from 'axios'; // Axios 라이브러리 가져오기
   import { ref, onMounted } from 'vue';
   import accountService from "@/store/mvpApi";
   import { useAuthStore } from "@/store/auth";
@@ -62,6 +63,37 @@ const id = ref('')
 const password = ref('')
 const error = ref(0)
 
+
+// const login = async function(){
+//   const user = await accountService.getLogin(id.value, password.value)
+//   useAuthStore.login_info = user
+//   if(user.length === 0){
+//      error.value = 1
+//   }
+//   axios.post('http://localhost:5000/user/loginProc', {
+//     id: useAuthStore.login_info[0].login_id,
+//     pw: useAuthStore.login_info[0].password
+//   })
+//   .then(response => {
+//     if (response.data.success) {
+//       console.log('로그인 성공:', response.data.message);
+//       error.value = 0
+//       router.push({ name:'main'});
+//     } else {
+//       console.log('로그인 실패:', response.data.message);
+//       error.value = 1
+//     }
+//   })
+//   .catch(error => {
+//     console.error('POST 요청 오류:', error);
+//     // POST 요청 실패 시 수행할 작업 추가
+//   });
+
+//   localStorage.setItem('user_id', useAuthStore.login_info[0].login_id);
+//   localStorage.setItem('pw', useAuthStore.login_info[0].password);
+// }
+
+
 const login = async function(){
   const user = await accountService.getLogin(id.value, password.value)
   if(user.length === 0){
@@ -70,8 +102,23 @@ const login = async function(){
   else{
     error.value = 0
     useAuthStore.login_info = user
-    router.push({ name:'main'})
+    // axios.post('http://localhost:5000/user/loginProc', {
+    //   id:useAuthStore.login_info[0].login_id,
+    //   pw:useAuthStore.login_info[0].password
+    // })
+    // .then(response => {
+    //     console.log('서버 응답:', response.data);
+    //     // alert("선호도 조사 완료");
+    //     // POST 요청 성공 시 수행할 작업 추가
+    // })
+    // .catch(error => {
+    //     console.error('POST 요청 오류:', error);
+    //     // POST 요청 실패 시 수행할 작업 추가
+    // });
+    localStorage.setItem('loginFlag', 1);
+    //localStorage.setItem('pw', useAuthStore.login_info[0].password);
   }
+  router.push({ name:'main'});
 }
 const goback = function(){
   router.go(-1)

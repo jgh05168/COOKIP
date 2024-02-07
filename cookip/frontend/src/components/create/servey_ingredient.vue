@@ -1,95 +1,87 @@
 <template>
-    <div class="survey-container">
-      <h1 class="survey-title">선호 재료 조사</h1>
-      <!-- 6개씩 5줄로 알러지 정보 표시 -->
-      <div v-for="(row, rowIndex) in allergRows" :key="rowIndex" class="survey-row">
-        <div v-for="(item, colIndex) in row" :key="colIndex" class="survey-item">
-          <button
-            :class="{ 'active': selectedItems[rowIndex * 6 + colIndex] }"
-            @click="toggleCheckbox(rowIndex * 6 + colIndex)"
-          >
-            {{ item }}
-          </button>
-        </div>
-      </div>
-  
-      <!-- RouterLink를 버튼으로 스타일링 -->
-      <router-link :to="{ name: 'mobile-home' }">
-        <button @click="submitSurvey" class="submit-button">Continue</button>
-      </router-link>
-      <!-- <router-link :to="{ name: 'create-member' }">
-        <button class="submit-button">Coutinue</button>
-      </router-link> -->
+  <div class="survey-container">
+    <h1 class="survey-title">선호 재료 조사</h1>
+    <!-- 검색창 추가 -->
+    <div class="search-container">
+      <input type="text" v-model="searchQuery" placeholder="재료를 검색하세요..." class="search-input">
+      <button @click="addSelectedIngredient" class="add-button" v-show="searchQuery">Add</button>
     </div>
-  </template>
+
+    <!-- 6개씩 5줄로 알러지 정보 표시 -->
+    <div v-for="(row, rowIndex) in allergRows" :key="rowIndex" class="survey-row">
+      <div v-for="(item, colIndex) in row" :key="colIndex" class="survey-item">
+        <button
+          :class="{ 'active': selectedItems[rowIndex * 6 + colIndex] }"
+          @click="toggleCheckbox(rowIndex * 6 + colIndex)"
+        >
+          {{ item }}
+        </button>
+      </div>
+    </div>
+
+    <!-- RouterLink를 버튼으로 스타일링 -->
+    <router-link :to="{ name: 'mobile-home' }">
+      <button @click="submitSurvey" class="submit-button">Continue</button>
+    </router-link>
+  </div>
+</template>
+
+<script setup>
+import axios from 'axios';
+import { ref } from 'vue';
+import { useRecipeStore } from "@/store/recipe";
+
+const recipeStore = useRecipeStore();
+
+const allergens = [
+  "애호박", "대파", "청양고추", "고추기름", "고춧가루", "국간장", "순두부", "표고버섯", "양파", "다시마 물",
+  "소금", "맛술", "다진 마늘", "후춧가루", "들기름", "우유", "마늘", "생강", "월계수잎", "통후추",
+  "통삼겹살", "차돌박이", "두부", "무", "다시마 멸치 육수", "다진마늘", "된장", "스파게티 면", "치킨스톡",
+  "베이컨", "파슬리", "달걀", "꽃소금", "그라나파다노 치즈", "올리브유", "한우 불고기 용", "알배추", "깻잎",
+  "청경채", "팽이버섯", "물", "멸치", "다시마", "간장", "식초", "올리고당", "설탕", "다진양파", "고추"
+];
+
+const allergRows = ref(Array.from({ length: 5 }, (_, i) => allergens.slice(i * 6, (i + 1) * 6)));
+const selectedItems = ref(Array(allergens.length).fill(false));
+const searchQuery = ref('');
+const selectedChoices = ref([]);
+
+const toggleCheckbox = (index) => {
+  selectedItems.value[index] = !selectedItems.value[index];
+};
+
+const addSelectedIngredient = () => {
+  if (searchQuery.value.trim() !== '') {
+    selectedChoices.value.push(searchQuery.value.trim());
+    searchQuery.value = '';
+  }
+};
+
+const submitSurvey = () => {
+  // 검색창으로 추가한 재료와 버튼으로 추가한 재료를 모두 선택된 재료 목록에 포함시킴
+  const allSelectedIngredients = [...selectedChoices.value, ...allergens.filter((item, index) => selectedItems.value[index])];
   
-  <script setup>
-  import axios from 'axios'; // Axios 라이브러리 가져오기
-  import { ref } from 'vue';
-  import { useRecipeStore } from "@/store/recipe";
-
-  const recipeStore = useRecipeStore();
-  
-  //console.log("재료설문조사창",recipeStore.ingredient_servey);
-
-
-  // 재료 정보 배열
-  const allergens = [
-    "애호박", "대파", "청양고추", "고추기름", "고춧가루", "국간장", "순두부", "표고버섯", "양파", "다시마 물",
-    "소금", "맛술", "다진 마늘", "후춧가루", "들기름", "우유", "마늘", "생강", "월계수잎", "통후추",
-    "통삼겹살", "차돌박이", "두부", "무", "다시마 멸치 육수", "다진마늘", "된장", "스파게티 면", "치킨스톡",
-    "베이컨", "파슬리", "달걀", "꽃소금", "그라나파다노 치즈", "올리브유", "한우 불고기 용", "알배추", "깻잎",
-    "청경채", "팽이버섯", "물", "멸치", "다시마", "간장", "식초", "올리고당", "설탕", "다진양파", "고추"
-  ];
-  // 알러지 정보 배열을 6개씩 5줄로 나누어 저장
-  const allergRows = ref(Array.from({ length: 5 }, (_, i) => allergens.slice(i * 6, (i + 1) * 6)));
-  // 선택된 알러지 정보 배열
-  const selectedItems = ref(Array(allergens.length).fill(false));
-  
-  // 체크박스 토글 함수
-  const toggleCheckbox = (index) => {
-    selectedItems.value[index] = !selectedItems.value[index];
-  };
-
-
-  // selectedChoices
-  // const sugarIngredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === '설탕');
-  // if (sugarIngredient) {
-  //   const sugarIngredientId = sugarIngredient.ingredient_id;
-  //   console.log("설탕의 ingredient_id:", sugarIngredientId);
-  // } else {
-  //   console.log("설탕이 user_ingredients 배열에 존재하지 않습니다.");
-  // }
-
-
-
-
-  const submitSurvey = () => {
-    //설문 선택된 항목(재료이름)
-    const selectedChoices = allergens.filter((item, index) => selectedItems.value[index]);
-
-    //선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
-    const selectedIngredientIds = selectedChoices.map(choice => {
+  // 선택된 재료들을 서버에 전송
+  const selectedIngredientIds = allSelectedIngredients.map(choice => {
     const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
     return ingredient ? ingredient.ingredient_id : null;
-    });
-    // Axios를 사용하여 POST 요청 보내기
-    axios.post('http://localhost:5000/user/ingredientFollow', {
-        ingredient_id: selectedIngredientIds
-    })
-    .then(response => {
-        console.log('서버 응답:', response.data);
-        alert("선호도 조사 완료");
-        // POST 요청 성공 시 수행할 작업 추가
-    })
-    .catch(error => {
-        console.error('POST 요청 오류:', error);
-        // POST 요청 실패 시 수행할 작업 추가
-    });
+  });
+
+  axios.post('http://localhost:5000/user/ingredientFollow', {
+      ingredient_id: selectedIngredientIds
+  })
+  .then(response => {
+      console.log('서버 응답:', response.data);
+      alert("선호도 조사 완료");
+  })
+  .catch(error => {
+      console.error('POST 요청 오류:', error);
+  });
 };
-  </script>
-  
-  <style scoped>
+</script>
+
+<style scoped>
+/* 기존 스타일 유지 */
 body {
   margin: 0;
   padding: 0; /* 기본 padding도 제거합니다. */
@@ -162,5 +154,21 @@ body {
   .submit-button:hover {
     background-color: #1b1bdd;
   }
-  </style>
-  
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+}
+.add-button{
+  background-color: #1b1bdd;
+  border-radius: 14px;
+  color: white;
+}
+
+</style>

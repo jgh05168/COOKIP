@@ -22,6 +22,11 @@
   import { ref } from 'vue';
   import { useRecipeStore } from "@/store/recipe";
 
+
+  const loginFlag = localStorage.getItem('loginFlag');
+  console.log("pwpwpwpwpwpwpwwpwp",loginFlag);
+
+
   const recipeStore = useRecipeStore();
   //console.log("카테 페이지",recipeStore.user_category);
   
@@ -45,6 +50,8 @@
     //console.log("선호카테고리창",selectedChoices,selectedCategoryIds)
     // Axios를 사용하여 POST 요청 보내기
     axios.post('http://localhost:5000/user/categoryFollow', {
+      // user_id:user_id,
+      // profile_id:profile_id,
       category_id: selectedCategoryIds
     })
     .then(response => {
