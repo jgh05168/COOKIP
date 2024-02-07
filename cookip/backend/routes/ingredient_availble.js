@@ -12,11 +12,11 @@ router.get("/", async (req, res) => {
     try {
       // db.query 메소드가 제대로 정의되어 있는지 확인
       if (db && typeof db.query === 'function') {
-        let sql = "SELECT * FROM Category";
+        let sql = "SELECT * FROM Ingredient_Availble";
         db.query(sql, (err, results) => {
           if (err) throw err.message;
           res.json({
-            category: results,
+            ingredient_availble: results,
           });
           console.log(cc.green("Users retrieved!"));
         });
@@ -29,16 +29,16 @@ router.get("/", async (req, res) => {
     }
   });
 
-router.get("/:category_id", async (req, res) => {
+  router.get("/:user_id", async (req, res) => {
     try {
-      const category_id = req.params.category_id;
+      const user_id = req.params.user_id;
       // db.query 메소드가 제대로 정의되어 있는지 확인
       if (db && typeof db.query === 'function') {
-        let sql = `SELECT * FROM Category where category_id = ${category_id}`;
+        let sql = `SELECT * FROM Ingredient_Availble where user_id = ${user_id}`;
         db.query(sql, (err, results) => {
           if (err) throw err.message;
           res.json({
-            category_id: results,
+            user_id: results,
           });
           console.log(cc.green("Users retrieved!"));
         });
@@ -50,5 +50,4 @@ router.get("/:category_id", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   });
-
-module.exports = router;
+  module.exports = router;

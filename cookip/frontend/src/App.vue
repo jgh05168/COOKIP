@@ -61,6 +61,8 @@
       </div>
     </div>
   </div>
+  <!-- <input v-model="text" type="text" />
+  <img :src="qrcode" alt=""> -->
 </template>
 
 <script setup>
@@ -82,40 +84,33 @@ const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();
     recipeData.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
+    if (!Object.prototype.hasOwnProperty.call(recipe, 'ingredient')) {
+      recipe.ingredient = []; 
+    }
+  });
     recipestore.recipes = recipeData;
   } catch (err) {
     error.value = err.message;
   }
-};
-
-const get_all_ingredients = async () => {
-  try {
-    const all_ingredients = await accountService.getUseringredients();
-    recipestore.ingredients = all_ingredients;
-  } catch (err) {
-    error.value = err.message;
-  }
-};
+}
 
 const get_all_recipes_ingredients = async () => {
   try {
-    const recipe_ingredientData =
-      await accountService.getUserrecipe_ingredient();
+    const recipe_ingredientData = await accountService.getUserrecipe_ingredient();
     recipe_ingredientData.forEach((ingredient) => {
-      const matchingRecipe = recipestore.recipes.find(
-        (recipe) => recipe.recipe_id === ingredient.recipe_id
-      );
-      matchingRecipe.ingredient.push(ingredient.ingredient_id);
+    const matchingRecipe = recipestore.recipes.find((recipe) => recipe.recipe_id === ingredient.recipe_id);
+    matchingRecipe.ingredient.push(ingredient.ingredient_id); 
     });
-    console.log(recipestore.recipes);
+    console.log(recipestore.recipes)
   } catch (err) {
     error.value = err.message;
   }
 };
+
+onMounted( async () => {
+  await get_all_recipes(),
+  await get_all_recipes_ingredients()
+});
 
 const handleWebSocketMessage = async (e) => {
   try {

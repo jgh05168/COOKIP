@@ -15,21 +15,27 @@
                 <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
                     @mouseover="handleMouseOver"
                     @mouseleave="handleMouseLeave"/>
-                <div class="basic-details">Login</div>
+                <div class="basic-details">Basic details</div>
               </div>
-              <div class="to-sign-up-you-need">Please login to continue.</div>
+              <div class="to-sign-up-you-need">Lorem ipsum dolor sit amet, adipiscing elit, 
+sed eiusmod tempor incididunt.</div>
             </div>
             <v-form @submit.prevent class="div-4">
                 
                 <v-text-field
-        v-model="id"
+        v-model="first_name"
         :rules="rules"
-        label="ID" style="width: 100%;"
+        label="First name" style="width: 100%;"
       ></v-text-field>
       <v-text-field
-        v-model="password"
+        v-model="last_name"
         :rules="rules"
-        label="Password" style="width: 100%;"
+        label="Last name" style="width: 100%;"
+      ></v-text-field>
+      <v-text-field
+        v-model="birthday"
+        :rules="rules"
+        label="Birthday (mm/dd/yyyy)" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
                 <v-btn

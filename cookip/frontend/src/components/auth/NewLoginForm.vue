@@ -15,9 +15,9 @@
                 <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
                     @mouseover="handleMouseOver"
                     @mouseleave="handleMouseLeave"/>
-                <div class="basic-details">Login</div>
+                <div class="basic-details">ID and Password</div>
               </div>
-              <div class="to-sign-up-you-need">Please login to continue.</div>
+              <div class="to-sign-up-you-need">Please set Id and Password to continue. </div>
             </div>
             <v-form @submit.prevent class="div-4">
                 
@@ -30,6 +30,11 @@
         v-model="password"
         :rules="rules"
         label="Password" style="width: 100%;"
+      ></v-text-field>
+      <v-text-field
+        v-model="confirm_password"
+        :rules="rules"
+        label="Confirm Password" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
