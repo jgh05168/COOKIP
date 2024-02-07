@@ -28,6 +28,18 @@ class accountService {
       });
   }
 
+  static getLogin(id, password) {
+    const url = `http://localhost:5000/user/${id}/${password}`;
+    return axios.get(url)
+    .then((res) => {
+      const data = res.data;
+      return data.User.map((guild_owner) => ({ ...guild_owner }));
+    })
+    .catch((error) => {
+      throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+    });
+}
+
   static getUserRecipe_RecipeId(id) {
     const url = `http://localhost:5000/recipe/${id}`;
     return axios.get(url)

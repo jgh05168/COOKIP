@@ -2,7 +2,7 @@
     <div class="frame">
       <div class="div-wrapper">
           <div class="icon">
-            <v-img class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
+            <v-img @click="goback()" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
             @mouseover="handleMouseOver"
             @mouseleave="handleMouseLeave"/>
           </div>
@@ -23,21 +23,19 @@
                 
                 <v-text-field
         v-model="id"
-        :rules="rules"
         label="ID" style="width: 100%;"
       ></v-text-field>
       <v-text-field
         v-model="password"
-        :rules="rules"
         label="Password" style="width: 100%;"
       ></v-text-field>
       <v-text-field
         v-model="confirm_password"
-        :rules="rules"
         label="Confirm Password" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
+                @click="goEmail"
               class="continue"
               color="#007aff"
               dark
@@ -46,6 +44,9 @@
             >
               </div>
             </v-form>
+            <div v-show="error" style="color: red;">
+              비밀번호와 확인비밀번호가 틀립니다.
+            </div>
           </div>
         </div>
       </div>
@@ -53,7 +54,32 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, defineProps } from "vue";
+import { useAuthStore } from '@/store/auth'
+const store = useAuthStore()
+
+
+const props = defineProps({
+  showNext: Function,
+  showBack: Function
+});
+
+
+const id = ref(null);
+const password = ref(null);
+const confirm_password = ref(null);
+const error = ref(0);
+const goEmail = () => {
+  if(password.value == confirm_password.value, id.value !== null){
+    error.value = 0
+    props.showNext()
+    store.signup.id = id.value
+    store.signup.password = password.value
+  }
+  else{
+    error.value = 1
+  }
+}
 
 const colorElement = ref(null);
 const handleMouseOver = () => {
@@ -69,6 +95,10 @@ const handleMouseLeave = () => {
 onMounted(() => {
   colorElement.value = document.querySelector('.color');
 });
+
+const goback = function(){
+  props.showBack()
+}
   </script>
   
   <style>

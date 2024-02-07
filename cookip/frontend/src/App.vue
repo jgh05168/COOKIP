@@ -9,7 +9,6 @@
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
     <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
 
-    
     <div class="screen">
       <div v-if="motionStore.motion_data=='SwipeUp'">
         <transition
@@ -180,8 +179,8 @@ onBeforeUnmount(() => {
 .screen {
   width: 1920px;
   height: 1080px;
-  background-color: #534645;
-  color: white;
+  /* background-color: #534645; */
+  /* color: white; */
 }
 
 

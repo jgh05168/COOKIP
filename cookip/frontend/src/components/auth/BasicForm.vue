@@ -2,7 +2,7 @@
     <div class="frame">
       <div class="div-wrapper">
           <div class="icon">
-            <v-img class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
+            <v-img @click="goback()" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
             @mouseover="handleMouseOver"
             @mouseleave="handleMouseLeave"/>
           </div>
@@ -35,15 +35,16 @@ sed eiusmod tempor incididunt.</div>
       <v-text-field
         v-model="birthday"
         :rules="rules"
-        label="Birthday (mm/dd/yyyy)" style="width: 100%;"
+        label="Birthday (mm-dd-yyyy)" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
+                @click="userpost"
               class="continue"
               color="#007aff"
               dark
               elevation="2"
-              >Continue</v-btn
+              >Cookip Play</v-btn
             >
               </div>
             </v-form>
@@ -54,8 +55,24 @@ sed eiusmod tempor incididunt.</div>
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, defineProps } from "vue";
+import { useAuthStore } from '@/store/auth'
+const store = useAuthStore()
 
+
+const props = defineProps({
+  showBack: Function
+});
+const first_name = ref();
+const last_name = ref();
+const birthday = ref();
+
+const userpost = () => {
+  store.signup.firstname = first_name.value
+  store.signup.lastname = last_name.value
+  store.signup.birthday = birthday.value
+  console.log(store.signup)
+}
 const colorElement = ref(null);
 const handleMouseOver = () => {
   // 이미지에 마우스 호버 시 크기를 확대
@@ -70,6 +87,10 @@ const handleMouseLeave = () => {
 onMounted(() => {
   colorElement.value = document.querySelector('.color');
 });
+
+const goback = function(){
+  props.showBack()
+}
   </script>
   
   <style>
