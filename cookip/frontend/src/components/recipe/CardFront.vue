@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="thumbnail">
-      <img :src="getBufferImage(recipeFront.thumbnail)" alt="음식이미지" />
+      <!-- <img :src="getBufferImage(recipeFront.thumbnail)" alt="음식이미지" /> -->
     </div>
   </div>
 </template>
@@ -26,14 +26,14 @@ const props = defineProps({
   recipeFront: Object,
 });
 
-const getBufferImage = (buffer) => {
-  if (buffer && buffer.data instanceof Array) {
-    const uint8Array = new Uint8Array(buffer.data);
-    const blob = new Blob([uint8Array], { type: "image/jpeg" });
-    return URL.createObjectURL(blob);
-  }
-  return null;
-};
+// const getBufferImage = (buffer) => {
+//   if (buffer && buffer.data instanceof Array) {
+//     const uint8Array = new Uint8Array(buffer.data);
+//     const blob = new Blob([uint8Array], { type: "image/jpeg" });
+//     return URL.createObjectURL(blob);
+//   }
+//   return null;
+// };
 </script>
 
 <style scoped>
