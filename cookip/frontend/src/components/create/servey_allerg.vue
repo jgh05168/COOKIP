@@ -1,6 +1,6 @@
 <template>
     <div class="survey-container">
-      <h1 class="survey-title">선호 카테고리 조사</h1>
+      <h1 class="survey-title">알러지 정보 조사</h1>
       <div v-for="(item, index) in items" :key="index" class="survey-item">
         <button
           :class="{ 'active': selectedItems[index] }"
@@ -10,7 +10,7 @@
         </button>
         </div>
     <!-- RouterLink를 버튼으로 스타일링 -->
-        <router-link :to="{ name: 'servey_allerg' }">
+        <router-link :to="{ name: 'servey_ingredient' }">
             <button @click="submitSurvey" class="submit-button">Coutinue</button>
         </router-link>
     </div>
@@ -22,9 +22,10 @@
   import { useRecipeStore } from "@/store/recipe";
 
   const recipeStore = useRecipeStore();
-  //console.log("카테 페이지",recipeStore.user_category);
   
-  const items = ['양식', '중식', '한식', '일식', '비건', '육류'];
+  console.log("설문조사창22",recipeStore.ingredient_servey);
+  
+  const items = ['땅콩', '호두', '복숭아', '새우', '연어', '우유'];
   const selectedItems = ref(Array(items.length).fill(false));
   
   const toggleCheckbox = (index) => {
@@ -33,21 +34,26 @@
 
 
   const submitSurvey = () => {
-    //설문 선택된 항목(재료이름)
+    // 설문 선택된 항목(재료이름)
     const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
 
-    //선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
+    // 선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
     const selectedCategoryIds = selectedChoices.map(choice => {
-    const ingredient = recipeStore.user_category.find(item => item.category === choice);
-    return ingredient ? ingredient.category_id : null;
+    const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+    return ingredient ? ingredient.ingredient_id : null;
     });
+
+
     // Axios를 사용하여 POST 요청 보내기
-    axios.post('http://localhost:5000/user/categoryFollow', {
-      category_id: selectedCategoryIds
+    axios.post('http://localhost:5000/user/allergy', {
+        ingredients: selectedCategoryIds.map((ingredient_id, index) => ({
+            ingredient_id,
+            allergy_name: selectedChoices[index] // 선택된 재료 이름
+        }))
     })
     .then(response => {
         console.log('서버 응답:', response.data);
-        //alert("선호도 조사 완료");
+        // alert("선호도 조사 완료");
         // POST 요청 성공 시 수행할 작업 추가
     })
     .catch(error => {
@@ -55,6 +61,7 @@
         // POST 요청 실패 시 수행할 작업 추가
     });
 };
+
   </script>
   
   <style scoped>
