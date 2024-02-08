@@ -8,8 +8,22 @@ router.use((req, res, next) => {
   next();
 });
 
+// router.use((req, res, next) => {    // express의 middleware로 local은 변수 공유를 하게 해준다. 이를 통해 로그인을 하면 어느 페이지에서든 로그인을 유지할 수 있다
+
+//   res.locals.user_id = "";
+//   res.locals.name = "";
+  
+//   if(req.session.member){ 
+//      res.locals.user_id = req.session.member.login_id 
+//      res.locals.name = req.session.member.password 
+//   }
+//   console.log("dsssssssssssssss",res.locals.user_id,res.locals.user_name)
+//   next()
+// })
+
 router.get("/", async (req, res) => {
   try {
+    //console.log(req.session.member); 
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
       let sql = "SELECT * FROM User";
@@ -76,6 +90,40 @@ router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말�
       res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>"); 
   })
 })
+
+
+
+// 로그인 유지 하기
+// router.post('/loginProc', (req, res) => {
+//   const user_id = req.body.id; // 입력받은 id, pw
+//   const pw = req.body.pw; 
+//   console.log(user_id,pw);
+//   var sql = `select * from User  where login_id=? and password=?` // 두값이 존재할때
+
+//   var values = [user_id, pw]; 
+
+//   db.query(sql, values, function (err, result){ // 입력받은 id,pw 와 DB에 있는 id,pw 비교
+//       if(err) throw err;      
+      
+//       if(result.length==0){ // DB안에 해당 값 있는가
+//         res.send("<script> alert('존재하지 않는 아이디입니다..'); location.href='/login';</script>");          
+//         res.status(401).json({ message: '로그인 실패' });
+//       }else{  
+//         console.log(result[0]); 
+//         req.session.member = result[0]  
+//         res.status(200).json({ message: '로그인 성공' });       
+//         res.send("<script> alert('로그인 되었습니다.'); location.href='/';</script>");          
+//         //res.send(result); 
+//       }
+//   })
+// })
+
+//로그아웃 하기
+router.get('/logout', (req, res) => {
+  req.session.member = null; 
+  res.send("<script> alert('로그아웃 되었습니다.'); location.href='/';</script>");          
+})
+
 
 // 프로필 등록하기
 router.post('/insertProfile', (req, res) => {

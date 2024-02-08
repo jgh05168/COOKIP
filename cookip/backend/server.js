@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false })) // req를 받기위한 api �
 app.use(express.json());
 app.use(cors());
 
+
+
+
+ 
 const recipe = require("./routes/recipe");
 app.use("/recipe", recipe);
 
@@ -51,6 +55,7 @@ app.use("/allergy", allergy);  //이거는 json파일 이 저장되는 url
 
 const follow = require("./routes/follow");
 app.use("/follow", follow);  //이거는 json파일 이 저장되는 url
+
 
 // Port
 const port = process.env.PORT || 5000;
