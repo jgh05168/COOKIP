@@ -31,7 +31,8 @@ app.use((req, res, next) => {    // express의 middleware로 local은 변수 공
    }
    next()
  })
-
+ 
+ //req.session.member = result[0]  
 // 라우팅
 app.get('/', (req, res) => {
    console.log(req.session.member); 

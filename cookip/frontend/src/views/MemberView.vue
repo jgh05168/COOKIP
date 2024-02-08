@@ -28,8 +28,8 @@ import CreateMemberQR from '@/components/create/CreateMemberQR.vue';
   /* 이미지가 가운데 정렬되도록 설정 */
   background-position: center;
   /* 배경 색상 fallback 설정 (이미지가 로드되지 않을 경우) */
-  width: 1920px;
-  height: 1080px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 

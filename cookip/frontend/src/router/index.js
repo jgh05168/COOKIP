@@ -9,14 +9,20 @@ import RecipeDetailView from "@/views/RecipeDetailView.vue";
 import RecipeView from "@/views/RecipeView.vue";
 import UserProfileView from "@/views/UserProfileView.vue";
 import MyFavoriteView from "@/views/MyFavoriteView.vue";
+import SearchView from "@/views/SearchView.vue";
+
 
 // Mobile views
+import GetstartView from "@/views/mobile/GetStartView.vue"
 import CreateMemberView from "@/views/mobile/CreateMemberView.vue";
+import servey_allergView from "@/components/create/servey_allerg.vue";
+import servey_ingredientView from "@/components/create/servey_ingredient.vue";
 import EditProfileView from "@/views/mobile/EditProfileView.vue";
 import LoginView from "@/views/mobile/LoginView.vue";
 import MemberViewMobile from "@/views/mobile/MemberView.vue";
 import SignUpView from "@/views/mobile/SignUpView.vue";
 import MemberDetailView from "@/views/mobile/MemberDetailView";
+import MobileHomeView from "@/views/mobile/MobileHomeView"
 
 const routes = [
   {
@@ -59,14 +65,39 @@ const routes = [
     name: "my-favorite",
     component: MyFavoriteView,
   },
+  {
+    path: "/search", // Example of dynamic route parameter
+    name: "search",
+    component: SearchView,
+  },
 
   
 
   // Mobile views
   {
+    path: "/mobile/home",
+    name: "mobile-home",
+    component: MobileHomeView,
+  },
+  {
+    path: "/mobile/start",
+    name: "get-start",
+    component: GetstartView,
+  },
+  {
     path: "/mobile/createmember",
     name: "create-member",
     component: CreateMemberView,
+  },
+  {
+    path: "/mobile/servey_allerg",
+    name: "servey_allerg",
+    component: servey_allergView,
+  },
+  {
+    path: "/mobile/servey_ingredient",
+    name: "servey_ingredient",
+    component: servey_ingredientView,
   },
   {
     path: "/mobile/member/:id/editprofile",

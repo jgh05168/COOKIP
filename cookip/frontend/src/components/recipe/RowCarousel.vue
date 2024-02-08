@@ -5,19 +5,23 @@
   </div> -->
 
   <Carousel
+    v-model="currentSlide"
     ref="rowCarousel"
     :itemsToShow="3"
     :wrapAround="true"
     :transition="500"
-    class="row-carousel"
+    class="row-carousel carousel__viewport carousel__track"
   >
     <Slide
       class="row-carousel-slide"
       v-for="(recipe_col, slide) in recipe_category"
       :key="slide"
-      viewport="1080px"
+      :class="{
+        'active-row': slide === currentSlide,
+        'deactive-row': slide !== currentSlide,
+      }"
     >
-      <ColCarousel :recipe-list="recipe_col" />
+      <ColCarousel :recipe-list="recipe_col" :row-slide="slide" />
     </Slide>
   </Carousel>
 
@@ -29,17 +33,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import ColCarousel from "./ColCarousel.vue";
 import { useRecipeStore } from "@/store/recipe";
 
-const currentSlide = ref(0)
-
+const currentSlide = ref(0);
 const recipeStore = useRecipeStore();
 
-const recipe_category = recipeStore.recommend_list[recipeStore.selected_category].recipe_list;
+const recipe_category =
+  recipeStore.recommend_list[recipeStore.selected_category].recipe_list;
 
 const rowCarousel = ref(null);
 
@@ -51,28 +55,39 @@ const prevpage = () => {
   rowCarousel.value.prev();
 };
 
-// const getBufferImage = (buffer) => {
-//   if (buffer && buffer.data instanceof Array) {
-//     const uint8Array = new Uint8Array(buffer.data);
-//     const blob = new Blob([uint8Array], { type: "image/jpeg" });
-//     return URL.createObjectURL(blob);
-//   }
-//   return null;
-// };
+watch(currentSlide, (newVal) => {
+  console.log("Current Row:", newVal);
+  recipeStore.currentRowSlide = newVal;
+});
 </script>
 
 <style scoped>
 .row-carousel {
-  width: 100%;
+  width: 1920px;
   height: 1080px;
 }
 
 .row-carousel-slide {
-  height: 100%;
-  width: 100%;
+  width: 1080px;
+  margin: -0.2%;
 }
 
 .carousel__viewport {
   height: 1080px;
+}
+
+.carousel__track {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.active-row {
+  z-index: 1;
+}
+
+.deactive-row {
+  z-index: 0;
+  opacity: 0.7;
 }
 </style>

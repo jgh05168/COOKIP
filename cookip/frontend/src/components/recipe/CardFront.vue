@@ -1,19 +1,21 @@
 <template>
-  <v-card class="d">
-    <div class="d-flex flex-no-wrap justify-space-between">
-      <div>
-        <v-card-title class="text-h5">
+  <v-card class="d-flex rounded-xl" width="400">
+    <div class="rouded-xl">
+      <v-card-item style="width: 150px">
+        <p style="font-size: 13px; font-weight: 700">
           {{ props.recipeFront.name }}
-        </v-card-title>
-
-        <v-card-subtitle>Card_Front</v-card-subtitle>
-        <v-card-text>재료 데이터</v-card-text>
-        <v-card-actions>
-          <v-btn class="ms-2" icon="mdi-play" variant="text"></v-btn>
-        </v-card-actions>
-      </div>
-      <v-img>음식 이미지</v-img>
+        </p>
+      </v-card-item>
     </div>
+    <v-img
+      :aspect-ratio="4/3"
+      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+    ></v-img>
+    <!-- <v-card-actions>
+      <v-btn color="orange"> Share </v-btn>
+
+      <v-btn color="orange"> Explore </v-btn>
+    </v-card-actions> -->
   </v-card>
 </template>
 
@@ -24,6 +26,14 @@ const props = defineProps({
   recipeFront: Object,
 });
 
+// const getBufferImage = (buffer) => {
+//   if (buffer && buffer.data instanceof Array) {
+//     const uint8Array = new Uint8Array(buffer.data);
+//     const blob = new Blob([uint8Array], { type: "image/jpeg" });
+//     return URL.createObjectURL(blob);
+//   }
+//   return null;
+// };
 </script>
 
 <style scoped></style>

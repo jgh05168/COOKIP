@@ -7,12 +7,13 @@
     :transition="500"
     class="category-carousel"
   >
-    <Slide
-      v-for="(category, slide) in recommend_category"
-      :key="slide"
-    >
+    <Slide v-for="(category, slide) in recommend_category" :key="slide">
       <div class="category" @click="selectCategory(slide)">
-        {{ category.title }}
+        <div>{{ category.title }}</div>
+        {{ category.img }}
+        <div>
+          <!-- <img :src="`@/assets/image/${category.img}`" alt="" /> -->
+        </div>
       </div>
     </Slide>
 
@@ -37,12 +38,13 @@ import "vue3-carousel/dist/carousel.css";
 import { useMotionStore } from "@/store/motion";
 import { useRecipeStore } from "@/store/recipe";
 import { watchEffect } from "vue";
+import router from "@/router";
 
 const motionStore = useMotionStore();
 
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
 // 동작 수행 후 store에 저장되어 있는 motion 초기화
-watchEffect(motionStore.motion_data, () => {
+watchEffect(() => {
   if (motionStore.motion_data.swipe !== null) {
     let value = motionStore.motion_data.swipe;
     // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
@@ -51,6 +53,13 @@ watchEffect(motionStore.motion_data, () => {
     } else if (value == "SwipeRight") {
       prevpage();
     }
+    else if (value == "SwipeDown") {
+      motionStore.transition_dir = "slide-down"
+      router.push({name:"recipe" ,params : {}, query:{}})
+    } else if (value == "SwipeUp") {
+      motionStore.transition_dir = "slide-up"
+      router.push({name:"my-favorite" ,params : {}, query:{}})
+    } 
   }
   // 초기화
   motionStore.motion_data = {
@@ -67,7 +76,7 @@ const currentSlide = ref(0); // 초기 슬라이드 인덱스 설정
 watch(currentSlide, (newVal) => {
   console.log("Current Slide Changed:", newVal);
   selectedSlide.value = newVal;
-  recipeStore.selected_category = newVal
+  recipeStore.selected_category = newVal;
 });
 
 const rowCarousel = ref(null);

@@ -28,6 +28,30 @@ class accountService {
       });
   }
 
+  static getLogin(id, password) {
+    const url = `http://localhost:5000/user/${id}/${password}`;
+    return axios.get(url)
+    .then((res) => {
+      const data = res.data;
+      return data.User.map((guild_owner) => ({ ...guild_owner }));
+    })
+    .catch((error) => {
+      throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+    });
+}
+
+static getUserProfile(id) {
+  const url = `http://localhost:5000/profile/${id}`;
+  return axios.get(url)
+    .then((res) => {
+      const data = res.data;
+      return data.Recipe_one.map((guild_owner) => ({ ...guild_owner }));
+    })
+    .catch((error) => {
+      throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+    });
+}
+
   static getUserRecipe_RecipeId(id) {
     const url = `http://localhost:5000/recipe/${id}`;
     return axios.get(url)
@@ -226,6 +250,18 @@ class accountService {
       .then((res) => {
         const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
         return data.user.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getUserprofile(id) {
+    const url = `http://localhost:5000/category/${id}`;
+    return axios.get(url)
+      .then((res) => {
+        const data = res.data;
+        return data.category_id.map((guild_owner) => ({ ...guild_owner }));
       })
       .catch((error) => {
         throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);

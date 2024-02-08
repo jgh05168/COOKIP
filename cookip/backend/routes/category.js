@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
       } else {
         throw new Error("db.query is not a function");
       }
-    } catch (err) {q
+    } catch (err) {
       console.error(err.message);
       res.status(500).send("Internal Server Error");
     }
