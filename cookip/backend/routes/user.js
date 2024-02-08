@@ -51,6 +51,7 @@ router.get("/:id/:password", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 // 회원가입하기
 router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말이다 
   //const user_id = req.body.user_id;

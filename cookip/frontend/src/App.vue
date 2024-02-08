@@ -40,7 +40,7 @@ const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
 const error = ref("");
-
+console.log(localStorage.loginFlag)
 const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();

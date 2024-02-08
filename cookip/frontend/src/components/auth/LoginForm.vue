@@ -72,6 +72,7 @@ const login = async function(){
     useAuthStore.login_info = user
     localStorage.setItem('loginFlag', 1);
     router.push({ name:'main'})
+    console.log(localStorage.loginFlag)
   }
 }
 const goback = function(){
