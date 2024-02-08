@@ -12,7 +12,7 @@
         <div>{{ category.title }}</div>
         {{ category.img }}
         <div>
-          <img :src="`@/assets/image/${category.img}`" alt="" />
+          <!-- <img :src="`@/assets/image/${category.img}`" alt="" /> -->
         </div>
       </div>
     </Slide>
@@ -44,7 +44,7 @@ const motionStore = useMotionStore();
 
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
 // 동작 수행 후 store에 저장되어 있는 motion 초기화
-watchEffect( () => {
+watchEffect(() => {
   if (motionStore.motion_data.swipe !== null) {
     let value = motionStore.motion_data.swipe;
     // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}

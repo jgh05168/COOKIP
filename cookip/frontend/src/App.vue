@@ -32,7 +32,6 @@ import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
 if(localStorage.setItem('loginFlag', 0) === null){
-  console.log()
   localStorage.setItem('loginFlag', 0);
 }
 const recipestore = useRecipeStore();
