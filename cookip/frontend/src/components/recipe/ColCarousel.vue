@@ -128,8 +128,12 @@ const props = defineProps({
 .vertical-carousel {
   transform: rotate(0.25turn);
   width: 1080px;
-  height: 100%;
-  margin: auto auto;
+}
+
+.vertical-carousel-slide {
+  /* transform: rotate(-0.25turn); */
+  width: 100%;
+  height: 1080px;
 }
 
 .carousel__viewport {
@@ -155,8 +159,9 @@ const props = defineProps({
 }
 
 .flip-card {
-  transform: rotate(-0.25turn);
-  width: 480px;
-  height: 270px;
+  width: 360px;
+  height: 600px;
+  border: 2px solid red;
+  margin: 10%;
 }
 </style>
