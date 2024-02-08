@@ -64,36 +64,6 @@ const password = ref('')
 const error = ref(0)
 
 
-// const login = async function(){
-//   const user = await accountService.getLogin(id.value, password.value)
-//   useAuthStore.login_info = user
-//   if(user.length === 0){
-//      error.value = 1
-//   }
-//   axios.post('http://localhost:5000/user/loginProc', {
-//     id: useAuthStore.login_info[0].login_id,
-//     pw: useAuthStore.login_info[0].password
-//   })
-//   .then(response => {
-//     if (response.data.success) {
-//       console.log('로그인 성공:', response.data.message);
-//       error.value = 0
-//       router.push({ name:'main'});
-//     } else {
-//       console.log('로그인 실패:', response.data.message);
-//       error.value = 1
-//     }
-//   })
-//   .catch(error => {
-//     console.error('POST 요청 오류:', error);
-//     // POST 요청 실패 시 수행할 작업 추가
-//   });
-
-//   localStorage.setItem('user_id', useAuthStore.login_info[0].login_id);
-//   localStorage.setItem('pw', useAuthStore.login_info[0].password);
-// }
-
-
 const login = async function(){
   const user = await accountService.getLogin(id.value, password.value)
   if(user.length === 0){
@@ -103,6 +73,7 @@ const login = async function(){
     error.value = 0
     useAuthStore.login_info = user
     localStorage.setItem('loginFlag', 1);
+    console.log("로그인 직후",localStorage.loginFlag);
     router.push({ name:'main'})
   }
 }

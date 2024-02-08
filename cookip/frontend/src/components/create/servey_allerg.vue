@@ -41,12 +41,18 @@
 
   const addSelectedIngredient = () => {
   if (searchQuery.value.trim() !== '') {
-    selectedChoices.value.push(searchQuery.value.trim());
+    // 검색한 값이 ingredient_servey에 있는지 확인
+    const ingredientExists = recipeStore.ingredient_servey.some(item => item.ingredient_name === searchQuery.value.trim());
+    if (ingredientExists) {
+      selectedChoices.value.push(searchQuery.value.trim());
+    } else {
+      console.log('검색한 재료가 존재하지 않습니다.');
+      // 혹은 사용자에게 알림을 표시할 수 있습니다.
+    }
     searchQuery.value = '';
   }
 };
-
-console.log("4444444444444444",selectedItems);
+//console.log("4444444444444444",selectedItems);
 
   const submitSurvey = () => {
     // 설문 선택된 항목(재료이름)
@@ -56,11 +62,15 @@ console.log("4444444444444444",selectedItems);
     // 선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
     const selectedCategoryIds = allSelectedIngredients.map(choice => {
     const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-    return ingredient ? ingredient.ingredient_id : null;
+    if (ingredient) {
+      return ingredient.ingredient_id;
+    } else {
+      // 재료를 찾지 못한 경우에 대한 처리
+      // 여기서는 빈 배열을 반환하지 않고, 아무 것도 반환하지 않도록 처리합니다.
+    }
     });
 
-
-    console.log(selectedChoices,selectedCategoryIds);
+    console.log("sssssssssssssssss",selectedChoices,selectedCategoryIds.length);
     // Axios를 사용하여 POST 요청 보내기
     axios.post('http://localhost:5000/user/allergy', {
         // user_id:user_id,

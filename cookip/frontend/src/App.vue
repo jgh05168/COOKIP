@@ -32,9 +32,14 @@ import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
-if(localStorage.setItem('loginFlag') === null){
+if(localStorage.setItem('loginFlag',0) === null){
   localStorage.setItem('loginFlag', 0);
 }
+console.log("앱뷰후",localStorage.loginFlag);
+
+// if(localStorage.setItem('loginFlag') === null){
+//   localStorage.setItem('loginFlag', 0);
+// }
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
@@ -273,6 +278,7 @@ onBeforeUnmount(() => {
   socket.close();
   console.log("앱 Unmount");
 });
+
 
 </script>
 

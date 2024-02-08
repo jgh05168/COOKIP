@@ -52,7 +52,14 @@ const toggleCheckbox = (index) => {
 
 const addSelectedIngredient = () => {
   if (searchQuery.value.trim() !== '') {
-    selectedChoices.value.push(searchQuery.value.trim());
+    // 검색한 값이 ingredient_servey에 있는지 확인
+    const ingredientExists = recipeStore.ingredient_servey.some(item => item.ingredient_name === searchQuery.value.trim());
+    if (ingredientExists) {
+      selectedChoices.value.push(searchQuery.value.trim());
+    } else {
+      console.log('검색한 재료가 존재하지 않습니다.');
+      // 혹은 사용자에게 알림을 표시할 수 있습니다.
+    }
     searchQuery.value = '';
   }
 };
