@@ -32,7 +32,7 @@ import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
-if(localStorage.setItem('loginFlag',0) === null){
+if(localStorage.setItem('loginFlag') === null){
   localStorage.setItem('loginFlag', 0);
 }
 console.log("앱뷰후",localStorage.loginFlag);
@@ -46,7 +46,7 @@ const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
 const error = ref("");
-
+console.log(localStorage.loginFlag)
 const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();

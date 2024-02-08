@@ -1,8 +1,8 @@
 <template>
-    <div v-show="loginFlag==0">
+    <div v-show="localStorage.loginFlag==0">
         <LoginHomeForm />
     </div>
-    <div v-show="loginFlag==1">
+    <div v-show="localStorage.loginFlag==1">
         <LogoutHomeForm />
     </div>
 </template>

@@ -57,6 +57,8 @@ const follow = require("./routes/follow");
 app.use("/follow", follow);  //이거는 json파일 이 저장되는 url
 
 
+const profile = require("./routes/profile");
+app.use("/profile", profile);
 // Port
 const port = process.env.PORT || 5000;
 

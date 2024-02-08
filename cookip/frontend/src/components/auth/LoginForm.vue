@@ -75,6 +75,7 @@ const login = async function(){
     localStorage.setItem('loginFlag', 1);
     console.log("로그인 직후",localStorage.loginFlag);
     router.push({ name:'main'})
+    console.log(localStorage.loginFlag)
   }
 }
 const goback = function(){
