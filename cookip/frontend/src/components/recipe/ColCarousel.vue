@@ -92,7 +92,10 @@ watch(
   (newPage) => {
     if (newPage !== null) {
       if (newPage == "PageIn") {
-        router.push({ name: "recipe-detail" });
+        router.push({
+          name: "recipe-detail",
+          params: { recipeid: props.recipeList[currentSlide.value] },
+        });
       } else if (newPage == "PageOut") {
         router.push({ name: "home" });
       }
