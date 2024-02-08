@@ -1,8 +1,8 @@
 <template>
-    <div v-show="loginFlag==0">
+    <div v-show="Islogin == 0">
         <LoginHomeForm />
     </div>
-    <div v-show="loginFlag==1">
+    <div v-show="Islogin == 1">
         <LogoutHomeForm />
     </div>
 </template>
@@ -10,10 +10,9 @@
 <script setup>
 import LoginHomeForm from '@/components/auth/LoginHomeForm.vue'
 import LogoutHomeForm from '@/components/auth/LogoutHomeForm.vue';
-import { ref } from 'vue'
-// import LogoutHomeForm from '@/components/auth/LogoutHomeForm.vue';
-const loginFlag = ref(localStorage.getItem('loginFlag'))
-console.log(loginFlag.value)
+
+
+const Islogin = localStorage["Islogin"]
 </script>
 
 <style scoped>

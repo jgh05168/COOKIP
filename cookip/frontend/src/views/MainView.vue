@@ -2,8 +2,6 @@
 
     <div>
         <!-- <h1>기본페이지입니다</h1>
-=========
-
         <form action="http://localhost:5000/user/insertUser" method="post">
         <label for="login_id">login_id:</label>
         <input type="text" id="login_id" name="login_id">
@@ -17,73 +15,6 @@
         <input type="text" id="age" name="age">
         <label for="phone_number">phone_number:</label>
         <input type="text" id="phone_number" name="phone_number">
-        <button type="submit">Submit</button>
-    </form> -->
-
-    <!-- <form action="http://localhost:5000/user/chefFollow" method="post">
-        <label for="profile_id">profile_id:</label>
-        <input type="text" id="profile_id" name="profile_id">
-        <label for="user_id">user_id:</label>
-        <input type="text" id="user_id" name="user_id">
-        <label for="chef_id">chef_id:</label>
-        <input type="text" id="chef_id" name="chef_id">
-        <button type="submit">Submit</button>
-    </form> -->
-
-
-    <!-- <form action="http://localhost:5000/user/foodFollow" method="post">
-        <label for="recipe_id">recipe_id:</label>
-        <input type="text" id="recipe_id" name="recipe_id">
-        <label for="profile_id">profile_id:</label>
-        <input type="text" id="profile_id" name="profile_id">
-        <label for="user_id">user_id:</label>
-        <input type="text" id="user_id" name="user_id">
-        <button type="submit">Submit</button>
-    </form> -->
-
-    <!-- <form action="http://localhost:5000/user/categoryFollow" method="post">
-        <label for="category_id">category_id:</label>
-        <input type="text" id="category_id" name="category_id">
-        <label for="profile_id">profile_id:</label>
-        <input type="text" id="profile_id" name="profile_id">
-        <label for="user_id">user_id:</label>
-        <input type="text" id="user_id" name="user_id">
-        <button type="submit">Submit</button>
-    </form> -->
-
-
-    <!-- <form action="http://localhost:5000/user/allergy" method="post">
-        <label for="ingredient_id">ingredient_id:</label>
-        <input type="text" id="ingredient_id" name="ingredient_id">
-        <label for="profile_id">profile_id:</label>
-        <input type="text" id="profile_id" name="profile_id">
-        <label for="allergy">allergy:</label>
-        <input type="text" id="allergy" name="allergy">
-        <label for="user_id">user_id:</label>
-        <input type="text" id="user_id" name="user_id">
-        <button type="submit">Submit</button>
-    </form> -->
-
-
-    <!-- <form action="http://localhost:5000/user/ingredientFollow" method="post">
-        <label for="ingredient_id">ingredient_id:</label>
-        <input type="text" id="ingredient_id" name="ingredient_id">
-        <label for="profile_id">profile_id:</label>
-        <input type="text" id="profile_id" name="profile_id">
-        <label for="user_id">user_id:</label>
-        <input type="text" id="user_id" name="user_id">
-        <button type="submit">Submit</button>
-    </form> -->
-
-    <!-- <form action="http://localhost:5000/user/score" method="post">
-        <label for="recipe_id">recipe_id:</label>
-        <input type="text" id="recipe_id" name="recipe_id">
-        <label for="profile_id">profile_id:</label>
-        <input type="text" id="profile_id" name="profile_id">
-        <label for="score">score:</label>
-        <input type="text" id="score" name="score">
-        <label for="user_id">user_id:</label>
-        <input type="text" id="user_id" name="user_id">
         <button type="submit">Submit</button>
     </form> -->
 
@@ -114,9 +45,26 @@ import { ref } from 'vue';
 const userValid = ref(false)
 
 
+
 </script>
 
 <style scoped>
+.member_background {
+  /* 백그라운드 이미지 설정 */
+  background-image: url('@/assets/image/home_background.png'); /* @는 src 경로를 나타냅니다. */
+  /* 이미지가 꽉 채우도록 설정 */
+  background-size: cover;
+  /* 이미지가 반복되지 않도록 설정 */
+  background-repeat: no-repeat;
+  /* 이미지가 가운데 정렬되도록 설정 */
+  background-position: center;
+  /* 배경 색상 fallback 설정 (이미지가 로드되지 않을 경우) */
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+
 
 
 

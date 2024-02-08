@@ -31,6 +31,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import RecommendCategory from "@/components/home/RecommendCategory.vue";
+console.log("홈뷰 직후",localStorage.loginFlag);
 
 
 </script>

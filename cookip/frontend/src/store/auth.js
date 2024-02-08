@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
   const userProfileList = ref([]);
   const login_info = ref()
   const profile = ref()
+  
   const signup = ref({
     phonenumber:'',
     id:'',
@@ -19,6 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
     lastname:'',
     birthday:'',
   })
+
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
@@ -40,6 +42,6 @@ export const useAuthStore = defineStore('auth', () => {
     userProfileList,
     login_info,
     profile,
-    signup
+    signup,
   };
 }, { persist: true });
