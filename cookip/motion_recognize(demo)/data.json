@@ -1,0 +1,10 @@
+{
+	"type": "Motion",
+	"data": {
+		"swipe": "SwipeUp",
+		"page": null,
+		"rating": null,
+		"zoom": "ZoomIn",
+		"flip": null
+	}
+}
