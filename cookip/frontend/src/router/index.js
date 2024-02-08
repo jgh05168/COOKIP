@@ -15,6 +15,8 @@ import SearchView from "@/views/SearchView.vue";
 // Mobile views
 import GetstartView from "@/views/mobile/GetStartView.vue"
 import CreateMemberView from "@/views/mobile/CreateMemberView.vue";
+import servey_allergView from "@/components/create/servey_allerg.vue";
+import servey_ingredientView from "@/components/create/servey_ingredient.vue";
 import EditProfileView from "@/views/mobile/EditProfileView.vue";
 import LoginView from "@/views/mobile/LoginView.vue";
 import MemberViewMobile from "@/views/mobile/MemberView.vue";
@@ -86,6 +88,16 @@ const routes = [
     path: "/mobile/createmember",
     name: "create-member",
     component: CreateMemberView,
+  },
+  {
+    path: "/mobile/servey_allerg",
+    name: "servey_allerg",
+    component: servey_allergView,
+  },
+  {
+    path: "/mobile/servey_ingredient",
+    name: "servey_ingredient",
+    component: servey_ingredientView,
   },
   {
     path: "/mobile/member/:id/editprofile",

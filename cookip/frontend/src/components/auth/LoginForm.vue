@@ -52,6 +52,7 @@
   </template>
   
   <script setup>
+  //import axios from 'axios'; // Axios 라이브러리 가져오기
   import { ref, onMounted } from 'vue';
   import accountService from "@/store/mvpApi";
   import { useAuthStore } from "@/store/auth";
@@ -62,6 +63,7 @@ const id = ref('')
 const password = ref('')
 const error = ref(0)
 
+
 const login = async function(){
   const user = await accountService.getLogin(id.value, password.value)
   if(user.length === 0){
@@ -71,6 +73,7 @@ const login = async function(){
     error.value = 0
     useAuthStore.login_info = user
     localStorage.setItem('loginFlag', 1);
+    console.log("로그인 직후",localStorage.loginFlag);
     router.push({ name:'main'})
     console.log(localStorage.loginFlag)
   }

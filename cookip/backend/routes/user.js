@@ -8,8 +8,22 @@ router.use((req, res, next) => {
   next();
 });
 
+// router.use((req, res, next) => {    // express의 middleware로 local은 변수 공유를 하게 해준다. 이를 통해 로그인을 하면 어느 페이지에서든 로그인을 유지할 수 있다
+
+//   res.locals.user_id = "";
+//   res.locals.name = "";
+  
+//   if(req.session.member){ 
+//      res.locals.user_id = req.session.member.login_id 
+//      res.locals.name = req.session.member.password 
+//   }
+//   console.log("dsssssssssssssss",res.locals.user_id,res.locals.user_name)
+//   next()
+// })
+
 router.get("/", async (req, res) => {
   try {
+    //console.log(req.session.member); 
     // db.query 메소드가 제대로 정의되어 있는지 확인
     if (db && typeof db.query === 'function') {
       let sql = "SELECT * FROM User";
@@ -55,12 +69,12 @@ router.get("/:id/:password", async (req, res) => {
 // 회원가입하기
 router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말이다 
   //const user_id = req.body.user_id;
-  const login_id = req.body.login_id;
-  const password = req.body.password;
-  const username = req.body.username;
-  const email = req.body.email;
-  const age = req.body.age;
-  const phone_number = req.body.phone_number;
+  const UserData = req.body.User_loginData;
+  // const password = req.body.password;
+  // const username = req.body.username;
+  // const email = req.body.email;
+  // const age = req.body.age;
+  // const phone_number = req.body.phone_number;
   // const is_superuser= req.body.is_superuser;
   // contact.ejs에서 받은 값을 req로 받아온다
   // body 대신 query로 받아오면 undefined 이라고 뜬다
@@ -69,7 +83,7 @@ router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말�
   // body-parser 를 설치해야 한다
   var sql = `insert into User(login_id,password,username,email,age,phone_number,is_superuser)
   values(?,?,?,?,?,?,?)` // ? 를 통해 '' 와 같은 특수기호도 넣을 수 있다. DB에 특수기호가 보안상 이유로 잘들어가지지 않는다. 치환문 이용
-  var values = [login_id,password,username,email,age,phone_number,0]; // 위 ? 위치에 들어가는 배열 지정하기
+  var values = [UserData.id,UserData.password,UserData.firstname+UserData.lastname,UserData.email,UserData.birthday,UserData.phonenumber,0]; // 위 ? 위치에 들어가는 배열 지정하기
 
   db.query(sql, values, function (err, result){
       if(err) throw err; 
@@ -77,6 +91,40 @@ router.post('/insertUser', (req, res) => { // => 랑 function 이랑 같은 말�
       res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>"); 
   })
 })
+
+
+
+// 로그인 유지 하기
+// router.post('/loginProc', (req, res) => {
+//   const user_id = req.body.id; // 입력받은 id, pw
+//   const pw = req.body.pw; 
+//   console.log(user_id,pw);
+//   var sql = `select * from User  where login_id=? and password=?` // 두값이 존재할때
+
+//   var values = [user_id, pw]; 
+
+//   db.query(sql, values, function (err, result){ // 입력받은 id,pw 와 DB에 있는 id,pw 비교
+//       if(err) throw err;      
+      
+//       if(result.length==0){ // DB안에 해당 값 있는가
+//         res.send("<script> alert('존재하지 않는 아이디입니다..'); location.href='/login';</script>");          
+//         res.status(401).json({ message: '로그인 실패' });
+//       }else{  
+//         console.log(result[0]); 
+//         req.session.member = result[0]  
+//         res.status(200).json({ message: '로그인 성공' });       
+//         res.send("<script> alert('로그인 되었습니다.'); location.href='/';</script>");          
+//         //res.send(result); 
+//       }
+//   })
+// })
+
+//로그아웃 하기
+router.get('/logout', (req, res) => {
+  req.session.member = null; 
+  res.send("<script> alert('로그아웃 되었습니다.'); location.href='/';</script>");          
+})
+
 
 // 프로필 등록하기
 router.post('/insertProfile', (req, res) => {
@@ -135,55 +183,70 @@ router.post('/foodFollow', (req, res) => {
 
 // 카테고리
 router.post('/categoryFollow', (req, res) => {
-  const category_id = req.body.category_id;
-  const profile_id = req.body.profile_id;
-  const user_id = req.body.user_id;
+  const categoryFllow_names = req.body.category_id; // 배열로 전송된다고 가정
+  console.log(categoryFllow_names);
+  const profile_id = 1;
+  const user_id = 1;
+  // 배열의 각 요소에 대해 반복하여 쿼리 실행
+  categoryFllow_names.forEach(category_names => {
+    var sql = `insert into Profile_Favorite_Category(category_id,profile_id,user_id) values(?,?,?)`;
+    var values = [category_names,profile_id,user_id];
 
-  var sql = `insert into Profile_Favorite_Category(category_id,profile_id,user_id)
-  values(?,?,?)`
-  var values = [category_id,profile_id,user_id];
+    db.query(sql, values, function (err, result) {
+        if (err) throw err;
+        console.log('선호카테고리 자료 1개를 삽입하였습니다.');
+    });
+  });
+  res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>");
+});
 
-  db.query(sql, values, function (err, result){
-      if(err) throw err; 
-      console.log('자료 1개를 삽입하였습니다.');
-      res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>"); 
-  })
-})
+
+
+
+
+
+
 
 // 알러지 정보
 router.post('/allergy', (req, res) => {
-  const ingredient_id = req.body.ingredient_id;
-  const profile_id = req.body.profile_id;
-  const allergy = req.body.allergy;
-  const user_id = req.body.user_id;
+  const allergy = req.body.ingredients;
+  const profile_id = 1;
+  const user_id = 1;
+  console.log(allergy);
+  // 배열의 각 요소에 대해 반복하여 쿼리 실행
+  allergy.forEach(allery_data => {
+    var sql = `insert into Profile_Allergy(ingredient_id,profile_id,allergy,user_id) values(?,?,?,?)`;
+    var values = [allery_data.ingredient_id,profile_id,allery_data.allergy_name,user_id];
+    db.query(sql, values, function (err, result) {
+        if (err) throw err;
+        console.log('알러지 자료 1개를 삽입하였습니다.');
+    });
+  });
+  res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>");
+});
 
-  var sql = `insert into Profile_Allergy(ingredient_id,profile_id,allergy,user_id)
-  values(?,?,?,?)`
-  var values = [ingredient_id,profile_id,allergy,user_id];
-
-  db.query(sql, values, function (err, result){
-      if(err) throw err; 
-      console.log('자료 1개를 삽입하였습니다.');
-      res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>"); 
-  })
-})
 
 // 선호재료
 router.post('/ingredientFollow', (req, res) => {
-  const ingredientFllow_id = req.body.ingredient_id;
-  const profile_id = req.body.profile_id;
-  const user_id = req.body.user_id;
+  const ingredientFllow_names = req.body.ingredient_id; // 배열로 전송된다고 가정
+  const profile_id = 1;
+  const user_id = 1;
+  // 배열의 각 요소에 대해 반복하여 쿼리 실행
+  ingredientFllow_names.forEach(ingredientFllow_name => {
+      var sql = `INSERT INTO Profile_Favorite_Ingredient(ingredient_id, profile_id, user_id) VALUES (?, ?, ?)`;
+      var values = [ingredientFllow_name, profile_id, user_id];
 
-  var sql = `insert into Profile_Favorite_Ingredient(ingredient_id,profile_id,user_id)
-  values(?,?,?)`
-  var values = [ingredientFllow_id,profile_id,user_id];
+      db.query(sql, values, function (err, result) {
+          if (err) throw err;
+          console.log('선호 재료 1개를 삽입하였습니다.');
+      });
+  });
+  res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>");
+});
 
-  db.query(sql, values, function (err, result){
-      if(err) throw err; 
-      console.log('자료 1개를 삽입하였습니다.');
-      res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>"); 
-  })
-})
+
+
+
 
 // 평점
 router.post('/score', (req, res) => {
