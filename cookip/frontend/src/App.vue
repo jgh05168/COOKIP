@@ -274,8 +274,6 @@ onBeforeUnmount(() => {
   console.log("앱 Unmount");
 });
 
-localStorage.setItem('loginFlag', 0);
-
 </script>
 
 <style scoped>
