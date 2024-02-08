@@ -2,7 +2,7 @@
 <template>
   <div class="stepper-content ">
     <StepInfos :recipe="recipe" :step="props.now_step" />
-    <!-- <v-img class="stepper-main-gallery" :src="imagePath" /> -->
+    <v-img class="stepper-main-gallery" src="@\assets\image\recipe\1\chadoldoenjangjjigae.jpg" />
     <StepIngredientsGallery :recipe="recipe" :step="props.now_step" />
   </div>
 </template>
@@ -17,10 +17,7 @@ const props = defineProps({
   now_step: Object,
 });
 
-// const imagePath = ref("");
-// watchEffect(() => {
-//   imagePath.value = require(`../../assets/image/recipe/1/${props.now_step.step_image}`);
-// });
+
 </script>
 <style scoped>
 .stepper-content {
@@ -28,5 +25,12 @@ const props = defineProps({
   display: flex;
   flex-direction: row;
 
+}
+.stepper-main-gallery{
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 0 0 20px;
 }
 </style>

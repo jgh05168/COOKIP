@@ -1,26 +1,27 @@
 import { defineStore } from "pinia";
 import accountService from "@/store/mvpApi";
-import { ref, onBeforeMount } from "vue";    
-import recipeStepsData from './recipeDemo.json';
+import { ref } from "vue";
+import recipeStepsData from "./recipeDemo.json";
 
-export const useRecipeStore = defineStore(
+export const useGuideStore = defineStore(
   "recipe",
   () => {
     const recipes = ref([]);
+    const ingredients = ref([]);
+    const user_ingredients = ref([]);
+
     const recipe_steps = ref(recipeStepsData);
-    const error = ref("");
 
-    onBeforeMount(async () => {
-      try {
-        const recipeId = 27; // Replace with the actual recipe ID
-        const recipeData = await accountService.getUserStep_recipeId(recipeId);
-        recipes.value = recipeData;
-      } catch (err) {
-        error.value = err.message;
-      }
-    });
+    const recipeId = 27; // Replace with the actual recipe ID
+    const recipeData = accountService.getUserStep_recipeId(recipeId);
+    recipes.value = recipeData;
 
-    return { recipes, recipe_steps };
+    return {
+      recipes,
+      ingredients,
+      user_ingredients,
+      recipe_steps,
+    };
   },
   { persist: true }
 );

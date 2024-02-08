@@ -12,7 +12,6 @@
         </v-stepper-item>
       </v-stepper-header>
       <v-stepper-content>
-        <v-divider></v-divider>
         <div
           class="recipe-guide"
           v-for="(guide, index) in recipe_steps.guide"
@@ -42,65 +41,45 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useGuideStore } from "@/store/guide";
 import accountService from "@/store/mvpApi";
-import recipeStepsData from "@/store/recipeDemo.json";
+// import recipeStepsData from "@/store/recipeDemo.json";
 import GuideHeaderVue from "@/components/recipe/guide/GuideHeader.vue";
 import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
-const recipe_steps = ref(recipeStepsData[0]);
+// const recipe_steps = ref(recipeStepsData[0]);
 const selectedStep = ref(1);
 
-const error = ref("");
-const raw_recipes = useGuideStore();
-const recipeId = 27; // Replace with the actual recipe ID
+const guideStore = useGuideStore();
+const recipe_steps = ref({});
+onMounted(async () => {
+  guideStore.now_recipe_info = await accountService.getUserRecipe_RecipeId(
+    guideStore.now_recipe_id
+  );
+  guideStore.now_recipe_guide = await accountService.getUserStep_recipeId(
+    guideStore.now_recipe_id
+  );
 
-
-const get_now_recipes = async () => {
-  try {
-    const recipeData = await accountService.getUserRecipe_RecipeId(recipeId);
-    recipeData.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.cnow(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    raw_recipes.recipes = recipeData;
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-const get_now_ingredients = async () => {
-  try {
-    const now_ingredients = await accountService.getUseringredient_IngredientId(
-      recipeId
+  guideStore.now_recipe_ingredients =
+    await accountService.getUserrecipe_ingredient_RecipeId(
+      guideStore.now_recipe_id
     );
-    raw_recipes.ingredients = now_ingredients;
-  } catch (err) {
-    error.value = err.message;
-  }
-};
+  guideStore.now_recipe_stepofstep =
+    await accountService.getUserstepofstep_RecipeId(guideStore.now_recipe_id);
 
-const get_now_recipes_ingredients = async () => {
-  try {
-    const recipe_ingredientData =
-      await accountService.getUserrecipe_ingredient_RecipeId(recipeId);
-    recipe_ingredientData.forEach((ingredient) => {
-      const matchingRecipe = raw_recipes.recipes.find(
-        (recipe) => recipe.recipe_id === ingredient.recipe_id
-      );
-      matchingRecipe.ingredient.push(ingredient.ingredient_id);
-    });
-  } catch (err) {
-    error.value = err.message;
-  }
-};
+  guideStore.my.id = guideStore.now_recipe_id;
+  guideStore.my.name = guideStore.now_recipe_info[0].name;
+  guideStore.my.description = guideStore.now_recipe_info[0].description;
+  guideStore.my.time = guideStore.now_recipe_info[0].time;
+  guideStore.my.image = guideStore.now_recipe_info[0].thumbnail;
+  guideStore.my.ingredients = guideStore.now_recipe_ingredients;
+  guideStore.my.guide = guideStore.now_recipe_guide;
 
-await get_now_recipes();
-await get_now_recipes_ingredients();
-await get_now_ingredients();
-console.log(raw_recipes);
+  recipe_steps.value = guideStore.my;
 
+  console.log(guideStore.my); // 레시피 스텝
+  console.log(recipe_steps);
+});
 
 const disabled = () => {
   return selectedStep.value === 1
@@ -155,6 +134,6 @@ const next = () => {
   height: 165px;
 }
 .recipe-guide-body {
-  height: 850px;
+  height: 750px;
 }
 </style>

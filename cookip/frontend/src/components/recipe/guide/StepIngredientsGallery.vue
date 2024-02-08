@@ -1,24 +1,26 @@
 <template>
-  <div class="step-ingredients-gallery">
+  <div>
+  <div class="step-ingredients-gallery ">
     <Carousel
-      :items-to-show="3"
+      :items-to-show="4"
       :wrap-around="true"
       ref="colCarousel"
-      class="vertical-carousel carousel__viewport"
+      class="vertical-carousel"
     >
       <Slide
-        class="vertical-carousel-slide sub-img"
+        class="vertical-carousel-slide sub-img carousel__viewport"
         v-for="index in 5"
         :key="index"
       >
         <v-img src="@/assets/image/ingredient/item_greenonion.jpg" />
       </Slide>
     </Carousel>
-    <div>
+
+  </div>
+  <div class="my_btns">
       <button @click="nextpage()">다음</button>
       <button @click="prevpage()">이전</button>
-    </div>
-  </div>
+    </div></div>
 </template>
   
 <script setup>
@@ -38,24 +40,46 @@ const prevpage = () => {
 </script>
   
 <style scoped>
-.step-ingredients-gallery{
-  display: flex;
+div > button {
+  margin-right: 0; /* 버튼의 상단 마진을 0으로 설정 */
+}
+.step-ingredients-gallery {
+  overflow: hidden;
+  width: 500px;
+  height: 500px;
+  display: block;
+  /* display: inline; */
   flex-direction: column;
+  background-color: pink;
 }
 .vertical-carousel {
   transform: rotate(0.25turn);
-  width: 1080px;
-  height: 1080px;
+  /* display: inline; */
+  margin-bottom: 0;
+  width: 800px;
+  height: 200px;
+  background-color: aqua;
+  margin-right: 0px;
 }
+.my_btns{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: red;
 
+}
+.carousel__track {
+  margin: 0px 0px;
+}
 .carousel__viewport {
   height: 150px;
   width: 800px;
   gap: 10px;
-  margin-top: 200px;
+  margin-right: 100px;
+  background-color: red;
 }
-
 .vertical-carousel-slide {
+  margin-right: 10px;
   transform: rotate(-0.25turn);
 }
 

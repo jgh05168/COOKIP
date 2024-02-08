@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h3 class="text-h6">Step {{ props.step.step }}.</h3>
-    <h4 class="text-h6"> {{ props.step.description }}</h4>
-    <br />
-    <v-sheet border>
+  <div class="step-infos">
+    <h3 class="text-h3">Step {{ props.step.step }}.</h3>
+    <h4 class="text-h4"> {{ props.step.description }}</h4>
+    <v-sheet border
+        class="ingredients-table">
       <v-table>
         <thead>
           <tr>
@@ -21,12 +21,12 @@
         </tbody>
       </v-table>
     </v-sheet>
-    <br />
-    <v-sheet border>
+    <v-sheet border
+        class="cooking-tip">
       <v-textarea
         v-model="cookingTip"
         label="요리 꿀팁 어쩌구 저쩌구"
-        rows="6"
+        rows="6" 
       ></v-textarea>
     </v-sheet>
   </div>
@@ -46,6 +46,24 @@ const cookingTip = ref(""); // Define a reactive variable to capture the textare
 
 
 <style scoped>
+.step-infos{
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: pink;   */
+  position: relative; /* 부모 요소를 positioning context로 설정 */
 
+}
+.ingredients-table{
+  width: 100%;
+  margin-top: 20px;
+  position: absolute; /* 요리 꿀팁 요소를 부모 요소에 상대적으로 고정 */
+  top: 150px; /* 요리 꿀팁 요소를 부모 요소의 하단에 위치시킴 */
 
+}
+.cooking-tip {
+  width: 100%;
+  position: absolute; /* 요리 꿀팁 요소를 부모 요소에 상대적으로 고정 */
+  bottom: 0; /* 요리 꿀팁 요소를 부모 요소의 하단에 위치시킴 */
+}
 </style>
