@@ -19,7 +19,8 @@
       :key="slide"
     >
       <div class="flip-card">
-        <FlipCard :recipe="recipe" />
+        <button @click="Flip_test">Flip_test</button>
+        <FlipCard :flip="flip && slide == currentSlide" :recipe="recipe" />
       </div>
     </Slide>
   </Carousel>
@@ -30,44 +31,16 @@
 </template>
 
 <script setup>
-import { ref, defineProps, watchEffect, watch } from "vue";
+import { ref, defineProps, watch } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import FlipCard from "./FlipCard.vue";
 import { useMotionStore } from "@/store/motion";
 import { useRecipeStore } from "@/store/recipe";
+import router from "@/router";
 
 const motionStore = useMotionStore();
 const recipeStore = useRecipeStore();
-
-// motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
-// 동작 수행 후 store에 저장되어 있는 motion 초기화
-watchEffect( () => {
-  if (motionStore.motion_data.swipe !== null) {
-    let value = motionStore.motion_data.swipe;
-    // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
-    if (value == "SwipeLeft") {
-      nextpage();
-    } else if (value == "SwipeRight") {
-      prevpage();
-    }
-  }
-  // 초기화
-  motionStore.motion_data = {
-    swipe: null,
-    page: null,
-    rating: null,
-    zoom: null,
-    flip: null,
-  };
-});
-
-const props = defineProps({
-  recipeList: Array,
-  rowSlide: Number,
-});
-
-console.log(props.rowSlide, recipeStore.currentRowSlide);
 
 const currentSlide = ref(0);
 
@@ -81,9 +54,73 @@ const prevpage = () => {
   colCarousel.value.prev();
 };
 
+const flip = ref(false);
+
+const Flip_test = () => {
+  flip.value = !flip.value;
+};
+
 watch(currentSlide, (newVal) => {
   console.log("Current Col:", newVal);
   currentSlide.value = newVal;
+});
+
+// motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
+// 동작 수행 후 store에 저장되어 있는 motion 초기화
+watch(
+  () => motionStore.motion_data.swipe,
+  (newSwipe) => {
+    if (newSwipe !== null) {
+      if (newSwipe == "SwipeUp") {
+        nextpage();
+      } else if (newSwipe == "SwipeDown") {
+        prevpage();
+      } else if (newSwipe == "SwipeLeft") {
+        nextpage();
+      } else if (newSwipe == "SwipeRight") {
+        prevpage();
+      }
+
+      // 초기화
+      motionStore.motion_data.swipe = null;
+    }
+  }
+);
+
+watch(
+  () => motionStore.motion_data.page,
+  (newPage) => {
+    if (newPage !== null) {
+      if (newPage == "PageIn") {
+        router.push({ name: "recipe-detail" });
+      } else if (newPage == "PageOut") {
+        router.push({ name: "home" });
+      }
+
+      // 초기화
+      motionStore.motion_data.page = null;
+    }
+  }
+);
+
+watch(
+  () => motionStore.motion_data.zoom,
+  (newZoom) => {
+    if (newZoom !== null) {
+      let value = motionStore.motion_data.zoom;
+      // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
+      if (value == "ZoomIn") {
+        flip.value = true;
+      } else if (value == "ZoomOut") {
+        flip.value = false;
+      }
+    }
+  }
+);
+
+const props = defineProps({
+  recipeList: Array,
+  rowSlide: Number,
 });
 </script>
 
@@ -108,8 +145,8 @@ watch(currentSlide, (newVal) => {
 
 .active-slide {
   transition: transform 0.5s ease-out;
-  transform-origin: 50% 50%;
-  transform: scale(2.2);
+  transform-origin: 46% 48%;
+  transform: scale(2.6);
   z-index: 2;
 }
 

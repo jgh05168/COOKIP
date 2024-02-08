@@ -102,23 +102,9 @@ const login = async function(){
   else{
     error.value = 0
     useAuthStore.login_info = user
-    // axios.post('http://localhost:5000/user/loginProc', {
-    //   id:useAuthStore.login_info[0].login_id,
-    //   pw:useAuthStore.login_info[0].password
-    // })
-    // .then(response => {
-    //     console.log('서버 응답:', response.data);
-    //     // alert("선호도 조사 완료");
-    //     // POST 요청 성공 시 수행할 작업 추가
-    // })
-    // .catch(error => {
-    //     console.error('POST 요청 오류:', error);
-    //     // POST 요청 실패 시 수행할 작업 추가
-    // });
     localStorage.setItem('loginFlag', 1);
-    //localStorage.setItem('pw', useAuthStore.login_info[0].password);
+    router.push({ name:'main'})
   }
-  router.push({ name:'main'});
 }
 const goback = function(){
   router.go(-1)
