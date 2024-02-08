@@ -72,10 +72,8 @@ const login = async function(){
   else{
     error.value = 0
     useAuthStore.login_info = user
-    localStorage.setItem('loginFlag', 1);
-    console.log("로그인 직후",localStorage.loginFlag);
+    localStorage.setItem("Islogin", 1)
     router.push({ name:'main'})
-    console.log(localStorage.loginFlag)
   }
 }
 const goback = function(){
