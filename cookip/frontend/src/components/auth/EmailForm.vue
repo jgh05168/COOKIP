@@ -2,7 +2,7 @@
     <div class="frame">
       <div class="div-wrapper">
           <div class="icon">
-            <v-img class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
+            <v-img @click="goback()" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
             @mouseover="handleMouseOver"
             @mouseleave="handleMouseLeave"/>
           </div>
@@ -35,6 +35,7 @@
 
               <div style="width: 100%;">
                 <v-btn
+                @click="goname"
               class="continue"
               color="#007aff"
               dark
@@ -50,8 +51,21 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, defineProps } from "vue";
+import { useAuthStore } from '@/store/auth'
+const store = useAuthStore()
 
+
+const props = defineProps({
+  showNext: Function,
+  showBack: Function
+});
+const email = ref();
+
+const goname = () => {
+  props.showNext()
+  store.signup.email = email.value
+}
 const colorElement = ref(null);
 const handleMouseOver = () => {
   // 이미지에 마우스 호버 시 크기를 확대
@@ -68,6 +82,10 @@ onMounted(() => {
 });
 
 const checkbox = ref(true);
+
+const goback = function(){
+  props.showBack()
+}
   </script>
   
   <style>

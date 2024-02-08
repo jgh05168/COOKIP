@@ -52,11 +52,14 @@ watchEffect(() => {
       nextpage();
     } else if (value == "SwipeRight") {
       prevpage();
-    } else if (value == "SwipeDown") {
-      router.push({ name: "recipe", params: {}, query: {} });
-    } else if (value == "SwipeUp") {
-      router.push({ name: "my-favorite", params: {}, query: {} });
     }
+    else if (value == "SwipeDown") {
+      motionStore.transition_dir = "slide-down"
+      router.push({name:"recipe" ,params : {}, query:{}})
+    } else if (value == "SwipeUp") {
+      motionStore.transition_dir = "slide-up"
+      router.push({name:"my-favorite" ,params : {}, query:{}})
+    } 
   }
   // 초기화
   motionStore.motion_data = {
