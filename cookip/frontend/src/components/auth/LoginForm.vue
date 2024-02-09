@@ -73,6 +73,7 @@ const login = async function(){
     error.value = 0
     useAuthStore.login_info = user
     localStorage.setItem("Islogin", 1)
+    console.log(useAuthStore.login_info)
     router.push({ name:'main'})
   }
 }
