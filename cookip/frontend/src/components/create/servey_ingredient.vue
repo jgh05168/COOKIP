@@ -32,6 +32,8 @@ import { ref } from 'vue';
 import { useRecipeStore } from "@/store/recipe";
 
 const recipeStore = useRecipeStore();
+console.log("asdasdsaddasd",recipeStore.filteredFavorites(5));
+
 
 const allergens = [
   "애호박", "대파", "청양고추", "고추기름", "고춧가루", "국간장", "순두부", "표고버섯", "양파", "다시마 물",

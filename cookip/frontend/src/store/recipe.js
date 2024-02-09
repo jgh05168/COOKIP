@@ -13,7 +13,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   const Follow = ref([]); // 쉐프팔로우
   const Favorite_category = ref([]);
   const Favorite_ingredient = ref([]);
-  const Favorite_recipe = ref([]);
+  const favorite_recipe = ref([]);
   //const expiration = ref([]); // 유통기한
 
   //servey에 필요한 재료목록 정의
@@ -34,6 +34,12 @@ export const useRecipeStore = defineStore('recipe', () => {
     {id:4, title:"난이도 맞춤 추천"}, // 
     {id:5, title:"조리시간 별 추천"}, // 
   ])
+
+  //favorite_recipe userid로 가져오기
+  const filteredFavorites = (userId) => computed(() => {
+    return favorite_recipe.value.filter(item => item.user_id === userId);
+  });
+
 
   // 지금 냉장고에 있는 재료
   const category_1 = computed(() => {
@@ -79,7 +85,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   //console.log("보내지는창",ingredient_servey, category_servey);
   const selected_category = ref(0)
   
-  return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,Favorite_recipe,recommend_category, recommend_list, 
-    selected_category,ingredient_servey,user_category }
+  return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,recommend_category, recommend_list, 
+    selected_category,ingredient_servey,user_category,filteredFavorites }
   }, { persist: true })
   

@@ -333,6 +333,22 @@ static getUserProfile(id) {
         throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
       });
   }
+
+  static getFavorite_recipe_userid(userid) {
+    const url = `http://localhost:5000/favorite_recipe/${userid}`;
+    return axios.get(url)
+      .then((res) => {
+        const data = res.data;
+        return data.favorite_recipe_userid.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+
+
+
 }
 
 export default accountService;
