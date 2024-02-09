@@ -1,47 +1,55 @@
 <!-- 레시피 가이드 해당 스텝 헤더 컴포넌트 -->
 <template>
-  <v-row class="recipe-guide-header">
-    <!-- 레시피 가이드 스텝 메인 이미지 -->
-    <div class="step-header-image">
-      <v-img src="/src/assets/image/임채진.png" />
+  <div>
+    <div class="recipe-guide-header">
+      <!-- 레시피 가이드 스텝 메인 이미지 -->
+      <!-- <v-img class="step-header-image" src="@/assets/image/임채진.png" /> -->
+      <!-- 레시피 가이드 스텝 정보 및 경과 시간-->
+      <div class="step-header-content">
+          <HeaderStepInfo :recipe="props.recipe" :step="props.now_step" />
+          <HeaderRecipeInfo :recipe="props.recipe" :step="props.now_step" />
+      </div>
     </div>
-
-    <!-- 레시피 가이드 스텝 정보 및 경과 시간 -->
-    <v-row class="step-header-content">
-      <HeaderStepInfo :step="props.selectedStep[props.selectedStep.step]" :title="props.selectedStep.title" />
-      <!-- <HeaderRecipeInfo :recipeName="props.selectedStep.name" /> -->
-    </v-row>
-  </v-row>
+  </div>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
 import HeaderStepInfo from "./HeaderStepInfo.vue";
-// import HeaderRecipeInfo from "./HeaderRecipeInfo.vue";
+import HeaderRecipeInfo from "./HeaderRecipeInfo.vue";
 
 const props = defineProps({
-  userInfos: Object,
-  selectedStep: Object,
+  recipe: Object,
+  now_step: Object,
 });
 </script>
 
 <style scoped>
 .recipe-guide-header {
-  width: max-content;
+  /* width: max-content; */
+  background: #fdf8ec;
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
 }
 .step-header-image {
   width: 140px;
   height: 140px;
+  padding: 0 0;
+  /* margin: 20px; */
+  border-radius: 0 30px 30px 0;
 }
 
 .step-header-content {
-  width: 1250px;
+  width: 1000px;
   height: 140px;
   padding: 20px;
   background: white;
-  border-radius: 30px 0 0 30px;
+  /* border-radius: 30px 0 0 30px; */
   overflow: hidden;
   gap: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 .step-info {

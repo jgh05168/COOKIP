@@ -4,6 +4,9 @@ import App from './App.vue'
 import './assets/tailwind.css'
 import router from './router'
 import { createPinia } from 'pinia'
+const pinia = createPinia()
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+pinia.use(piniaPluginPersistedstate)
 
 // Vuetify
 import 'vuetify/styles'

@@ -32,21 +32,16 @@ import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
-if(localStorage.setItem('loginFlag',0) === null){
-  localStorage.setItem('loginFlag', 0);
-}
-console.log("앱뷰후",localStorage.loginFlag);
-
-// if(localStorage.setItem('loginFlag') === null){
-//   localStorage.setItem('loginFlag', 0);
-// }
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 
 const error = ref("");
-console.log(localStorage.loginFlag)
+
+if(localStorage["Islogin"] == null){
+  localStorage["Islogin"] = 0
+}
 const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();
@@ -120,6 +115,9 @@ const handleWebSocketMessage = async (e) => {
         // 만약 "STT" 타입으로 들어올 경우 데이터를 motion store에 저장
         sttStore.stt_data = result["data"];
       }
+    }
+    else {
+      console.log("돌아가")
     }
   } catch (err) {
     console.error(err);
@@ -261,7 +259,7 @@ onMounted(async () => {
 
   // 웹소켓 연결 설정
   socket.onopen = () => {
-    console.log("웹소켓 연결이 열렸습니다.");
+    console.log("웹소켓(모션 인식) 연결이 열렸습니다.");
   };
 
   // 데이터를 수신 받았을 때의 처리
@@ -269,7 +267,7 @@ onMounted(async () => {
 
   // 에러가 발생했을 때의 처리
   socket.onerror = (e) => {
-    console.error("웹소켓 에러:", e);
+    console.error("웹소켓(모션 인식) 에러:", e);
   };
 });
 

@@ -257,7 +257,7 @@ static getUserProfile(id) {
   }
 
   static getUserprofile(id) {
-    const url = `http://localhost:5000/category/${id}`;
+    const url = `http://localhost:5000/profile/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
