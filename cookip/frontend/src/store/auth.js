@@ -8,8 +8,8 @@ const urlUserProfile = 'http://localhost:5000/Users_Profile';
 export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([]);
   const userProfileList = ref([]);
-  const login_info = ref()
-  const profile = ref()
+  const login_info = ref(null)
+  const profile = ref(null)
   
   const signup = ref({
     phonenumber:'',

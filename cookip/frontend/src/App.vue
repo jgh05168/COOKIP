@@ -116,6 +116,9 @@ const handleWebSocketMessage = async (e) => {
         sttStore.stt_data = result["data"];
       }
     }
+    else {
+      console.log("돌아가")
+    }
   } catch (err) {
     console.error(err);
   }
@@ -256,7 +259,7 @@ onMounted(async () => {
 
   // 웹소켓 연결 설정
   socket.onopen = () => {
-    console.log("웹소켓 연결이 열렸습니다.");
+    console.log("웹소켓(모션 인식) 연결이 열렸습니다.");
   };
 
   // 데이터를 수신 받았을 때의 처리
@@ -264,7 +267,7 @@ onMounted(async () => {
 
   // 에러가 발생했을 때의 처리
   socket.onerror = (e) => {
-    console.error("웹소켓 에러:", e);
+    console.error("웹소켓(모션 인식) 에러:", e);
   };
 });
 

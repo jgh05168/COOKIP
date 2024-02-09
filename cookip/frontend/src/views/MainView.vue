@@ -26,10 +26,7 @@
             <h2>만약 로그인 되어있다면 대표 화면을 보여줍니다.</h2>
             <h1>여기서 사용자 얼굴인식을 통하여 현재 사용자 정보를 저장해 둡니다</h1>
             <h1>여기서는 STT와 모션인식을 통해 다른 화면이나 기능으로 넘어갈 수 있습니다</h1>
-            <div v-if="userValid">
-                <SignedIn />
-            </div>
-            <div v-else>
+            <div>
                 <LoginRequired />
             </div>
         </div>
@@ -40,11 +37,7 @@
 import LoginRequired from '@/components/main/LoginRequired.vue'
 // import SignedIn from '@/components/main/SignedIn.vue'
 // import router from '@/router';
-import { ref } from 'vue';
-
-const userValid = ref(false)
-
-
+// import { ref } from 'vue';
 
 </script>
 
