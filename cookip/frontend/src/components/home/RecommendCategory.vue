@@ -40,6 +40,9 @@ import { useRecipeStore } from "@/store/recipe";
 import { watchEffect } from "vue";
 import router from "@/router";
 
+
+
+
 const motionStore = useMotionStore();
 
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨

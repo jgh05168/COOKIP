@@ -1,14 +1,12 @@
 <template>
   <div class="grid grid-cols-5 gap-10">
     <div
-      v-for="(item, idx) in recipeStore.recommend_list[selectedSlide]
-        .recipe_list[selectedSlide]"
+      v-for="(item, idx)  in results[selectedSlide].value[0]"
       :key="idx"
       class="rounded overflow-hidden shadow-lg preview-list"
       style="color: #111111;+"
-    >
-      <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
-    </div>
+    ><h1>{{ item.name }}</h1>
+    <img  class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" /></div>
   </div>
 </template>
 
@@ -23,14 +21,26 @@ const props = defineProps({
 });
 
 // console.log(props.selectedSlide);
-console.log(recipeStore.recommend_list[props.selectedSlide].recipe_list);
+//console.log(recipeStore.recommend_list[props.selectedSlide].recipe_list);
+const user_id = 1;
+const profile_id = 1;
+const results = [
+    recipeStore.ref_category_1[0],
+    recipeStore.ref_category_2[0],
+    recipeStore.category_3(user_id),
+    recipeStore.category_4(user_id, profile_id)
+];
+console.log("results",results);
 
 watch(
   () => props.selectedSlide,
   (newVal) => {
     console.log("Selected Recipe Name Changed_reciv:", newVal);
+    console.log("ssssssssssssssssssssssssssss",results[props.selectedSlide].value),
+    console.log(results[props.selectedSlide].value[0].length)
+
     // 여기서 변경된 값에 대한 로직을 추가할 수 있습니다.
-  }
+  },
 );
 
 const getBufferImage = (buffer) => {
@@ -39,6 +49,7 @@ const getBufferImage = (buffer) => {
     const blob = new Blob([uint8Array], { type: "image/jpeg" });
     return URL.createObjectURL(blob);
   }
+  // null 값인 경우 빈 문자열 반환
   return null;
 };
 </script>

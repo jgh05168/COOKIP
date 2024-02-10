@@ -75,6 +75,16 @@ const get_all_ingredient_availble = async () => {
   }
 };
 
+const get_recipe_ingredient = async () => {
+  try {
+    const recipe_ingredient = await accountService.getUserrecipe_ingredient();
+    recipestore.user_recipe_ingredient = recipe_ingredient;
+    //console.log("app 재료목록",recipestore.user_ingredient_availble);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
@@ -99,40 +109,6 @@ const get_all_recipes_ingredients = async () => {
     error.value = err.message;
   }
 };
-
-const handleWebSocketMessage = async (e) => {
-  try {
-    if (e !== null && e !== undefined) {
-      //   console.log(e.data)
-      const result = await JSON.parse(e.data);
-      // console.log(result["data"]);
-      // 데이터 다음과 같이 받아옴 type 이 뭔지에 따라서 motion, stt store 에 저장
-      //   {
-      //     "type": "Motion",
-      //     "data": {
-      //         "swipe": "SwipeRight",
-      //         "page": null,
-      //         "rating": null,
-      //         "zoom": "ZoomIn",
-      //         "flip": "Flip"
-      //     }
-      // }
-      if (result["type"] == "Motion") {
-        // 만약 "Motion" 타입으로 들어올 경우 데이터를 motion store에 저장
-        motionStore.motion_data = result["data"];
-      } else {
-        // 만약 "STT" 타입으로 들어올 경우 데이터를 motion store에 저장
-        sttStore.stt_data = result["data"];
-      }
-    }
-    else {
-      console.log("돌아가")
-    }
-  } catch (err) {
-    console.error(err);
-  }
-};
-
 
 
 const get_useIngredient_recipe = async () => {
@@ -201,37 +177,29 @@ const get_Follow = async () => {
   }
 };
 
+
+
 const get_Favorite_category = async () => {
   try {
     const Favorite_category_Data = await accountService.getFavorite_category();
-    Favorite_category_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
     recipestore.Favorite_category = Favorite_category_Data;
-    //console.log(recipestore.Favorite_category);
-
+    //console.log("get_확인", recipestore.Favorite_category);
   } catch (err) {
     error.value = err.message;
   }
 };
+
 
 const get_Favorite_ingredient = async () => {
   try {
     const Favorite_ingredient_Data = await accountService.getFavorite_ingredient();
-    Favorite_ingredient_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
     recipestore.Favorite_ingredient = Favorite_ingredient_Data;
-    //console.log(recipestore.Favorite_ingredient);
-
+    //console.log("get_확인", recipestore.Favorite_ingredient);
   } catch (err) {
     error.value = err.message;
   }
 };
+
 
 const get_Favorite_recipe = async () => {
   try {
@@ -251,9 +219,46 @@ const get_Favorite_recipe = async () => {
 
 
 
+
+const handleWebSocketMessage = async (e) => {
+  try {
+    if (e !== null && e !== undefined) {
+      //   console.log(e.data)
+      const result = await JSON.parse(e.data);
+      // console.log(result["data"]);
+      // 데이터 다음과 같이 받아옴 type 이 뭔지에 따라서 motion, stt store 에 저장
+      //   {
+      //     "type": "Motion",
+      //     "data": {
+      //         "swipe": "SwipeRight",
+      //         "page": null,
+      //         "rating": null,
+      //         "zoom": "ZoomIn",
+      //         "flip": "Flip"
+      //     }
+      // }
+      if (result["type"] == "Motion") {
+        // 만약 "Motion" 타입으로 들어올 경우 데이터를 motion store에 저장
+        motionStore.motion_data = result["data"];
+      } else {
+        // 만약 "STT" 타입으로 들어올 경우 데이터를 motion store에 저장
+        sttStore.stt_data = result["data"];
+      }
+    }
+    else {
+      console.log("돌아가")
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
+
 onMounted(async () => {
-  await get_all_ingredients(), // 모든 재료 목록
   await get_all_ingredient_availble(); // 보유 식자재
+  await get_all_ingredients(), // 모든 재료 목록
+  await get_recipe_ingredient(), // 레시피와 사용재료 같이있는 테이블
   await get_all_recipes(), // 모든 레시피 목록
   await get_all_recipes_ingredients(), //레시피별 재료상세단위
   await get_all_category(),
