@@ -29,6 +29,9 @@ app.use("/step", step);  //이거는 json파일 이 저장되는 url
 const ingredient = require("./routes/ingredient");
 app.use("/ingredient", ingredient);  //이거는 json파일 이 저장되는 url
 
+const ingredient_availble = require("./routes/ingredient_availble");
+app.use("/ingredient_availble", ingredient_availble);  //이거는 json파일 이 저장되는 url
+
 const stepofstep = require("./routes/stepofstep");
 app.use("/stepofstep", stepofstep);  //이거는 json파일 이 저장되는 url
 

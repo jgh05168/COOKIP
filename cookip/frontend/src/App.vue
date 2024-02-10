@@ -65,13 +65,22 @@ const get_all_ingredients = async () => {
   }
 };
 
+const get_all_ingredient_availble = async () => {
+  try {
+    const all_ingredient_availble = await accountService.getUserigredient_availble();
+    recipestore.user_ingredient_availble = all_ingredient_availble;
+    //console.log("app 재료목록",recipestore.user_ingredient_availble);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
 
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
-    console.log("getgeyget",categoryData);
+    //console.log("getgeyget",categoryData);
     recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
-    console.log("get_확인",recipestore.user_category);
+    //console.log("get_확인",recipestore.user_category);
   } catch (err) {
     error.value = err.message;
   }
@@ -85,7 +94,7 @@ const get_all_recipes_ingredients = async () => {
     const matchingRecipe = recipestore.recipes.find((recipe) => recipe.recipe_id === ingredient.recipe_id);
     matchingRecipe.ingredient.push(ingredient.ingredient_id); 
     });
-    console.log(recipestore.recipes)
+    //console.log(recipestore.recipes)
   } catch (err) {
     error.value = err.message;
   }
@@ -135,7 +144,7 @@ const get_useIngredient_recipe = async () => {
       }
     });
     recipestore.useIngredient_recipe = useIngredient_recipeData;
-    console.log(recipestore.useIngredient_recipe);
+    //console.log(recipestore.useIngredient_recipe);
 
   } catch (err) {
     error.value = err.message;
@@ -152,7 +161,7 @@ const get_score = async () => {
       }
     });
     recipestore.score = score_Data;
-    console.log(recipestore.score);
+    //console.log(recipestore.score);
 
   } catch (err) {
     error.value = err.message;
@@ -169,7 +178,7 @@ const get_Allergy = async () => {
       }
     });
     recipestore.Allergy = Allergy_Data;
-    console.log(recipestore.Allergy);
+    //console.log(recipestore.Allergy);
 
   } catch (err) {
     error.value = err.message;
@@ -185,7 +194,7 @@ const get_Follow = async () => {
       }
     });
     recipestore.Follow = Follow_Data;
-    console.log(recipestore.Follow);
+    //console.log(recipestore.Follow);
 
   } catch (err) {
     error.value = err.message;
@@ -201,7 +210,7 @@ const get_Favorite_category = async () => {
       }
     });
     recipestore.Favorite_category = Favorite_category_Data;
-    console.log(recipestore.Favorite_category);
+    //console.log(recipestore.Favorite_category);
 
   } catch (err) {
     error.value = err.message;
@@ -217,7 +226,7 @@ const get_Favorite_ingredient = async () => {
       }
     });
     recipestore.Favorite_ingredient = Favorite_ingredient_Data;
-    console.log(recipestore.Favorite_ingredient);
+    //console.log(recipestore.Favorite_ingredient);
 
   } catch (err) {
     error.value = err.message;
@@ -233,7 +242,7 @@ const get_Favorite_recipe = async () => {
       }
     });
     recipestore.favorite_recipe = Favorite_recipe_Data;
-    console.log(recipestore.favorite_recipe);
+    //console.log(recipestore.favorite_recipe);
 
   } catch (err) {
     error.value = err.message;
@@ -243,9 +252,10 @@ const get_Favorite_recipe = async () => {
 
 
 onMounted(async () => {
-  await get_all_ingredients(),
-  await get_all_recipes(),
-  await get_all_recipes_ingredients(),
+  await get_all_ingredients(), // 모든 재료 목록
+  await get_all_ingredient_availble(); // 보유 식자재
+  await get_all_recipes(), // 모든 레시피 목록
+  await get_all_recipes_ingredients(), //레시피별 재료상세단위
   await get_all_category(),
   await get_useIngredient_recipe(),
   await get_score(),
