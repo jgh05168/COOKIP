@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
       db.query(sql, (err, results) => {
         if (err) throw err.message;
         res.json({
-          Favorite_Recipe: results,
+          favorite_recipe: results,
         });
         console.log(cc.green("recipe retrieved!"));
       });
