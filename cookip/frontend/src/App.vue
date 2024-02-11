@@ -6,21 +6,21 @@
     <RouterLink :to="{ name: 'main' }">main</RouterLink> |
     <RouterLink :to="{ name: 'member' }">member</RouterLink> |
     <RouterLink :to="{ name: 'home' }">home</RouterLink> |
-    <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
     <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> |
     <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
 
     <div class="screen">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
-        <p>{{ motionStore.transition_dir }}</p>
-        <transition
+      <p>{{ motionStore.transition_dir }}</p>
+      <!-- <transition
           :name="motionStore.transition_dir"
           mode="out-in"
           >
-          <RouterView />
-        </transition>
-      </div>
-  </div> 
+          
+        </transition> -->
+      <RouterView />
+    </div>
+  </div>
   <!-- <input v-model="text" type="text" />
   <img :src="qrcode" alt=""> -->
 </template>
@@ -31,25 +31,29 @@ import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
+import { useAuthStore } from "./store/auth";
 import accountService from "@/store/mvpApi";
+import axios from "axios";
+
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
+const authStore = useAuthStore();
 
 const error = ref("");
 
-if(localStorage["Islogin"] == null){
-  localStorage["Islogin"] = 0
+if (localStorage["Islogin"] == null) {
+  localStorage["Islogin"] = 0;
 }
 const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();
     recipeData.forEach((recipe) => {
-    if (!Object.prototype.hasOwnProperty.call(recipe, 'ingredient')) {
-      recipe.ingredient = []; 
-    }
-  });
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
     recipestore.recipes = recipeData;
   } catch (err) {
     error.value = err.message;
@@ -65,27 +69,28 @@ const get_all_ingredients = async () => {
   }
 };
 
-
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
-    console.log("getgeyget",categoryData);
+    console.log("getgeyget", categoryData);
     recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
-    console.log("get_확인",recipestore.user_category);
+    console.log("get_확인", recipestore.user_category);
   } catch (err) {
     error.value = err.message;
   }
 };
 
-
 const get_all_recipes_ingredients = async () => {
   try {
-    const recipe_ingredientData = await accountService.getUserrecipe_ingredient();
+    const recipe_ingredientData =
+      await accountService.getUserrecipe_ingredient();
     recipe_ingredientData.forEach((ingredient) => {
-    const matchingRecipe = recipestore.recipes.find((recipe) => recipe.recipe_id === ingredient.recipe_id);
-    matchingRecipe.ingredient.push(ingredient.ingredient_id); 
+      const matchingRecipe = recipestore.recipes.find(
+        (recipe) => recipe.recipe_id === ingredient.recipe_id
+      );
+      matchingRecipe.ingredient.push(ingredient.ingredient_id);
     });
-    console.log(recipestore.recipes)
+    console.log(recipestore.recipes);
   } catch (err) {
     error.value = err.message;
   }
@@ -121,11 +126,10 @@ const handleWebSocketMessage = async (e) => {
   }
 };
 
-
-
 const get_useIngredient_recipe = async () => {
   try {
-    const useIngredient_recipeData = await accountService.getUserrecipe_ingredient_UseRecipe_IngredientId(1);
+    const useIngredient_recipeData =
+      await accountService.getUserrecipe_ingredient_UseRecipe_IngredientId(1);
     useIngredient_recipeData.forEach((recipe) => {
       if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
         recipe.ingredient = [];
@@ -133,12 +137,10 @@ const get_useIngredient_recipe = async () => {
     });
     recipestore.useIngredient_recipe = useIngredient_recipeData;
     console.log(recipestore.useIngredient_recipe);
-
   } catch (err) {
     error.value = err.message;
   }
 };
-
 
 const get_score = async () => {
   try {
@@ -150,12 +152,10 @@ const get_score = async () => {
     });
     recipestore.score = score_Data;
     console.log(recipestore.score);
-
   } catch (err) {
     error.value = err.message;
   }
 };
-
 
 const get_Allergy = async () => {
   try {
@@ -167,7 +167,6 @@ const get_Allergy = async () => {
     });
     recipestore.Allergy = Allergy_Data;
     console.log(recipestore.Allergy);
-
   } catch (err) {
     error.value = err.message;
   }
@@ -183,7 +182,6 @@ const get_Follow = async () => {
     });
     recipestore.Follow = Follow_Data;
     console.log(recipestore.Follow);
-
   } catch (err) {
     error.value = err.message;
   }
@@ -199,7 +197,6 @@ const get_Favorite_category = async () => {
     });
     recipestore.Favorite_category = Favorite_category_Data;
     console.log(recipestore.Favorite_category);
-
   } catch (err) {
     error.value = err.message;
   }
@@ -207,7 +204,8 @@ const get_Favorite_category = async () => {
 
 const get_Favorite_ingredient = async () => {
   try {
-    const Favorite_ingredient_Data = await accountService.getFavorite_ingredient();
+    const Favorite_ingredient_Data =
+      await accountService.getFavorite_ingredient();
     Favorite_ingredient_Data.forEach((recipe) => {
       if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
         recipe.ingredient = [];
@@ -215,7 +213,6 @@ const get_Favorite_ingredient = async () => {
     });
     recipestore.Favorite_ingredient = Favorite_ingredient_Data;
     console.log(recipestore.Favorite_ingredient);
-
   } catch (err) {
     error.value = err.message;
   }
@@ -231,27 +228,36 @@ const get_Favorite_recipe = async () => {
     });
     recipestore.Favorite_recipe = Favorite_recipe_Data;
     console.log(recipestore.Favorite_recipe);
-
   } catch (err) {
     error.value = err.message;
   }
 };
 
-
+const fetchUserData = async () => {
+  try {
+    const userResponse = await axios.get(authStore.urlUser);
+    // const userProfileResponse = await axios.get(authStore.urlUserProfile);
+    authStore.memberList = userResponse.data;
+    // authStore.userProfileList = userProfileResponse.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
 
 onMounted(async () => {
   await get_all_ingredients(),
-  await get_all_recipes(),
-  await get_all_recipes_ingredients(),
-  await get_all_category(),
-  await get_useIngredient_recipe(),
-  await get_score(),
-  await get_Allergy(),
-  await get_Follow(),
-  await get_Favorite_category(),
-  await get_Favorite_ingredient(),
-  await get_Favorite_recipe(),
-    // 컴포넌트가 마운트된 후 실행되는 로직
+    await get_all_recipes(),
+    await get_all_recipes_ingredients(),
+    await get_all_category(),
+    await get_useIngredient_recipe(),
+    await get_score(),
+    await get_Allergy(),
+    await get_Follow(),
+    await get_Favorite_category(),
+    await get_Favorite_ingredient(),
+    await get_Favorite_recipe(),
+    await fetchUserData();
+  // 컴포넌트가 마운트된 후 실행되는 로직
   console.log("App Mount");
 
   // 웹소켓 연결 설정
@@ -273,18 +279,15 @@ onBeforeUnmount(() => {
   socket.close();
   console.log("앱 Unmount");
 });
-
-
 </script>
 
 <style scoped>
 .screen {
   width: 1920px;
   height: 1080px;
-  /* background-color: #534645; */
+  background-color: #fdf8ec;
   /* color: white; */
 }
-
 
 .slide-up-enter-from {
   transform: translateY(100%);
@@ -298,9 +301,10 @@ onBeforeUnmount(() => {
 .slide-right-enter-from {
   transform: translateX(-100%);
 }
-.slide-up-enter-active, .slide-down-enter-active,
-.slide-left-enter-active, .slide-right-enter-active {
+.slide-up-enter-active,
+.slide-down-enter-active,
+.slide-left-enter-active,
+.slide-right-enter-active {
   transition: transform 0.5s ease-in-out;
 }
-
 </style>

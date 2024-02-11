@@ -1,29 +1,18 @@
 <template>
   <v-card color="basil" class="card">
     <v-card-title class="text-center justify-center py-6">
-      <h1 class="font-weight-bold text-h2 text-basil">BASiL</h1>
+      <h1 class="font-weight-bold text-h2 text-basil">FAVORiTE</h1>
     </v-card-title>
 
     <v-tabs v-model="tab" color="deep-purple-accent-4" align-tabs="center">
-      <v-tab :value="1">Landscape</v-tab>
-      <v-tab :value="2">City</v-tab>
-      <v-tab :value="3">Abstract</v-tab>
+      <v-tab v-for="member in authStore.memberList" :key="member.id" :value="1">
+        {{ member }}
+      </v-tab>
     </v-tabs>
 
     <v-window v-model="tab">
-      <v-window-item v-for="n in 3" :key="n" :value="n">
-        <v-container fluid>
-          <v-row>
-            <v-col v-for="i in 6" :key="i" cols="12" md="4">
-              <v-img
-                height="300"
-                :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
-                aspect-ratio="1"
-              ></v-img>
-            </v-col>
-          </v-row>
-        </v-container>
+      <v-window-item v-for="n in recipeStore.memberList" :key="n" :value="n">
+        
       </v-window-item>
     </v-window>
   </v-card>
@@ -31,6 +20,17 @@
 
 <script setup>
 import { ref } from "vue";
+import { useAuthStore } from "@/store/auth";
+import { useRecipeStore } from "@/store/recipe";
+
+const authStore = useAuthStore();
+const recipeStore = useRecipeStore();
+
+console.log(authStore.memberList.user);
+
+// 내가 멤버리스트 중 가장 앞에 있어야 함
+
+//
 
 const tab = ref(null);
 </script>
@@ -43,9 +43,9 @@ const tab = ref(null);
 
 /* Helper classes */
 .bg-basil {
-  background-color: #fffbe6 !important;
+  background-color: #fdf8ec;
 }
 .text-basil {
-  color: #356859 !important;
+  color: #6d4c41;
 }
 </style>

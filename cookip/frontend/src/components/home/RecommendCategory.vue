@@ -10,9 +10,9 @@
     <Slide v-for="(category, slide) in recommend_category" :key="slide">
       <div class="category" @click="selectCategory(slide)">
         <div>{{ category.title }}</div>
-        {{ category.img }}
+        <!-- {{ category.img }} -->
         <div>
-          <!-- <img :src="`@/assets/image/${category.img}`" alt="" /> -->
+          <img :src="require(`@/assets/image/${category.img}`)" alt="" />
         </div>
       </div>
     </Slide>
@@ -125,10 +125,7 @@ const selectCategory = (slide) => {
 }
 
 .category {
-  height: 200px;
-  width: 400px;
-  color: aliceblue;
-  border: 2px solid bisque;
+
 }
 
 .carousel__slide {

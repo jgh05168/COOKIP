@@ -20,6 +20,8 @@
     >
       <div class="flip-card">
         <button @click="Flip_test">Flip_test</button>
+        <button @click="props.nextrow">nextrow</button>
+        <button @click="nextpage">nextcol</button>
         <FlipCard :flip="flip && slide == currentSlide" :recipe="recipe" />
       </div>
     </Slide>
@@ -42,15 +44,28 @@ import router from "@/router";
 const motionStore = useMotionStore();
 const recipeStore = useRecipeStore();
 
+const props = defineProps({
+  recipeList: Array,
+  rowSlide: Number,
+  nextrow: Function,
+  prevrow: Function,
+});
+
 const currentSlide = ref(0);
 
 const colCarousel = ref(null);
 
 const nextpage = () => {
+  if (flip.value == true) {
+    flip.value = false;
+  }
   colCarousel.value.next();
 };
 
 const prevpage = () => {
+  if (flip.value == true) {
+    flip.value = false;
+  }
   colCarousel.value.prev();
 };
 
@@ -65,72 +80,61 @@ watch(currentSlide, (newVal) => {
   currentSlide.value = newVal;
 });
 
+// emit 으로 row 에 flip 값 전달해서 페이지 이동시 제자리로 돌아오게 걸어두기
+
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
 // 동작 수행 후 store에 저장되어 있는 motion 초기화
 watch(
-  () => motionStore.motion_data.swipe,
-  (newSwipe) => {
-    if (newSwipe !== null) {
-      if (newSwipe == "SwipeUp") {
+  () => motionStore.motion_data,
+  (newMotion) => {
+    if (newMotion.swipe !== null) {
+      if (newMotion.swipe == "SwipeUp") {
         nextpage();
-      } else if (newSwipe == "SwipeDown") {
+      } else if (newMotion.swipe == "SwipeDown") {
         prevpage();
-      } else if (newSwipe == "SwipeLeft") {
-        nextpage();
-      } else if (newSwipe == "SwipeRight") {
-        prevpage();
+      } else if (newMotion.swipe == "SwipeLeft") {
+        props.nextrow();
+      } else if (newMotion.swipe == "SwipeRight") {
+        props.prevrow();
       }
-
-      // 초기화
-      motionStore.motion_data.swipe = null;
-    }
-  }
-);
-
-watch(
-  () => motionStore.motion_data.page,
-  (newPage) => {
-    if (newPage !== null) {
-      if (newPage == "PageIn") {
+      if (flip.value == true) {
+        flip.value = false;
+      }
+    } else if (newMotion.zoom !== null) {
+      // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
+      if (newMotion.zoom == "ZoomIn") {
+        flip.value = true;
+      } else if (newMotion.zoom == "ZoomOut") {
+        flip.value = false;
+      }
+    } else if (newMotion.page !== null) {
+      if (newMotion.page == "PageIn") {
         router.push({
           name: "recipe-detail",
           params: { recipeid: props.recipeList[currentSlide.value] },
         });
-      } else if (newPage == "PageOut") {
+      } else if (newMotion.page == "PageOut") {
         router.push({ name: "home" });
       }
-
-      // 초기화
-      motionStore.motion_data.page = null;
     }
+    // 초기화
+    motionStore.motion_data = {
+      swipe: null,
+      page: null,
+      rating: null,
+      zoom: null,
+      flip: null,
+    };
   }
 );
-
-watch(
-  () => motionStore.motion_data.zoom,
-  (newZoom) => {
-    if (newZoom !== null) {
-      let value = motionStore.motion_data.zoom;
-      // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
-      if (value == "ZoomIn") {
-        flip.value = true;
-      } else if (value == "ZoomOut") {
-        flip.value = false;
-      }
-    }
-  }
-);
-
-const props = defineProps({
-  recipeList: Array,
-  rowSlide: Number,
-});
 </script>
 
 <style scoped>
 .vertical-carousel {
   transform: rotate(0.25turn);
   width: 1080px;
+  height: 100%;
+  margin: auto auto;
 }
 
 .vertical-carousel-slide {
@@ -162,9 +166,8 @@ const props = defineProps({
 }
 
 .flip-card {
-  width: 360px;
-  height: 600px;
-  border: 2px solid red;
-  margin: 10%;
+  transform: rotate(-0.25turn);
+  width: 480px;
+  height: 270px;
 }
 </style>
