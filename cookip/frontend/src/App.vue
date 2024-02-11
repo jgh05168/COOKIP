@@ -12,15 +12,16 @@
 
     <div class="screen">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
-        <p>{{ motionStore.transition_dir }}</p>
-        <transition
+      <p>{{ motionStore.transition_dir }}</p>
+      <!-- <transition
           :name="motionStore.transition_dir"
           mode="out-in"
           >
-          <RouterView />
-        </transition>
-      </div>
-  </div> 
+          
+        </transition> -->
+      <RouterView />
+    </div>
+  </div>
   <!-- <input v-model="text" type="text" />
   <img :src="qrcode" alt=""> -->
 </template>
@@ -32,6 +33,7 @@ import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
+
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
@@ -39,17 +41,17 @@ const sttStore = useSttStore();
 
 const error = ref("");
 
-if(localStorage["Islogin"] == null){
-  localStorage["Islogin"] = 0
+if (localStorage["Islogin"] == null) {
+  localStorage["Islogin"] = 0;
 }
 const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();
     recipeData.forEach((recipe) => {
-    if (!Object.prototype.hasOwnProperty.call(recipe, 'ingredient')) {
-      recipe.ingredient = []; 
-    }
-  });
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
     recipestore.recipes = recipeData;
   } catch (err) {
     error.value = err.message;
@@ -65,46 +67,29 @@ const get_all_ingredients = async () => {
   }
 };
 
-const get_all_ingredient_availble = async () => {
-  try {
-    const all_ingredient_availble = await accountService.getUserigredient_availble();
-    recipestore.user_ingredient_availble = all_ingredient_availble;
-    //console.log("app 재료목록",recipestore.user_ingredient_availble);
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-const get_recipe_ingredient = async () => {
-  try {
-    const recipe_ingredient = await accountService.getUserrecipe_ingredient();
-    recipestore.user_recipe_ingredient = recipe_ingredient;
-    //console.log("app 재료목록",recipestore.user_ingredient_availble);
-  } catch (err) {
-    error.value = err.message;
-  }
-};
 
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
-    //console.log("getgeyget",categoryData);
+    console.log("getgeyget",categoryData);
     recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
-    //console.log("get_확인",recipestore.user_category);
+    console.log("get_확인",recipestore.user_category);
   } catch (err) {
     error.value = err.message;
   }
 };
 
-
 const get_all_recipes_ingredients = async () => {
   try {
-    const recipe_ingredientData = await accountService.getUserrecipe_ingredient();
+    const recipe_ingredientData =
+      await accountService.getUserrecipe_ingredient();
     recipe_ingredientData.forEach((ingredient) => {
-    const matchingRecipe = recipestore.recipes.find((recipe) => recipe.recipe_id === ingredient.recipe_id);
-    matchingRecipe.ingredient.push(ingredient.ingredient_id); 
+      const matchingRecipe = recipestore.recipes.find(
+        (recipe) => recipe.recipe_id === ingredient.recipe_id
+      );
+      matchingRecipe.ingredient.push(ingredient.ingredient_id);
     });
-    //console.log(recipestore.recipes)
+    console.log(recipestore.recipes)
   } catch (err) {
     error.value = err.message;
   }
@@ -113,20 +98,20 @@ const get_all_recipes_ingredients = async () => {
 
 const get_useIngredient_recipe = async () => {
   try {
-    const useIngredient_recipeData = await accountService.getUserrecipe_ingredient_UseRecipe_IngredientId(1);
+    const useIngredient_recipeData =
+      await accountService.getUserrecipe_ingredient_UseRecipe_IngredientId(1);
     useIngredient_recipeData.forEach((recipe) => {
       if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
         recipe.ingredient = [];
       }
     });
     recipestore.useIngredient_recipe = useIngredient_recipeData;
-    //console.log(recipestore.useIngredient_recipe);
+    console.log(recipestore.useIngredient_recipe);
 
   } catch (err) {
     error.value = err.message;
   }
 };
-
 
 const get_score = async () => {
   try {
@@ -137,13 +122,12 @@ const get_score = async () => {
       }
     });
     recipestore.score = score_Data;
-    //console.log(recipestore.score);
+    console.log(recipestore.score);
 
   } catch (err) {
     error.value = err.message;
   }
 };
-
 
 const get_Allergy = async () => {
   try {
@@ -154,7 +138,7 @@ const get_Allergy = async () => {
       }
     });
     recipestore.Allergy = Allergy_Data;
-    //console.log(recipestore.Allergy);
+    console.log(recipestore.Allergy);
 
   } catch (err) {
     error.value = err.message;
@@ -170,7 +154,7 @@ const get_Follow = async () => {
       }
     });
     recipestore.Follow = Follow_Data;
-    //console.log(recipestore.Follow);
+    console.log(recipestore.Follow);
 
   } catch (err) {
     error.value = err.message;
@@ -183,7 +167,8 @@ const get_Favorite_category = async () => {
   try {
     const Favorite_category_Data = await accountService.getFavorite_category();
     recipestore.Favorite_category = Favorite_category_Data;
-    //console.log("get_확인", recipestore.Favorite_category);
+    console.log(recipestore.Favorite_category);
+
   } catch (err) {
     error.value = err.message;
   }
@@ -193,8 +178,14 @@ const get_Favorite_category = async () => {
 const get_Favorite_ingredient = async () => {
   try {
     const Favorite_ingredient_Data = await accountService.getFavorite_ingredient();
+    Favorite_ingredient_Data.forEach((recipe) => {
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
     recipestore.Favorite_ingredient = Favorite_ingredient_Data;
-    //console.log("get_확인", recipestore.Favorite_ingredient);
+    console.log(recipestore.Favorite_ingredient);
+
   } catch (err) {
     error.value = err.message;
   }
@@ -209,15 +200,13 @@ const get_Favorite_recipe = async () => {
         recipe.ingredient = [];
       }
     });
-    recipestore.favorite_recipe = Favorite_recipe_Data;
-    //console.log(recipestore.favorite_recipe);
+    recipestore.Favorite_recipe = Favorite_recipe_Data;
+    console.log(recipestore.Favorite_recipe);
 
   } catch (err) {
     error.value = err.message;
   }
 };
-
-
 
 
 const handleWebSocketMessage = async (e) => {
@@ -256,11 +245,9 @@ const handleWebSocketMessage = async (e) => {
 
 
 onMounted(async () => {
-  await get_all_ingredient_availble(); // 보유 식자재
-  await get_all_ingredients(), // 모든 재료 목록
-  await get_recipe_ingredient(), // 레시피와 사용재료 같이있는 테이블
-  await get_all_recipes(), // 모든 레시피 목록
-  await get_all_recipes_ingredients(), //레시피별 재료상세단위
+  await get_all_ingredients(),
+  await get_all_recipes(),
+  await get_all_recipes_ingredients(),
   await get_all_category(),
   await get_useIngredient_recipe(),
   await get_score(),
@@ -280,6 +267,7 @@ onMounted(async () => {
   // 데이터를 수신 받았을 때의 처리
   socket.onmessage = handleWebSocketMessage;
 
+
   // 에러가 발생했을 때의 처리
   socket.onerror = (e) => {
     console.error("웹소켓(모션 인식) 에러:", e);
@@ -291,18 +279,15 @@ onBeforeUnmount(() => {
   socket.close();
   console.log("앱 Unmount");
 });
-
-
 </script>
 
 <style scoped>
 .screen {
   width: 1920px;
   height: 1080px;
-  /* background-color: #534645; */
+  background-color: #fdf8ec;
   /* color: white; */
 }
-
 
 .slide-up-enter-from {
   transform: translateY(100%);
@@ -316,9 +301,10 @@ onBeforeUnmount(() => {
 .slide-right-enter-from {
   transform: translateX(-100%);
 }
-.slide-up-enter-active, .slide-down-enter-active,
-.slide-left-enter-active, .slide-right-enter-active {
+.slide-up-enter-active,
+.slide-down-enter-active,
+.slide-left-enter-active,
+.slide-right-enter-active {
   transition: transform 0.5s ease-in-out;
 }
-
 </style>

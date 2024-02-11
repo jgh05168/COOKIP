@@ -62,9 +62,7 @@ const getBufferImage = (buffer) => {
   margin: 10px auto;
 }
 .preview-item {
-  border: 2px solid bisque;
-  background-color: bisque;
-  border-radius: 5%;
+  /* border-radius: 5%; */
   width: 250px;
   height: 250px;
   margin: auto auto;
@@ -73,6 +71,6 @@ const getBufferImage = (buffer) => {
 .preview-img {
   width: 360px;
   height: 360px;
-  border-radius: 10%;
+  /* border-radius: 10%; */
 }
 </style>
