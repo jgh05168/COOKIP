@@ -40,6 +40,9 @@ import { useRecipeStore } from "@/store/recipe";
 import { watchEffect } from "vue";
 import router from "@/router";
 
+
+
+
 const motionStore = useMotionStore();
 
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
@@ -92,7 +95,7 @@ const prevpage = () => {
 
 const recipeStore = useRecipeStore();
 const recommend_category = recipeStore.recommend_category;
-
+console.log("recommend_category",recommend_category);
 // 고려 인자
 
 // 1.보유식자재 + 유통기한
@@ -127,7 +130,7 @@ const selectCategory = (slide) => {
 .category {
   height: 200px;
   width: 400px;
-  color: aliceblue;
+  color: rgb(6, 59, 105);
   border: 2px solid bisque;
 }
 

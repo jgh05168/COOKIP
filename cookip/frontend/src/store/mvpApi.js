@@ -5,6 +5,7 @@ const urlRecipe = "http://localhost:5000/recipe";
 const urlrecipe_ingredient = "http://localhost:5000/recipe_ingredient";
 const urlstep = "http://localhost:5000/step";
 const urlingredient = "http://localhost:5000/ingredient";
+const urlingredient_availble = "http://localhost:5000/ingredient_availble";
 const urlsetpofstep = "http://localhost:5000/stepofstep";
 const urlcategory = "http://localhost:5000/category";
 const urluser = "http://localhost:5000/user";
@@ -129,6 +130,17 @@ class accountService {
       .then((res) => {
         const data = res.data;
         return data.ingredient_one.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+  static getUserigredient_availble() {
+    return axios.get(urlingredient_availble)
+      .then((res) => {
+        const data = res.data;// 여기 아래 subTitle은 백엔드server파일에서 result앞에 저장한 값이여야함
+        return data.ingredient_availble.map((guild_owner) => ({ ...guild_owner }));
       })
       .catch((error) => {
         throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
@@ -333,6 +345,22 @@ class accountService {
         throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
       });
   }
+
+  static getFavorite_recipe_userid(userid) {
+    const url = `http://localhost:5000/favorite_recipe/${userid}`;
+    return axios.get(url)
+      .then((res) => {
+        const data = res.data;
+        return data.favorite_recipe_userid.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
+
+
+
 }
 
 export default accountService;

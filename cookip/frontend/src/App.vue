@@ -65,13 +65,32 @@ const get_all_ingredients = async () => {
   }
 };
 
+const get_all_ingredient_availble = async () => {
+  try {
+    const all_ingredient_availble = await accountService.getUserigredient_availble();
+    recipestore.user_ingredient_availble = all_ingredient_availble;
+    //console.log("app 재료목록",recipestore.user_ingredient_availble);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+const get_recipe_ingredient = async () => {
+  try {
+    const recipe_ingredient = await accountService.getUserrecipe_ingredient();
+    recipestore.user_recipe_ingredient = recipe_ingredient;
+    //console.log("app 재료목록",recipestore.user_ingredient_availble);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
 
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
-    console.log("getgeyget",categoryData);
+    //console.log("getgeyget",categoryData);
     recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
-    console.log("get_확인",recipestore.user_category);
+    //console.log("get_확인",recipestore.user_category);
   } catch (err) {
     error.value = err.message;
   }
@@ -85,11 +104,121 @@ const get_all_recipes_ingredients = async () => {
     const matchingRecipe = recipestore.recipes.find((recipe) => recipe.recipe_id === ingredient.recipe_id);
     matchingRecipe.ingredient.push(ingredient.ingredient_id); 
     });
-    console.log(recipestore.recipes)
+    //console.log(recipestore.recipes)
   } catch (err) {
     error.value = err.message;
   }
 };
+
+
+const get_useIngredient_recipe = async () => {
+  try {
+    const useIngredient_recipeData = await accountService.getUserrecipe_ingredient_UseRecipe_IngredientId(1);
+    useIngredient_recipeData.forEach((recipe) => {
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
+    recipestore.useIngredient_recipe = useIngredient_recipeData;
+    //console.log(recipestore.useIngredient_recipe);
+
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+const get_score = async () => {
+  try {
+    const score_Data = await accountService.getScore();
+    score_Data.forEach((recipe) => {
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
+    recipestore.score = score_Data;
+    //console.log(recipestore.score);
+
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+const get_Allergy = async () => {
+  try {
+    const Allergy_Data = await accountService.getAllergy();
+    Allergy_Data.forEach((recipe) => {
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
+    recipestore.Allergy = Allergy_Data;
+    //console.log(recipestore.Allergy);
+
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+const get_Follow = async () => {
+  try {
+    const Follow_Data = await accountService.getFollow();
+    Follow_Data.forEach((recipe) => {
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
+    recipestore.Follow = Follow_Data;
+    //console.log(recipestore.Follow);
+
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+
+const get_Favorite_category = async () => {
+  try {
+    const Favorite_category_Data = await accountService.getFavorite_category();
+    recipestore.Favorite_category = Favorite_category_Data;
+    //console.log("get_확인", recipestore.Favorite_category);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+const get_Favorite_ingredient = async () => {
+  try {
+    const Favorite_ingredient_Data = await accountService.getFavorite_ingredient();
+    recipestore.Favorite_ingredient = Favorite_ingredient_Data;
+    //console.log("get_확인", recipestore.Favorite_ingredient);
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+const get_Favorite_recipe = async () => {
+  try {
+    const Favorite_recipe_Data = await accountService.getFavorite_recipe();
+    Favorite_recipe_Data.forEach((recipe) => {
+      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+        recipe.ingredient = [];
+      }
+    });
+    recipestore.favorite_recipe = Favorite_recipe_Data;
+    //console.log(recipestore.favorite_recipe);
+
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+
 
 const handleWebSocketMessage = async (e) => {
   try {
@@ -126,126 +255,12 @@ const handleWebSocketMessage = async (e) => {
 
 
 
-const get_useIngredient_recipe = async () => {
-  try {
-    const useIngredient_recipeData = await accountService.getUserrecipe_ingredient_UseRecipe_IngredientId(1);
-    useIngredient_recipeData.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    recipestore.useIngredient_recipe = useIngredient_recipeData;
-    console.log(recipestore.useIngredient_recipe);
-
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-
-const get_score = async () => {
-  try {
-    const score_Data = await accountService.getScore();
-    score_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    recipestore.score = score_Data;
-    console.log(recipestore.score);
-
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-
-const get_Allergy = async () => {
-  try {
-    const Allergy_Data = await accountService.getAllergy();
-    Allergy_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    recipestore.Allergy = Allergy_Data;
-    console.log(recipestore.Allergy);
-
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-const get_Follow = async () => {
-  try {
-    const Follow_Data = await accountService.getFollow();
-    Follow_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    recipestore.Follow = Follow_Data;
-    console.log(recipestore.Follow);
-
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-const get_Favorite_category = async () => {
-  try {
-    const Favorite_category_Data = await accountService.getFavorite_category();
-    Favorite_category_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    recipestore.Favorite_category = Favorite_category_Data;
-    console.log(recipestore.Favorite_category);
-
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-const get_Favorite_ingredient = async () => {
-  try {
-    const Favorite_ingredient_Data = await accountService.getFavorite_ingredient();
-    Favorite_ingredient_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    recipestore.Favorite_ingredient = Favorite_ingredient_Data;
-    console.log(recipestore.Favorite_ingredient);
-
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-const get_Favorite_recipe = async () => {
-  try {
-    const Favorite_recipe_Data = await accountService.getFavorite_recipe();
-    Favorite_recipe_Data.forEach((recipe) => {
-      if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
-        recipe.ingredient = [];
-      }
-    });
-    recipestore.Favorite_recipe = Favorite_recipe_Data;
-    console.log(recipestore.Favorite_recipe);
-
-  } catch (err) {
-    error.value = err.message;
-  }
-};
-
-
-
 onMounted(async () => {
-  await get_all_ingredients(),
-  await get_all_recipes(),
-  await get_all_recipes_ingredients(),
+  await get_all_ingredient_availble(); // 보유 식자재
+  await get_all_ingredients(), // 모든 재료 목록
+  await get_recipe_ingredient(), // 레시피와 사용재료 같이있는 테이블
+  await get_all_recipes(), // 모든 레시피 목록
+  await get_all_recipes_ingredients(), //레시피별 재료상세단위
   await get_all_category(),
   await get_useIngredient_recipe(),
   await get_score(),
