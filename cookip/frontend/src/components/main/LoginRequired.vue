@@ -12,7 +12,8 @@ import router from '@/router';
 import { useMotionStore } from '@/store/motion';
 import { watchEffect } from 'vue';
 import { useAuthStore } from '@/store/auth';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import accountService from "@/store/mvpApi";
 
 const motionStore = useMotionStore()
 let socket = new WebSocket("ws://localhost:8060");
@@ -23,9 +24,22 @@ let socket = new WebSocket("ws://localhost:8060");
 //   isLogin.value = 
 // }
 
+const error = ref("")
+
+const get_user_profile = async () => {
+  try {
+    useAuthStore.profile = await accountService.getUserProfile(useAuthStore.login_info[0]["user_id"]);
+    console.log(useAuthStore.profile)
+  } catch (err) {
+    error.value = err.message;
+    console.error("Error in get_user_profile:", err);
+  }
+};
+
+
 const sendAuthInfoToServer = () => {
   try {
-    const jsonData = JSON.stringify(useAuthStore.login_info[0]);
+    const jsonData = JSON.stringify(useAuthStore.profile);
     if (socket && socket.readyState === WebSocket.OPEN && jsonData) {
       socket.send(jsonData);
       console.log("Auth info sent to the server:", useAuthStore.login_info[0]);
@@ -36,7 +50,8 @@ const sendAuthInfoToServer = () => {
 };
 
 
-onMounted( () => {
+onMounted(async () => {
+  await get_user_profile(useAuthStore.login_info["user_id"])
   const socket = new WebSocket("ws://localhost:8060");
 
   // 웹소켓 연결 설정
