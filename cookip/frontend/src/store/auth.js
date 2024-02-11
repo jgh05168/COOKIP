@@ -9,8 +9,9 @@ export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([]);
   const userProfileList = ref([]);
   const login_info = ref(null)
-  const profile = ref(null)
-  
+  const profile = ref([])
+  const profileImage = ref([])
+
   const signup = ref({
     phonenumber:'',
     id:'',
@@ -43,5 +44,6 @@ export const useAuthStore = defineStore('auth', () => {
     login_info,
     profile,
     signup,
+    profileImage,
   };
 }, { persist: true });
