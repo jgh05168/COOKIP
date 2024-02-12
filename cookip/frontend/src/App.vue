@@ -283,8 +283,8 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .screen {
-  width: 1920px;
-  height: 1080px;
+  width: 800px;
+  height: 360px;
   background-color: #fdf8ec;
   /* color: white; */
 }

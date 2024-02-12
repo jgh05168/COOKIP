@@ -66,6 +66,7 @@ const router = useRouter()
 
 
 const goLogin = function() {
+    localStorage.setItem("Islogin", 0)
     router.push({ name:'login'})
 }
 
