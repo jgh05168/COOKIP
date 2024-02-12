@@ -67,8 +67,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRecipeStore } from "@/store/recipe";
+import { useMotionStore } from "@/store/motion";
+import router from "@/router";
+
+const motionStore = useMotionStore();
 
 const recipeStore = useRecipeStore();
 
@@ -87,6 +91,14 @@ const headers = [
 
 const page = ref(1); // 현제 페이지
 const itemsPerPage = ref(5); // 페이지당 아이템 수
+
+// 특정 아이템을 선택하는 함수
+const selectItem = (index) => {
+  const startIndex = (page.value - 1) * itemsPerPage.value; // 현재 페이지의 첫 번째 아이템 인덱스
+  const itemIndex = startIndex + index; // 현재 페이지의 첫 번째 아이템부터의 인덱스
+  const selectedItem = recipes.value[itemIndex]; // 선택한 아이템
+  console.log("Selected Item:", selectedItem);
+};
 
 const canGoNextPage = computed(
   () => page.value < Math.ceil(recipes.value.length / itemsPerPage.value)
@@ -121,6 +133,40 @@ const set_color = (level) => {
 const ratingToPercent = (score) => {
   return score * 20 + 1.5;
 };
+
+watch(
+  () => motionStore.motion_data,
+  (newMotion) => {
+    if (newMotion.swipe !== null) {
+      if (newMotion.swipe == "SwipeLeft") {
+        nextpage();
+      } else if (newMotion.swipe == "SwipeRight") {
+        prevpage();
+      }
+    } else if (newMotion.rating !== null) {
+      // 레이팅에 들어온 값으로
+      selectItem(newMotion.rating);
+      // 이 방법 말고도 음성으로 들어온 데이터로도 가능
+    } else if (newMotion.page !== null) {
+      if (newMotion.page == "PageIn") {
+        router.push({
+          name: "recipe-detail",
+          params: { recipeid: 1 }, // 현재 가리키는 slide 의 해당하는 레시피의 디테일 페이지로 가기
+        });
+      } else if (newMotion.page == "PageOut") {
+        router.push({ name: "home" });
+      }
+    }
+    // 초기화
+    motionStore.motion_data = {
+      swipe: null,
+      page: null,
+      rating: null,
+      zoom: null,
+      flip: null,
+    };
+  }
+);
 </script>
 
 <style scoped>
@@ -181,5 +227,4 @@ const ratingToPercent = (score) => {
   padding: 0;
 }
 /* ------별점 구현 끝 */
-
 </style>

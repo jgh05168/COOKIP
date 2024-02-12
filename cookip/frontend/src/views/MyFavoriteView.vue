@@ -31,9 +31,7 @@
             :wrapAround="true"
             :transition="500"
           >
-            <Slide> 
-              
-            </Slide>
+            <Slide> </Slide>
           </Carousel>
           <button @click="prev">prev</button>
           <button @click="next">next</button>
@@ -44,12 +42,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useAuthStore } from "@/store/auth";
 import { useFavoriteStore } from "@/store/favorite";
 import { useRecipeStore } from "@/store/recipe";
 import { Carousel, Slide } from "vue3-carousel";
+import { useMotionStore } from "@/store/motion";
+import router from "@/router";
 
+const motionStore = useMotionStore();
 const authStore = useAuthStore();
 const favoriteStore = useFavoriteStore();
 const recipeStore = useRecipeStore();
@@ -74,6 +75,50 @@ const prev = () => {
 // });
 
 const tab = ref(null);
+
+watch(currentSlide, (newVal) => {
+  console.log("Current Col:", newVal);
+  currentSlide.value = newVal;
+});
+
+// emit 으로 row 에 flip 값 전달해서 페이지 이동시 제자리로 돌아오게 걸어두기
+
+// motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
+// 동작 수행 후 store에 저장되어 있는 motion 초기화
+watch(
+  () => motionStore.motion_data,
+  (newMotion) => {
+    if (newMotion.swipe !== null) {
+      if (newMotion.swipe == "SwipeUp") {
+        // 다음 멤버로
+      } else if (newMotion.swipe == "SwipeDown") {
+        // 이전 멤버로
+      } else if (newMotion.swipe == "SwipeLeft") {
+        next(); // 다음 레시피
+      } else if (newMotion.swipe == "SwipeRight") {
+        prev(); // 이전 레시피
+      }
+      } else if (newMotion.page !== null) {
+      if (newMotion.page == "PageIn") {
+        router.push({
+          name: "recipe-detail",
+          params: { recipeid: currentSlide.value }, // 현재 가리키는 slide 의 해당하는 레시피의 디테일 페이지로 가기
+        });
+      } else if (newMotion.page == "PageOut") {
+        router.push({ name: "home" });
+      }
+    }
+    // 초기화
+    motionStore.motion_data = {
+      swipe: null,
+      page: null,
+      rating: null,
+      zoom: null,
+      flip: null,
+    };
+  }
+);
+
 </script>
 
 <style scoped>
