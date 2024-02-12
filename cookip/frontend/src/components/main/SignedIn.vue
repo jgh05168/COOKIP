@@ -1,16 +1,22 @@
 <template>
-    <div>
-        로그인 되어 있을 때 나타나는 컴포넌트 멤버 리스트로 넘어갈 수 있음
-    </div>
-    <RouterLink :to="{name:'member'}">멤범 선택 리스트</RouterLink>
+  <div class="main-background"></div>
 </template>
 
-<script setup>
-import { RouterLink } from 'vue-router';
-
-
-</script>
+<script setup></script>
 
 <style scoped>
-
+.main-background {
+    /* 백그라운드 이미지 설정 */
+  background-image: url('@/assets/image/home_background.png');
+  /* 이미지가 꽉 채우도록 설정 */
+  background-size: cover;
+  /* 이미지가 반복되지 않도록 설정 */
+  background-repeat: no-repeat;
+  /* 이미지가 가운데 정렬되도록 설정 */
+  background-position: center;
+  /* 배경 색상 fallback 설정 (이미지가 로드되지 않을 경우) */
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
 </style>

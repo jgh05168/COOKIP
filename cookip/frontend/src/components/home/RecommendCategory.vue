@@ -9,17 +9,12 @@
   >
     <Slide v-for="(category, slide) in recommend_category" :key="slide">
       <div class="category" @click="selectCategory(slide)">
-        <div>{{ category.title }}</div>
-        <!-- {{ category.img }} -->
-        <div>
+        <div class="category-title">{{ category.title }}</div>
+        <div class="category-img">
           <img :src="require(`@/assets/image/${category.img}`)" alt="" />
         </div>
       </div>
     </Slide>
-
-    <template #addons>
-      <Pagination />
-    </template>
   </Carousel>
   <div>
     <button @click="nextpage()">Next</button>
@@ -27,21 +22,19 @@
     <button @click="prevpage()">Prev</button>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
+  <div class="divide"></div>
   <RecommendPreview :selected-slide="selectedSlide" />
 </template>
 
 <script setup>
 import RecommendPreview from "./RecommendPreview.vue";
 import { ref, watch } from "vue";
-import { Carousel, Pagination, Slide } from "vue3-carousel";
+import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import { useMotionStore } from "@/store/motion";
 import { useRecipeStore } from "@/store/recipe";
 import { watchEffect } from "vue";
 import router from "@/router";
-
-
-
 
 const motionStore = useMotionStore();
 
@@ -55,14 +48,13 @@ watchEffect(() => {
       nextpage();
     } else if (value == "SwipeRight") {
       prevpage();
-    }
-    else if (value == "SwipeDown") {
-      motionStore.transition_dir = "slide-down"
-      router.push({name:"recipe" ,params : {}, query:{}})
+    } else if (value == "SwipeDown") {
+      motionStore.transition_dir = "slide-down";
+      router.push({ name: "recipe", params: {}, query: {} });
     } else if (value == "SwipeUp") {
-      motionStore.transition_dir = "slide-up"
-      router.push({name:"my-favorite" ,params : {}, query:{}})
-    } 
+      motionStore.transition_dir = "slide-up";
+      router.push({ name: "my-favorite", params: {}, query: {} });
+    }
   }
   // 초기화
   motionStore.motion_data = {
@@ -95,23 +87,7 @@ const prevpage = () => {
 
 const recipeStore = useRecipeStore();
 const recommend_category = recipeStore.recommend_category;
-console.log("recommend_category",recommend_category);
-// 고려 인자
-
-// 1.보유식자재 + 유통기한
-
-// 2.쉐프팔로우
-
-// 3.선호카테고리, 재료
-
-// 4.평점
-
-// 5.알러지
-
-// 오늘의 추천 -> 무작위
-// 인기추천 -> 평점,~
-// 즐겨찾기는 -> 즐겨찾기 한거
-// 맞춤추천
+console.log("recommend_category", recommend_category);
 
 const selectedSlide = ref(0);
 
@@ -124,14 +100,31 @@ const selectCategory = (slide) => {
 
 <style scoped>
 .category-carousel {
-  height: 300px;
+  height: 370px;
+}
+
+.divide {
+  background-color: #795548;
+  height: 10px;
+  opacity: 0.6;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .category {
-  height: 200px;
-  width: 400px;
-  color: aliceblue;
-  border: 2px solid bisque;
+  padding: 30px;
+  border: 7px solid #6d4c41;
+}
+
+.category-title {
+  color: #6d4c41;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.category-img {
+  width: 220px;
 }
 
 .carousel__slide {
@@ -140,7 +133,6 @@ const selectCategory = (slide) => {
 
 .carousel__viewport {
   perspective: 2000px;
-  height: 400px;
 }
 
 .carousel__track {
@@ -153,25 +145,25 @@ const selectCategory = (slide) => {
 
 .carousel__slide {
   opacity: 0.9;
-  transform: rotateY(-20deg) scale(0.9);
+  transform: rotateY(-20deg) scale(0.8);
 }
 
 .carousel__slide--active ~ .carousel__slide {
-  transform: rotateY(20deg) scale(0.9);
+  transform: rotateY(20deg) scale(0.8);
 }
 
 .carousel__slide--prev {
   opacity: 1;
-  transform: rotateY(-10deg) scale(0.95);
+  transform: rotateY(-10deg) scale(0.8);
 }
 
 .carousel__slide--next {
   opacity: 1;
-  transform: rotateY(10deg) scale(0.95);
+  transform: rotateY(10deg) scale(0.8);
 }
 
 .carousel__slide--active {
   opacity: 1;
-  transform: rotateY(0) scale(1.1);
+  transform: rotateY(0) scale(1);
 }
 </style>
