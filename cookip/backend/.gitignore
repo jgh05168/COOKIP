@@ -188,4 +188,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/node,vue,vuejs,windows
 
 #database
-.database/
+database/
