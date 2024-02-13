@@ -6,41 +6,6 @@
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
     <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
   </div>
-  <v-row>
-    <v-col
-      v-for="(bar, i) in bars"
-      :key="i"
-      cols="12"
-      sm="12"
-      md="6"
-      class="my-4"
-    >
-      <v-card
-        color="grey lighten-4"
-        flat
-        height="200px"
-      >
-        <v-toolbar
-          :color="bar.class"
-          :dark="bar.dark"
-        >
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
-          <v-toolbar-title>Title</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon>
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-heart</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </v-toolbar>
-      </v-card>
-    </v-col>
-  </v-row>
-  
     <div class="screen" style="height: 750px;">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
       <!-- <p>{{ motionStore.transition_dir }}</p> -->
@@ -58,7 +23,7 @@
 
 <script setup>
 import { RouterView, RouterLink } from "vue-router";
-import { onMounted, onBeforeUnmount, ref, onBeforeMount } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
@@ -69,7 +34,9 @@ const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 const error = ref("");
-
+if(localStorage.getItem('Islogin') === null){
+  localStorage.setItem('Islogin', 0)
+}
 const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();
@@ -267,10 +234,6 @@ const handleWebSocketMessage = async (e) => {
     console.error(err);
   }
 };
-
-onBeforeMount(() => {
-  localStorage.setItem('Islogin', 0)
-})
 
 onMounted(async () => {
   await get_all_ingredients(),
