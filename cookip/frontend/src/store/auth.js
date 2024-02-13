@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const urlUser = 'http://localhost:5000/User';
 const urlUserProfile = 'http://localhost:5000/Users_Profile';
@@ -9,8 +9,15 @@ export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);
   const userProfileList = ref([]);
   const login_info = ref(null)
+  // const token = ref(null)
   const profile = ref([])
   const profileImage = ref([])
+
+  const Islogin = computed(() => {
+    const isLogin = !localStorage.getItem('Islogin');
+    console.log('Islogin computed value:', isLogin);
+    return isLogin;
+  });
 
   const signup = ref({
     phonenumber:'',
@@ -45,5 +52,6 @@ export const useAuthStore = defineStore('auth', () => {
     profile,
     signup,
     profileImage,
+    Islogin
   };
 }, { persist: true });
