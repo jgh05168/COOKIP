@@ -1,12 +1,15 @@
 <template>
-  <div class="grid grid-cols-5 gap-10">
+  <div class="grid grid-cols-5">
+    <div class="recommand-title">RECOMMAND</div>
     <div
-      v-for="(item, idx)  in results[selectedSlide].value[0]"
+      v-for="(item, idx) in results[selectedSlide].value[0]"
       :key="idx"
       class="rounded overflow-hidden shadow-lg preview-list"
       style="color: #111111;+"
-    ><h1>{{ item.name }}</h1>
-    <img  class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" /></div>
+    >
+      <h1>{{ item.name }}</h1>
+      <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
+    </div>
   </div>
 </template>
 
@@ -25,22 +28,18 @@ const props = defineProps({
 const user_id = 1;
 const profile_id = 1;
 const results = [
-    recipeStore.ref_category_1[0],
-    recipeStore.ref_category_2[0],
-    recipeStore.category_3(user_id),
-    recipeStore.category_4(user_id, profile_id)
+  recipeStore.ref_category_1[0],
+  recipeStore.ref_category_2[0],
+  recipeStore.category_3(user_id),
+  recipeStore.category_4(user_id, profile_id),
 ];
-console.log("results",results);
+console.log("results", results);
 
 watch(
   () => props.selectedSlide,
   (newVal) => {
     console.log("Selected Recipe Name Changed_reciv:", newVal);
-    console.log("ssssssssssssssssssssssssssss",results[props.selectedSlide].value),
-    console.log(results[props.selectedSlide].value[0].length)
-
-    // 여기서 변경된 값에 대한 로직을 추가할 수 있습니다.
-  },
+  }
 );
 
 const getBufferImage = (buffer) => {
@@ -57,20 +56,21 @@ const getBufferImage = (buffer) => {
 <style scoped>
 .preview-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   /* width: 400px; */
-  margin: 10px auto;
-}
-.preview-item {
-  /* border-radius: 5%; */
-  width: 250px;
-  height: 250px;
-  margin: auto auto;
+  margin: 0 auto;
 }
 
 .preview-img {
-  width: 360px;
-  height: 360px;
-  /* border-radius: 10%; */
+  width: 350px;
+  height: 350px;
+}
+
+.recommand-title {
+  width: 1920px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: #6d4c41;
 }
 </style>

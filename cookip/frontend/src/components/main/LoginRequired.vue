@@ -1,7 +1,6 @@
 <!-- components/Modal.vue -->
 <template>
   <div class="member_background">
-    hi hello
     <p>{{ useAuthStore.login_info }}</p>
     <div v-if="timeout">
       <p>신규 생성을 하려면 왼쪽으로 밀어주세요</p>

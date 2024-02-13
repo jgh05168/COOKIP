@@ -1,7 +1,6 @@
 <template>
-
-    <div>
-        <!-- <h1>기본페이지입니다</h1>
+  <div>
+    <!-- <h1>기본페이지입니다</h1>
         <form action="http://localhost:5000/user/insertUser" method="post">
         <label for="login_id">login_id:</label>
         <input type="text" id="login_id" name="login_id">
@@ -23,13 +22,15 @@
           </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup>
 import LoginRequired from "@/components/main/LoginRequired.vue";
-// import SignedIn from '@/components/main/SignedIn.vue'
+import SignedIn from "@/components/main/SignedIn.vue";
 // import router from '@/router';
 
+const userValid = ref(true);
 </script>
 
 <style scoped>
