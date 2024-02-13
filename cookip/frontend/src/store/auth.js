@@ -12,6 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
   // const token = ref(null)
   const profile = ref([])
   const profileImage = ref([])
+  const cur_user_info = ref(null)
 
   const Islogin = computed(() => {
     const isLogin = !localStorage.getItem('Islogin');
@@ -52,6 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
     profile,
     signup,
     profileImage,
+    cur_user_info, 
     Islogin
   };
 }, { persist: true });
