@@ -12,5 +12,6 @@ import RowCarousel from "@/components/recipe/RowCarousel.vue";
 .recipe-view {
   height: 1080px;
   width: 1920px;
+  background-color: #bcaaa4;
 }
 </style>

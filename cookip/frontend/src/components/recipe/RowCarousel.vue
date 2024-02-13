@@ -32,7 +32,7 @@
 
   <div>
     <button @click="nextrow()">Next</button>
-    <input type="number" min="0" max="3" v-model="currentSlide" />
+    <input type="number" min="0" max="4" v-model="currentSlide" />
     <button @click="prevrow()">Prev</button>
   </div>
 </template>
