@@ -1,13 +1,33 @@
 <template>
- <div class="max-w-sm rounded overflow-hidden">
-  <img class="w-full" src="" alt="Sunset in the mountains">
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">{{ props.recipeBack.name }}</div>
-  </div>
-  <div class="px-6 pt-4 pb-2">
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-  </div>
-</div>
+  <v-card class="back-info rounded-xl" width="400" height="187.477">
+    <v-card-item class="back-info-inner">
+      <div
+        class="d-flex"
+        style="
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <!-- 설명 -->
+        <div>레시피 설명 보여주기</div>
+        <div style="height: 140px; border: 1px dashed #8d6e63"></div>
+        <!-- 재료 -->
+        <div class="recipe-ingredients">
+          재료리스트 반복문 돌면서 재료 사진 보여주기
+          <div
+            v-for="ingredient_id in props.recipeBack.ingredient"
+            :key="ingredient_id"
+          >
+            <v-img aspect-ratio="1/1" src="" alt=""
+              >{{ ingredient_id }} 사진
+            </v-img>
+            <span>재료명</span>
+          </div>
+        </div>
+      </div>
+    </v-card-item>
+  </v-card>
 </template>
 
 <script setup>
@@ -18,4 +38,16 @@ const props = defineProps({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.back-info {
+  background-color: white;
+}
+
+.back-info-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.recipe-ingredients {
+}
+</style>
