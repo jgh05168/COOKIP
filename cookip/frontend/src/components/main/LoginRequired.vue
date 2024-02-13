@@ -88,6 +88,21 @@ watchEffect(() => {
   // if (useAuthStore.cur_user_info !== null) {
   //     router.push(({name:"home" ,params : {}, query:{}}))
   // }
+  if (timeout.value == true && motionStore.motion_data.zoom !== null) {
+    console.log(motionStore.motion_data.page);
+    if (motionStore.motion_data.zoom == "SwipeLeft") {
+      router.push({name:"SignIn" ,params : {}, query:{}})
+    }
+    // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
+    motionStore.motion_data = {
+      swipe: null,
+      page: null,
+      rating: null,
+      zoom: null,
+      flip: null,
+    };
+    // console.log(motionStore.motion_data)
+  }
 
   sendAuthInfoToServer();
 });

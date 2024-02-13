@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
+import CreateProfileView from "@/views/CreateProfileView.vue";
 // import MainView from "@/views/MainView.vue";
 import MemberView from "@/views/MemberView.vue";
 import MyProfileView from "@/views/MyProfileView.vue";
@@ -29,6 +30,11 @@ const routes = [
     path: "/home",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/createprofile",
+    name: "create-profile",
+    component: CreateProfileView,
   },
   {
     path: "/member",
