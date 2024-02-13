@@ -6,7 +6,7 @@ const urlUser = 'http://localhost:5000/User';
 const urlUserProfile = 'http://localhost:5000/Users_Profile';
 
 export const useAuthStore = defineStore('auth', () => {
-  const memberList = ref([]);
+  const memberList = ref([1,2,3,4]);
   const userProfileList = ref([]);
   const login_info = ref(null)
   // const token = ref(null)

@@ -2,6 +2,7 @@
     <div>
         <LoginRequired />
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -14,6 +15,7 @@ import LoginRequired from "@/views/mobile/GetStartView.vue";
 
 
 
+const userValid = ref(true);
 </script>
 
 <style scoped>
