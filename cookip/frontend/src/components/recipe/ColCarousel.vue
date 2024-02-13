@@ -23,7 +23,7 @@
         <button @click="props.nextrow">nextrow</button>
         <button @click="nextpage">nextcol</button>
         <FlipCard
-          class="shadow-2xl "
+          class="shadow-2xl"
           :flip="flip && slide == currentSlide"
           :recipe="recipe"
         />
