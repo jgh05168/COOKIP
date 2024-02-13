@@ -4,14 +4,15 @@
       v-for="(item, idx)  in results[selectedSlide].value[0]"
       :key="idx"
       class="rounded overflow-hidden shadow-lg preview-list"
-      style="color: #111111;+"
-    ><h1>{{ item.name }}</h1>
-    <img  class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" /></div>
+    >
+      <h1 class="preview-title">{{ item.name }}</h1>
+      <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { watch, defineProps } from "vue"; // import reactive and onMounted from vue
+import { watch, defineProps } from "vue"; 
 import { useRecipeStore } from "@/store/recipe";
 
 const recipeStore = useRecipeStore();
@@ -20,15 +21,14 @@ const props = defineProps({
   selectedSlide: Number,
 });
 
-// console.log(props.selectedSlide);
-//console.log(recipeStore.recommend_list[props.selectedSlide].recipe_list);
+
 const user_id = 1;
 const profile_id = 1;
 const results = [
-    recipeStore.ref_category_1[0],
-    recipeStore.ref_category_2[0],
-    recipeStore.category_3(user_id),
-    recipeStore.category_4(user_id, profile_id)
+  recipeStore.category_1(user_id, profile_id),
+  recipeStore.category_2(user_id, profile_id),
+  recipeStore.category_3(user_id, profile_id),
+  recipeStore.category_4(user_id, profile_id)
 ];
 console.log("results",results);
 
@@ -36,10 +36,6 @@ watch(
   () => props.selectedSlide,
   (newVal) => {
     console.log("Selected Recipe Name Changed_reciv:", newVal);
-    console.log("ssssssssssssssssssssssssssss",results[props.selectedSlide].value),
-    console.log(results[props.selectedSlide].value[0].length)
-
-    // 여기서 변경된 값에 대한 로직을 추가할 수 있습니다.
   },
 );
 
@@ -58,21 +54,32 @@ const getBufferImage = (buffer) => {
 .preview-list {
   display: flex;
   flex-wrap: wrap;
-  /* width: 400px; */
   margin: 10px auto;
-}
-.preview-item {
-  border: 2px solid bisque;
-  background-color: bisque;
-  border-radius: 5%;
-  width: 250px;
-  height: 250px;
-  margin: auto auto;
+  /* width: 250px; /* 고정된 너비 */
+  /* height: 300px; 고정된 높이 */ 
+  width: 100%; /*부모 요소에 꽉 차도록 너비 설정*/
+  height: 300px; /*고정된 높이 설정*/
 }
 
-.preview-img {
-  width: 360px;
-  height: 360px;
-  border-radius: 10%;
+.preview-list:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
 }
+
+.preview-list .preview-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.preview-list .preview-img {
+  width: 100%;
+  height: 100%; /* 이미지가 부모 요소에 꽉 차도록 설정 */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* .preview-list:nth-child(even) {
+  background-color: #f3f4f6;
+} */
 </style>

@@ -1,23 +1,5 @@
 <template>
-
     <div>
-        <!-- <h1>기본페이지입니다</h1>
-        <form action="http://localhost:5000/user/insertUser" method="post">
-        <label for="login_id">login_id:</label>
-        <input type="text" id="login_id" name="login_id">
-        <label for="password">password:</label>
-        <input type="text" id="password" name="password">
-        <label for="username">username:</label>
-        <input type="text" id="username" name="username">
-        <label for="email">email:</label>
-        <input type="text" id="email" name="email">
-        <label for="age">age:</label>
-        <input type="text" id="age" name="age">
-        <label for="phone_number">phone_number:</label>
-        <input type="text" id="phone_number" name="phone_number">
-        <button type="submit">Submit</button>
-    </form> -->
-
         <div>
             <h1>기본페이지입니다</h1>
             <h2>만약 기기에 로그인 정보가 기록되어 있지 않다면 auth 게정

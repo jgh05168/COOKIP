@@ -125,7 +125,6 @@ router.get('/logout', (req, res) => {
   res.send("<script> alert('로그아웃 되었습니다.'); location.href='/';</script>");          
 })
 
-
 // 프로필 등록하기
 router.post('/insertProfile', (req, res) => {
   const profile_id = req.body.profile_id;

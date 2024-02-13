@@ -9,11 +9,8 @@
   >
     <Slide v-for="(category, slide) in recommend_category" :key="slide">
       <div class="category" @click="selectCategory(slide)">
-        <div>{{ category.title }}</div>
-        {{ category.img }}
-        <div>
-          <!-- <img :src="`@/assets/image/${category.img}`" alt="" /> -->
-        </div>
+        <div class="category-title">{{ category.title }}</div>
+        <img class="category-image" :src="category.img" alt="" />
       </div>
     </Slide>
 
@@ -21,10 +18,10 @@
       <Pagination />
     </template>
   </Carousel>
-  <div>
-    <button @click="nextpage()">Next</button>
-    <input type="number" min="0" max="5" v-model="currentSlide" />
-    <button @click="prevpage()">Prev</button>
+  <div class="pagination-controls">
+    <button @click="prevpage()" class="prev-button button">Previous</button>
+    <input type="number" min="0" max="5" v-model="currentSlide" class="slide-input" />
+    <button @click="nextpage()" class="next-button button">Next</button>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
   <RecommendPreview :selected-slide="selectedSlide" />
@@ -40,17 +37,11 @@ import { useRecipeStore } from "@/store/recipe";
 import { watchEffect } from "vue";
 import router from "@/router";
 
-
-
-
 const motionStore = useMotionStore();
 
-// motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
-// 동작 수행 후 store에 저장되어 있는 motion 초기화
 watchEffect(() => {
   if (motionStore.motion_data.swipe !== null) {
     let value = motionStore.motion_data.swipe;
-    // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
     if (value == "SwipeLeft") {
       nextpage();
     } else if (value == "SwipeRight") {
@@ -64,7 +55,6 @@ watchEffect(() => {
       router.push({name:"my-favorite" ,params : {}, query:{}})
     } 
   }
-  // 초기화
   motionStore.motion_data = {
     swipe: null,
     page: null,
@@ -74,7 +64,7 @@ watchEffect(() => {
   };
 });
 
-const currentSlide = ref(0); // 초기 슬라이드 인덱스 설정
+const currentSlide = ref(0);
 
 watch(currentSlide, (newVal) => {
   console.log("Current Slide Changed:", newVal);
@@ -95,28 +85,10 @@ const prevpage = () => {
 
 const recipeStore = useRecipeStore();
 const recommend_category = recipeStore.recommend_category;
-console.log("recommend_category",recommend_category);
-// 고려 인자
-
-// 1.보유식자재 + 유통기한
-
-// 2.쉐프팔로우
-
-// 3.선호카테고리, 재료
-
-// 4.평점
-
-// 5.알러지
-
-// 오늘의 추천 -> 무작위
-// 인기추천 -> 평점,~
-// 즐겨찾기는 -> 즐겨찾기 한거
-// 맞춤추천
 
 const selectedSlide = ref(0);
 
 const selectCategory = (slide) => {
-  // 클릭한 카테고리의 정보를 가져오기
   const selectedCategory = recommend_category[slide];
   console.log("Selected Category:", selectedCategory);
 };
@@ -128,50 +100,80 @@ const selectCategory = (slide) => {
 }
 
 .category {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 200px;
-  width: 400px;
+  width: 200px;
   color: rgb(6, 59, 105);
-  border: 2px solid bisque;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
-.carousel__slide {
+.category:hover {
+  transform: translateY(-5px);
+}
+
+.category-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.category-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.pagination-controls {
+  margin-top: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 이전 버튼 스타일 */
+.prev-button {
+  background-color: #4E342E;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.prev-button:hover {
+  background-color: #4E342E;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+/* 다음 버튼 스타일 */
+.next-button {
+  background-color: #4E342E;
+  color: #fff;
+}
+
+.next-button:hover {
+  background-color: #4E342E;
+}
+
+.slide-input {
+  width: 50px;
   padding: 5px;
+  text-align: center;
+  /* border: 1px solid #4E342E; */
+  border-radius: 5px;
 }
-
-.carousel__viewport {
-  perspective: 2000px;
-  height: 400px;
-}
-
-.carousel__track {
-  transform-style: preserve-3d;
-}
-
-.carousel__slide--sliding {
-  transition: 0.5s;
-}
-
-.carousel__slide {
-  opacity: 0.9;
-  transform: rotateY(-20deg) scale(0.9);
-}
-
-.carousel__slide--active ~ .carousel__slide {
-  transform: rotateY(20deg) scale(0.9);
-}
-
-.carousel__slide--prev {
-  opacity: 1;
-  transform: rotateY(-10deg) scale(0.95);
-}
-
-.carousel__slide--next {
-  opacity: 1;
-  transform: rotateY(10deg) scale(0.95);
-}
-
-.carousel__slide--active {
-  opacity: 1;
-  transform: rotateY(0) scale(1.1);
+.error {
+  color: red;
 }
 </style>
