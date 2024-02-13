@@ -3,21 +3,23 @@
   <div class="member_background">
     hi hello
     <p>{{ useAuthStore.login_info }}</p>
+    <div v-if="timeout">
+      <p>신규 생성을 하려면 왼쪽으로 밀어주세요</p>
+    </div>
   </div>
 </template>
 
 
 <script setup>
-import router from '@/router';
-import { useMotionStore } from '@/store/motion';
+// import router from '@/router';
 import { watchEffect } from 'vue';
 import { useAuthStore } from '@/store/auth';
 import { onMounted, ref } from 'vue';
 import accountService from "@/store/mvpApi";
 
-const motionStore = useMotionStore()
 let socket = new WebSocket("ws://localhost:8060");
 
+const timeout = ref(false)
 // const isLogin = ref(false)
 
 // function loginTimeOver(){
@@ -37,12 +39,20 @@ const get_user_profile = async () => {
 };
 
 
-const sendAuthInfoToServer = () => {
+const sendAuthInfoToServer = async (e) => {
   try {
-    const jsonData = JSON.stringify(useAuthStore.profile);
-    if (socket && socket.readyState === WebSocket.OPEN && jsonData) {
-      socket.send(jsonData);
-      console.log("Auth info sent to the server:", useAuthStore.login_info[0]);
+    // 만약 데이터가 서버에서 클라이언트로 전송된다면
+    if (e !== null && e !== undefined) {
+      //   console.log(e.data)
+      const result = await JSON.parse(e.data);
+      useAuthStore.cur_user_info = [result["User"], result["Profile"]]
+    }
+    else {
+      const jsonData = JSON.stringify(useAuthStore.profile);
+      if (socket && socket.readyState === WebSocket.OPEN && jsonData) {
+        socket.send(jsonData);
+        console.log("Auth info sent to the server:", useAuthStore.login_info[0]);
+      }
     }
   } catch (error) {
     console.error("Error sending auth info to the server:", error);
@@ -50,10 +60,13 @@ const sendAuthInfoToServer = () => {
 };
 
 
+const loginTimeOver = () => {
+  timeout.value = true
+}
+
 onMounted(async () => {
   await get_user_profile(useAuthStore.login_info["user_id"])
-  const socket = new WebSocket("ws://localhost:8060");
-
+  socket = new WebSocket("ws://localhost:8060");
   // 웹소켓 연결 설정
   socket.onopen = () => {
     console.log("웹소켓(얼굴 인식) 연결이 열렸습니다.");
@@ -64,26 +77,18 @@ onMounted(async () => {
   socket.onerror = (e) => {
     console.error("웹소켓(얼굴 인식) 에러:", e);
   };
-  // setTimeout(loginTimeOver, 5000);
+  
+  setTimeout(() => {
+    loginTimeOver();
+    console.log("hello ")
+  }, 5000);
 })
 
 watchEffect(() => {
-  console.log(motionStore.motion_data);
-  if (motionStore.motion_data.swipe !== null) {
-    if (motionStore.motion_data.swipe == "SwipeUp") {
-      motionStore.transition_dir = "slide-up"
-      router.push(({name:"member" ,params : {}, query:{}}))
-    }
-
-    // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
-    motionStore.motion_data = {
-      swipe: null,
-      page: null,
-      rating: null,
-      zoom: null,
-      flip: null,
-    };
-  }
+  console.log(useAuthStore.cur_user_info);
+  // if (useAuthStore.cur_user_info !== null) {
+  //     router.push(({name:"home" ,params : {}, query:{}}))
+  // }
 
   sendAuthInfoToServer();
 });

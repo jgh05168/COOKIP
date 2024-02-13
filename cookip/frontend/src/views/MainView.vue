@@ -18,13 +18,10 @@
         <button type="submit">Submit</button>
     </form> -->
         <div>
-            <div v-if="userValid">
-                <SignedIn />
-            </div>
-            <div v-else>
-                <LoginRequired />
-            </div>
-        </div>
+          <div>
+            <LoginRequired />
+          </div>
+      </div>
     </div>
 </template>
 
@@ -32,11 +29,6 @@
 import LoginRequired from "@/components/main/LoginRequired.vue";
 // import SignedIn from '@/components/main/SignedIn.vue'
 // import router from '@/router';
-import { ref } from 'vue';
-
-const userValid = ref(false)
-
-
 
 </script>
 

@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   const login_info = ref(null)
   const profile = ref([])
   const profileImage = ref([])
+  const cur_user_info = ref(null)
 
   const signup = ref({
     phonenumber:'',
@@ -45,5 +46,6 @@ export const useAuthStore = defineStore('auth', () => {
     profile,
     signup,
     profileImage,
+    cur_user_info, 
   };
 }, { persist: true });
