@@ -1,18 +1,49 @@
 <template>
-  <div>
-    <div>
-      <h1>hello, APP.vue</h1>
-    </div>
-    <RouterLink :to="{ name: 'main' }">main</RouterLink> |
+  <div style="width: 360px; display: fixed;">
+    <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
+    <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
     <RouterLink :to="{ name: 'member' }">member</RouterLink> |
-    <RouterLink :to="{ name: 'home' }">home</RouterLink> |
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-    <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> |
-    <RouterLink :to="{ name: 'search' }">Search</RouterLink> |
-
-    <div class="screen">
+    <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
+  </div>
+  <v-row>
+    <v-col
+      v-for="(bar, i) in bars"
+      :key="i"
+      cols="12"
+      sm="12"
+      md="6"
+      class="my-4"
+    >
+      <v-card
+        color="grey lighten-4"
+        flat
+        height="200px"
+      >
+        <v-toolbar
+          :color="bar.class"
+          :dark="bar.dark"
+        >
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+          <v-toolbar-title>Title</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon>
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </v-toolbar>
+      </v-card>
+    </v-col>
+  </v-row>
+  
+    <div class="screen" style="height: 750px;">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
-      <p>{{ motionStore.transition_dir }}</p>
+      <!-- <p>{{ motionStore.transition_dir }}</p> -->
       <!-- <transition
           :name="motionStore.transition_dir"
           mode="out-in"
@@ -21,14 +52,13 @@
         </transition> -->
       <RouterView />
     </div>
-  </div>
   <!-- <input v-model="text" type="text" />
   <img :src="qrcode" alt=""> -->
 </template>
 
 <script setup>
 import { RouterView, RouterLink } from "vue-router";
-import { onMounted, onBeforeUnmount, ref } from "vue";
+import { onMounted, onBeforeUnmount, ref, onBeforeMount } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
@@ -38,12 +68,8 @@ const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
-
 const error = ref("");
 
-if (localStorage["Islogin"] == null) {
-  localStorage["Islogin"] = 0;
-}
 const get_all_recipes = async () => {
   try {
     const recipeData = await accountService.getUserRecipe();
@@ -242,7 +268,9 @@ const handleWebSocketMessage = async (e) => {
   }
 };
 
-
+onBeforeMount(() => {
+  localStorage.setItem('Islogin', 0)
+})
 
 onMounted(async () => {
   await get_all_ingredients(),
@@ -256,14 +284,14 @@ onMounted(async () => {
   await get_Favorite_category(),
   await get_Favorite_ingredient(),
   await get_Favorite_recipe(),
-    // 컴포넌트가 마운트된 후 실행되는 로직
+  // 컴포넌트가 마운트된 후 실행되는 로직
   console.log("App Mount");
-
+  
   // 웹소켓 연결 설정
   socket.onopen = () => {
     console.log("웹소켓(모션 인식) 연결이 열렸습니다.");
   };
-
+  
   // 데이터를 수신 받았을 때의 처리
   socket.onmessage = handleWebSocketMessage;
 
@@ -283,12 +311,13 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .screen {
-  width: 800px;
-  height: 360px;
-  background-color: #fdf8ec;
-  /* color: white; */
+  width: 360px;
 }
 
+.bar {
+  display: absolute;
+  height: 30px;
+}
 .slide-up-enter-from {
   transform: translateY(100%);
 }
