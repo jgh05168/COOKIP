@@ -53,10 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
     profile,
     signup,
     profileImage,
-<<<<<<< HEAD
     cur_user_info, 
-=======
     Islogin
->>>>>>> 948b9a80053738f8743274a2feb3fac138c74839
   };
 }, { persist: true });
