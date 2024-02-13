@@ -1,24 +1,32 @@
 <template>
-  <div style="width: 360px; display: fixed;">
-    <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
-    <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
-    <RouterLink :to="{ name: 'member' }">member</RouterLink> |
-    <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-    <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
-  </div>
-    <div class="screen" style="height: 750px;">
-      <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
-      <!-- <p>{{ motionStore.transition_dir }}</p> -->
-      <!-- <transition
-          :name="motionStore.transition_dir"
-          mode="out-in"
-          >
-          
-        </transition> -->
-      <RouterView />
+  <div>
+
+    <div style="width: 360px; display: fixed;">
+      <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
+      <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
+      <RouterLink :to="{ name: 'member' }">member</RouterLink> |
+      <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
+      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
     </div>
-  <!-- <input v-model="text" type="text" />
-  <img :src="qrcode" alt=""> -->
+    <div style="width: 360px; display: fixed;">
+      <RouterLink :to="{ name: 'main' }">main</RouterLink> |
+      <RouterLink :to="{ name: 'home' }">home</RouterLink> |
+      <RouterLink :to="{ name: 'member' }">member</RouterLink> |
+      <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
+      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
+    </div>
+      <div class="screen">
+        <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
+          <transition
+            :name="motionStore.transition_dir"
+            mode="out-in"
+            >
+            <RouterView />
+          </transition>
+      </div>
+    <!-- <input v-model="text" type="text" />
+    <img :src="qrcode" alt=""> -->
+  </div>
 </template>
 
 <script setup>

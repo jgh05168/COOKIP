@@ -19,7 +19,7 @@ import websockets
 # print(flattened_data)
 
 # 웹캠 열기
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 
 async def handle_client(websocket, path):
