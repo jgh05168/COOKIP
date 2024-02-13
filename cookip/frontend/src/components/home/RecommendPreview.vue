@@ -1,13 +1,15 @@
 <template>
-  <div class="grid grid-cols-5">
-    <div class="recommand-title">RECOMMAND</div>
+  <div class="recommand-title">RECOMMAND</div>
+  <div class="grid grid-cols-5 preview-list">
     <div
       v-for="(item, idx) in results[selectedSlide].value[0]"
       :key="idx"
-      class="rounded overflow-hidden shadow-lg preview-list"
+      class="rounded overflow-hidden shadow-lg preview-item"
       style="color: #111111;+"
     >
-      <h1>{{ item.name }}</h1>
+      <p style="font-size: 20px; font-weight: bold; text-align: center">
+        {{ item.name }}
+      </p>
       <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
     </div>
   </div>
@@ -55,6 +57,10 @@ const getBufferImage = (buffer) => {
 
 <style scoped>
 .preview-list {
+  padding: 0 7%;
+}
+
+.preview-item {
   display: flex;
   flex-direction: column;
   /* width: 400px; */
@@ -62,15 +68,17 @@ const getBufferImage = (buffer) => {
 }
 
 .preview-img {
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
+  margin: 0 0;
 }
 
 .recommand-title {
   width: 1920px;
   text-align: center;
-  font-size: 40px;
+  font-size: 45px;
   font-weight: bold;
   color: #6d4c41;
+  margin-bottom: 10px;
 }
 </style>
