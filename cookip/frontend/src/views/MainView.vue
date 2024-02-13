@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="main">
+      <div class="login">
         <!-- <h1>기본페이지입니다</h1>
         <form action="http://localhost:5000/user/insertUser" method="post">
         <label for="login_id">login_id:</label>
@@ -17,16 +18,20 @@
         <button type="submit">Submit</button>
     </form> -->
         <div>
-          <div>
+          <div v-if="userValid">
             <LoginRequired />
           </div>
+          <div v-else>
+            <SignedIn />
+          </div>
       </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import LoginRequired from "@/views/mobile/GetStartView.vue";
-// import SignedIn from '@/components/main/SignedIn.vue'
+import LoginRequired from '@/components/main/LoginRequired.vue'
+import SignedIn from '@/components/main/SignedIn.vue'
 // import router from '@/router';
 import { ref } from "vue";
 
@@ -34,10 +39,23 @@ const userValid = ref(true);
 </script>
 
 <style scoped>
-.member_background {
-  background-color: #fffbe6;
+
+.main {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background-color: #8d6e63;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.login {
+  width: 90%;
+  height: 90%;
+  background-color: #fffbe6;
+  border-radius: 10%;
+}
 .logo-box {
   padding-top: 300px;
   margin: 0 auto;

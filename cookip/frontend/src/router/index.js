@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
 import CreateProfileView from "@/views/CreateProfileView.vue";
-// import MainView from "@/views/MainView.vue";
+import MainView from "@/views/MainView.vue";
 import MemberView from "@/views/MemberView.vue";
 import MyProfileView from "@/views/MyProfileView.vue";
 import RecipeDetailView from "@/views/RecipeDetailView.vue";
@@ -26,6 +26,11 @@ import MemberDetailView from "@/views/mobile/MemberDetailView";
 import MobileHomeView from "@/views/mobile/MobileHomeView"
 
 const routes = [
+  {
+    path: "/main",
+    name: "main",
+    component: MainView,
+  },
   {
     path: "/home",
     name: "home",
