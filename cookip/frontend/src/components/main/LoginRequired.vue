@@ -1,7 +1,6 @@
 <!-- components/Modal.vue -->
 <template>
   <div class="member_background">
-    hi hello
     <p>{{ useAuthStore.login_info }}</p>
   </div>
 </template>
