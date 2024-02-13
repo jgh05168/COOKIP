@@ -2,7 +2,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
-import MainView from "@/views/MainView.vue";
+// import MainView from "@/views/MainView.vue";
 import MemberView from "@/views/MemberView.vue";
 import MyProfileView from "@/views/MyProfileView.vue";
 import RecipeDetailView from "@/views/RecipeDetailView.vue";
@@ -26,11 +26,6 @@ import MobileHomeView from "@/views/mobile/MobileHomeView"
 
 const routes = [
   {
-    path: "/",
-    name: "main",
-    component: MainView,
-  },
-  {
     path: "/home",
     name: "home",
     component: HomeView,
@@ -46,7 +41,7 @@ const routes = [
     component: MyProfileView,
   },
   {
-    path: '/recipe/detail/:recipeid', // Example of dynamic route parameter
+    path: '/recipe/detail', // Example of dynamic route parameter
     name : 'recipe-detail',
     component: RecipeDetailView,
   },
@@ -80,7 +75,7 @@ const routes = [
     component: MobileHomeView,
   },
   {
-    path: "/mobile/start",
+    path: "/",
     name: "get-start",
     component: GetstartView,
   },
@@ -131,4 +126,24 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const isLogin = localStorage.getItem('Islogin');
+
+
+  const publicRoutes = ['/mobile/login', '/mobile/signup', '/mobile/home', '/'];
+  const restrictedRoutes = ['/mobile/login', '/mobile/signup'];
+
+
+  if (!isLogin || (isLogin === '0' && !publicRoutes.includes(to.path))) {
+    alert('로그인이 필요합니다.');
+    next('/mobile/login');
+  } else if (isLogin === '1' && restrictedRoutes.includes(to.path)) {
+    next(from.path)
+  } else {
+    next(); 
+  }
+});
+
+
 export default router;
+

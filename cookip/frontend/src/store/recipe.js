@@ -32,7 +32,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   const recommend_category = ref([
     {id:1, title:"오늘의 추천", img:"today.png"}, // 랜덤
     {id:2, title:"실시간 인기 음식" , img:"popularity.png"}, // 실시간 인기 음식(좋아요 순)
-    {id:3, title:"냉장고에 있는 재료로 만들기" , img:"refrigerator.png"}, // 지금 냉장고에 있는 재료로
+    {id:3, title:"냉장고 재료" , img:"refrigerator.png"}, // 지금 냉장고에 있는 재료로
     {id:4, title:"사용자 맞춤" , img:"profile.png"}, // 선호설문결과로  
   ])
 
@@ -186,8 +186,11 @@ const ingredient_match = (userId) => computed(() => {
 
 
   const selected_category = ref(0)
+
+  const currentRowSlide = ref(0)
   
   return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,recommend_category, recommend_list, 
-    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,ref_category_1,ref_category_2,filteredFavorites,category_3,category_4 }
+    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,ref_category_1,ref_category_2,
+    filteredFavorites,category_3,category_4 ,currentRowSlide }
   }, { persist: true })
   

@@ -37,6 +37,7 @@ const cardBack = ref(props.recipe);
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.5s;
+
 }
 
 .card-front,
@@ -45,6 +46,7 @@ const cardBack = ref(props.recipe);
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  
 }
 
 .card-front {
