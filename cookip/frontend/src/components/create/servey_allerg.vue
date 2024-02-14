@@ -52,8 +52,9 @@
     searchQuery.value = '';
   }
 };
-//console.log("4444444444444444",selectedItems);
 
+const user_id = 1;
+const profile_id = 1;
 const submitSurvey = () => {
     // 선택된 설문 항목 (재료 이름)
     const selectedIngredients = items.filter((item, index) => selectedItems.value[index]);
@@ -74,8 +75,16 @@ const submitSurvey = () => {
         return !existingAllergies.some(allergy => allergy.ingredient_id === id);
     });
 
+    // ingredients가 null 또는 빈 배열인 경우 요청을 보내지 않음
+    if (newCategoryIds.length === 0) {
+        console.log('선택된 재료가 없습니다. 요청을 보내지 않습니다.');
+        return;
+    }
+
     // Axios를 사용하여 POST 요청 보내기
     axios.post('http://localhost:5000/user/allergy', {
+        user_id: user_id,
+        profile_id: profile_id,
         ingredients: newCategoryIds.map(ingredient_id => ({
             ingredient_id,
             allergy_name: selectedIngredients.find((choice) => {
@@ -94,6 +103,7 @@ const submitSurvey = () => {
         // POST 요청 실패 시 수행할 작업 추가
     });
 };
+
 
 
 
