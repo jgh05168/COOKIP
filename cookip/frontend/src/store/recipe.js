@@ -289,5 +289,5 @@ export const useRecipeStore = defineStore('recipe', () => {
   return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,recommend_category, 
     selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,currentRowSlide,filteredFavorites,category_1,category_2,category_3,category_4 
   , recipes_object,recommend_list}
-  }, { persist: true })
+  })
   

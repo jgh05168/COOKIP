@@ -37,6 +37,10 @@
 <script setup>
 import ProfilenicknameForm from '@/components/auth/ProfilenicknameForm.vue';
 import ProfilepictureForm from '@/components/auth/ProfilepictureForm.vue';
+import ProfilerealpictureForm from '@/components/auth/ProfilerealpictureForm.vue';
+import FavoriteingredientForm from '@/components/auth/FavoriteingredientForm.vue';
+import FavoritecategoryForm from '@/components/auth/FavoritecategoryForm.vue';
+import allergyForm from '@/components/auth/allergyForm.vue';
 
 </script>
 
