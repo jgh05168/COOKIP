@@ -119,6 +119,16 @@ const selectCategory = (slide) => {
   width: 220px;
 }
 
+.category-title {
+  color: #6d4c41;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.category-img {
+  width: 220px;
+}
+
 .category:hover {
   transform: translateY(-5px);
 }

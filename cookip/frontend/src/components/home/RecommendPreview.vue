@@ -81,6 +81,15 @@ const getBufferImage = (buffer) => {
   margin-bottom: 10px;
 }
 
+.recommand-title {
+  width: 1920px;
+  text-align: center;
+  font-size: 45px;
+  font-weight: bold;
+  color: #6d4c41;
+  margin-bottom: 10px;
+}
+
 .preview-list .preview-title {
   font-size: 1.2rem;
   font-weight: bold;
