@@ -27,7 +27,7 @@
 
 <script setup>
 import { RouterView } from "vue-router";
-import { onBeforeMount, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
@@ -240,7 +240,7 @@ const handleWebSocketMessage = async (e) => {
   }
 };
 
-onBeforeMount(async () => {
+onMounted(async () => {
   await get_all_ingredients(),
     await get_all_recipes(),
     await get_all_recipes_ingredients(),

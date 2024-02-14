@@ -36,11 +36,9 @@
           flex: 0 0 calc(50% - 20px);
         "
       >
-      <v-img @click="makeprofile"
-        style="width: 150px;
-        height: 150px;
-        margin: 10px;
-        flex: 0 0 calc(50% - 20px); width: 100%; height: 100%; object-fit: contain"
+      <v-img 
+      v-if="profile_list.length <= 5"
+      @click="makeprofile"
         :src="require(`@/assets/profile_create.png`)"
         alt="">
       </v-img>
@@ -85,7 +83,7 @@ const makeprofile = function () {
 };
 
 const profile_list = JSON.parse(localStorage.getItem("profile")).profile;
-
+console.log(profile_list)
 const getBufferImage = (buffer) => {
   if (buffer && buffer.data instanceof Array) {
     const uint8Array = new Uint8Array(buffer.data);
@@ -108,4 +106,6 @@ const getBufferImage = (buffer) => {
   height: 724px;
   background-color: #a1887f;
 }
+
+
 </style>

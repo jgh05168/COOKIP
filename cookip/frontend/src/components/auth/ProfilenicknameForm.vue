@@ -32,14 +32,9 @@ sed eiusmod tempor incididunt.</div>
         :rules="rules"
         label="Last name" style="width: 100%;"
       ></v-text-field>
-      <v-text-field
-        v-model="birthday"
-        :rules="rules"
-        label="Birthday (mm-dd-yyyy)" style="width: 100%;"
-      ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
-                @click="userpost"
+                @click="gonext()"
               class="continue"
               color="#007aff"
               dark
@@ -56,7 +51,6 @@ sed eiusmod tempor incididunt.</div>
   
   <script setup>
   import { ref, onMounted, defineProps } from "vue";
-  import axios from 'axios'; // Axios 라이브러리 가져오기
 import { useAuthStore } from '@/store/auth'
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -64,31 +58,12 @@ const store = useAuthStore()
 
 
 const props = defineProps({
-  showBack: Function
+  showNext: Function
 });
 const first_name = ref();
 const last_name = ref();
-const birthday = ref();
 
-const userpost = () => {
-  store.signup.firstname = first_name.value
-  store.signup.lastname = last_name.value
-  store.signup.birthday = birthday.value
-  // console.log(store.signup)
-  axios.post('http://localhost:5000/user/insertUser', {
-      User_loginData:store.signup
-    })
-    .then(response => {
-        console.log('서버 응답:', response.data);
-        // alert("선호도 조사 완료");
-        // POST 요청 성공 시 수행할 작업 추가
-    })
-    .catch(error => {
-        console.error('POST 요청 오류:', error);
-        // POST 요청 실패 시 수행할 작업 추가
-    });
-  router.push({name:'login'})
-}
+
 const colorElement = ref(null);
 const handleMouseOver = () => {
   // 이미지에 마우스 호버 시 크기를 확대
@@ -105,7 +80,15 @@ onMounted(() => {
 });
 
 const goback = function(){
-  props.showBack()
+  router.go(-1)
+}
+
+const gonext = function(){
+  store.profile.firstname = first_name.value
+  store.profile.lastname = last_name.value
+  console.log(store.profile.firstname)
+  console.log(store.profile.lastname)
+  props.showNext()
 }
   </script>
   

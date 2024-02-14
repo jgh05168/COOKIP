@@ -9,11 +9,9 @@ export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);
   const userProfileList = ref([]);
   const login_info = ref(null)
-  const profile = ref([])
   const profileImage = ref([])
   const cur_user_info = ref(null)
-  
-  console.log("profile",profile);
+  const img = ref();
 
   const Islogin = computed(() => {
     const isLogin = !localStorage.getItem('Islogin');
@@ -31,6 +29,11 @@ export const useAuthStore = defineStore('auth', () => {
     birthday:'',
   })
   
+  const profile = ref({
+    nickname: '',
+    firstname: '',
+    lastname: '',
+  })
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
@@ -52,10 +55,11 @@ export const useAuthStore = defineStore('auth', () => {
     memberList,
     userProfileList,
     login_info,
-    profile,
     signup,
+    profile,
     profileImage,
     cur_user_info, 
-    Islogin
+    Islogin,
+    img
   };
 }, { persist: true });
