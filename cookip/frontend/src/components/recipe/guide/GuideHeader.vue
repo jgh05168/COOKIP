@@ -6,8 +6,8 @@
       <!-- <v-img class="step-header-image" src="@/assets/image/임채진.png" /> -->
       <!-- 레시피 가이드 스텝 정보 및 경과 시간-->
       <div class="step-header-content">
-          <HeaderStepInfo :recipe="props.recipe" :step="props.now_step" />
-          <HeaderRecipeInfo :recipe="props.recipe" :step="props.now_step" />
+          <HeaderStepInfo :guide="props.guide" :step="props.now_step" />
+          <HeaderRecipeInfo :recipe="props.recipe" />
       </div>
     </div>
   </div>
@@ -20,7 +20,8 @@ import HeaderRecipeInfo from "./HeaderRecipeInfo.vue";
 
 const props = defineProps({
   recipe: Object,
-  now_step: Object,
+  guide: Object,
+  now_step: Number
 });
 </script>
 

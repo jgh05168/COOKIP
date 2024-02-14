@@ -1,6 +1,5 @@
 <template>
     <div class="main">
-      <div class="login">
         <!-- <h1>기본페이지입니다</h1>
         <form action="http://localhost:5000/user/insertUser" method="post">
         <label for="login_id">login_id:</label>
@@ -25,7 +24,6 @@
             <SignedIn />
           </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -44,18 +42,12 @@ const userValid = ref(true);
   position: relative;
   width: 1920px;
   height: 1080px;
-  background-color: #8d6e63;
+  background-color: #fffbe6;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login {
-  width: 90%;
-  height: 90%;
-  background-color: #fffbe6;
-  border-radius: 10%;
-}
 .logo-box {
   padding-top: 300px;
   margin: 0 auto;

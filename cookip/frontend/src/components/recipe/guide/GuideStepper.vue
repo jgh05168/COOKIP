@@ -1,9 +1,9 @@
 <!-- 레시피 가이드 해당 스텝 상세 컨텐츠, 액션을 포함하는 컴포넌트 -->
 <template>
   <div class="stepper-content ">
-    <StepInfos :recipe="recipe" :step="props.now_step" />
+    <StepInfos :recipe="props.recipe" :guide="props.guide" :step="props.now_step" />
     <v-img class="stepper-main-gallery" src="@\assets\image\recipe\1\chadoldoenjangjjigae.jpg" />
-    <StepIngredientsGallery :recipe="recipe" :step="props.now_step" />
+    <StepIngredientsGallery :recipe="props.recipe" :guide="props.guide" :step="props.now_step" />
   </div>
 </template>
 
@@ -14,7 +14,8 @@ import StepIngredientsGallery from "@/components/recipe/guide/StepIngredientsGal
 
 const props = defineProps({
   recipe: Object,
-  now_step: Object,
+  guide: Object,
+  now_step: Number
 });
 
 

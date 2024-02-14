@@ -2,7 +2,7 @@
 <template>
   <div class="time-info">
     <div class="recipe-info">
-      <div class="recipe-name">{{ props.recipeName }}</div>
+      <div class="recipe-name">{{ props.recipe.name }}</div>
       <div class="recipe-status">만드는 중...</div>
     </div>
   </div>
@@ -11,6 +11,6 @@
   <script setup>
 import { defineProps } from "vue";
 const props = defineProps({
-  recipeName: String,
+  recipe: Object,
 });
 </script>

@@ -19,7 +19,7 @@
           <span v-if="timeout" class="arrow-prev"></span>
           <span v-if="timeout" class="arrow-prev"></span>
           <span v-if="timeout" class="arrow-prev"></span>
-          <h2><strong>{{ timeout ? '밀어서 프로필 생성' : 'hello world' }}</strong></h2>
+          <h2><strong>{{ timeout ? '밀어서 프로필 생성' : '사용자 인증 진행중 ...' }}</strong></h2>
         </div>
       </transition>
 
