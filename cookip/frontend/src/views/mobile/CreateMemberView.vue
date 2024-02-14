@@ -122,7 +122,6 @@
 </script>
 
 <style scoped>
-  @media only screen and (max-width: 360px) and (max-height: 780px) {
     body {
       margin: 0;
       padding: 0; /* 기본 padding도 제거합니다. */
@@ -152,7 +151,7 @@
     }
     
     .survey-item {
-      margin-bottom: 1rem;
+      margin-bottom: 15px;
     }
     
     button {
@@ -190,6 +189,5 @@
     .submit-button:hover {
       background-color: #3E2723;
     }
-  }
 </style>
   
