@@ -93,7 +93,7 @@ const submitSurvey = () => {
         return !existingFavoriteIngredients.some(favoriteIngredient => favoriteIngredient.ingredient_id === ingredientId);
     }).filter(Boolean); // null 또는 빈 문자열 제거
 
-    axios.post('http://localhost:5000/user/ingredientFollow', {
+    axios.post('http://i10c101.p.ssafy.io:3001/user/ingredientFollow', {
         user_id: user_id,
         profile_id: profile_id,
         ingredient_id: newSelectedIngredientIds
