@@ -5,9 +5,9 @@
         <v-stepper-item
           v-for="(guide, index) in recipe_steps.guide"
           :key="index"
-          :title="guide.title"
-          :value="guide.step"
-          :complete="guide.step <= selectedStep"
+          :title="index"
+          :value="index"
+          :complete="guide.method <= selectedStep"
         >
         </v-stepper-item>
       </v-stepper-header>
@@ -20,14 +20,16 @@
           <GuideHeaderVue
             class="recipe-guide-header"
             :recipe="recipe_steps"
-            :now_step="guide"
-            v-if="guide.step === selectedStep"
+            :guide="guide"
+            :now_step="index + 1"
+            v-if="index + 1 === selectedStep"
           />
           <GuideStepperVue
             class="recipe-guide-body"
             :recipe="recipe_steps"
-            :now_step="guide"
-            v-if="guide.step === selectedStep"
+            :guide="guide"
+            :now_step="index + 1"
+            v-if="index + 1 === selectedStep"
           />
         </div>
       </v-stepper-content>
@@ -51,34 +53,35 @@ import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
 const selectedStep = ref(1);
 
 const guideStore = useGuideStore();
-const recipe_steps = ref({});
+const recipe_steps = ref({})
+
+
 onMounted(async () => {
   guideStore.now_recipe_info = await accountService.getUserRecipe_RecipeId(
     guideStore.now_recipe_id
   );
   guideStore.now_recipe_guide = await accountService.getUserStep_recipeId(
     guideStore.now_recipe_id
-  );
-
-  guideStore.now_recipe_ingredients =
+    );
+    guideStore.now_recipe_ingredients =
     await accountService.getUserrecipe_ingredient_RecipeId(
       guideStore.now_recipe_id
-    );
+      );
   guideStore.now_recipe_stepofstep =
     await accountService.getUserstepofstep_RecipeId(guideStore.now_recipe_id);
 
-  guideStore.my.id = guideStore.now_recipe_id;
-  guideStore.my.name = guideStore.now_recipe_info[0].name;
-  guideStore.my.description = guideStore.now_recipe_info[0].description;
-  guideStore.my.time = guideStore.now_recipe_info[0].time;
-  guideStore.my.image = guideStore.now_recipe_info[0].thumbnail;
-  guideStore.my.ingredients = guideStore.now_recipe_ingredients;
-  guideStore.my.guide = guideStore.now_recipe_guide;
+  guideStore.now.id = guideStore.now_recipe_id;
+  guideStore.now.name = guideStore.now_recipe_info[0].name;
+  guideStore.now.description = guideStore.now_recipe_info[0].description;
+  guideStore.now.time = guideStore.now_recipe_info[0].time;
+  guideStore.now.image = guideStore.now_recipe_info[0].thumbnail;
+  guideStore.now.ingredients = guideStore.now_recipe_ingredients;
+  guideStore.now.guide = guideStore.now_recipe_guide;
 
-  recipe_steps.value = guideStore.my;
+  recipe_steps.value = guideStore.now;
 
-  console.log(guideStore.my); // 레시피 스텝
-  console.log(recipe_steps);
+  console.log("나는가이드", guideStore.now); // 레시피 스텝
+  console.log("나는 레시피 스텝", recipe_steps.value);
 });
 
 const disabled = () => {
