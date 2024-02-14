@@ -60,6 +60,7 @@ import accountService from "@/store/mvpApi";
 import { useRecipeStore } from "@/store/recipe";
 
 const favoriteStore = useFavoriteStore();
+const recipeStore = useRecipeStore();
 const error = ref("");
 const tab = ref(0);
 
@@ -145,7 +146,7 @@ const fetchData = async () => {
           "레시피 데이터 객체로 뽑기",
           recipe_id,
           "ㄱ갳게",
-          useRecipeStore.recipes_object
+          recipeStore.recipes_object
         );
         // favorite_recipes.push(useRecipeStore.recipes_object[recipe_id]);
       }

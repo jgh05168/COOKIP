@@ -1,12 +1,12 @@
 <template>
-    <div>
-      <LoginRequired />
-    </div>
+  <div>
+    <LoginRequired />
+  </div>
 </template>
 
 <script setup>
-import LoginRequired from '@/components/main/LoginRequired.vue'
-import SignedIn from '@/components/main/SignedIn.vue'
+import LoginRequired from "@/components/main/LoginRequired.vue";
+// import SignedIn from '@/components/main/SignedIn.vue'
 // import router from '@/router';
 // import { ref } from "vue";
 
@@ -14,7 +14,6 @@ import SignedIn from '@/components/main/SignedIn.vue'
 </script>
 
 <style scoped>
-
 .main {
   position: relative;
   width: 1920px;
