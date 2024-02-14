@@ -6,6 +6,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
     const recipes = ref([]);
     const Favorite_recipe = ref([]);
     const authStore = useAuthStore()
+    //console.log("Favorite_recipe",Favorite_recipe,recipes);
     // 멤버 별 즐겨찾기 목록
     const member_list = ref(authStore.memberList)
     const member_favorite = ref([
@@ -15,7 +16,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
       {favorite_list:[1,2,3,4,]},
     ])
 
-    const user_id =1;
+    const user_id =2;
     const profile_id =1;
 
     const favorite_recipe_list = (user_id, profile_id) => computed(() => {
@@ -44,6 +45,8 @@ export const useFavoriteStore = defineStore('favorite', () => {
   return {
   member_list,
     member_favorite,
+    recipes,
+    Favorite_recipe,
     favorite_recipe_list
   };
 }, { persist: true });
