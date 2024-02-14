@@ -18,68 +18,69 @@
 </template>
 
 <script setup>
-import { ref, watch, defineProps } from "vue";
+import { ref, defineProps, watchEffect } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
-// import { useMotionStore } from "@/store/motion";
-// import router from "@/router";
+import { useMotionStore } from "@/store/motion";
+import router from "@/router";
 // import { useFavoriteStore } from "@/store/favorite";
 
 const props = defineProps({
   recipeList: Array,
+  nexttab: Function,
+  prevtab: Function,
 });
-// const motionStore = useMotionStore();
+const motionStore = useMotionStore();
 // const favoriteStore = useFavoriteStore();
-
-const next = () => {
-  fCarousel.value.next();
-};
-
-const prev = () => {
-  fCarousel.value.prev();
-};
 
 const currentSlide = ref(0);
 
 const fCarousel = ref(null);
 
-watch(currentSlide, (newVal) => {
-  console.log("Current Col:", newVal);
-  currentSlide.value = newVal;
+const next = () => {
+  fCarousel.value.next();
+  currentSlide.value = (currentSlide.value + 1) % props.recipeList.length; // 012340123 무한
+};
+
+const prev = () => {
+  fCarousel.value.prev();
+  currentSlide.value =
+    (props.recipeList.length + currentSlide.value - 1) %
+    props.recipeList.length; // 432104321 무한
+};
+
+watchEffect(() => {
+  console.log(motionStore.motion_data);
+  if (motionStore.motion_data.swipe !== null) {
+    if (motionStore.motion_data.swipe == "SwipeUp") {
+      // 다음 멤버로
+      props.nexttab()
+    } else if (motionStore.motion_data.swipe == "SwipeDown") {
+      // 이전 멤버로
+      props.prevtab()
+    } else if (motionStore.motion_data.swipe == "SwipeLeft") {
+      next(); // 다음 레시피
+    } else if (motionStore.motion_data.swipe == "SwipeRight") {
+      prev(); // 이전 레시피
+    }
+  } else if (motionStore.motion_data.page !== null) {
+    if (motionStore.motion_data.page == "PageIn") {
+      router.push({
+        name: "recipe-detail",
+        params: { recipeid: currentSlide.value }, // 현재 가리키는 slide 의 해당하는 레시피의 디테일 페이지로 가기
+      });
+    } else if (motionStore.motion_data.page == "PageOut") {
+      router.push({ name: "home" });
+    }
+  }
+  // 초기화
+  motionStore.motion_data = {
+    swipe: null,
+    page: null,
+    rating: null,
+    zoom: null,
+    flip: null,
+  };
 });
-
-// watchEffect(() => {
-//   console.log(motionStore.motion_data);
-//   if (motionStore.motion_data.swipe !== null) {
-//     if (motionStore.motion_data.swipe == "SwipeUp") {
-//       // 다음 멤버로
-
-//     } else if (motionStore.motion_data.swipe == "SwipeDown") {
-//       // 이전 멤버로
-
-//     } else if (motionStore.motion_data.swipe == "SwipeLeft") {
-//       next(); // 다음 레시피
-//     } else if (motionStore.motion_data.swipe == "SwipeRight") {
-//       prev(); // 이전 레시피
-//     }
-//   } else if (motionStore.motion_data.page !== null) {
-//     if (motionStore.motion_data.page == "PageIn") {
-//       router.push({
-//         name: "recipe-detail",
-//         params: { recipeid: currentSlide.value }, // 현재 가리키는 slide 의 해당하는 레시피의 디테일 페이지로 가기
-//       });
-//     } else if (motionStore.motion_data.page == "PageOut") {
-//       router.push({ name: "home" });
-//     }
-//   }
-//   // 초기화
-//   motionStore.motion_data = {
-//     swipe: null,
-//     page: null,
-//     rating: null,
-//     zoom: null,
-//     flip: null,
-//   };
-// });
 </script>
 
 <style scoped></style>
