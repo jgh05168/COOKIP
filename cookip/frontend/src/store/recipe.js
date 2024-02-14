@@ -70,9 +70,15 @@ export const useRecipeStore = defineStore('recipe', () => {
     const shuffledRecipes = filteredRecipes.sort(() => Math.random() - 0.5);
 
     // 랜덤으로 정렬된 레시피를 5개씩 묶어서 반환
-    return Array.from({ length: Math.ceil(shuffledRecipes.length / 5) }, (_, index) =>
-        shuffledRecipes.slice(index * 5, index * 5 + 5)
-    );
+    return Array.from({ length: Math.ceil(shuffledRecipes.length / 5) }, (_, index) => {
+      const start = index * 5;
+      const end = start + 5;
+      const slicedArray = shuffledRecipes.slice(start, end);
+      // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+      if (slicedArray.length >= 3) {
+          return slicedArray;
+      }
+    });
   });
   //console.log("category_1",category_1(1,1));
 
@@ -96,9 +102,15 @@ export const useRecipeStore = defineStore('recipe', () => {
     const sortedRecipes = filteredRecipes.sort((a, b) => b.recipe_score - a.recipe_score);
 
     // 정렬된 데이터를 5개씩 묶어 배열을 만듭니다.
-    return Array.from({ length: Math.ceil(sortedRecipes.length / 5) }, (value, index) =>
-        sortedRecipes.slice(index * 5, index * 5 + 5)
-    );
+    return Array.from({ length: Math.ceil(sortedRecipes.length / 5) }, (_, index) => {
+      const start = index * 5;
+      const end = start + 5;
+      const slicedArray = sortedRecipes.slice(start, end);
+      // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+      if (slicedArray.length >= 3) {
+          return slicedArray;
+      }
+    });
   });
   //console.log("무작위 추천2",category_2(1,1));
   //const ref_category_2 = ref([category_2]);
@@ -173,9 +185,15 @@ export const useRecipeStore = defineStore('recipe', () => {
     });
   
     // 추출된 레시피를 5개씩 묶어서 반환
-    return Array.from({ length: Math.ceil(matchedRecipes.length / 5) }, (value, index) =>
-      matchedRecipes.slice(index * 5, index * 5 + 5)
-    );
+    return Array.from({ length: Math.ceil(matchedRecipes.length / 5) }, (_, index) => {
+      const start = index * 5;
+      const end = start + 5;
+      const slicedArray = matchedRecipes.slice(start, end);
+      // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+      if (slicedArray.length >= 3) {
+          return slicedArray;
+      }
+    });
   });
   //console.log("ingredientIds",category_3(1,1));
 
@@ -218,10 +236,20 @@ export const useRecipeStore = defineStore('recipe', () => {
 
     const slicedRecipes = Array.from(
       { length: Math.ceil(filteredRecipes.length / 5) },
-      (_, index) => filteredRecipes.slice(index * 5, index * 5 + 5)
+      (_, index) => {
+          const start = index * 5;
+          const end = start + 5;
+          const slicedArray = filteredRecipes.slice(start, end);
+          // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+          if (slicedArray.length >= 3) {
+              return slicedArray;
+          }
+      }
   );
-
-  return slicedRecipes;
+  
+  // 빈 배열 제거
+  return slicedRecipes.filter(Boolean);
+  
   });
   //console.log("processFavoriteData",category_4(1,1));
 
