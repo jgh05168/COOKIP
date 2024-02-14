@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-import LoginRequired from "@/views/mobile/GetStartView.vue";
-// import SignedIn from '@/components/main/SignedIn.vue'
+import LoginRequired from '@/components/main/LoginRequired.vue'
+import SignedIn from '@/components/main/SignedIn.vue'
 // import router from '@/router';
 // import { ref } from "vue";
 
@@ -14,8 +14,15 @@ import LoginRequired from "@/views/mobile/GetStartView.vue";
 </script>
 
 <style scoped>
-.member_background {
+
+.main {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
   background-color: #fffbe6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-box {

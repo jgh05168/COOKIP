@@ -55,6 +55,7 @@ const authStore = useAuthStore();
 const favoriteStore = useFavoriteStore();
 const recipeStore = useRecipeStore();
 
+
 console.log(authStore.memberList.user);
 console.log(favoriteStore.member_favorite);
 

@@ -1,45 +1,52 @@
 <template>
-  <div class="grid grid-cols-5">
-    <div class="recommand-title">RECOMMAND</div>
+  <div class="recommand-title">RECOMMAND</div>
+  <div class="grid grid-cols-5 preview-list">
     <div
       v-for="(item, idx) in results[selectedSlide].value[0]"
       :key="idx"
-      class="rounded overflow-hidden shadow-lg preview-list"
+      class="rounded overflow-hidden shadow-lg preview-item"
       style="color: #111111;+"
     >
-      <h1>{{ item.name }}</h1>
+      <p style="font-size: 20px; font-weight: bold; text-align: center">
+        {{ item.name }}
+      </p>
       <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { watch, defineProps } from "vue"; // import reactive and onMounted from vue
+import { watch, defineProps } from "vue"; 
 import { useRecipeStore } from "@/store/recipe";
 
 const recipeStore = useRecipeStore();
+
+
+const user_id = 1;
+const profile_id = 1;
+
+const results = [
+  recipeStore.category_1(user_id, profile_id),
+  recipeStore.category_2(user_id, profile_id),
+  recipeStore.category_3(user_id, profile_id),
+  recipeStore.category_4(user_id, profile_id)
+];
+
 
 const props = defineProps({
   selectedSlide: Number,
 });
 
-// console.log(props.selectedSlide);
-//console.log(recipeStore.recommend_list[props.selectedSlide].recipe_list);
-const user_id = 1;
-const profile_id = 1;
-const results = [
-  recipeStore.ref_category_1[0],
-  recipeStore.ref_category_2[0],
-  recipeStore.category_3(user_id),
-  recipeStore.category_4(user_id, profile_id),
-];
+
+
+
 console.log("results", results);
 
 watch(
   () => props.selectedSlide,
   (newVal) => {
     console.log("Selected Recipe Name Changed_reciv:", newVal);
-  }
+  },
 );
 
 const getBufferImage = (buffer) => {
@@ -55,6 +62,10 @@ const getBufferImage = (buffer) => {
 
 <style scoped>
 .preview-list {
+  padding: 0 7%;
+}
+
+.preview-item {
   display: flex;
   flex-direction: column;
   /* width: 400px; */
@@ -62,15 +73,43 @@ const getBufferImage = (buffer) => {
 }
 
 .preview-img {
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
+  margin: 0 0;
 }
 
 .recommand-title {
   width: 1920px;
   text-align: center;
-  font-size: 40px;
+  font-size: 45px;
   font-weight: bold;
   color: #6d4c41;
+  margin-bottom: 10px;
 }
+
+.recommand-title {
+  width: 1920px;
+  text-align: center;
+  font-size: 45px;
+  font-weight: bold;
+  color: #6d4c41;
+  margin-bottom: 10px;
+}
+
+.preview-list .preview-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.preview-list .preview-img {
+  width: 100%;
+  height: 100%; /* 이미지가 부모 요소에 꽉 차도록 설정 */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* .preview-list:nth-child(even) {
+  background-color: #f3f4f6;
+} */
 </style>

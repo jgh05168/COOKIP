@@ -22,7 +22,11 @@
         <button @click="Flip_test">Flip_test</button>
         <button @click="props.nextrow">nextrow</button>
         <button @click="nextpage">nextcol</button>
-        <FlipCard class="recipe-card" :flip="flip && slide == currentSlide" :recipe="recipe" />
+        <FlipCard
+          class="shadow-2xl"
+          :flip="flip && slide == currentSlide"
+          :recipe="recipe"
+        />
       </div>
     </Slide>
   </Carousel>
@@ -170,5 +174,4 @@ watch(
   width: 480px;
   height: 270px;
 }
-
 </style>

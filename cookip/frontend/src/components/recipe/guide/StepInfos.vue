@@ -1,7 +1,7 @@
 <template>
   <div class="step-infos">
-    <h3 class="text-h3">Step {{ props.step.step }}.</h3>
-    <h4 class="text-h4"> {{ props.step.description }}</h4>
+    <h3 class="text-h3">Step {{ props.step }}.</h3>
+    <!-- <h4 class="text-h4"> {{ props.step.description }}</h4> -->
     <v-sheet border
         class="ingredients-table">
       <v-table>
@@ -33,13 +33,18 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps, ref, onMounted } from "vue";
 
 const props = defineProps({
   recipe: Object,
-  step: Object,
+  guide: Object,
+  step: Number
 });
-console.log(props.recipe.ingredients[props.step.step_ingredients[0]].name);
+
+onMounted(() => {
+  console.log("스텝인포스 진입", props.recipe)
+  console.log("샘플입니다",  props.recipe.ingredients[props.step.step_ingredients[0]].name);
+})
 console.log("props");
 const cookingTip = ref(""); // Define a reactive variable to capture the textarea input
 </script>

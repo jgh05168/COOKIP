@@ -19,17 +19,19 @@ import websockets
 # print(flattened_data)
 
 # 웹캠 열기
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 
 async def handle_client(websocket, path):
     print(f"클라이언트(얼굴 인식)가 연결되었습니다.")
-
     try:
         async for message in websocket:
             known_person_list = json.loads(message)
-            print(known_person_list)
-            flattened_data_list = [known_person_list["profile"][i]["profile_img"]["data"] for i in range(len(known_face_list))]
+            flattened_data_list = []
+            for i in range(len(known_person_list)):
+                if not known_person_list["profile"][i]["profile_face"]["data"]:
+                    continue
+                flattened_data_list.append(known_person_list["profile"][i]["profile_face"]["data"])
             image_data_list = [np.reshape(flattened_data_list[i], (64, 64, 4)) for i in range(len(flattened_data_list))]
             known_face_list = [fr.face_encodings(person)[0] for person in image_data_list]
             

@@ -125,7 +125,6 @@ router.get('/logout', (req, res) => {
   res.send("<script> alert('로그아웃 되었습니다.'); location.href='/';</script>");          
 })
 
-
 // 프로필 등록하기
 router.post('/insertProfile', (req, res) => {
   const profile_id = req.body.profile_id;
@@ -210,8 +209,8 @@ router.post('/categoryFollow', (req, res) => {
 // 알러지 정보
 router.post('/allergy', (req, res) => {
   const allergy = req.body.ingredients;
-  const profile_id = 1;
-  const user_id = 1;
+  const profile_id = req.body.profile_id;
+  const user_id = req.body.user_id;
   console.log(allergy);
   // 배열의 각 요소에 대해 반복하여 쿼리 실행
   allergy.forEach(allery_data => {
@@ -229,8 +228,8 @@ router.post('/allergy', (req, res) => {
 // 선호재료
 router.post('/ingredientFollow', (req, res) => {
   const ingredientFllow_names = req.body.ingredient_id; // 배열로 전송된다고 가정
-  const profile_id = 1;
-  const user_id = 1;
+  const profile_id = req.body.profile_id;
+  const user_id = req.body.user_id;
   // 배열의 각 요소에 대해 반복하여 쿼리 실행
   ingredientFllow_names.forEach(ingredientFllow_name => {
       var sql = `INSERT INTO Profile_Favorite_Ingredient(ingredient_id, profile_id, user_id) VALUES (?, ?, ?)`;
