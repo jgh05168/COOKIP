@@ -32,7 +32,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   const recommend_category = ref([
     {id:1, title:"오늘의 추천", img:require("@/assets/image/today_2.png")}, // 랜덤
     {id:2, title:"실시간 인기 음식" , img:require("@/assets/image/popularity_2.png")}, // 실시간 인기 음식(좋아요 순)
-    {id:3, title:"냉장고에 있는 재료맞춤" , img:require("@/assets/image/refrigerator_2.avif")}, // 지금 냉장고에 있는 재료로
+    {id:3, title:"냉장고 재료 맞춤" , img:require("@/assets/image/refrigerator_2.avif")}, // 지금 냉장고에 있는 재료로
     {id:4, title:"사용자 맞춤" , img:require("@/assets/image/profile_2.png")}, // 선호설문결과로  
   ])
 

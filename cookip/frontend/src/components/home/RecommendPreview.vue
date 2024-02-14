@@ -96,12 +96,7 @@ const getBufferImage = (buffer) => {
   margin-bottom: 10px;
 }
 
-.preview-list .preview-img {
-  width: 100%;
-  height: 100%; /* 이미지가 부모 요소에 꽉 차도록 설정 */
-  object-fit: cover;
-  border-radius: 10px;
-}
+
 
 /* .preview-list:nth-child(even) {
   background-color: #f3f4f6;

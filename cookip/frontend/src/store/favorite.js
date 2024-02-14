@@ -6,7 +6,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
 
     const authStore = useAuthStore()
     // 멤버 별 즐겨찾기 목록
-    const member_list = authStore.memberList
+    const member_list = ref(authStore.memberList)
     const member_favorite = ref([
       {favorite_list:[1,2,3]},
       {favorite_list:[1,2,3,4,5,6]},

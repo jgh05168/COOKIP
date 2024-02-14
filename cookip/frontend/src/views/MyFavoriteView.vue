@@ -9,7 +9,7 @@
         v-model="favoriteStore.now_tab"
         direction="vertical"
         color="white"
-        align-tabs="center"
+        align-tabs="center" 
         bg-color="#BCAAA4"
         style="padding: 10px 10px"
       >
