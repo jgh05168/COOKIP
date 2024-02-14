@@ -253,20 +253,25 @@ export const useRecipeStore = defineStore('recipe', () => {
   });
   //console.log("processFavoriteData",category_4(1,1));
 
+  //const userData = JSON.parse(localStorage.getItem("user_id"));
+  let user_id = 1;
+  //if(userData[0].user_id!=null)user_id = userData[0].user_id;
   // 추천 카테고리 별로 데이터 쪼개기
-  // const recommend_list = ref([
-  //   {category : 1, recipe_list: category_1},
-  //   {category : 2, recipe_list: category_2},
-  //   {category : 3, recipe_list: category_3},
-  //   {category : 4, recipe_list: category_4},
-  // ])
 
+  console.log("user_id",user_id);
+
+  const recommend_list = ref([
+    {category : 1, recipe_list: category_1(user_id,1)},
+    {category : 2, recipe_list: category_2(user_id,1)},
+    {category : 3, recipe_list: category_3(user_id,1)},
+    {category : 4, recipe_list: category_4(user_id,1)},
+  ])
 
   const selected_category = ref(0)
 
   const currentRowSlide = ref(0)
   
   return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,recommend_category, 
-    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,currentRowSlide,filteredFavorites,category_1,category_2,category_3,category_4 }
+    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,currentRowSlide,recommend_list,filteredFavorites,category_1,category_2,category_3,category_4 }
   }, { persist: true })
   

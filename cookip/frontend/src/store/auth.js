@@ -13,6 +13,8 @@ export const useAuthStore = defineStore('auth', () => {
   const profile = ref([])
   const profileImage = ref([])
   const cur_user_info = ref(null)
+  
+  console.log("profile",profile);
 
   const Islogin = computed(() => {
     const isLogin = !localStorage.getItem('Islogin');
