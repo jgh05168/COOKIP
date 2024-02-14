@@ -52,32 +52,45 @@
     searchQuery.value = '';
   }
 };
-//console.log("4444444444444444",selectedItems);
 
-  const submitSurvey = () => {
-    // 설문 선택된 항목(재료이름)
-    //const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
-    const allSelectedIngredients = [...selectedChoices.value, ...items.filter((item, index) => selectedItems.value[index])];
+const user_id = 1;
+const profile_id = 1;
+const submitSurvey = () => {
+    // 선택된 설문 항목 (재료 이름)
+    const selectedIngredients = items.filter((item, index) => selectedItems.value[index]);
 
-    // 선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
-    const selectedCategoryIds = allSelectedIngredients.map(choice => {
-    const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-    if (ingredient) {
-      return ingredient.ingredient_id;
-    } else {
-      // 재료를 찾지 못한 경우에 대한 처리
-      // 여기서는 빈 배열을 반환하지 않고, 아무 것도 반환하지 않도록 처리합니다.
-    }
+    // 선택된 설문 항목 내용을 SQL 재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
+    const selectedCategoryIds = selectedIngredients.map(choice => {
+        const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+        return ingredient ? ingredient.ingredient_id : null;
     });
 
-    console.log("sssssssssssssssss",selectedChoices,selectedCategoryIds.length);
+    // 이미 선택된 항목인지 확인
+    const existingAllergies = recipeStore.Allergy.filter(allergy => {
+        return selectedCategoryIds.includes(allergy.ingredient_id);
+    });
+
+    // 이미 선택된 항목 제거
+    const newCategoryIds = selectedCategoryIds.filter(id => {
+        return !existingAllergies.some(allergy => allergy.ingredient_id === id);
+    });
+
+    // ingredients가 null 또는 빈 배열인 경우 요청을 보내지 않음
+    if (newCategoryIds.length === 0) {
+        console.log('선택된 재료가 없습니다. 요청을 보내지 않습니다.');
+        return;
+    }
+
     // Axios를 사용하여 POST 요청 보내기
     axios.post('http://localhost:5000/user/allergy', {
-        // user_id:user_id,
-        // profile_id:profile_id,
-        ingredients: selectedCategoryIds.map((ingredient_id, index) => ({
+        user_id: user_id,
+        profile_id: profile_id,
+        ingredients: newCategoryIds.map(ingredient_id => ({
             ingredient_id,
-            allergy_name: selectedChoices[index] // 선택된 재료 이름
+            allergy_name: selectedIngredients.find((choice) => {
+                const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+                return ingredient && ingredient.ingredient_id === ingredient_id;
+            }) || null // 선택된 재료 이름
         }))
     })
     .then(response => {
@@ -90,87 +103,6 @@
         // POST 요청 실패 시 수행할 작업 추가
     });
 };
-
-// const submitSurvey = () => {
-//     // 설문 선택된 항목(재료이름)
-//     const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
-
-//     // 선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
-//     const selectedCategoryIds = selectedChoices.map(choice => {
-//         const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-//         return ingredient ? ingredient.ingredient_id : null;
-//     });
-
-//     // Axios를 사용하여 POST 요청 보내기
-//     axios.post('http://localhost:5000/user/allergy', {
-//         ingredients: selectedCategoryIds.map(ingredient_id => ({
-//             ingredient_id,
-//             allergy_name: selectedChoices.find(choice => {
-//                 const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-//                 return ingredient && ingredient.ingredient_id === ingredient_id;
-//             })
-//         }))
-//     })
-//     .then(response => {
-//         console.log('서버 응답:', response.data);
-//         // alert("선호도 조사 완료");
-//         // POST 요청 성공 시 수행할 작업 추가
-//     })
-//     .catch(error => {
-//         console.error('POST 요청 오류:', error);
-//         // POST 요청 실패 시 수행할 작업 추가
-//     });
-// };
-
-
-
-// const submitSurvey = async () => {
-//     try {
-//         const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
-
-//         const selectedIngredientIds = selectedChoices.map(choice => {
-//             const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-//             return ingredient ? ingredient.ingredient_id : null;
-//         });
-
-//         const response = await axios.post('http://localhost:5000/user/categoryFollow', {
-//           ingredients: selectedIngredientIds.map((ingredient_id, index) => ({
-//             ingredient_id,
-//             allergy_name: selectedChoices[index] // 선택된 재료 이름
-//         }))
-//         });
-
-//         console.log('서버 응답:', response.data);
-//         // 성공적으로 요청이 완료된 후 수행할 작업 추가
-//     } catch (error) {
-//         console.error('POST 요청 오류:', error);
-//         // 요청이 실패한 경우 수행할 작업 추가
-//     }
-// };
-
-
-// const submitSurvey = async (selectedChoices) => {
-//     try {
-//         const selectedIngredientIds = selectedChoices.map(choice => {
-//             const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-//             return ingredient ? ingredient.ingredient_id : null;
-//         });
-
-//         const response = await axios.post('http://localhost:5000/user/categoryFollow', {
-//           ingredients: selectedIngredientIds.map((ingredient_id, index) => ({
-//             ingredient_id,
-//             allergy_name: selectedChoices[index] // 선택된 재료 이름
-//         }))
-//         });
-
-//         console.log('서버 응답:', response.data);
-//         // 성공적으로 요청이 완료된 후 수행할 작업 추가
-//     } catch (error) {
-//         console.error('POST 요청 오류:', error);
-//         // 요청이 실패한 경우 수행할 작업 추가
-//     }
-// };
-
 
 
 

@@ -36,7 +36,9 @@ import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
+import { useFavoriteStore } from "@/store/favorite";
 
+const Favoritestore = useFavoriteStore();
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
@@ -53,11 +55,13 @@ const get_all_recipes = async () => {
         recipe.ingredient = [];
       }
     });
+    Favoritestore.recipes = recipeData;
     recipestore.recipes = recipeData;
   } catch (err) {
     error.value = err.message;
   }
 };
+
 
 const get_all_ingredients = async () => {
   try {
@@ -72,9 +76,9 @@ const get_all_ingredients = async () => {
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
-    console.log("getgeyget",categoryData);
+    //console.log("getgeyget",categoryData);
     recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
-    console.log("get_확인",recipestore.user_category);
+    //console.log("get_확인",recipestore.user_category);
   } catch (err) {
     error.value = err.message;
   }
@@ -90,7 +94,7 @@ const get_all_recipes_ingredients = async () => {
       );
       matchingRecipe.ingredient.push(ingredient.ingredient_id);
     });
-    console.log(recipestore.recipes)
+    //console.log(recipestore.recipes)
   } catch (err) {
     error.value = err.message;
   }
@@ -107,7 +111,7 @@ const get_useIngredient_recipe = async () => {
       }
     });
     recipestore.useIngredient_recipe = useIngredient_recipeData;
-    console.log(recipestore.useIngredient_recipe);
+    //console.log(recipestore.useIngredient_recipe);
 
   } catch (err) {
     error.value = err.message;
@@ -123,7 +127,7 @@ const get_score = async () => {
       }
     });
     recipestore.score = score_Data;
-    console.log(recipestore.score);
+    //console.log(recipestore.score);
 
   } catch (err) {
     error.value = err.message;
@@ -139,7 +143,7 @@ const get_Allergy = async () => {
       }
     });
     recipestore.Allergy = Allergy_Data;
-    console.log(recipestore.Allergy);
+    //console.log(recipestore.Allergy);
 
   } catch (err) {
     error.value = err.message;
@@ -155,7 +159,7 @@ const get_Follow = async () => {
       }
     });
     recipestore.Follow = Follow_Data;
-    console.log(recipestore.Follow);
+    //console.log(recipestore.Follow);
 
   } catch (err) {
     error.value = err.message;
@@ -168,7 +172,7 @@ const get_Favorite_category = async () => {
   try {
     const Favorite_category_Data = await accountService.getFavorite_category();
     recipestore.Favorite_category = Favorite_category_Data;
-    console.log(recipestore.Favorite_category);
+    //console.log(recipestore.Favorite_category);
 
   } catch (err) {
     error.value = err.message;
@@ -185,7 +189,7 @@ const get_Favorite_ingredient = async () => {
       }
     });
     recipestore.Favorite_ingredient = Favorite_ingredient_Data;
-    console.log(recipestore.Favorite_ingredient);
+    //console.log(recipestore.Favorite_ingredient);
 
   } catch (err) {
     error.value = err.message;
@@ -201,9 +205,9 @@ const get_Favorite_recipe = async () => {
         recipe.ingredient = [];
       }
     });
+    Favoritestore.Favorite_recipe = Favorite_recipe_Data;
     recipestore.Favorite_recipe = Favorite_recipe_Data;
-    console.log(recipestore.Favorite_recipe);
-
+    //console.log("Favoritestore",Favoritestore.Favorite_recipe);
   } catch (err) {
     error.value = err.message;
   }
