@@ -1,56 +1,106 @@
 <template>
   <div class="container">
-    <div style="display: fixed">
+    <!-- <div style="display: fixed; background-color: #f18842">
       <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
       <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
       <RouterLink :to="{ name: 'member' }">member</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
+      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
+    <!-- </div> -->
+    <div
+      class="profile"
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        v-for="(profile, idx) in profile_list"
+        :key="idx"
+        class="ma-2"
+        style="
+          width: 150px;
+          height: 150px;
+          margin: 10px;
+          flex: 0 0 calc(50% - 20px);
+        "
+      >
+        <v-img
+          :aspect-ratio="1 / 1"
+          :src="getBufferImage(profile.profile_img)"
+          alt=""
+          style="border-radius: 30%; width: 150px"
+        ></v-img>
+      </div>
+
+      <div
+        class="ma-2"
+        style="
+          width: 150px;
+          height: 150px;
+          margin: 10px;
+          flex: 0 0 calc(50% - 20px);
+        "
+      >
+        <img
+          @click="makeprofile"
+          style="width: 100%; height: 100%; object-fit: contain"
+          :src="require(`@/assets/profile_create.png`)"
+          alt=""
+        />
+      </div>
     </div>
-    <div class="profile">
-      <!-- <v-card-group class="text-center">
-        <v-card v-for="(profile, idx) in profilelist" :key="idx" class="ma-2" style="width: 150px; height: 150px;">
-          <img :src="getBufferImage(profile.profile_img)" alt="">
-          {{ profile.profile_name }}
-        </v-card>
-      </v-card-group> -->
-      <img @click="makeprofile" style="display: flex; justify-content: center; align-items: center;" :src="require(`@/assets/profile_create.png`)" alt="" />
-    </div>
+    <v-layout class="overflow-visible" style="height: 56px;">
+    <v-bottom-navigation
+      v-model="value"
+      :bg-color="color"
+      mode="shift"
+    >
+      <v-btn width="120px">
+
+        <v-icon>mdi-domain</v-icon>
+        <RouterLink :to="{ name: 'get-start' }" style="color: #f18842;">main</RouterLink>
+      </v-btn>
+
+      <v-btn width="120px">
+
+        <v-icon>mdi-home-circle</v-icon>
+        <RouterLink :to="{ name: 'mobile-home' }" style="color: #f18842;">home</RouterLink>
+      </v-btn>
+
+      <v-btn width="120px">
+
+        <v-icon>mdi-face-man-profile</v-icon>
+        <RouterLink :to="{ name: 'my-profile' }" style="color: #f18842;">my-profile</RouterLink>
+      </v-btn>
+    </v-bottom-navigation>
+  </v-layout>
   </div>
 </template>
 
 <script setup>
-// import { ref } from 'vue'
 // import { useAuthStore } from '@/store/auth';
 import { useRouter } from "vue-router";
+
 const router = useRouter();
 
-const makeprofile = function() {
-  router.push({name:'mobile-make-profile'})
-}
-// const profilelist = ref(localStorage.getItem(`profile`))
-// import { onBeforeMount } from 'vue';
-// import accountService from "@/store/mvpApi";
+const makeprofile = function () {
+  router.push({ name: "mobile-make-profile" });
+};
 
-// onBeforeMount(async () => {
-//     try {
-//         useAuthStore.profile = await accountService.getUserProfile(localStorage.getItem("user_id"))
-//         console.log(useAuthStore.profile)
-//         console.log(localStorage.getItem("user_id"))
-//     } catch (error) {
-//         console.error("Error fetching user profile:", error.message);
-//     }
-// })
+const profile_list = JSON.parse(localStorage.getItem("profile")).profile;
 
-// const getBufferImage = (buffer) => {
-//   console.log(buffer)
-//   if (buffer && buffer.data instanceof Array) {
-//     const uint8Array = new Uint8Array(buffer.data);
-//     const blob = new Blob([uint8Array], { type: "image/jpeg" });
-//     return URL.createObjectURL(blob);
-//   }
-//   return null;
-// };
+const getBufferImage = (buffer) => {
+  if (buffer && buffer.data instanceof Array) {
+    const uint8Array = new Uint8Array(buffer.data);
+    const blob = new Blob([uint8Array], { type: "image/jpeg" });
+    return URL.createObjectURL(blob);
+  }
+  return null;
+};
+
 </script>
 
 <style scoped>
@@ -61,12 +111,7 @@ const makeprofile = function() {
 
 .profile {
   widows: 360px;
-  height: 756px;
-  background-color: #8d6e63;
-}
-
-.text-center {
-  display: flex;
-  justify-content: space-between;
+  height: 724px;
+  background-color: #a1887f;
 }
 </style>

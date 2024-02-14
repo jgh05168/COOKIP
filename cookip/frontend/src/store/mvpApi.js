@@ -41,6 +41,18 @@ class accountService {
     });
   } 
 
+  static getstepingredient(recipe_id, step) {
+    const url = `http://localhost:5000/step_ingredient/${recipe_id}/${step}`;
+    return axios.get(url)
+      .then((res) => {
+        const data = res.data;
+        return data.step_recipeid_stepid.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+  
   static getUserProfile(id) {
     const url = `http://localhost:5000/profile/${id}`;
     return axios.get(url)

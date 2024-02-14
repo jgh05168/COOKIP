@@ -1,17 +1,35 @@
 <template>
-  <div style="display: fixed;">
-    <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
-    <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
-    <RouterLink :to="{ name: 'member' }">member</RouterLink> |
-    <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-    <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
-  </div>
   <div style="width: 360px;">
     <PhoneNumberForm v-if="currentFormIndex === 0" :show-next="showNextForm" :show-back="showbackForm"/>
     <NewLoginForm v-if="currentFormIndex === 1" :show-next="showNextForm" :show-back="showbackForm"/>
     <EmailForm v-if="currentFormIndex === 2" :show-next="showNextForm" :show-back="showbackForm"/>
     <BasicForm v-if="currentFormIndex === 3" :show-next="showNextForm" :show-back="showbackForm"/>
   </div>
+  <v-layout class="overflow-visible" style="height: 56px;">
+    <v-bottom-navigation
+      v-model="value"
+      :bg-color="color"
+      mode="shift"
+    >
+      <v-btn width="120px">
+
+        <v-icon>mdi-domain</v-icon>
+        <RouterLink :to="{ name: 'get-start' }" style="color: #f18842;">main</RouterLink>
+      </v-btn>
+
+      <v-btn width="120px">
+
+        <v-icon>mdi-home-circle</v-icon>
+        <RouterLink :to="{ name: 'mobile-home' }" style="color: #f18842;">home</RouterLink>
+      </v-btn>
+
+      <v-btn width="120px">
+
+        <v-icon>mdi-face-man-profile</v-icon>
+        <RouterLink :to="{ name: 'my-profile' }" style="color: #f18842;">my-profile</RouterLink>
+      </v-btn>
+    </v-bottom-navigation>
+  </v-layout>
 </template>
 
 <script setup>

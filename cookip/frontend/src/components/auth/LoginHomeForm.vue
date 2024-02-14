@@ -1,6 +1,6 @@
 <template>
-    <div class="login-or-sign-up" style="height: 750px">
-      <div class="overlap-group" style="height: 750px">
+    <div class="login-or-sign-up" style="height: 724px">
+      <div class="overlap-group" style="height: 724px">
             <v-img
             class="items"
             :src="require('../../assets/login_image/cookip_back.png')"
@@ -11,7 +11,7 @@
         alt="Rectangle"
         src="../../assets/login_image/cookip_logo.png"
       />
-        <div class="standard" style="height: 250px;">
+        <div class="standard" style="height: 150px;">
           <div class="frame" style="height: 350px">
             <div class="frame-2" style="height: 250px;">
               <div class="frame-3">
@@ -34,17 +34,17 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="if-you-are-creating-wrapper">
-              <p class="if-you-are-creating">
-                <span class="text-wrapper">
-                  If you are creating a new account, <br />
-                </span>
-                <span class="span">Terms &amp; Conditions</span>
-                <span class="text-wrapper"> and </span>
-                <span class="span">Privacy Policy</span>
-                <span class="text-wrapper"> will apply.</span>
-              </p>
+              <div class="if-you-are-creating-wrapper">
+                <p class="if-you-are-creating">
+                  <span class="text-wrapper">
+                    If you are creating a new account, <br />
+                  </span>
+                  <span class="span">Terms &amp; Conditions</span>
+                  <span class="text-wrapper"> and </span>
+                  <span class="span">Privacy Policy</span>
+                  <span class="text-wrapper"> will apply.</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -172,12 +172,14 @@ const goSignUp = function() {
   }
   
   .login-or-sign-up .frame-2 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 100%;
-  }
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  align-self: flex-start; /* Add this line to prevent stretching */
+}
   
   .login-or-sign-up .frame-3 {
     align-items: center;

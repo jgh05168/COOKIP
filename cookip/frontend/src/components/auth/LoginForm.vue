@@ -63,6 +63,7 @@ const error = ref(0)
 
 const login = async function(){
   const user = await accountService.getLogin(id.value, password.value)
+  const profile = await accountService.getUserProfile(user[0].user_id)
   if(user.length === 0){
     error.value = 1
   }
@@ -71,9 +72,10 @@ const login = async function(){
     useAuthStore.login_info = user
     localStorage.setItem("user_id", user[0].user_id)
     localStorage.setItem("Islogin", 1)
+
     // const profile = await accountService.getUserProfile(localStorage.getItem("user_id"))
     router.push({ name:'get-start'})
-    // localStorage.setItem("profile", JSON.stringify(profile))
+    localStorage.setItem("profile", JSON.stringify(profile))
   }
 }
 
