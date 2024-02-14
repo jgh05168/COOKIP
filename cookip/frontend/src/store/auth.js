@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
-import { ref, onMounted, computed } from 'vue';
+// import axios from 'axios';
+import { ref, computed } from 'vue';
 
 const urlUser = 'http://i10c101.p.ssafy.io:3001/User';
 const urlUserProfile = 'http://i10c101.p.ssafy.io:3001/Users_Profile';
@@ -36,12 +36,12 @@ export const useAuthStore = defineStore('auth', () => {
       const userResponse = await axios.get(urlUser);
       const userProfileResponse = await axios.get(urlUserProfile);
 
-      memberList.value = userResponse.data;
-      userProfileList.value = userProfileResponse.data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  //     memberList.value = userResponse.data;
+  //     userProfileList.value = userProfileResponse.data;
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
 
   
   onMounted(() => {

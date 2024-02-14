@@ -105,6 +105,8 @@ const set_color = (level) => {
 //   }
 //   return null;
 // };
+
+
 </script>
 
 <style scoped>

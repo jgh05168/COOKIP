@@ -19,9 +19,12 @@ export const useFavoriteStore = defineStore('favorite', () => {
     //const user_id =2;
     //const profile_id =1;
 
-    const favorite_recipe_list = (user_id, profile_id) => computed(() => {
+    const favorite_recipe_list = computed(() => {
+      if (user_id.value !== null && profile_id.value !== null) {
+
+      
       // Allergy 데이터에서 userId와 user_pw에 해당하는 ingredient_id 추출
-      const FavoriteRecipeIds = Favorite_recipe.value.filter(item => item.user_id === user_id && item.profile_id === profile_id)
+      const FavoriteRecipeIds = Favorite_recipe.value.filter(item => item.user_id === user_id.value && item.profile_id === profile_id.value)
           .map(item => item.recipe_id);
   
       // Allergy에 해당하는 recipe_id를 제외한 레시피 필터링
@@ -30,8 +33,12 @@ export const useFavoriteStore = defineStore('favorite', () => {
       // 랜덤으로 정렬된 레시피를 5개씩 묶어서 반환
       return Array.from({ length: Math.ceil(FilterdRecipes.length / 5) }, (_, index) =>
         FilterdRecipes.slice(index * 5, index * 5 + 5)
-      );
-    });
+      ) 
+      } else {
+        return 0
+      }
+      
+})
 
     console.log("favorite_recipe_list",favorite_recipe_list(2,1));
 
@@ -41,12 +48,14 @@ export const useFavoriteStore = defineStore('favorite', () => {
     // 받아온 즐겨찾기 목록 돌면서 멤버별로 분리하기
 
 
-
   return {
-  member_list,
+    member_list,
     member_favorite,
     recipes,
     Favorite_recipe,
-    favorite_recipe_list
+    favorite_recipe_list,
+    user_id,
+    profile_id,
+    
   };
-}, { persist: true });
+},{ persist: true });

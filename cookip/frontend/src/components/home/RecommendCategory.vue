@@ -7,16 +7,26 @@
     :transition="500"
     class="category-carousel"
   >
-    <Slide v-for="(category, slide) in recommend_category" :key="slide">
+    <Slide
+      class="carousel__slide"
+      v-for="(category, slide) in recommend_category"
+      :key="slide"
+    >
       <div class="category" @click="selectCategory(slide)">
         <div class="category-title">{{ category.title }}</div>
-        <img class="category-image" :src="category.img" alt="" />
+        <img class="category-image" :src="category.img" alt="" style="" />
       </div>
     </Slide>
   </Carousel>
   <div class="pagination-controls">
     <button @click="prevpage()" class="prev-button button">Previous</button>
-    <input type="number" min="0" max="5" v-model="currentSlide" class="slide-input" />
+    <input
+      type="number"
+      min="0"
+      max="5"
+      v-model="currentSlide"
+      class="slide-input"
+    />
     <button @click="nextpage()" class="next-button button">Next</button>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
@@ -105,8 +115,14 @@ const selectCategory = (slide) => {
 }
 
 .category {
-  padding: 30px;
+  padding: 10px;
+  width: 300px;
+  height: 300px;
   border: 7px solid #6d4c41;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .category-title {
@@ -114,35 +130,15 @@ const selectCategory = (slide) => {
   font-size: 30px;
   font-weight: bold;
 }
-
-.category-img {
-  width: 220px;
-}
-
-.category-title {
-  color: #6d4c41;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.category-img {
-  width: 220px;
-}
-
 .category:hover {
   transform: translateY(-5px);
 }
 
-.category-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
 .category-image {
-  width: 150px;
-  height: 150px;
+  width: 220px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 5%;
 }
 
 .pagination-controls {
@@ -154,13 +150,13 @@ const selectCategory = (slide) => {
 
 /* 이전 버튼 스타일 */
 .prev-button {
-  background-color: #4E342E;
+  background-color: #4e342e;
   color: #fff;
   margin-right: 10px;
 }
 
 .prev-button:hover {
-  background-color: #4E342E;
+  background-color: #4e342e;
 }
 
 .button {
@@ -173,12 +169,12 @@ const selectCategory = (slide) => {
 }
 /* 다음 버튼 스타일 */
 .next-button {
-  background-color: #4E342E;
+  background-color: #4e342e;
   color: #fff;
 }
 
 .next-button:hover {
-  background-color: #4E342E;
+  background-color: #4e342e;
 }
 
 .slide-input {
