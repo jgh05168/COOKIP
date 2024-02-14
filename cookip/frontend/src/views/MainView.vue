@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <!-- <h1>기본페이지입니다</h1>
-        <form action="http://localhost:5000/user/insertUser" method="post">
+        <form action="http://i10c101.p.ssafy.io:8000/user/insertUser" method="post">
         <label for="login_id">login_id:</label>
         <input type="text" id="login_id" name="login_id">
         <label for="password">password:</label>

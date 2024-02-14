@@ -2,8 +2,8 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import { ref, onMounted, computed } from 'vue';
 
-const urlUser = 'http://localhost:5000/User';
-const urlUserProfile = 'http://localhost:5000/Users_Profile';
+const urlUser = 'http://i10c101.p.ssafy.io:3001/User';
+const urlUserProfile = 'http://i10c101.p.ssafy.io:3001/Users_Profile';
 
 export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);

@@ -16,7 +16,7 @@
   import { onMounted } from 'vue';
   import QRCode from 'qrcode';
   
-  const dataToEncode = 'http://localhost:8080/'; // QR 코드로 인코딩할 데이터
+  const dataToEncode = 'http://i10c101.p.ssafy.io:8000/'; // QR 코드로 인코딩할 데이터
   
   // QR 코드를 생성하고 이미지 URL을 제공하는 함수
   const generateQRCode = async () => {

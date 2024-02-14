@@ -82,7 +82,7 @@ const submitSurvey = () => {
     }
 
     // Axios를 사용하여 POST 요청 보내기
-    axios.post('http://localhost:5000/user/allergy', {
+    axios.post('http://i10c101.p.ssafy.io:3001/user/allergy', {
         user_id: user_id,
         profile_id: profile_id,
         ingredients: newCategoryIds.map(ingredient_id => ({
