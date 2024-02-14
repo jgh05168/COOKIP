@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="width: 360px; display: fixed">
+    <!-- <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
       <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
       <RouterLink :to="{ name: 'member' }">member</RouterLink> |
@@ -13,7 +13,7 @@
       <RouterLink :to="{ name: 'recipe-detail' }">recipe_detail</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
       <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
-    </div>
+    </div> -->
     <div class="screen">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
       <transition :name="motionStore.transition_dir" mode="out-in">
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { RouterView, RouterLink } from "vue-router";
+import { RouterView } from "vue-router";
 import { onBeforeMount, onMounted, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
@@ -278,10 +278,6 @@ onMounted(() => {
   width: 360px;
 }
 
-.bar {
-  display: absolute;
-  height: 30px;
-}
 .slide-up-enter-from {
   transform: translateY(100%);
 }

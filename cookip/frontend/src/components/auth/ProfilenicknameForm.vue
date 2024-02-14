@@ -44,7 +44,7 @@ sed eiusmod tempor incididunt.</div>
               color="#007aff"
               dark
               elevation="2"
-              >Cookip Play</v-btn
+              >continue</v-btn
             >
               </div>
             </v-form>

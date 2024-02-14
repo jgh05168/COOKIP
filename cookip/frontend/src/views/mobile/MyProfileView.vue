@@ -1,12 +1,5 @@
 <template>
   <div class="container">
-    <!-- <div style="display: fixed; background-color: #f18842">
-      <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
-      <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
-      <RouterLink :to="{ name: 'member' }">member</RouterLink> |
-      <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
-    <!-- </div> -->
     <div
       class="profile"
       style="
@@ -34,7 +27,6 @@
           style="border-radius: 30%; width: 150px"
         ></v-img>
       </div>
-
       <div
         class="ma-2"
         style="
@@ -44,12 +36,14 @@
           flex: 0 0 calc(50% - 20px);
         "
       >
-        <img
-          @click="makeprofile"
-          style="width: 100%; height: 100%; object-fit: contain"
-          :src="require(`@/assets/profile_create.png`)"
-          alt=""
-        />
+      <v-img @click="makeprofile"
+        style="width: 150px;
+        height: 150px;
+        margin: 10px;
+        flex: 0 0 calc(50% - 20px); width: 100%; height: 100%; object-fit: contain"
+        :src="require(`@/assets/profile_create.png`)"
+        alt="">
+      </v-img>
       </div>
     </div>
     <v-layout class="overflow-visible" style="height: 56px;">

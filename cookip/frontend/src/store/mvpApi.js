@@ -1,20 +1,20 @@
 
 import axios from "axios";
 //여기 사이트에 json 데이터 파일 있음
-const urlRecipe = "http://i10c101.p.ssafy.io:3001/recipe";
-const urlrecipe_ingredient = "http://i10c101.p.ssafy.io:3001/recipe_ingredient";
-const urlstep = "http://i10c101.p.ssafy.io:3001/step";
-const urlingredient = "http://i10c101.p.ssafy.io:3001/ingredient";
-const urlingredient_availble = "http://i10c101.p.ssafy.io:3001/ingredient_availble";
-const urlsetpofstep = "http://i10c101.p.ssafy.io:3001/stepofstep";
-const urlcategory = "http://i10c101.p.ssafy.io:3001/category";
-const urluser = "http://i10c101.p.ssafy.io:3001/user";
-const urlscore = "http://i10c101.p.ssafy.io:3001/score";
-const urlfavorite_category = "http://i10c101.p.ssafy.io:3001/favorite_category";
-const urlfavorite_ingredient = "http://i10c101.p.ssafy.io:3001/favorite_ingredient";
-const urlfavorite_recipe = "http://i10c101.p.ssafy.io:3001/favorite_recipe";
-const urlallergy = "http://i10c101.p.ssafy.io:3001/allergy";
-const urlfollow = "http://i10c101.p.ssafy.io:3001/follow";
+const urlRecipe = "http://localhost:5000/recipe";
+const urlrecipe_ingredient = "http://localhost:5000/recipe_ingredient";
+const urlstep = "http://localhost:5000/step";
+const urlingredient = "http://localhost:5000/ingredient";
+const urlingredient_availble = "http://localhost:5000/ingredient_availble";
+const urlsetpofstep = "http://localhost:5000/stepofstep";
+const urlcategory = "http://localhost:5000/category";
+const urluser = "http://localhost:5000/user";
+const urlscore = "http://localhost:5000/score";
+const urlfavorite_category = "http://localhost:5000/favorite_category";
+const urlfavorite_ingredient = "http://localhost:5000/favorite_ingredient";
+const urlfavorite_recipe = "http://localhost:5000/favorite_recipe";
+const urlallergy = "http://localhost:5000/allergy";
+const urlfollow = "http://localhost:5000/follow";
 
 class accountService {
 
@@ -30,7 +30,7 @@ class accountService {
   }
 
   static getLogin(id, password) {
-    const url = `http://i10c101.p.ssafy.io:3001/user/${id}/${password}`;
+    const url = `http://localhost:5000/user/${id}/${password}`;
     return axios.get(url)
     .then((res) => {
       const data = res.data;
@@ -54,7 +54,7 @@ class accountService {
   }
   
   static getUserProfile(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/profile/${id}`;
+    const url = `http://localhost:5000/profile/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -66,7 +66,7 @@ class accountService {
   }
 
   static getUserRecipe_RecipeId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/recipe/${id}`;
+    const url = `http://localhost:5000/recipe/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -78,7 +78,7 @@ class accountService {
   }
 
   static getUserRecipe_CategoryId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/recipe/category/${id}`;
+    const url = `http://localhost:5000/recipe/category/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -102,7 +102,7 @@ class accountService {
 
 
   static getUserStep_recipeId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/step/${id}`;
+    const url = `http://localhost:5000/step/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -114,7 +114,7 @@ class accountService {
   }
 
   static getUserStep_recipeId_stepId(id,id2) {
-    const url = `http://i10c101.p.ssafy.io:3001/step/${id}/${id2}`;
+    const url = `http://localhost:5000/step/${id}/${id2}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -137,7 +137,7 @@ class accountService {
   }
 
   static getUseringredient_IngredientId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/ingredient/${id}`;
+    const url = `http://localhost:5000/ingredient/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -172,7 +172,7 @@ class accountService {
 
 
   static getUserrecipe_ingredient_RecipeId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/recipe_ingredient/${id}`;
+    const url = `http://localhost:5000/recipe_ingredient/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -184,7 +184,7 @@ class accountService {
   }
 
   static getUserrecipe_ingredient_UseRecipe_IngredientId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/recipe_ingredient/UseRecipe/${id}`;
+    const url = `http://localhost:5000/recipe_ingredient/UseRecipe/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -209,7 +209,7 @@ class accountService {
 
 
   static getUserstepofstep_RecipeId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/stepofstep/${id}`;
+    const url = `http://localhost:5000/stepofstep/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -221,7 +221,7 @@ class accountService {
   }
 
   static getUserstepofstep_RecipeId_StepId(id,id2) {
-    const url = `http://i10c101.p.ssafy.io:3001/stepofstep/${id}/${id2}`;
+    const url = `http://localhost:5000/stepofstep/${id}/${id2}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -233,7 +233,7 @@ class accountService {
   }
 
   static getUserstepofstep_RecipeId_StepId_StepOfStepId(id,id2,id3) {
-    const url = `http://i10c101.p.ssafy.io:3001/stepofstep/${id}/${id2}/${id3}`;
+    const url = `http://localhost:5000/stepofstep/${id}/${id2}/${id3}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -258,7 +258,7 @@ class accountService {
 
 
   static getUsercategory_CategoryId(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/category/${id}`;
+    const url = `http://localhost:5000/category/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -281,7 +281,7 @@ class accountService {
   }
 
   static getUserprofile(id) {
-    const url = `http://i10c101.p.ssafy.io:3001/profile/${id}`;
+    const url = `http://localhost:5000/profile/${id}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -359,7 +359,7 @@ class accountService {
   }
 
   static getFavorite_recipe_userid(userid) {
-    const url = `http://i10c101.p.ssafy.io:3001/favorite_recipe/${userid}`;
+    const url = `http://localhost:5000/favorite_recipe/${userid}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
@@ -371,7 +371,7 @@ class accountService {
   }
 
   static getFavorite_recipe_userid_profileid(userid,profileid) {
-    const url = `http://i10c101.p.ssafy.io:3001/favorite_recipe/${userid}/${profileid}`;
+    const url = `http://localhost:5000/favorite_recipe/${userid}/${profileid}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
