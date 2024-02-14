@@ -1,16 +1,12 @@
 <template>
   <div class="get-started">
-    <div class="overlap-group">
-      <div class="status-bar">
-        <div class="content">
+    <div class="overlap-group" style="height: 650px;">
           <v-img
             class="items"
             :src="require('../../assets/login_image/cookip_back.png')"
             alt="왜 안나와"
           />
-        </div>
-      </div>
-      <div class="frame">
+      <div class="frame" style="height: 200px;">
         <div class="frame-wrapper">
           <div class="div" style="align-items: center">
             <div class="basic-details">Welcome to COOKIP</div>
@@ -19,13 +15,6 @@
               <br />
               of the app or it’s key features.
             </p>
-          </div>
-        </div>
-        <div class="div-wrapper" style="align-items: center">
-          <div class="frame-2">
-            <div class="ellipse" />
-            <div class="ellipse-2" />
-            <div class="ellipse-2" />
           </div>
         </div>
       </div>
@@ -66,7 +55,7 @@ const gomobilehome = function () {
 <style>
 .get-started {
   background-color: #ffffff;
-  height: 800px;
+  height: 750px;
   overflow: hidden;
   position: relative;
   width: 360px;
@@ -204,7 +193,7 @@ const gomobilehome = function () {
   height: 100px;
   left: 0;
   position: absolute;
-  top: 706px;
+  top: 630px;
   width: 360px;
 }
 

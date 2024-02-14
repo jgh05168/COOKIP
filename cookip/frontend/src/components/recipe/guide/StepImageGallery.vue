@@ -1,16 +1,21 @@
 <template>
-  <div class="stepper-main-gallery">
-    <v-img src="@/assets/image/recipe/1/chadoldoenjangjjigae.jpg" />
-  </div>
+
+    <v-img class="stepper-main-gallery" :src="props.step.step_image" />
+
 </template>
   
 <script setup>
+import { defineProps } from "vue";
 
+const props = defineProps({
+  recipe: Object,
+  step: Object,
+});
 </script>
   
 <style scoped>
 .stepper-main-gallery {
-  height: 500px;
+  height: 400px;
 }
 </style>
-  
+   

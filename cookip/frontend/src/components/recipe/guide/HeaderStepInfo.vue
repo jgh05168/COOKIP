@@ -2,14 +2,14 @@
 <template>
   <div class="step-info">
     <div class="step-number">Step {{ props.step }}.</div>
-    <div class="step-description">{{ props.title }}</div>
+    <div class="step-description">{{ props.guide.method }}</div>
   </div>
 </template>
   
-  <script setup>
+<script setup>
 import { defineProps } from "vue";
 const props = defineProps({
+  guide: Object,
   step: Number,
-  title: String,
 });
 </script>

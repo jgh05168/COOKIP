@@ -1,200 +1,323 @@
 [
   {
     "name": "차돌박이 된장찌개",
-    "image": "@/assets/image/recipe/1/chadoldoenjangjjigae.jpeg",
+    "image": "@/assets/image/recipe/1/chadoldoenjangjjigae.jpg",
     "description": "색다른 된장찌개를 즐기고 싶다면 딱 한 가지 재료를 사용해보세요! 바로 차돌박이인데요. 고소한 차돌박이를 된장찌개에 넣어 보글보글 끓여내면 더욱 깊은 맛을 느낄 수 있답니다. 따듯한 집 밥이 그리운 날, 하루가 지친 날. 그런 날에 따끈한 차돌박이 된장찌개와 밥 한 그릇으로 나를 달래주세요.",
     "time": 30,
     "level": 1,
     "like": 10,
     "bookmark": 20,
-    "tag": ["구수한", "칼칼한", "간단한 요리", "한식"],
+    "tag": ["구수한", "칼칼한", "간단한 요리"],
     "ingredients": [
       {
         "id": 1,
         "name": "차돌박이",
         "unit": "g",
         "quantity": 150,
-        "image": "@/assets/image/ingredient/item_marbled.jpeg"
+        "image": "@/assets/image/ingredient/item_marbled.jpg"
       },
       {
         "id": 2,
         "name": "두부",
         "unit": "개",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_tofu.jpeg"
+        "image": "@/assets/image/ingredient/item_tofu.jpg"
       },
       {
         "id": 3,
         "name": "표고버섯",
         "unit": "개",
         "quantity": 2,
-        "image": "@/assets/image/ingredient/item_shiitakemushrooms.jpeg"
+        "image": "@/assets/image/ingredient/item_shiitakemushrooms.jpg"
       },
       {
         "id": 4,
         "name": "무",
         "unit": "개",
         "quantity": 0.125,
-        "image": "@/assets/image/ingredient/item_radish.jpeg"
+        "image": "@/assets/image/ingredient/item_radish.jpg"
       },
       {
         "id": 5,
         "name": "애호박",
         "unit": "개",
         "quantity": 0.3,
-        "image": "@/assets/image/ingredient/item_zucchini.jpeg"
+        "image": "@/assets/image/ingredient/item_zucchini.jpg"
       },
       {
         "id": 6,
         "name": "양파",
         "unit": "개",
         "quantity": 0.5,
-        "image": "@/assets/image/ingredient/item_onion.jpeg"
+        "image": "@/assets/image/ingredient/item_onion.jpg"
       },
       {
         "id": 7,
         "name": "대파",
         "unit": "개",
         "quantity": 0.5,
-        "image": "@/assets/image/ingredient/item_greenonion.jpeg"
+        "image": "@/assets/image/ingredient/item_greenonion.jpg"
       },
       {
         "id": 8,
         "name": "고추",
         "unit": "개",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_greenpepper.jpeg"
+        "image": "@/assets/image/ingredient/item_greenpepper.jpg"
       },
       {
         "id": 9,
         "name": "다시마 멸치 육수",
         "unit": "컵",
         "quantity": 2.5,
-        "image": "@/assets/image/ingredient/item_kelpanchovybroth.jpeg"
+        "image": "@/assets/image/ingredient/item_kelpanchovybroth.jpg"
       },
       {
         "id": 10,
         "name": "맛술",
         "unit": "큰술",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_cookingliquor.jpeg"
+        "image": "@/assets/image/ingredient/item_cookingliquor.jpg"
       },
       {
         "id": 11,
         "name": "다진마늘",
         "unit": "큰술",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_choppedgarlic.jpeg"
+        "image": "@/assets/image/ingredient/item_choppedgarlic.jpg"
       },
       {
         "id": 12,
         "name": "후춧가루",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_blackpepper.jpeg"
+        "image": "@/assets/image/ingredient/item_blackpepper.jpg"
       },
       {
         "id": 13,
         "name": "된장",
         "unit": "큰술",
         "quantity": 2,
-        "image": "@/assets/image/ingredient/item_soybeanpaste.jpeg"
+        "image": "@/assets/image/ingredient/item_soybeanpaste.jpg"
       },
       {
         "id": 14,
         "name": "고춧가루",
         "unit": "작은술",
         "quantity": 0.5,
-        "image": "@/assets/image/ingredient/item_chilipowder.jpeg"
+        "image": "@/assets/image/ingredient/item_chilipowder.jpg"
       }
     ],
     "utencils": [
       {
         "id": 1,
         "name": "키친 타올",
-        "image": "@/assets/image/utencil/item_kitchentowel.jpeg"
+        "image": "@/assets/image/utencil/item_kitchentowel.jpg"
       },
       {
         "id": 2,
         "name": "칼",
-        "image": "@/assets/image/utencil/item_kitchenknife.jpeg"
+        "image": "@/assets/image/utencil/item_kitchenknife.jpg"
       },
       {
         "id": 3,
         "name": "도마",
-        "image": "@/assets/image/utencil/item_cuttingboard.jpeg"
+        "image": "@/assets/image/utencil/item_cuttingboard.jpg"
       },
       {
         "id": 4,
         "name": "요리용 숟가락",
-        "image": "@/assets/image/utencil/item_cookingspoon.jpeg"
+        "image": "@/assets/image/utencil/item_cookingspoon.jpg"
       },
       {
         "id": 5,
         "name": "냄비",
-        "image": "@/assets/image/utencil/item_pot.jpeg"
+        "image": "@/assets/image/utencil/item_pot.jpg"
       },
       {
         "id": 6,
         "name": "화구",
-        "image": "@/assets/image/utencil/item_pottery.jpeg"
+        "image": "@/assets/image/utencil/item_pottery.jpg"
       }
     ],
-    "guide": 
-      [
-        {
-          "step": 1,
-          "title": "재료 손질하기 - 고기",
-          "description": "차돌박이는 2등분으로 자르고 키친 타올에 올려 핏물을 빼주세요.",
-          "step_image": "@/assets/image/recipe/1/step1.jpeg",
-          "step_ingredients": [1],
-          "step_utencils": [1, 2]
-        },
-        {
-          "step": 2,
-          "title": "재료 손질하기 - 야채",
-          "description": "무, 표고, 양파, 두부는 한 입 크기로 썰고 애호박은 반달 모양으로 썰어주세요. 대파, 홍고추, 청고추는 송송 썰어주세요.",
-          "step_image": "@/assets/image/recipe/1/step2.jpeg",
-          "step_ingredients": [2, 3, 4, 5, 6, 7, 8],
-          "step_utencils": [2, 3]
-        },
-        {
-          "step": 3,
-          "title": "조리 시작하기",
-          "description": "냄비에 차돌박이와 고기양념을 넣고 중약불에서 볶다가 기름이 나오면 무를 넣고 1분 정도 볶아주세요.",
-          "step_image": "@/assets/image/recipe/1/step3.jpeg",
-          "step_ingredients": [1, 4, 10, 11, 12],
-          "step_utencils": [4, 5, 6]
-        },
-        {
-          "step": 4,
-          "title": "조리하기 (1) 기본 육수 만들기",
-          "description": "냄비에 다시마 멸치육수와 된장을 넣고 끓여주세요.",
-          "step_image": "@/assets/image/recipe/1/step4.jpeg",
-          "step_ingredients": [13, 9],
-          "step_utencils": [4, 5, 6]
-        },
-        {
-          "step": 5,
-          "title": "조리하기 (2) 야채 넣기",
-          "description": "무가 익으면 표고버섯과 양파, 애호박을 넣어 3분 정도 끓이고 두부와 다진마늘, 고춧가루를 넣고 끓여주세요.",
-          "step_image": "@/assets/image/recipe/1/step5.jpeg",
-          "step_ingredients": [1],
-          "step_utencils": [4, 5, 6]
-        },
-        {
-          "step": 6,
-          "title": "조리 마무리하기",
-          "description": "마지막에 대파, 홍고추, 청고추를 넣고 한소끔 더 끓여주세요.",
-          "step_image": "@/assets/image/recipe/1/step6.jpeg",
-          "step_ingredients": [1],
-          "step_utencils": [4, 5, 6]
-        }
-      ]
+    "guide": [
+      {
+        "step": 1,
+        "title": "재료 손질하기 - 고기",
+        "description": "차돌박이는 2등분으로 자르고 키친 타올에 올려 핏물을 빼주세요.",
+        "step_image": "@/assets/image/recipe/1/step1.jpg",
+        "step_ingredients": [1],
+        "step_utencils": [1, 2, 3],
+        "steps_of_step": [
+          {
+            "title": "차돌박이 준비하기",
+            "description": "차돌박이는 2등분으로 자르세요.",
+            "image": "@/assets/image",
+            "ingredient": [1],
+            "utencil": [2, 3]
+          },
+          {
+            "title": "고기 핏물 제거하기",
+            "description": "2등분으로 자른 차돌박이의 핏물을 빼주세요.",
+            "image": "@/assets/image",
+            "ingredient": [1],
+            "utencil": [1, 3]
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "title": "재료 손질하기 - 야채",
+        "description": "무, 표고, 양파, 두부는 한 입 크기로 썰고 애호박은 반달 모양으로 썰어주세요. 대파, 고추는 송송 썰어주세요.",
+        "step_image": "@/assets/image/recipe/1/step2.jpg",
+        "step_ingredients": [2, 3, 4, 5, 6, 7, 8],
+        "step_utencils": [2, 3],
+        "steps_of_step": [
+          {
+            "title": "재료 손질하기 - 무",
+            "description": "무는 한 입 크기로 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [4],
+            "utencil": [2, 3]
+          },
+          {
+            "title": "재료 손질하기 - 표고",
+            "description": "표고는 한 입 크기로 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [3],
+            "utencil": [2, 3]
+          },
+          {
+            "title": "재료 손질하기 - 양파",
+            "description": "양파는 한 입 크기로 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [6],
+            "utencil": [2, 3]
+          },
+          {
+            "title": "재료 손질하기 - 두부",
+            "description": "두부는 한 입 크기로 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [2],
+            "utencil": [2, 3]
+          },
+          {
+            "title": "재료 손질하기 - 애호박",
+            "description": "애호박는 한 입 크기로 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [5],
+            "utencil": [2, 3]
+          },
+          {
+            "title": "재료 손질하기 - 대파",
+            "description": "대파는 한 입 크기로 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [7],
+            "utencil": [2, 3]
+          },
+          {
+            "title": "재료 손질하기 - 고추",
+            "description": "고추는 한 입 크기로 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [8],
+            "utencil": [2, 3]
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "title": "조리 시작하기",
+        "description": "냄비에 차돌박이와 고기양념을 넣고 중약불에서 볶다가 기름이 나오면 무를 넣고 1분 정도 볶아주세요.",
+        "step_image": "@/assets/image/recipe/1/step3.jpg",
+        "step_ingredients": [1, 4, 10, 11, 12],
+        "step_utencils": [4, 5, 6],
+        "steps_of_step": [
+          {
+            "title": "찌개 양념 넣는 방법",
+            "description": "찌개는 오래 끓이기에 따로 양념을 미리 제조하지 않고 냄비에 바로 넣어도 됩니다.",
+            "image": "@/assets/image",
+            "ingredient": [10, 11, 12],
+            "utencil": [1, 3]
+          },
+          {
+            "title": "고기를 미리 볶아 깊은 맛 내기",
+            "description": "고기를 미리 볶아서 깊은 맛을 내세요. 고기에서 기름이 나오면 무를 넣어주세요",
+            "image": "@/assets/image",
+            "ingredient": [1, 4],
+            "utencil": [2, 3]
+          }
+        ]
+      },
+      {
+        "step": 4,
+        "title": "조리하기 (1) 기본 육수 만들기",
+        "description": "냄비에 다시마 멸치육수와 된장을 넣고 끓여주세요.",
+        "step_image": "@/assets/image/recipe/1/step4.jpg",
+        "step_ingredients": [13, 9],
+        "step_utencils": [4, 5, 6],
+        "steps_of_step": [
+          {
+            "title": "다시마 멸치육수 내는 방법",
+            "description": "찌개는 오래 끓이기에 따로 양념을 미리 제조하지 않고 냄비에 바로 넣어도 됩니다.",
+            "image": "@/assets/image",
+            "ingredient": [9],
+            "utencil": [4, 5, 6]
+          }
+        ]
+      },
+      {
+        "step": 5,
+        "title": "조리하기 (2) 야채 넣기",
+        "description": "무가 익으면 표고버섯과 양파, 애호박을 넣어 3분 정도 끓이고 두부와 다진마늘, 고춧가루를 넣고 끓여주세요.",
+        "step_image": "@/assets/image/recipe/1/step5.jpg",
+        "step_ingredients": [2, 3, 5, 6, 11, 14],
+        "step_utencils": [4, 5, 6],
+        "steps_of_step": [
+          {
+            "title": "무 익은 정도 확인",
+            "description": "무는 반 투명해지면 어느정도 익은 것 입니다. 사진을 참조해주세요",
+            "image": "@/assets/image",
+            "ingredient": [4],
+            "utencil": []
+          },
+          {
+            "title": "두부 넣는 방법",
+            "description": "두부는 도마째로 다음과 같이 넣어주세여. ",
+            "image": "@/assets/image",
+            "ingredient": [2],
+            "utencil": []
+          }
+        ]
+      },
+      {
+        "step": 6,
+        "title": "조리 마무리하기",
+        "description": "마지막에 대파, 홍고추, 청고추를 넣고 한소끔 더 끓여주세요.",
+        "step_image": "@/assets/image/recipe/1/step6.jpg",
+        "step_ingredients": [7, 8],
+        "step_utencils": [4, 5, 6],
+        "steps_of_step": [
+          {
+            "title": "한 소끔 끓이는 것",
+            "description": "팔팔 끓여주세요 찌개는 오래 끓일수록 깊은 맛이 납니다. 너무 많이 졸아들면 물을 추가해주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "찌개 간 맞추기",
+            "description": "취향에 따라 소금, 멸치액젓 까나리 액젓을 넣어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
+      }
+    ]
   },
   {
     "name": "이태리 정통 까르보나라",
-    "image": "@/assets/image/recipe/2/carbonara.jpeg",
+    "image": "@/assets/image/recipe/2/carbonara.jpg",
     "description": "이탈리아의 대표적인 파스타 요리인 까르보나라는 크림소스를 사용하지 않고 계란과 파마산 치즈로 진한 크림같은 맛을 낸다. 이탈리아의 정통 까르보나라를 집에서 만들어보자.",
     "time": 30,
     "level": 1,
@@ -207,131 +330,131 @@
         "name": "스파게티면",
         "unit": "g",
         "quantity": 100,
-        "image": "@/assets/image/ingredient/item_spaghetti.jpeg"
+        "image": "@/assets/image/ingredient/item_spaghetti.jpg"
       },
       {
         "id": 2,
         "name": "양파",
         "unit": "g",
         "quantity": 30,
-        "image": "@/assets/image/ingredient/item_onion.jpeg"
+        "image": "@/assets/image/ingredient/item_onion.jpg"
       },
       {
         "id": 3,
         "name": "마늘",
         "unit": "개",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_garlic.jpeg"
+        "image": "@/assets/image/ingredient/item_garlic.jpg"
       },
       {
         "id": 4,
         "name": "베이컨",
         "unit": "g",
         "quantity": 70,
-        "image": "@/assets/image/ingredient/item_bacon.jpeg"
+        "image": "@/assets/image/ingredient/item_bacon.jpg"
       },
       {
         "id": 5,
         "name": "치킨스톡",
         "unit": "ml",
         "quantity": 200,
-        "image": "@/assets/image/ingredient/item_chickenstock.jpeg"
+        "image": "@/assets/image/ingredient/item_chickenstock.jpg"
       },
       {
         "id": 6,
         "name": "파슬리",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_parsley.jpeg"
+        "image": "@/assets/image/ingredient/item_parsley.jpg"
       },
       {
         "id": 7,
         "name": "달걀",
         "unit": "개",
         "quantity": 2,
-        "image": "@/assets/image/ingredient/item_egg.jpeg"
+        "image": "@/assets/image/ingredient/item_egg.jpg"
       },
       {
         "id": 8,
         "name": "꽃소금",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_flowersalt.jpeg"
+        "image": "@/assets/image/ingredient/item_flowersalt.jpg"
       },
       {
         "id": 9,
         "name": "소금",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_salt.jpeg"
+        "image": "@/assets/image/ingredient/item_salt.jpg"
       },
       {
         "id": 10,
         "name": "후춧가루",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_blackpepper.jpeg"
+        "image": "@/assets/image/ingredient/item_blackpepper.jpg"
       },
       {
         "id": 11,
         "name": "그라나파다노 치즈",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_granapadanocheese.jpeg"
+        "image": "@/assets/image/ingredient/item_granapadanocheese.jpg"
       },
       {
         "id": 12,
         "name": "올리브유",
         "unit": "큰술",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_oliveoil.jpeg"
+        "image": "@/assets/image/ingredient/item_oliveoil.jpg"
       }
     ],
     "utencils": [
       {
         "id": 1,
         "name": "칼",
-        "image": "@/assets/image/utencil/item_kitchenknife.jpeg"
+        "image": "@/assets/image/utencil/item_kitchenknife.jpg"
       },
       {
         "id": 2,
         "name": "도마",
-        "image": "@/assets/image/utencil/item_cuttingboard.jpeg"
+        "image": "@/assets/image/utencil/item_cuttingboard.jpg"
       },
       {
         "id": 3,
         "name": "냄비",
-        "image": "@/assets/image/utencil/item_pot.jpeg"
+        "image": "@/assets/image/utencil/item_pot.jpg"
       },
       {
         "id": 4,
         "name": "팬",
-        "image": "@/assets/image/utencil/item_pan.jpeg"
+        "image": "@/assets/image/utencil/item_pan.jpg"
       },
       {
         "id": 5,
         "name": "키친 타올",
-        "image": "@/assets/image/utencil/item_kitchentowel.jpeg"
+        "image": "@/assets/image/utencil/item_kitchentowel.jpg"
       },
       {
         "id": 6,
         "name": "치즈 그라인더",
-        "image": "@/assets/image/utencil/item_cheesegrinder.jpeg"
+        "image": "@/assets/image/utencil/item_cheesegrinder.jpg"
       },
       {
         "id": 7,
         "name": "요리용 젓가락",
-        "image": "@/assets/image/utencil/item_cookingchopstick.jpeg"
+        "image": "@/assets/image/utencil/item_cookingchopstick.jpg"
       },
       {
         "id": 8,
         "name": "요리용 보울",
-        "image": "@/assets/image/utencil/item_cookingbowl.jpeg"
+        "image": "@/assets/image/utencil/item_cookingbowl.jpg"
       },
       {
         "id": 9,
         "name": "화구",
-        "image": "@/assets/image/utencil/item_pottery.jpeg"
+        "image": "@/assets/image/utencil/item_pottery.jpg"
       }
     ],
     "guide": [
@@ -339,39 +462,117 @@
         "step": 1,
         "title": "재료 준비하기",
         "description": "냄비에 꽃소금을 한 줌과 치킨스톡을 넣고 물을 끓인 후 스파게티 면을 5분간 삶아주세요. 양파와 마늘은 곱게 다지고 베이컨을 1cm 크기로 썬 뒤 팬에 올리브유를 둘러 베이컨을 바삭하게 볶은 후 키친타올에 빼두세요.",
-        "step_image": "@/assets/image/recipe/2/step1.jpeg",
+        "step_image": "@/assets/image/recipe/2/step1.jpg",
         "step_ingredients": [8, 1, 2, 3, 4, 12],
-        "step_utencils": [1, 2, 3, 4, 5, 7, 9]
+        "step_utencils": [1, 2, 3, 4, 5, 7, 9],
+        "steps_of_step": [
+          {
+            "title": "파스타 삻는 방법",
+            "description": "면을 삶을 때 치킨 스톡을 함께 넣고 삶으면 면에 간이 베어들어 추후 간을 조절할 때 좋습니다.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "재료 손질하기 - 양파",
+            "description": "양파는 채썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "재료 손질하기 - 마늘",
+            "description": "편마늘을 만들어주세요. 마늘의 양은 취향껏 조절해주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "재료 손질하기 - 베이컨",
+            "description": "베이컨을 1cm 크기로 썬 뒤 팬에 올리브유를 둘러 베이컨을 바삭하게 볶은 후 키친타올에 빼두세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       },
       {
         "step": 2,
         "title": "재료 준비하기",
         "description": "달걀은 흰자와 노른자를 분리하고 노른자는 풀어서 준비해 주세요.",
-        "step_image": "@/assets/image/recipe/2/step2.jpeg",
+        "step_image": "@/assets/image/recipe/2/step2.jpg",
         "step_ingredients": [7],
-        "step_utencils": [7, 8]
+        "step_utencils": [7, 8],
+        "steps_of_step": [
+          {
+            "title": "노른자 분리 꿀팁",
+            "description": "도구를 사용해도 좋지만 계란 껍질을 이용해서 다음과 같이 분리해주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       },
       {
         "step": 3,
         "title": "조리 시작하기",
-        "description": "베이컨 기름으로 양파와 마늘을 볶아주세요.",
-        "step_image": "@/assets/image/recipe/2/step3.jpeg",
+        "description": "올리브유를 충분히 두른 팬에 양파와 마늘을 볶아주세요.",
+        "step_image": "@/assets/image/recipe/2/step3.jpg",
         "step_ingredients": [2, 3, 4, 12],
-        "step_utencils": [4, 7]
+        "step_utencils": [4, 7],
+        "steps_of_step": [
+          {
+            "title": "마늘 볶기",
+            "description": "올리브유는 가열점이 낮아 금방 타버리니 저온에서 마늘을 서서히 익혀주세요. 마늘은 타지 않게 주의해주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "양파 볶기",
+            "description": "어느정도 마늘이 익으면 양파를 넣어주세요. 양파는 투명해질 때까지 볶아주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       },
       {
         "step": 4,
         "title": "조리 마무리하기",
         "description": "양파와 마늘을 볶은 팬에 면수와 면을 넣고 면수의 양이 반으로 줄어들 때까지 계속 비벼주세요. 불을 끄고 달걀을 넣어 면과 잘 비빈 후 그라나 파다노 치즈, 파슬리, 후추, 볶아 둔 베이컨을 올려 마무리합니다.",
-        "step_image": "@/assets/image/recipe/2/step4.jpeg",
+        "step_image": "@/assets/image/recipe/2/step4.jpg",
         "step_ingredients": [1, 6, 7, 10, 11],
-        "step_utencils": [4, 6, 7]
+        "step_utencils": [4, 6, 7],
+        "steps_of_step": [
+          {
+            "title": "면수 넣는 이유",
+            "description": "면을 삶으면서 나오는 전분은 만테까레할 때 사용합니다. 면수를 넣어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "파스타의 꽃, 만테까레",
+            "description": "만테까레는 유화시키는 일련의 방법들을 지칭합니다. 면을 삶을 때 부터 이는 시작됐습니다. 파스타가 어느정도 완성이 되면 불을 끄고 팬을 던져주며 내용물들로 하여금 공기와 마찰을 발생 시킵니다. 만약 어렵다면 팬 안에서 돌려주며 면을 들었다 내려주세요.  소스를 유화시키는 과정에서 전분이 유화를 돕고 섞는 동안 공기와 접촉을 시켜 크림쳐럼 부드러워진 소스로 변화할 수 있습니다.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "달걀과 치즈 넣는 방법",
+            "description": "달걀 노른자와 치즈는 가열하게 되면 익어버리게 됩니다. 파스타에 잘 어우러지게 불을 끄고 넣어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       }
     ]
   },
   {
     "name": "밀푀유나베",
-    "image": "@/assets/image/recipe/3/milpoeyunabe.jpeg",
+    "image": "@/assets/image/recipe/3/milpoeyunabe.jpg",
     "description": "따끈한 국물이 생각나는 요즘 만들기도 간단하고 맛과 담음새까지 좋은 밀푀유나베 만드는 법을 알려드릴게요. 밀푀유나베는 ‘천개의 잎사귀’ 라는 뜻인데 겹겹이 쌓인 채소와 고기가 보기에도 좋고 맛도 좋아서 손님 초대용 음식으로 준비하셔도 좋답니다.",
     "time": 30,
     "level": 1,
@@ -384,141 +585,141 @@
         "name": "한우 불고기용",
         "unit": "g",
         "quantity": 100,
-        "image": "@/assets/image/ingredient/item_bulgogibeef.jpeg"
+        "image": "@/assets/image/ingredient/item_bulgogibeef.jpg"
       },
       {
         "id": 2,
         "name": "알배추",
         "unit": "g",
         "quantity": 30,
-        "image": "@/assets/image/ingredient/item_scallion.jpeg"
+        "image": "@/assets/image/ingredient/item_scallion.jpg"
       },
       {
         "id": 3,
         "name": "깻잎",
         "unit": "개",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_perillaleaves.jpeg"
+        "image": "@/assets/image/ingredient/item_perillaleaves.jpg"
       },
       {
         "id": 4,
         "name": "청경채",
         "unit": "g",
         "quantity": 70,
-        "image": "@/assets/image/ingredient/item_bokchoy.jpeg"
+        "image": "@/assets/image/ingredient/item_bokchoy.jpg"
       },
       {
         "id": 5,
         "name": "팽이버섯",
         "unit": "ml",
         "quantity": 200,
-        "image": "@/assets/image/ingredient/item_shiitakemushrooms.jpeg"
+        "image": "@/assets/image/ingredient/item_shiitakemushrooms.jpg"
       },
       {
         "id": 6,
         "name": "표고버섯",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_portobellomushrooms.jpeg"
+        "image": "@/assets/image/ingredient/item_portobellomushrooms.jpg"
       },
       {
         "id": 7,
         "name": "물",
         "unit": "개",
         "quantity": 2,
-        "image": "@/assets/image/ingredient/item_water.jpeg"
+        "image": "@/assets/image/ingredient/item_water.jpg"
       },
       {
         "id": 8,
         "name": "멸치",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_anchovies.jpeg"
+        "image": "@/assets/image/ingredient/item_anchovies.jpg"
       },
       {
         "id": 9,
         "name": "다시마",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_kombu.jpeg"
+        "image": "@/assets/image/ingredient/item_kombu.jpg"
       },
       {
         "id": 10,
         "name": "무",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_radish.jpeg"
+        "image": "@/assets/image/ingredient/item_radish.jpg"
       },
       {
         "id": 11,
         "name": "국간장",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_soupsoysauce.jpeg"
+        "image": "@/assets/image/ingredient/item_soupsoysauce.jpg"
       },
       {
         "id": 12,
         "name": "소금",
         "unit": "큰술",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_salt.jpeg"
+        "image": "@/assets/image/ingredient/item_salt.jpg"
       },
       {
         "id": 13,
         "name": "간장",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_soysauce.jpeg"
+        "image": "@/assets/image/ingredient/item_soysauce.jpg"
       },
       {
         "id": 14,
         "name": "식초",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_vinegar.jpeg"
+        "image": "@/assets/image/ingredient/item_vinegar.jpg"
       },
       {
         "id": 15,
         "name": "올리고당",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_ricesyrup.jpeg"
+        "image": "@/assets/image/ingredient/item_ricesyrup.jpg"
       },
       {
         "id": 16,
         "name": "설탕",
         "unit": "약간",
         "quantity": 0,
-        "image": "@/assets/image/ingredient/item_sugar.jpeg"
+        "image": "@/assets/image/ingredient/item_sugar.jpg"
       },
       {
         "id": 17,
         "name": "다진양파",
         "unit": "큰술",
         "quantity": 1,
-        "image": "@/assets/image/ingredient/item_choppedonion.jpeg"
+        "image": "@/assets/image/ingredient/item_choppedonion.jpg"
       }
     ],
     "utencils": [
       {
         "id": 1,
         "name": "칼",
-        "image": "@/assets/image/utencil/item_kitchenknife.jpeg"
+        "image": "@/assets/image/utencil/item_kitchenknife.jpg"
       },
       {
         "id": 2,
         "name": "도마",
-        "image": "@/assets/image/utencil/item_cuttingboard.jpeg"
+        "image": "@/assets/image/utencil/item_cuttingboard.jpg"
       },
       {
         "id": 3,
         "name": "냄비",
-        "image": "@/assets/image/utencil/item_pot.jpeg"
+        "image": "@/assets/image/utencil/item_pot.jpg"
       },
       {
         "id": 4,
         "name": "화구",
-        "image": "@/assets/image/utencil/item_pottery.jpeg"
+        "image": "@/assets/image/utencil/item_pottery.jpg"
       }
     ],
     "guide": [
@@ -526,33 +727,83 @@
         "step": 1,
         "title": "재료 손질하기 - 밀가루",
         "description": "밀가루를 물에 풀어주세요.",
-        "step_image": "@/assets/image/recipe/3/step1.jpeg",
+        "step_image": "@/assets/image/recipe/3/step1.jpg",
         "step_ingredients": [1, 2],
-        "step_utencils": [1, 4]
+        "step_utencils": [1, 4],
+        "steps_of_step": [
+          {
+            "title": "밀가루를 물에 풀어주세요.",
+            "description": "왜 넣을까요...?",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       },
       {
         "step": 2,
         "title": "재료 손질하기 - 야채",
         "description": "대파와 양파는 얇게 썰어주세요.",
-        "step_image": "@/assets/image/recipe/3/step2.jpeg",
+        "step_image": "@/assets/image/recipe/3/step2.jpg",
         "step_ingredients": [3, 4],
-        "step_utencils": [2, 3]
+        "step_utencils": [2, 3],
+        "steps_of_step": [
+          {
+            "title": "재료 손질하기 - 대파",
+            "description": "대파를 얇게 썰어주세요.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "재료 손질하기 - 양파",
+            "description": "양파를 채썰어주세요",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       },
       {
         "step": 3,
         "title": "재료 손질하기 - 육류",
         "description": "대패살은 한입 크기로 썰고 새우는 껍질을 벗겨주세요.",
-        "step_image": "@/assets/image/recipe/3/step3.jpeg",
+        "step_image": "@/assets/image/recipe/3/step3.jpg",
         "step_ingredients": [5, 6],
-        "step_utencils": [2, 3]
+        "step_utencils": [2, 3],
+        "steps_of_step": [
+          {
+            "title": "재료 손질하기 - 고기",
+            "description": "고기 써는 법",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          },
+          {
+            "title": "재료 손질하기 - 새우",
+            "description": "새우 분리하는 법",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       },
       {
         "step": 4,
         "title": "조리 시작하기",
         "description": "냄비에 다시마 멸치 육수를 넣고 끓여주세요.",
-        "step_image": "@/assets/image/recipe/3/step4.jpeg",
+        "step_image": "@/assets/image/recipe/3/step4.jpg",
         "step_ingredients": [9],
-        "step_utencils": [5]
+        "step_utencils": [5],
+        "steps_of_step": [
+          {
+            "title": "다시마 멸치육수 내는 방법",
+            "description": "찌개는 오래 끓이기에 따로 양념을 미리 제조하지 않고 냄비에 바로 넣어도 됩니다.",
+            "image": "@/assets/image",
+            "ingredient": [],
+            "utencil": []
+          }
+        ]
       }
     ]
   }

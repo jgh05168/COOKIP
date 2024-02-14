@@ -1,26 +1,18 @@
 <template>
-    <div class="login-or-sign-up">
-      <div class="overlap-group">
-        <div class="status-bar">
-          <div class="content">
-            
+    <div class="login-or-sign-up" style="height: 750px">
+      <div class="overlap-group" style="height: 750px;">
             <v-img
             class="items"
             :src="require('../../assets/login_image/cookip_back.png')"
             alt="왜 안나와"
           />
-          </div>
-        </div>
         <v-img
         class="img"
         alt="Rectangle"
         src="../../assets/login_image/cookip_logo.png"
       />
-        <div class="standard">
-          <div class="handle">
-            <div class="div" />
-          </div>
-          <div class="frame">
+        <div class="standard" style="height: 250px;">
+          <div class="frame" style="height: 250px">
             <div class="frame-2">
               <div class="frame-3">
                 <div class="what-s-your-phone">Logout or Go profile</div>
@@ -34,10 +26,10 @@
                 <div class="div-wrapper">
                   <div class="frame-4">
                     <div class="continue-wrapper">
-                      <v-btn @click="goLogin" class="continue" color="#007aff" dark elevation="2">Logout</v-btn>
+                      <v-btn @click="goLogout" class="continue" color="#007aff" dark elevation="2">Logout</v-btn>
                     </div>
                     <div class="continue-with-apple-wrapper">
-                      <v-btn @click="goSignUp" class="continue-with-apple" color="white" dark elevation="2">Go profile</v-btn>
+                      <v-btn @click="goprofile" class="continue-with-apple" color="white" dark elevation="2">Go profile</v-btn>
                     </div>
                   </div>
                 </div>
@@ -62,14 +54,17 @@
   
   <script setup>
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/store/auth';
 const router = useRouter()
 
 
-const goLogin = function() {
-    router.push({ name:'login'})
+const goLogout = function() {
+    localStorage.setItem("Islogin", 0)
+    window.location.reload();
+    useAuthStore.token = null
 }
 
-const goSignUp = function() {
+const goprofile = function() {
     router.push({ name:'signup'})
 }
   </script>

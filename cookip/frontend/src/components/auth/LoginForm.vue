@@ -20,15 +20,12 @@
               <div class="to-sign-up-you-need">Please login to continue.</div>
             </div>
             <v-form @submit.prevent class="div-4">
-                
                 <v-text-field
         v-model="id"
-        :rules="rules"
         label="ID" style="width: 100%;"
       ></v-text-field>
       <v-text-field
         v-model="password"
-        :rules="rules"
         label="Password" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
@@ -52,6 +49,7 @@
   </template>
   
   <script setup>
+  //import axios from 'axios'; // Axios 라이브러리 가져오기
   import { ref, onMounted } from 'vue';
   import accountService from "@/store/mvpApi";
   import { useAuthStore } from "@/store/auth";
@@ -62,6 +60,7 @@ const id = ref('')
 const password = ref('')
 const error = ref(0)
 
+
 const login = async function(){
   const user = await accountService.getLogin(id.value, password.value)
   if(user.length === 0){
@@ -70,8 +69,11 @@ const login = async function(){
   else{
     error.value = 0
     useAuthStore.login_info = user
-    localStorage.setItem('loginFlag', 1);
-    router.push({ name:'main'})
+    localStorage.setItem("Islogin", 1)
+    localStorage.setItem("user_id", user[0].user_id)
+    // console.log(useAuthStore.login_info)
+    useAuthStore.token = true
+    router.push({ name:'get-start'})
   }
 }
 const goback = function(){
