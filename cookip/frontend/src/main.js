@@ -4,6 +4,7 @@ import App from './App.vue'
 import './assets/tailwind.css'
 import router from './router'
 import { createPinia } from 'pinia'
+const app = createApp(App)
 const pinia = createPinia()
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 pinia.use(piniaPluginPersistedstate)
@@ -19,4 +20,8 @@ const vuetify = createVuetify({
     directives,
   })
 
-createApp(App).use(createPinia()).use(router).use(vuetify).mount('#app')
+app.use(pinia)
+app.use(router)
+app.use(vuetify)
+app.mount('#app')
+// createApp(App).use(createPinia()).use(router).use(vuetify).mount('#app')

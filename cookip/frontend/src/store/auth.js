@@ -9,7 +9,6 @@ export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);
   const userProfileList = ref([]);
   const login_info = ref(null)
-  // const token = ref(null)
   const profile = ref([])
   const profileImage = ref([])
   const cur_user_info = ref(null)
@@ -29,7 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
     lastname:'',
     birthday:'',
   })
-
+  
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
@@ -42,6 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  
   onMounted(() => {
     fetchUserData();
   });

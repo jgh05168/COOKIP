@@ -1,33 +1,25 @@
 <template>
-  <div style="width: 360px; display: fixed;">
-    <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
-    <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
-    <RouterLink :to="{ name: 'member' }">member</RouterLink> |
-    <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-    <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
-  </div>
-    <div class="screen" style="height: 750px;">
+    <div class="screen" style="height: 780px;">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
       <!-- <p>{{ motionStore.transition_dir }}</p> -->
       <!-- <transition
           :name="motionStore.transition_dir"
           mode="out-in"
           >
-          
+    
         </transition> -->
       <RouterView />
     </div>
-  <!-- <input v-model="text" type="text" />
-  <img :src="qrcode" alt=""> -->
 </template>
 
 <script setup>
-import { RouterView, RouterLink } from "vue-router";
+import { RouterView } from "vue-router";
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
+// import { useAuthStore } from "./store/auth";
 
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
@@ -184,7 +176,6 @@ const get_Favorite_ingredient = async () => {
   }
 };
 
-
 const get_Favorite_recipe = async () => {
   try {
     const Favorite_recipe_Data = await accountService.getFavorite_recipe();
@@ -201,6 +192,16 @@ const get_Favorite_recipe = async () => {
   }
 };
 
+// const get_all_profile = async () => {
+//   try {
+//     if(localStorage["Islogin"] && localStorage["user_id"]){
+//       console.log(localStorage.getItem("user_id"))
+//       useAuthStore.profile = await accountService.getUserprofile(localStorage["user_id"]);
+//     }
+//   } catch (err) {
+//     error.value = err.message;
+//   }
+// };
 
 const handleWebSocketMessage = async (e) => {
   try {
@@ -247,6 +248,7 @@ onMounted(async () => {
   await get_Favorite_category(),
   await get_Favorite_ingredient(),
   await get_Favorite_recipe(),
+  // await get_all_profile(),
   // 컴포넌트가 마운트된 후 실행되는 로직
   console.log("App Mount");
   

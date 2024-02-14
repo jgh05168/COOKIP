@@ -55,7 +55,7 @@
   import { useAuthStore } from "@/store/auth";
   import { useRouter } from "vue-router"
 
-  const router = useRouter()
+const router = useRouter()
 const id = ref('')
 const password = ref('')
 const error = ref(0)
@@ -69,12 +69,14 @@ const login = async function(){
   else{
     error.value = 0
     useAuthStore.login_info = user
+    localStorage.setItem("user_id", user[0].user_id)
     localStorage.setItem("Islogin", 1)
-    console.log(useAuthStore.login_info)
-    useAuthStore.token = true
+    // const profile = await accountService.getUserProfile(localStorage.getItem("user_id"))
     router.push({ name:'get-start'})
+    // localStorage.setItem("profile", JSON.stringify(profile))
   }
 }
+
 const goback = function(){
   router.go(-1)
 }

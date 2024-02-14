@@ -6,22 +6,14 @@
     <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
     <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> 
   </div>
-    <div v-show="Islogin == 0">
-        <LoginHomeForm />
-    </div>
-    <div v-show="Islogin == 1">
-        <LogoutHomeForm />
-    </div>
+  <ProfilepictureForm />
 </template>
 
 <script setup>
-import LoginHomeForm from '@/components/auth/LoginHomeForm.vue'
-import LogoutHomeForm from '@/components/auth/LogoutHomeForm.vue';
+// import ProfilenicknameForm from '@/components/auth/ProfilenicknameForm.vue';
+import ProfilepictureForm from '@/components/auth/ProfilepictureForm.vue';
 
-
-const Islogin = localStorage["Islogin"]
 </script>
-
 
 <style scoped>
 
