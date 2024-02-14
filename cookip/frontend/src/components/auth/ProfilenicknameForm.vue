@@ -2,7 +2,7 @@
     <div class="frame">
       <div class="div-wrapper">
           <div class="icon">
-            <v-img @click="goback" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
+            <v-img @click="goback()" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
             @mouseover="handleMouseOver"
             @mouseleave="handleMouseLeave"/>
           </div>
@@ -15,33 +15,39 @@
                 <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
                     @mouseover="handleMouseOver"
                     @mouseleave="handleMouseLeave"/>
-                <div class="basic-details">Login</div>
+                <div class="basic-details">Basic details</div>
               </div>
-              <div class="to-sign-up-you-need">Please login to continue.</div>
+              <div class="to-sign-up-you-need">Lorem ipsum dolor sit amet, adipiscing elit, 
+sed eiusmod tempor incididunt.</div>
             </div>
             <v-form @submit.prevent class="div-4">
+                
                 <v-text-field
-        v-model="id"
-        label="ID" style="width: 100%;"
+        v-model="first_name"
+        :rules="rules"
+        label="First name" style="width: 100%;"
       ></v-text-field>
       <v-text-field
-        v-model="password"
-        label="Password" style="width: 100%;"
+        v-model="last_name"
+        :rules="rules"
+        label="Last name" style="width: 100%;"
+      ></v-text-field>
+      <v-text-field
+        v-model="birthday"
+        :rules="rules"
+        label="Birthday (mm-dd-yyyy)" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
-                @click.prevent="login"
+                @click="userpost"
               class="continue"
               color="#007aff"
               dark
               elevation="2"
-              >Continue</v-btn
+              >Cookip Play</v-btn
             >
               </div>
             </v-form>
-            <div v-show="error" style="color: red;">
-              id, password를 잘못 입력했습니다.
-            </div>
           </div>
         </div>
       </div>
@@ -49,38 +55,39 @@
   </template>
   
   <script setup>
-  //import axios from 'axios'; // Axios 라이브러리 가져오기
-  import { ref, onMounted } from 'vue';
-  import accountService from "@/store/mvpApi";
-  import { useAuthStore } from "@/store/auth";
-  import { useRouter } from "vue-router"
-
+  import { ref, onMounted, defineProps } from "vue";
+  import axios from 'axios'; // Axios 라이브러리 가져오기
+import { useAuthStore } from '@/store/auth'
+import { useRouter } from 'vue-router'
 const router = useRouter()
-const id = ref('')
-const password = ref('')
-const error = ref(0)
+const store = useAuthStore()
 
 
-const login = async function(){
-  const user = await accountService.getLogin(id.value, password.value)
-  const profile = await accountService.getUserProfile(user[0].user_id)
-  if(user.length === 0){
-    error.value = 1
-  }
-  else{
-    error.value = 0
-    useAuthStore.login_info = user
-    localStorage.setItem("user_id", user[0].user_id)
-    localStorage.setItem("Islogin", 1)
+const props = defineProps({
+  showBack: Function
+});
+const first_name = ref();
+const last_name = ref();
+const birthday = ref();
 
-    // const profile = await accountService.getUserProfile(localStorage.getItem("user_id"))
-    router.push({ name:'get-start'})
-    localStorage.setItem("profile", JSON.stringify(profile))
-  }
-}
-
-const goback = function(){
-  router.go(-1)
+const userpost = () => {
+  store.signup.firstname = first_name.value
+  store.signup.lastname = last_name.value
+  store.signup.birthday = birthday.value
+  // console.log(store.signup)
+  axios.post('http://localhost:5000/user/insertUser', {
+      User_loginData:store.signup
+    })
+    .then(response => {
+        console.log('서버 응답:', response.data);
+        // alert("선호도 조사 완료");
+        // POST 요청 성공 시 수행할 작업 추가
+    })
+    .catch(error => {
+        console.error('POST 요청 오류:', error);
+        // POST 요청 실패 시 수행할 작업 추가
+    });
+  router.push({name:'login'})
 }
 const colorElement = ref(null);
 const handleMouseOver = () => {
@@ -96,6 +103,10 @@ const handleMouseLeave = () => {
 onMounted(() => {
   colorElement.value = document.querySelector('.color');
 });
+
+const goback = function(){
+  props.showBack()
+}
   </script>
   
   <style>
