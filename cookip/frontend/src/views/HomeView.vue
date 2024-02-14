@@ -6,7 +6,10 @@
       페이지
     </h2> -->
     <RouterLink class="navigation-link" :to="{ name: 'my-favorite' }">
-      즐겨찾기 보러 가기
+      <div class="link-container">
+        <span class="link-text">즐겨찾기 보러 가기</span>
+        <i class="fas fa-bookmark"></i> <!-- Font Awesome 아이콘 사용 -->
+      </div>
     </RouterLink>
     <br><br>
     <div class="message-box">
@@ -16,12 +19,13 @@
       <br>
       <div>
         <RecommendCategory />
-        레시피 추천 카테고리 캐로셀 선택된 추천 카테고리를 기준으로 아래 요리
-        미리보기 제공
       </div>
     </div>
     <RouterLink class="navigation-link" :to="{ name: 'recipe' }">
-      추천 레시피 보러 가기
+      <div class="link-container">
+        <span class="link-text">추천 레시피 보러 가기</span>
+        <i class="fas fa-utensils"></i> <!-- Font Awesome 아이콘 사용 -->
+      </div>
     </RouterLink>
   </div>
 </template>
@@ -64,6 +68,21 @@ import RecommendCategory from "@/components/home/RecommendCategory.vue";
 .greeting {
   font-size: 24px;
   color: #eb4c4c;
+  font-weight: bold; /* 텍스트를 강조하기 위해 폰트 두껍게 설정 */
+  text-transform: uppercase; /* 텍스트를 대문자로 변환하여 강조 */
 }
+
+/* 이전 스타일은 그대로 두고 아래에 추가 */
+.link-container {
+  display: flex;
+  align-items: center;
+}
+
+.link-text {
+  margin-right: 10px;
+}
+
+/* Font Awesome 아이콘을 사용하기 위해 CDN 링크를 추가하고 해당 아이콘에 대한 스타일링 */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 </style>

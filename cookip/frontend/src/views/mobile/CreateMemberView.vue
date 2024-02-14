@@ -37,22 +37,53 @@
     selectedItems.value[index] = !selectedItems.value[index];
   };
 
+  const user_id =1;
+  const user_profile=1;
+  //Favorite_category
 
-  const submitSurvey = () => {
-    //설문 선택된 항목(재료이름)
-    const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
-
-    //선택된 설문 항목내용을 sql재료 테이블의 재료 이름과 매치시켜서 id를 반환하는 함수
-    const selectedCategoryIds = selectedChoices.map(choice => {
-    const ingredient = recipeStore.user_category.find(item => item.category === choice);
-    return ingredient ? ingredient.category_id : null;
+ const submitSurvey = () => {
+    // 선택된 항목에 대한 카테고리 ID 배열
+    const selectedCategoryIds = [];
+    
+    // 선택된 항목에 대한 카테고리 ID 추출
+    items.forEach((item, index) => {
+        if (selectedItems.value[index]) {
+            const category = recipeStore.user_category.find(cat => cat.category === item);
+            if (category) {
+                selectedCategoryIds.push(category.category_id);
+            }
+        }
     });
-    //console.log("선호카테고리창",selectedChoices,selectedCategoryIds)
+
+    // 이미 선택된 항목인지 확인
+    const existingFavorites = recipeStore.Favorite_category.filter(favorite => {
+        return (
+            favorite.user_id === user_id &&
+            favorite.profile_id === user_profile &&
+            selectedCategoryIds.includes(favorite.category_id)
+        );
+    });
+
+    if (existingFavorites.length > 0) {
+        // 이미 선택된 항목 중 하나라도 존재하면 해당 항목만 추가
+        console.log("이미 선택된 항목이 있습니다.");
+        const existingCategoryIds = existingFavorites.map(favorite => favorite.category_id);
+        const newCategoryIds = selectedCategoryIds.filter(id => !existingCategoryIds.includes(id));
+        if (newCategoryIds.length === 0) {
+            // 이미 존재하는 항목만 선택한 경우
+            console.log("이미 존재하는 항목만 선택되었습니다.");
+            return;
+        }
+        // 이미 존재하는 항목 외의 항목을 추가
+        selectedCategoryIds.length = 0;
+        selectedCategoryIds.push(...newCategoryIds);
+    }
+
     // Axios를 사용하여 POST 요청 보내기
     axios.post('http://localhost:5000/user/categoryFollow', {
-      // user_id:user_id,
-      // profile_id:profile_id,
-      category_id: selectedCategoryIds
+        user_id: user_id,
+        profile_id: user_profile,
+        category_id: selectedCategoryIds
     })
     .then(response => {
         console.log('서버 응답:', response.data);

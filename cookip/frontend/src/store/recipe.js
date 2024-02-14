@@ -17,7 +17,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   const Favorite_ingredient = ref([]);
   const favorite_recipe = ref([]);
   //const expiration = ref([]); // 유통기한
-
+  //console.log("user_category",user_category);
   //servey에 필요한 재료목록 정의
   // 선호재료
   const ingredient_servey = computed(() => {
@@ -177,7 +177,7 @@ export const useRecipeStore = defineStore('recipe', () => {
       matchedRecipes.slice(index * 5, index * 5 + 5)
     );
   });
-  console.log("ingredientIds",category_3(1,1));
+  //console.log("ingredientIds",category_3(1,1));
 
 
   //선호 카테고리,선호 재료추천 알러지 있으면 제외
