@@ -20,15 +20,12 @@
               <div class="to-sign-up-you-need">Please login to continue.</div>
             </div>
             <v-form @submit.prevent class="div-4">
-                
                 <v-text-field
         v-model="id"
-        :rules="rules"
         label="ID" style="width: 100%;"
       ></v-text-field>
       <v-text-field
         v-model="password"
-        :rules="rules"
         label="Password" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
@@ -74,7 +71,8 @@ const login = async function(){
     useAuthStore.login_info = user
     localStorage.setItem("Islogin", 1)
     console.log(useAuthStore.login_info)
-    router.push({ name:'main'})
+    useAuthStore.token = true
+    router.push({ name:'get-start'})
   }
 }
 const goback = function(){

@@ -19,21 +19,27 @@ import websockets
 # print(flattened_data)
 
 # 웹캠 열기
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 
 async def handle_client(websocket, path):
-    global start, rate
     print(f"클라이언트(얼굴 인식)가 연결되었습니다.")
 
     try:
         async for message in websocket:
             known_person_list = json.loads(message)
-            flattened_data_list = [known_person_list["profile"][i]["profile_img"]["data"] for i in range(1)]
+            print(known_person_list)
+            flattened_data_list = [known_person_list["profile"][i]["profile_img"]["data"] for i in range(len(known_face_list))]
             image_data_list = [np.reshape(flattened_data_list[i], (64, 64, 4)) for i in range(len(flattened_data_list))]
             known_face_list = [fr.face_encodings(person)[0] for person in image_data_list]
             
+            tmp_data = {        # 전송할 json 형식 데이터
+                "User": None,
+                "Profile": None
+            }
+
             while True:
+                flag = 0        # 얼굴 인식이 되었는지 확인하기 위한 flag
                 # 현재 프레임 가져오기
                 ret, frame = video_capture.read()
 
@@ -62,8 +68,20 @@ async def handle_client(websocket, path):
                         # 판단 결과 출력
                         if distance[min_distance_index] < 0.5:  # 예시 값, 필요에 따라 조절 가능
                             print("인식된 얼굴:", f"Person {min_distance_index + 1}")
+                            tmp_data["User"] = known_person_list["profile"][min_distance_index]["user_id"]
+                            tmp_data["Profile"] = known_person_list["profile"][min_distance_index]["profile_id"]
+
+                            flag = 1
                         else:
                             print("인식 실패: 알려진 얼굴과 일치하지 않음")
+
+                        ##### 얼굴 인식된 정보를 지속적으로 서버에 전송해주어야 한다. 
+                        if flag:
+                            # send_json(tmp_data)
+                            json_data =json.dumps(tmp_data,  indent='\t')
+                            await websocket.send(json_data)
+                            await asyncio.sleep(0)  # 이벤트 루프에 제어를 반환하여 다음 작업이 진행될 수 있도록 함
+                            print(json_data)
 
                         # 얼굴에 블록 생성
                         cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)

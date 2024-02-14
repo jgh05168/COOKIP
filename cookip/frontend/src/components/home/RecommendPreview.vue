@@ -1,11 +1,15 @@
 <template>
-  <div class="grid grid-cols-5 gap-10">
+  <div class="recommand-title">RECOMMAND</div>
+  <div class="grid grid-cols-5 preview-list">
     <div
-      v-for="(item, idx)  in results[selectedSlide].value[0]"
+      v-for="(item, idx) in results[selectedSlide].value[0]"
       :key="idx"
-      class="rounded overflow-hidden shadow-lg preview-list"
+      class="rounded overflow-hidden shadow-lg preview-item"
+      style="color: #111111;+"
     >
-      <h1 class="preview-title">{{ item.name }}</h1>
+      <p style="font-size: 20px; font-weight: bold; text-align: center">
+        {{ item.name }}
+      </p>
       <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
     </div>
   </div>
@@ -30,7 +34,7 @@ const results = [
   recipeStore.category_3(user_id, profile_id),
   recipeStore.category_4(user_id, profile_id)
 ];
-console.log("results",results);
+console.log("results", results);
 
 watch(
   () => props.selectedSlide,
@@ -52,18 +56,29 @@ const getBufferImage = (buffer) => {
 
 <style scoped>
 .preview-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 10px auto;
-  /* width: 250px; /* 고정된 너비 */
-  /* height: 300px; 고정된 높이 */ 
-  width: 100%; /*부모 요소에 꽉 차도록 너비 설정*/
-  height: 300px; /*고정된 높이 설정*/
+  padding: 0 7%;
 }
 
-.preview-list:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
+.preview-item {
+  display: flex;
+  flex-direction: column;
+  /* width: 400px; */
+  margin: 0 auto;
+}
+
+.preview-img {
+  width: 300px;
+  height: 300px;
+  margin: 0 0;
+}
+
+.recommand-title {
+  width: 1920px;
+  text-align: center;
+  font-size: 45px;
+  font-weight: bold;
+  color: #6d4c41;
+  margin-bottom: 10px;
 }
 
 .preview-list .preview-title {

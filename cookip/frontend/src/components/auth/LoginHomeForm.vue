@@ -1,26 +1,19 @@
 <template>
-    <div class="login-or-sign-up">
-      <div class="overlap-group">
-        <div class="status-bar">
-          <div class="content">
+    <div class="login-or-sign-up" style="height: 750px">
+      <div class="overlap-group" style="height: 750px">
             <v-img
             class="items"
             :src="require('../../assets/login_image/cookip_back.png')"
             alt="왜 안나와"
           />
-          </div>
-        </div>
         <v-img
         class="img"
         alt="Rectangle"
         src="../../assets/login_image/cookip_logo.png"
       />
-        <div class="standard">
-          <div class="handle">
-            <div class="div" />
-          </div>
-          <div class="frame">
-            <div class="frame-2">
+        <div class="standard" style="height: 250px;">
+          <div class="frame" style="height: 350px">
+            <div class="frame-2" style="height: 250px;">
               <div class="frame-3">
                 <div class="what-s-your-phone">Login or sign up</div>
                 <p class="enter-phone-number">
@@ -76,12 +69,12 @@ const goSignUp = function() {
   <style>
   .login-or-sign-up {
     background-color: #ffffff;
-    height: 800px;
+    height: 750px;
     width: 360px;
   }
   
   .login-or-sign-up .overlap-group {
-    height: 800px;
+    height: 750px;
     position: relative;
   }
   
@@ -114,7 +107,6 @@ const goSignUp = function() {
   
   .get-started .items {
   height: auto;
-
   position: absolute;
   top: 4px;
   width: 100%;
@@ -141,10 +133,10 @@ const goSignUp = function() {
     background-color: white;
     background-size: 100% 100%;
     box-shadow: var(--elevation-material3-level-1-1dp);
-    height: 480px;
+    height: 380px;
     left: 0;
     position: absolute;
-    top: 320px;
+    top: 280px;
     width: 360px;
   }
   
@@ -173,32 +165,23 @@ const goSignUp = function() {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    height: 380px;
-    justify-content: space-between;
     left: 0;
     padding: 0px 16px;
     position: absolute;
-    top: 82px;
     width: 360px;
   }
   
   .login-or-sign-up .frame-2 {
     align-items: flex-start;
-    align-self: stretch;
     display: flex;
-    flex: 1;
     flex-direction: column;
-    flex-grow: 1;
-    gap: 32px;
-    position: relative;
+    position: absolute;
     width: 100%;
   }
   
   .login-or-sign-up .frame-3 {
     align-items: center;
-    align-self: stretch;
     display: flex;
-    flex: 0 0 auto;
     flex-direction: column;
     gap: 8px;
     justify-content: center;
@@ -233,9 +216,9 @@ const goSignUp = function() {
   
   .login-or-sign-up .frame-wrapper {
     align-items: flex-start;
-    align-self: stretch;
+
     display: flex;
-    flex: 0 0 auto;
+
     flex-direction: column;
     gap: 10px;
     position: relative;
@@ -320,11 +303,9 @@ const goSignUp = function() {
     align-items: center;
     align-self: stretch;
     display: flex;
-    gap: 10px;
     height: 58px;
     justify-content: center;
-    padding: 10px;
-    position: relative;
+    position: absolute;
     width: 100%;
   }
   
@@ -337,7 +318,7 @@ const goSignUp = function() {
     letter-spacing: 0;
     line-height: 20px;
     margin-top: -2px;
-    position: relative;
+    position: absolute;
     text-align: center;
   }
   

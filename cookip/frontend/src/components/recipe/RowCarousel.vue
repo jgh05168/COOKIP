@@ -21,14 +21,19 @@
         'deactive-row': slide !== currentSlide,
       }"
     >
-      <ColCarousel :recipe-list="recipe_col" :row-slide="slide" />
+      <ColCarousel
+        :recipe-list="recipe_col"
+        :row-slide="slide"
+        :nextrow="nextrow"
+        :prevrow="prevrow"
+      />
     </Slide>
   </Carousel>
 
   <div>
-    <button @click="nextpage()">Next</button>
-    <input type="number" min="0" max="3" v-model="currentSlide" />
-    <button @click="prevpage()">Prev</button>
+    <button @click="nextrow()">Next</button>
+    <input type="number" min="0" max="4" v-model="currentSlide" />
+    <button @click="prevrow()">Prev</button>
   </div>
 </template>
 
@@ -47,11 +52,11 @@ const recipe_category =
 
 const rowCarousel = ref(null);
 
-const nextpage = () => {
+const nextrow = () => {
   rowCarousel.value.next();
 };
 
-const prevpage = () => {
+const prevrow = () => {
   rowCarousel.value.prev();
 };
 

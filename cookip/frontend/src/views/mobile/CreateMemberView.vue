@@ -1,6 +1,6 @@
 <template>
     <div class="survey-container">
-      <h1 class="survey-title">선호 카테고리 조사</h1>
+      <h1 class="survey-title">선호하는 음식의 종류를 여러개 선택해주세요.</h1>
       <div v-for="(item, index) in items" :key="index" class="survey-item">
         <button
           :class="{ 'active': selectedItems[index] }"
@@ -97,72 +97,123 @@
 };
 
 
-</script>
-  
-<style scoped>
-body {
-  margin: 0;
-  padding: 0; /* 기본 padding도 제거합니다. */
-}
+//         const response = await axios.post('http://localhost:5000/user/categoryFollow', {
+//             category_id: selectedIngredientIds
+//         });
 
-.survey-container {
-  width: 100%; /* 전체 화면을 사용합니다. */
-  height: 100vh; /* 화면의 높이를 100%로 설정합니다. */
-  display: flex;
-  flex-direction: column; /* 내부 컨텐츠를 세로로 정렬합니다. */
-  align-items: center; /* 가운데 정렬합니다. */
-  justify-content: center; /* 가운데 정렬합니다. */
-  text-align: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-  
-  .survey-title {
-    color: #333;
-    font-size: 60px; /* 28px의 3배 */
-    margin-bottom: 40px; /* 20px의 3배 */
+//         console.log('서버 응답:', response.data);
+//         // 성공적으로 요청이 완료된 후 수행할 작업 추가
+//     } catch (error) {
+//         console.error('POST 요청 오류:', error);
+//         // 요청이 실패한 경우 수행할 작업 추가
+//     }
+// };
+
+// const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
+// const submitSurvey = async (selectedChoices) => { // 매개변수 추가
+//     try {
+//         const selectedIngredientIds = selectedChoices.map(choice => {
+//             const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+//             return ingredient ? ingredient.ingredient_id : null;
+//         });
+
+//         const response = await axios.post('http://localhost:5000/user/categoryFollow', {
+//             category_id: selectedIngredientIds
+//         });
+
+//         console.log('서버 응답:', response.data);
+//         // 성공적으로 요청이 완료된 후 수행할 작업 추가
+//     } catch (error) {
+//         console.error('POST 요청 오류:', error);
+//         // 요청이 실패한 경우 수행할 작업 추가
+//     }
+// };
+
+// // submitSurvey 함수 호출 시 selectedChoices를 전달해야 함
+// submitSurvey(selectedChoices);
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<style scoped>
+  @media only screen and (max-width: 360px) and (max-height: 780px) {
+    body {
+      margin: 0;
+      padding: 0; /* 기본 padding도 제거합니다. */
+      font-family: Arial, sans-serif;
+    }
+
+    .survey-container {
+      width: 25%; /* 전체 화면을 사용합니다. */
+      height: 100vh; /* 화면의 높이를 100%로 설정합니다. */
+      display: flex;
+      flex-direction: column; /* 내부 컨텐츠를 세로로 정렬합니다. */
+      align-items: center; /* 가운데 정렬합니다. */
+      justify-content: center; /* 가운데 정렬합니다. */
+      text-align: center;
+      padding: 2rm;
+      border-radius: 10px;
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+      background-color: #D7CCC8;
+      border: 0;
+    }
+    
+    .survey-title {
+      color: #040404;
+      font-size: 0.7rem; /* 28px의 3배 */
+      margin-bottom: 0.5px; /* 20px의 3배 */
+      /* padding-bottom: 100px; */
+    }
+    
+    .survey-item {
+      margin-bottom: 1rem;
+    }
+    
+    button {
+      width: 250px; /* 200px의 3배 */
+      padding: 20px; /* 10px의 3배 */
+      font-size: 1.5rem; /* 20px의 3배 */
+      background-color: #EFEBE9;
+      color: #1f1d1d;
+      border: 2px solid #1f1d1d;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    button.active {
+      background-color: #795548;
+      color: #fff;
+      border-color: #795548;
+    }
+    
+    .submit-button {
+      width: 400px; /* 250px의 3배 */
+      padding: 20px; /* 10px의 3배 */
+      font-size: 50px; /* 25px의 3배 */
+      background-color: #3E2723;
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      align-items: center; /* 세로 가운데 정렬 */
+      justify-content: center; /* 가로 가운데 정렬 */
+    }
+    
+    .submit-button:hover {
+      background-color: #3E2723;
+    }
   }
-  
-  .survey-item {
-    margin-bottom: 15px;
-  }
-  
-  button {
-    width: 400px; /* 200px의 3배 */
-    padding: 20px; /* 10px의 3배 */
-    font-size: 40px; /* 20px의 3배 */
-    background-color: #fff;
-    color: #555;
-    border: 2px solid #555;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  button.active {
-    background-color: #335fe2;
-    color: #fff;
-    border-color: #335fe2;
-  }
-  
-  .submit-button {
-    width: 500px; /* 250px의 3배 */
-    padding: 20px; /* 10px의 3배 */
-    font-size: 50px; /* 25px의 3배 */
-    background-color: #335fe2;
-    color: #fff;
-    border: none;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    align-items: center; /* 세로 가운데 정렬 */
-    justify-content: center; /* 가로 가운데 정렬 */
-}
-  
-  .submit-button:hover {
-    background-color: #1b1bdd;
-  }
-  </style>
+</style>
   

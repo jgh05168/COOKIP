@@ -13,10 +13,6 @@
         <img class="category-image" :src="category.img" alt="" />
       </div>
     </Slide>
-
-    <template #addons>
-      <Pagination />
-    </template>
   </Carousel>
   <div class="pagination-controls">
     <button @click="prevpage()" class="prev-button button">Previous</button>
@@ -24,13 +20,14 @@
     <button @click="nextpage()" class="next-button button">Next</button>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
+  <div class="divide"></div>
   <RecommendPreview :selected-slide="selectedSlide" />
 </template>
 
 <script setup>
 import RecommendPreview from "./RecommendPreview.vue";
 import { ref, watch } from "vue";
-import { Carousel, Pagination, Slide } from "vue3-carousel";
+import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 import { useMotionStore } from "@/store/motion";
 import { useRecipeStore } from "@/store/recipe";
@@ -46,14 +43,13 @@ watchEffect(() => {
       nextpage();
     } else if (value == "SwipeRight") {
       prevpage();
-    }
-    else if (value == "SwipeDown") {
-      motionStore.transition_dir = "slide-down"
-      router.push({name:"recipe" ,params : {}, query:{}})
+    } else if (value == "SwipeDown") {
+      motionStore.transition_dir = "slide-down";
+      router.push({ name: "recipe", params: {}, query: {} });
     } else if (value == "SwipeUp") {
-      motionStore.transition_dir = "slide-up"
-      router.push({name:"my-favorite" ,params : {}, query:{}})
-    } 
+      motionStore.transition_dir = "slide-up";
+      router.push({ name: "my-favorite", params: {}, query: {} });
+    }
   }
   motionStore.motion_data = {
     swipe: null,
@@ -96,22 +92,31 @@ const selectCategory = (slide) => {
 
 <style scoped>
 .category-carousel {
-  height: 300px;
+  height: 370px;
+}
+
+.divide {
+  background-color: #795548;
+  height: 10px;
+  opacity: 0.6;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .category {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  width: 200px;
-  color: rgb(6, 59, 105);
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  padding: 30px;
+  border: 7px solid #6d4c41;
+}
+
+.category-title {
+  color: #6d4c41;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.category-img {
+  width: 220px;
 }
 
 .category:hover {
@@ -173,7 +178,40 @@ const selectCategory = (slide) => {
   /* border: 1px solid #4E342E; */
   border-radius: 5px;
 }
-.error {
-  color: red;
+
+.carousel__viewport {
+  perspective: 2000px;
+}
+
+.carousel__track {
+  transform-style: preserve-3d;
+}
+
+.carousel__slide--sliding {
+  transition: 0.5s;
+}
+
+.carousel__slide {
+  opacity: 0.9;
+  transform: rotateY(-20deg) scale(0.8);
+}
+
+.carousel__slide--active ~ .carousel__slide {
+  transform: rotateY(20deg) scale(0.8);
+}
+
+.carousel__slide--prev {
+  opacity: 1;
+  transform: rotateY(-10deg) scale(0.8);
+}
+
+.carousel__slide--next {
+  opacity: 1;
+  transform: rotateY(10deg) scale(0.8);
+}
+
+.carousel__slide--active {
+  opacity: 1;
+  transform: rotateY(0) scale(1);
 }
 </style>
