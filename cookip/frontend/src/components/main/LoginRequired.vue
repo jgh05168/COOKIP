@@ -10,20 +10,20 @@
       ></v-progress-circular>
     </div>
     <div class="logo">
-      <img src="안뜬다 ... 왜지" alt="로고" />
+      <img :src="require(`@/assets/login_image/cookip_logo.png`)" alt="로고" />
     </div>
     <!-- <p>{{ useAuthStore.login_info }}</p> -->
     <footer>
-      <div v-if="timeout">
-        <span class="arrow-prev"></span>
-        <span class="arrow-prev"></span>
-        <span class="arrow-prev"></span>
-        <h2><strong>밀어서 프로필 생성</strong></h2>
-      </div>
-      <div v-else>
-        <h2><strong>hello world</strong></h2>
-      </div>
-    </footer>
+      <transition name="fade" mode="out-in">
+        <div :key="timeout" class="fade">
+          <span v-if="timeout" class="arrow-prev"></span>
+          <span v-if="timeout" class="arrow-prev"></span>
+          <span v-if="timeout" class="arrow-prev"></span>
+          <h2><strong>{{ timeout ? '밀어서 프로필 생성' : 'hello world' }}</strong></h2>
+        </div>
+      </transition>
+
+  </footer>
 
   </div>
 </template>
@@ -34,7 +34,7 @@
 import { watchEffect } from 'vue';
 import { useMotionStore } from '@/store/motion';
 import { useAuthStore } from '@/store/auth';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, onUnmounted } from 'vue';
 import accountService from "@/store/mvpApi";
 import router from '@/router';
 
@@ -63,9 +63,10 @@ const get_user_profile = async () => {
 
 const sendAuthInfoToServer = async (e) => {
   try {
+    console.log(useAuthStore.profile)
     // 만약 데이터가 서버에서 클라이언트로 전송된다면
     if (e !== null && e !== undefined) {
-      //   console.log(e.data)
+        console.log(e.data)
       const result = await JSON.parse(e.data);
       useAuthStore.cur_user_info = [result["User"], result["Profile"]]
     }
@@ -84,6 +85,13 @@ const sendAuthInfoToServer = async (e) => {
 
 const loginTimeOver = () => {
   timeout.value = true
+  motionStore.motion_data = {
+    swipe: null,
+    page: null,
+    rating: null,
+    zoom: null,
+    flip: null,
+  }
 }
 
 onMounted(async () => {
@@ -106,6 +114,12 @@ onMounted(async () => {
     loginTimeOver();
   }, 5000);
 })
+
+onUnmounted(() => {
+  if (socket) {
+    socket.close(); // 컴포넌트가 제거될 때 웹소켓 연결을 닫습니다.
+  }
+});
 
 watchEffect(() => {
   // if (useAuthStore.cur_user_info !== null) {
@@ -133,6 +147,13 @@ watchEffect(() => {
 </script>
 
 <style>
+
+img {
+  width: 400px;
+  height: auto;
+}
+
+
 .login_container {
   height: 65vh;
   display: flex;
@@ -207,5 +228,16 @@ footer h2 {
     border-top: 5px solid #000; /* 선 두께 */
     border-right: 5px solid #000; /* 선 두께 */
     transform: rotate(45deg); /* 각도 */
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

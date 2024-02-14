@@ -12,10 +12,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { onMounted } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 import QRCode from 'qrcode';
+import { useMotionStore } from '@/store/motion';
+import router from '@/router';
 
+const motionStore = useMotionStore();
 const dataToEncode = 'http://localhost:8080/'; // QR 코드로 인코딩할 데이터
 
 // QR 코드를 생성하고 이미지 URL을 제공하는 함수
@@ -41,6 +43,28 @@ const qrCodeUrl = ref('');
 
 // 컴포넌트가 마운트되면 QR 코드를 생성
 onMounted(generateQRCode);
+
+watchEffect(() => {
+  // if (useAuthStore.cur_user_info !== null) {
+  //     router.push(({name:"home" ,params : {}, query:{}}))
+  // }
+  if (motionStore.motion_data.swipe !== null) {
+    if (motionStore.motion_data.swipe == "SwipeRight") {
+      motionStore.transition_dir = "slide-right"
+      router.push({name:"main" ,params : {}, query:{}})
+    }
+    // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
+    motionStore.motion_data = {
+      swipe: null,
+      page: null,
+      rating: null,
+      zoom: null,
+      flip: null,
+    };
+    // console.log(motionStore.motion_data)
+  }
+})
+
 </script>
 
 <style>
