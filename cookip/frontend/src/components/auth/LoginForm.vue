@@ -70,6 +70,7 @@ const login = async function(){
     error.value = 0
     useAuthStore.login_info = user
     localStorage.setItem("Islogin", 1)
+    localStorage.setItem("user_id", user[0].user_id)
     console.log(useAuthStore.login_info)
     useAuthStore.token = true
     router.push({ name:'get-start'})

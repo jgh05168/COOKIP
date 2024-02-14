@@ -358,6 +358,18 @@ class accountService {
       });
   }
 
+  static getFavorite_recipe_userid(userid,profileid) {
+    const url = `http://localhost:5000/favorite_recipe/${userid}/${profileid}`;
+    return axios.get(url)
+      .then((res) => {
+        const data = res.data;
+        return data.User_profile_Favorite_Recipe.map((guild_owner) => ({ ...guild_owner }));
+      })
+      .catch((error) => {
+        throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
+      });
+  }
+
 
 
 

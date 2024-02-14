@@ -24,7 +24,6 @@ video_capture = cv2.VideoCapture(1)
 
 async def handle_client(websocket, path):
     print(f"클라이언트(얼굴 인식)가 연결되었습니다.")
-
     try:
         async for message in websocket:
             known_person_list = json.loads(message)

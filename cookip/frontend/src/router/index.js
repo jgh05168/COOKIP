@@ -137,23 +137,23 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const isLogin = localStorage.getItem('Islogin');
+// router.beforeEach((to, from, next) => {
+//   const isLogin = localStorage.getItem('Islogin');
 
 
-  const publicRoutes = ['/mobile/login', '/mobile/signup', '/mobile/home', '/'];
-  const restrictedRoutes = ['/mobile/login', '/mobile/signup'];
+//   const publicRoutes = ['/mobile/login', '/mobile/signup', '/mobile/home', '/'];
+//   const restrictedRoutes = ['/mobile/login', '/mobile/signup'];
 
 
-  if (!isLogin || (isLogin === '0' && !publicRoutes.includes(to.path))) {
-    alert('로그인이 필요합니다.');
-    next('/mobile/login');
-  } else if (isLogin === '1' && restrictedRoutes.includes(to.path)) {
-    next(from.path)
-  } else {
-    next(); 
-  }
-});
+//   if (!isLogin || (isLogin === '0' && !publicRoutes.includes(to.path))) {
+//     alert('로그인이 필요합니다.');
+//     next('/mobile/login');
+//   } else if (isLogin === '1' && restrictedRoutes.includes(to.path)) {
+//     next(from.path)
+//   } else {
+//     next(); 
+//   }
+// });
 
 
 export default router;
