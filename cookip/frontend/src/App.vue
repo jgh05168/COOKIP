@@ -27,7 +27,7 @@
 
 <script setup>
 import { RouterView, RouterLink } from "vue-router";
-import { onBeforeMount, onMounted, onBeforeUnmount, ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
@@ -57,7 +57,6 @@ const get_all_recipes = async () => {
     error.value = err.message;
   }
 };
-
 
 const get_all_ingredients = async () => {
   try {
@@ -177,11 +176,10 @@ const get_Favorite_ingredient = async () => {
     });
     recipestore.Favorite_ingredient = Favorite_ingredient_Data;
     //console.log(recipestore.Favorite_ingredient);
-
-//   } catch (err) {
-//     error.value = err.message;
-//   }
-// };
+  } catch (err) {
+    error.value = err.message;
+  }
+};
 
 // const get_Favorite_recipe = async () => {
 //   try {
@@ -205,7 +203,6 @@ const get_Favorite_recipe = async () => {
     Favoritestore.Favorite_recipe = Favorite_recipe_Data;
     recipestore.Favorite_recipe = Favorite_recipe_Data;
     console.log(recipestore.Favorite_recipe);
-
   } catch (err) {
     error.value = err.message;
   }
@@ -254,10 +251,8 @@ onBeforeMount(async () => {
     await get_Follow(),
     await get_Favorite_category(),
     await get_Favorite_ingredient(),
-    await get_Favorite_recipe()
-
+    await get_Favorite_recipe();
 });
-
 
 onMounted(() => {
   // 컴포넌트가 마운트된 후 실행되는 로직
@@ -275,9 +270,7 @@ onMounted(() => {
   socket.onerror = (e) => {
     console.error("웹소켓(모션 인식) 에러:", e);
   };
-})
-
-
+});
 </script>
 
 <style scoped>
