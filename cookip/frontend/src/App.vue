@@ -207,7 +207,7 @@ const get_Favorite_recipe = async () => {
     });
     Favoritestore.Favorite_recipe = Favorite_recipe_Data;
     recipestore.Favorite_recipe = Favorite_recipe_Data;
-    console.log(recipestore.Favorite_recipe);
+    //console.log("Favoritestore",Favoritestore.Favorite_recipe);
   } catch (err) {
     error.value = err.message;
   }
