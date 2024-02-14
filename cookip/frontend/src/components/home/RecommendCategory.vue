@@ -10,16 +10,14 @@
     <Slide v-for="(category, slide) in recommend_category" :key="slide">
       <div class="category" @click="selectCategory(slide)">
         <div class="category-title">{{ category.title }}</div>
-        <div class="category-img">
-          <img :src="require(`@/assets/image/${category.img}`)" alt="" />
-        </div>
+        <img class="category-image" :src="category.img" alt="" />
       </div>
     </Slide>
   </Carousel>
-  <div>
-    <button @click="nextpage()">Next</button>
-    <input type="number" min="0" max="5" v-model="currentSlide" />
-    <button @click="prevpage()">Prev</button>
+  <div class="pagination-controls">
+    <button @click="prevpage()" class="prev-button button">Previous</button>
+    <input type="number" min="0" max="5" v-model="currentSlide" class="slide-input" />
+    <button @click="nextpage()" class="next-button button">Next</button>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
   <div class="divide"></div>
@@ -38,12 +36,9 @@ import router from "@/router";
 
 const motionStore = useMotionStore();
 
-// motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
-// 동작 수행 후 store에 저장되어 있는 motion 초기화
 watchEffect(() => {
   if (motionStore.motion_data.swipe !== null) {
     let value = motionStore.motion_data.swipe;
-    // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
     if (value == "SwipeLeft") {
       nextpage();
     } else if (value == "SwipeRight") {
@@ -56,7 +51,6 @@ watchEffect(() => {
       router.push({ name: "my-favorite", params: {}, query: {} });
     }
   }
-  // 초기화
   motionStore.motion_data = {
     swipe: null,
     page: null,
@@ -66,7 +60,7 @@ watchEffect(() => {
   };
 });
 
-const currentSlide = ref(0); // 초기 슬라이드 인덱스 설정
+const currentSlide = ref(0);
 
 watch(currentSlide, (newVal) => {
   console.log("Current Slide Changed:", newVal);
@@ -87,12 +81,10 @@ const prevpage = () => {
 
 const recipeStore = useRecipeStore();
 const recommend_category = recipeStore.recommend_category;
-console.log("recommend_category", recommend_category);
 
 const selectedSlide = ref(0);
 
 const selectCategory = (slide) => {
-  // 클릭한 카테고리의 정보를 가져오기
   const selectedCategory = recommend_category[slide];
   console.log("Selected Category:", selectedCategory);
 };
@@ -127,8 +119,74 @@ const selectCategory = (slide) => {
   width: 220px;
 }
 
-.carousel__slide {
+.category-title {
+  color: #6d4c41;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.category-img {
+  width: 220px;
+}
+
+.category:hover {
+  transform: translateY(-5px);
+}
+
+.category-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.category-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.pagination-controls {
+  margin-top: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 이전 버튼 스타일 */
+.prev-button {
+  background-color: #4E342E;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.prev-button:hover {
+  background-color: #4E342E;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+/* 다음 버튼 스타일 */
+.next-button {
+  background-color: #4E342E;
+  color: #fff;
+}
+
+.next-button:hover {
+  background-color: #4E342E;
+}
+
+.slide-input {
+  width: 50px;
   padding: 5px;
+  text-align: center;
+  /* border: 1px solid #4E342E; */
+  border-radius: 5px;
 }
 
 .carousel__viewport {
