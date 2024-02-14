@@ -346,8 +346,8 @@ class accountService {
       });
   }
 
-  static getFavorite_recipe_userid(userid) {
-    const url = `http://localhost:5000/favorite_recipe/${userid}`;
+  static getFavorite_recipe_userid(userid,profileid) {
+    const url = `http://localhost:5000/favorite_recipe/${userid}/${profileid}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;

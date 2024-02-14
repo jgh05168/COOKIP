@@ -79,10 +79,6 @@ const Flip_test = () => {
   flip.value = !flip.value;
 };
 
-watch(currentSlide, (newVal) => {
-  console.log("Current Col:", newVal);
-  currentSlide.value = newVal;
-});
 
 // emit 으로 row 에 flip 값 전달해서 페이지 이동시 제자리로 돌아오게 걸어두기
 
