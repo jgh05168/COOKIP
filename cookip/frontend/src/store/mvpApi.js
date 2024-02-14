@@ -351,12 +351,13 @@ class accountService {
     return axios.get(url)
       .then((res) => {
         const data = res.data;
-        return data.favorite_recipe_userid.map((guild_owner) => ({ ...guild_owner }));
+        return data.User_profile_Favorite_Recipe.map((guild_owner) => ({ ...guild_owner }));
       })
       .catch((error) => {
         throw new Error(`사용자 데이터를 가져오는 데 실패했습니다: ${error.message}`);
       });
   }
+
 
 }
 

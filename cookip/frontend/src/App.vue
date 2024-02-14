@@ -32,7 +32,9 @@ import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
 import accountService from "@/store/mvpApi";
+import { useFavoriteStore } from "@/store/favorite";
 
+const Favoritestore = useFavoriteStore();
 const recipestore = useRecipeStore();
 const socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
@@ -49,6 +51,7 @@ const get_all_recipes = async () => {
         recipe.ingredient = [];
       }
     });
+    Favoritestore.recipes = recipeData;
     recipestore.recipes = recipeData;
   } catch (err) {
     error.value = err.message;
@@ -187,8 +190,10 @@ const get_Favorite_recipe = async () => {
         recipe.ingredient = [];
       }
     });
+    Favoritestore.Favorite_recipe = Favorite_recipe_Data;
     recipestore.Favorite_recipe = Favorite_recipe_Data;
     console.log(recipestore.Favorite_recipe);
+
   } catch (err) {
     error.value = err.message;
   }

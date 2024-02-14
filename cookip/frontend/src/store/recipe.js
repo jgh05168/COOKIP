@@ -17,7 +17,21 @@ export const useRecipeStore = defineStore('recipe', () => {
   const Favorite_ingredient = ref([]);
   const favorite_recipe = ref([]);
   //const expiration = ref([]); // 유통기한
-  //console.log("user_category",user_category);
+  console.log("user_category",recipes);
+
+  // 레시피 전체 데이터 객체
+  const recipes_object  = computed(() => {
+    const recipesById = {};
+  
+    // recipes 배열을 순회하면서 각 객체의 recipe_id를 키로 가지는 객체를 생성합니다.
+    recipes.value.forEach(recipe => {
+      recipesById[recipe.recipe_id] = recipe;
+    });
+  
+    // 만들어진 객체를 반환합니다.
+    return recipesById;
+  });
+
   //servey에 필요한 재료목록 정의
   // 선호재료
   const ingredient_servey = computed(() => {
@@ -26,6 +40,7 @@ export const useRecipeStore = defineStore('recipe', () => {
       ingredient_name: item.ingredient_name
     }));
   });
+
 
 
   // 추천 카테고리
@@ -70,9 +85,15 @@ export const useRecipeStore = defineStore('recipe', () => {
     const shuffledRecipes = filteredRecipes.sort(() => Math.random() - 0.5);
 
     // 랜덤으로 정렬된 레시피를 5개씩 묶어서 반환
-    return Array.from({ length: Math.ceil(shuffledRecipes.length / 5) }, (_, index) =>
-        shuffledRecipes.slice(index * 5, index * 5 + 5)
-    );
+    return Array.from({ length: Math.ceil(shuffledRecipes.length / 5) }, (_, index) => {
+      const start = index * 5;
+      const end = start + 5;
+      const slicedArray = shuffledRecipes.slice(start, end);
+      // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+      if (slicedArray.length >= 3) {
+          return slicedArray;
+      }
+    });
   });
   //console.log("category_1",category_1(1,1));
 
@@ -96,9 +117,15 @@ export const useRecipeStore = defineStore('recipe', () => {
     const sortedRecipes = filteredRecipes.sort((a, b) => b.recipe_score - a.recipe_score);
 
     // 정렬된 데이터를 5개씩 묶어 배열을 만듭니다.
-    return Array.from({ length: Math.ceil(sortedRecipes.length / 5) }, (value, index) =>
-        sortedRecipes.slice(index * 5, index * 5 + 5)
-    );
+    return Array.from({ length: Math.ceil(sortedRecipes.length / 5) }, (_, index) => {
+      const start = index * 5;
+      const end = start + 5;
+      const slicedArray = sortedRecipes.slice(start, end);
+      // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+      if (slicedArray.length >= 3) {
+          return slicedArray;
+      }
+    });
   });
   //console.log("무작위 추천2",category_2(1,1));
   //const ref_category_2 = ref([category_2]);
@@ -173,9 +200,15 @@ export const useRecipeStore = defineStore('recipe', () => {
     });
   
     // 추출된 레시피를 5개씩 묶어서 반환
-    return Array.from({ length: Math.ceil(matchedRecipes.length / 5) }, (value, index) =>
-      matchedRecipes.slice(index * 5, index * 5 + 5)
-    );
+    return Array.from({ length: Math.ceil(matchedRecipes.length / 5) }, (_, index) => {
+      const start = index * 5;
+      const end = start + 5;
+      const slicedArray = matchedRecipes.slice(start, end);
+      // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+      if (slicedArray.length >= 3) {
+          return slicedArray;
+      }
+    });
   });
   //console.log("ingredientIds",category_3(1,1));
 
@@ -218,12 +251,24 @@ export const useRecipeStore = defineStore('recipe', () => {
 
     const slicedRecipes = Array.from(
       { length: Math.ceil(filteredRecipes.length / 5) },
-      (_, index) => filteredRecipes.slice(index * 5, index * 5 + 5)
+      (_, index) => {
+          const start = index * 5;
+          const end = start + 5;
+          const slicedArray = filteredRecipes.slice(start, end);
+          // 마지막 배열이 2개 이하의 요소를 가지고 있다면 버림
+          if (slicedArray.length >= 3) {
+              return slicedArray;
+          }
+      }
   );
-
-  return slicedRecipes;
+  
+  // 빈 배열 제거
+  return slicedRecipes.filter(Boolean);
+  
   });
   //console.log("processFavoriteData",category_4(1,1));
+
+  
 
   // 추천 카테고리 별로 데이터 쪼개기
   // const recommend_list = ref([
@@ -239,6 +284,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   const currentRowSlide = ref(0)
   
   return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,recommend_category, 
-    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,currentRowSlide,filteredFavorites,category_1,category_2,category_3,category_4 }
+    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,currentRowSlide,filteredFavorites,category_1,category_2,category_3,category_4 
+  , recipes_object}
   }, { persist: true })
   

@@ -33,16 +33,10 @@
 </template>
 
 <script setup>
-import { omMounted } from "vue";
+
 import { RouterLink } from "vue-router";
 import RecommendCategory from "@/components/home/RecommendCategory.vue";
 import { onMounted } from "vue";
-import accountService from "@/store/mvpApi";
-import { useRecipeStore } from "@/store/recipe";
-
-const recipeStore = useRecipeStore();
-
-const error = ref("")
 
 
 
