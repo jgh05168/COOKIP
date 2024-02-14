@@ -47,9 +47,8 @@ import { useRecipeStore } from "@/store/recipe";
 const currentSlide = ref(0);
 const recipeStore = useRecipeStore();
 
-const recipe_category =
-  recipeStore.recommend_list[recipeStore.selected_category].recipe_list;
-
+const recipe_category = recipeStore.recommend_list[recipeStore.selected_category].recipe_list;
+console.log("recipe_category",recipe_category);
 const rowCarousel = ref(null);
 
 const nextrow = () => {
