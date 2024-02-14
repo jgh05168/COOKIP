@@ -32,7 +32,7 @@ import { ref } from 'vue';
 import { useRecipeStore } from "@/store/recipe";
 
 const recipeStore = useRecipeStore();
-console.log("asdasdsaddasd",recipeStore.filteredFavorites(5));
+//console.log("asdasdsaddasd",recipeStore.filteredFavorites(5));
 
 
 const allergens = [
@@ -70,14 +70,24 @@ const submitSurvey = () => {
   // 검색창으로 추가한 재료와 버튼으로 추가한 재료를 모두 선택된 재료 목록에 포함시킴
   const allSelectedIngredients = [...selectedChoices.value, ...allergens.filter((item, index) => selectedItems.value[index])];
   
-  // 선택된 재료들을 서버에 전송
+
   const selectedIngredientIds = allSelectedIngredients.map(choice => {
     const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
     return ingredient ? ingredient.ingredient_id : null;
   });
 
+  // 이미 선택된 항목인지 확인
+  const existingFavoriteIngredients = recipeStore.Favorite_ingredient.filter(favoriteIngredient => {
+    return selectedIngredientIds.includes(favoriteIngredient.ingredient_id);
+  });
+
+  // 이미 선택된 항목 제거
+  const newSelectedIngredientIds = selectedIngredientIds.filter(ingredientId => {
+    return !existingFavoriteIngredients.some(favoriteIngredient => favoriteIngredient.ingredient_id === ingredientId);
+  });
+
   axios.post('http://localhost:5000/user/ingredientFollow', {
-      ingredient_id: selectedIngredientIds
+      ingredient_id: newSelectedIngredientIds
   })
   .then(response => {
       console.log('서버 응답:', response.data);
@@ -87,6 +97,7 @@ const submitSurvey = () => {
       console.error('POST 요청 오류:', error);
   });
 };
+
 </script>
 
 <style scoped>

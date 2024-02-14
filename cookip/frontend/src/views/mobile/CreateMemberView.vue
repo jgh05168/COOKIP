@@ -97,50 +97,6 @@
 };
 
 
-//         const response = await axios.post('http://localhost:5000/user/categoryFollow', {
-//             category_id: selectedIngredientIds
-//         });
-
-//         console.log('서버 응답:', response.data);
-//         // 성공적으로 요청이 완료된 후 수행할 작업 추가
-//     } catch (error) {
-//         console.error('POST 요청 오류:', error);
-//         // 요청이 실패한 경우 수행할 작업 추가
-//     }
-// };
-
-// const selectedChoices = items.filter((item, index) => selectedItems.value[index]);
-// const submitSurvey = async (selectedChoices) => { // 매개변수 추가
-//     try {
-//         const selectedIngredientIds = selectedChoices.map(choice => {
-//             const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-//             return ingredient ? ingredient.ingredient_id : null;
-//         });
-
-//         const response = await axios.post('http://localhost:5000/user/categoryFollow', {
-//             category_id: selectedIngredientIds
-//         });
-
-//         console.log('서버 응답:', response.data);
-//         // 성공적으로 요청이 완료된 후 수행할 작업 추가
-//     } catch (error) {
-//         console.error('POST 요청 오류:', error);
-//         // 요청이 실패한 경우 수행할 작업 추가
-//     }
-// };
-
-// // submitSurvey 함수 호출 시 selectedChoices를 전달해야 함
-// submitSurvey(selectedChoices);
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

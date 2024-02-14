@@ -16,8 +16,8 @@ export const useFavoriteStore = defineStore('favorite', () => {
       {favorite_list:[1,2,3,4,]},
     ])
 
-    const user_id =2;
-    const profile_id =1;
+    //const user_id =2;
+    //const profile_id =1;
 
     const favorite_recipe_list = (user_id, profile_id) => computed(() => {
       // Allergy 데이터에서 userId와 user_pw에 해당하는 ingredient_id 추출
@@ -33,7 +33,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
       );
     });
 
-    console.log("favorite_recipe_list",favorite_recipe_list(user_id,profile_id));
+    console.log("favorite_recipe_list",favorite_recipe_list(2,1));
 
 
 
