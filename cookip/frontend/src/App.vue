@@ -10,7 +10,7 @@
     <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'main' }">main</RouterLink> |
       <RouterLink :to="{ name: 'home' }">home</RouterLink> |
-      <RouterLink :to="{ name: 'member' }">member</RouterLink> |
+      <RouterLink :to="{ name: 'recipe-detail' }">recipe_detail</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
       <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
     </div>
@@ -71,9 +71,9 @@ const get_all_ingredients = async () => {
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
-    console.log("getgeyget", categoryData);
+    //console.log("getgeyget",categoryData);
     recipestore.user_category = categoryData; // 이거 스토어 recipe.js와 같아야함
-    console.log("get_확인", recipestore.user_category);
+    //console.log("get_확인",recipestore.user_category);
   } catch (err) {
     error.value = err.message;
   }
@@ -89,7 +89,7 @@ const get_all_recipes_ingredients = async () => {
       );
       matchingRecipe.ingredient.push(ingredient.ingredient_id);
     });
-    console.log(recipestore.recipes);
+    //console.log(recipestore.recipes)
   } catch (err) {
     error.value = err.message;
   }
@@ -176,11 +176,23 @@ const get_Favorite_ingredient = async () => {
       }
     });
     recipestore.Favorite_ingredient = Favorite_ingredient_Data;
-    console.log(recipestore.Favorite_ingredient);
-  } catch (err) {
-    error.value = err.message;
-  }
-};
+    //console.log(recipestore.Favorite_ingredient);
+
+//   } catch (err) {
+//     error.value = err.message;
+//   }
+// };
+
+// const get_Favorite_recipe = async () => {
+//   try {
+//     const Favorite_recipe_Data = await accountService.getFavorite_recipe();
+//     Favorite_recipe_Data.forEach((recipe) => {
+//       if (!Object.prototype.hasOwnProperty.call(recipe, "ingredient")) {
+//         recipe.ingredient = [];
+//       }
+//     });
+//     recipestore.Favorite_recipe = Favorite_recipe_Data;
+//     console.log(recipestore.Favorite_recipe);
 
 const get_Favorite_recipe = async () => {
   try {
@@ -266,11 +278,6 @@ onMounted(() => {
 })
 
 
-onBeforeUnmount(() => {
-  // 컴포넌트가 파괴되기 전에 웹소켓 연결을 닫음
-  socket.close();
-  console.log("앱 Unmount");
-});
 </script>
 
 <style scoped>

@@ -5,7 +5,6 @@ import HomeView from "@/views/HomeView.vue";
 import CreateProfileView from "@/views/CreateProfileView.vue";
 import MainView from "@/views/MainView.vue";
 import MemberView from "@/views/MemberView.vue";
-import MyProfileView from "@/views/MyProfileView.vue";
 import RecipeDetailView from "@/views/RecipeDetailView.vue";
 import RecipeView from "@/views/RecipeView.vue";
 import UserProfileView from "@/views/UserProfileView.vue";
@@ -14,6 +13,8 @@ import SearchView from "@/views/SearchView.vue";
 
 
 // Mobile views
+import MakeProfileView from "@/views/mobile/MakeProfileView.vue"
+import MyProfileView from "@/views/mobile/MyProfileView.vue";
 import GetstartView from "@/views/mobile/GetStartView.vue"
 import CreateMemberView from "@/views/mobile/CreateMemberView.vue";
 import servey_allergView from "@/components/create/servey_allerg.vue";
@@ -47,11 +48,6 @@ const routes = [
     component: MemberView,
   },
   {
-    path: "/myprofile",
-    name: "my-profile",
-    component: MyProfileView,
-  },
-  {
     path: '/recipe/detail', // Example of dynamic route parameter
     name : 'recipe-detail',
     component: RecipeDetailView,
@@ -76,19 +72,29 @@ const routes = [
     name: "search",
     component: SearchView,
   },
-
   
-
+  
+  
   // Mobile views
+  {
+    path: "/mobile/makeprofile",
+    name: "mobile-make-profile",
+    component: MakeProfileView,
+  },
   {
     path: "/mobile/home",
     name: "mobile-home",
     component: MobileHomeView,
   },
   {
-    path: "/",
+    path: "/mobile/start",
     name: "get-start",
     component: GetstartView,
+  },
+  {
+    path: "/mobile/myprofile",
+    name: "my-profile",
+    component: MyProfileView,
   },
   {
     path: "/mobile/createmember",
@@ -141,7 +147,7 @@ const router = createRouter({
 //   const isLogin = localStorage.getItem('Islogin');
 
 
-//   const publicRoutes = ['/mobile/login', '/mobile/signup', '/mobile/home', '/'];
+//   const publicRoutes = ['/mobile/login', '/mobile/signup', '/mobile/home', '/', '/mobile/start'];
 //   const restrictedRoutes = ['/mobile/login', '/mobile/signup'];
 
 

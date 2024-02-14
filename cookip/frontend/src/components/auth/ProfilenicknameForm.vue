@@ -75,7 +75,7 @@ const userpost = () => {
   store.signup.lastname = last_name.value
   store.signup.birthday = birthday.value
   // console.log(store.signup)
-  axios.post('http://i10c101.p.ssafy.io:3001/user/insertUser', {
+  axios.post('http://localhost:5000/user/insertUser', {
       User_loginData:store.signup
     })
     .then(response => {

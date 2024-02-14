@@ -21,19 +21,25 @@ import { useRecipeStore } from "@/store/recipe";
 
 const recipeStore = useRecipeStore();
 
-const props = defineProps({
-  selectedSlide: Number,
-});
-
 
 const user_id = 1;
 const profile_id = 1;
+
 const results = [
   recipeStore.category_1(user_id, profile_id),
   recipeStore.category_2(user_id, profile_id),
   recipeStore.category_3(user_id, profile_id),
   recipeStore.category_4(user_id, profile_id)
 ];
+
+
+const props = defineProps({
+  selectedSlide: Number,
+});
+
+
+
+
 console.log("results", results);
 
 watch(

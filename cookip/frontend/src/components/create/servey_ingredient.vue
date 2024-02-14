@@ -32,7 +32,7 @@ import { ref } from 'vue';
 import { useRecipeStore } from "@/store/recipe";
 
 const recipeStore = useRecipeStore();
-console.log("asdasdsaddasd",recipeStore.filteredFavorites(5));
+//console.log("asdasdsaddasd",recipeStore.filteredFavorites(5));
 
 
 const allergens = [
@@ -66,27 +66,49 @@ const addSelectedIngredient = () => {
   }
 };
 
+const user_id = 1;
+const profile_id = 1;
 const submitSurvey = () => {
-  // 검색창으로 추가한 재료와 버튼으로 추가한 재료를 모두 선택된 재료 목록에 포함시킴
-  const allSelectedIngredients = [...selectedChoices.value, ...allergens.filter((item, index) => selectedItems.value[index])];
-  
-  // 선택된 재료들을 서버에 전송
-  const selectedIngredientIds = allSelectedIngredients.map(choice => {
-    const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-    return ingredient ? ingredient.ingredient_id : null;
-  });
+    // 검색창으로 추가한 재료와 버튼으로 추가한 재료를 모두 선택된 재료 목록에 포함시킴
+    const allSelectedIngredients = [...selectedChoices.value, ...allergens.filter((item, index) => selectedItems.value[index])];
+    
+    // 만약 모든 재료가 null이거나 빈 문자열이면 요청을 보내지 않음
+    if (allSelectedIngredients.every(ingredient => !ingredient)) {
+        console.log('선택된 재료가 없습니다. 요청을 보내지 않습니다.');
+        return;
+    }
 
-  axios.post('http://localhost:5000/user/ingredientFollow', {
-      ingredient_id: selectedIngredientIds
-  })
-  .then(response => {
-      console.log('서버 응답:', response.data);
-      alert("선호도 조사 완료");
-  })
-  .catch(error => {
-      console.error('POST 요청 오류:', error);
-  });
+    const selectedIngredientIds = allSelectedIngredients.map(choice => {
+        const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+        return ingredient ? ingredient.ingredient_id : null;
+    });
+
+    // 이미 선택된 항목인지 확인
+    const existingFavoriteIngredients = recipeStore.Favorite_ingredient.filter(favoriteIngredient => {
+        return selectedIngredientIds.includes(favoriteIngredient.ingredient_id);
+    });
+
+    // 이미 선택된 항목 제거
+    const newSelectedIngredientIds = selectedIngredientIds.filter(ingredientId => {
+        return !existingFavoriteIngredients.some(favoriteIngredient => favoriteIngredient.ingredient_id === ingredientId);
+    }).filter(Boolean); // null 또는 빈 문자열 제거
+
+    axios.post('http://i10c101.p.ssafy.io:3001/user/ingredientFollow', {
+        user_id: user_id,
+        profile_id: profile_id,
+        ingredient_id: newSelectedIngredientIds
+    })
+    .then(response => {
+        console.log('서버 응답:', response.data);
+        alert("선호도 조사 완료");
+    })
+    .catch(error => {
+        console.error('POST 요청 오류:', error);
+    });
 };
+
+
+
 </script>
 
 <style scoped>

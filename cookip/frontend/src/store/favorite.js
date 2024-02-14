@@ -16,8 +16,8 @@ export const useFavoriteStore = defineStore('favorite', () => {
       {favorite_list:[1,2,3,4,]},
     ])
 
-    const user_id = ref(null)
-    const profile_id = ref(null)
+    //const user_id =2;
+    //const profile_id =1;
 
     const favorite_recipe_list = computed(() => {
       if (user_id.value !== null && profile_id.value !== null) {
@@ -40,8 +40,7 @@ export const useFavoriteStore = defineStore('favorite', () => {
       
 })
 
-
-    // console.log("favorite_recipe_list",favorite_recipe_list(user_id,profile_id));
+    console.log("favorite_recipe_list",favorite_recipe_list(2,1));
 
 
 

@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@mdi/js": "^7.4.47",
     "@vueuse/integrations": "^10.7.2",
     "all": "^0.0.0",
     "autoprefixer": "^10",

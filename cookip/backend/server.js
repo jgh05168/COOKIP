@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-var session = require('express-session')
+
 
 const app = express();
-app.use(session({ secret: 'unidago', cookie: { maxAge: 60000 }, resave:true, saveUninitialized:true, })) // 세션: 서버, 쿠키: local
+
 
 var bodyParser = require('body-parser') // req를 받기위한 api 선언
 app.use(bodyParser.urlencoded({ extended: false })) // req를 받기위한 api 선언(세팅) 2
@@ -62,6 +62,10 @@ app.use("/follow", follow);  //이거는 json파일 이 저장되는 url
 const profile = require("./routes/profile");
 app.use("/profile", profile);
 // Port
+
+const step_ingredient = require("./routes/step_ingredient");
+app.use("/step_ingredient", step_ingredient);
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
