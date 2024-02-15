@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div style="width: 360px; display: fixed">
+    <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'get-start' }">main</RouterLink> |
       <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
       <RouterLink :to="{ name: 'member' }">member</RouterLink> |
@@ -13,7 +13,7 @@
       <RouterLink :to="{ name: 'recipe-detail' }">recipe_detail</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
       <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
-    </div> -->
+    </div>
     <div class="screen">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
       <transition :name="motionStore.transition_dir" mode="out-in">
@@ -27,7 +27,7 @@
 
 <script setup>
 import { RouterView } from "vue-router";
-import { onMounted, ref } from "vue";
+import {onMounted, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
@@ -252,9 +252,7 @@ onMounted(async () => {
     await get_Favorite_category(),
     await get_Favorite_ingredient(),
     await get_Favorite_recipe();
-});
 
-onMounted(() => {
   // 컴포넌트가 마운트된 후 실행되는 로직
   console.log("App Mount");
 
@@ -271,6 +269,7 @@ onMounted(() => {
     console.error("웹소켓(모션 인식) 에러:", e);
   };
 });
+
 </script>
 
 <style scoped>

@@ -42,7 +42,7 @@ class accountService {
   } 
 
   static getstepingredient(recipe_id, step) {
-    const url = `http://localhost:5000/step_ingredient/${recipe_id}/${step}`;
+    const url = `http://i10c101.p.ssafy.io:3002/step_ingredient/${recipe_id}/${step}`;
     return axios.get(url)
       .then((res) => {
         const data = res.data;
