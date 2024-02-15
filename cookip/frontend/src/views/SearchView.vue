@@ -157,14 +157,6 @@ watch(
         router.push({ name: "home" });
       }
     }
-    // 초기화
-    motionStore.motion_data = {
-      swipe: null,
-      page: null,
-      rating: null,
-      zoom: null,
-      flip: null,
-    };
   }
 );
 </script>
