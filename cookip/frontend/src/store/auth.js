@@ -31,9 +31,10 @@ export const useAuthStore = defineStore('auth', () => {
   
   const profile = ref({
     nickname: '',
-    firstname: '',
-    lastname: '',
+    realpicture:'',
+    picture:'',
   })
+  
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
