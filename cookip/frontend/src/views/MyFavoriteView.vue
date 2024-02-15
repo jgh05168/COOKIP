@@ -61,6 +61,7 @@
               :nexttab="nexttab"
               :prevtab="prevtab"
               :tab="tab"
+              :tab-idx="idx"
               :favorite-list="members_favorite_list"
             />
           </v-window-item>

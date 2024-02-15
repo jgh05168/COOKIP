@@ -25,7 +25,7 @@
         <button @click="nowRecipe">nowrecipe</button>|
         <FlipCard
           class="shadow-2xl"
-          :flip="flip && slide == currentSlide"
+          :flip="flip && props.rowSlide == recipeStore.currentRowSlide && slide == currentSlide "
           :recipe="recipe"
         />
       </div>
@@ -97,8 +97,7 @@ const nowRecipe = () => {
 
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
 // 동작 수행 후 store에 저장되어 있는 motion 초기화
-watch(
-  () => motionStore.motion_data,
+watch(() => motionStore.motion_data,
   (newMotion) => {
     if (newMotion.swipe !== null) {
       if (flip.value == true) {
@@ -113,6 +112,7 @@ watch(
       } else if (newMotion.swipe == "SwipeRight") {
         props.prevrow();
       }
+      newMotion.swipe = null
     } else if (newMotion.zoom !== null) {
       // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
       if (newMotion.zoom == "ZoomIn") {
@@ -120,6 +120,7 @@ watch(
       } else if (newMotion.zoom == "ZoomOut") {
         flip.value = false;
       }
+      newMotion.zoom = null
     } else if (newMotion.page !== null) {
       if (newMotion.page == "PageIn") {
         router.push({
@@ -129,6 +130,7 @@ watch(
       } else if (newMotion.page == "PageOut") {
         router.push({ name: "home" });
       }
+      newMotion.page = null
     }
   }
 );
