@@ -18,20 +18,7 @@
       </div>
     </Slide>
   </Carousel>
-  <div class="pagination-controls">
-    <button @click="prevpage()" class="prev-button button">Previous</button>
-    <input
-      type="number"
-      min="0"
-      max="5"
-      v-model="currentSlide"
-      class="slide-input"
-    />
-    <button @click="nextpage()" class="next-button button" style="">
-      Next
-    </button>
-    <p v-if="error" class="error">{{ error }}</p>
-  </div>
+  
   <div class="divide"></div>
   <RecommendPreview :selected-slide="selectedSlide" />
 </template>
@@ -57,7 +44,6 @@ watch(currentSlide, (newVal) => {
 });
 
 const rowCarousel = ref(null);
-const error = ref("");
 
 const nextpage = () => {
   rowCarousel.value.next();
@@ -91,6 +77,7 @@ watchEffect(() => {
       motionStore.transition_dir = "slide-up";
       router.push({ name: "my-favorite", params: {}, query: {} });
     }
+    motionStore.motion_data.swipe = null
   }
 });
 

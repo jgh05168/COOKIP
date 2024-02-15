@@ -5,7 +5,6 @@
     :itemsToShow="2"
     :wrapAround="true"
     :transition="500"
-    style="height: "
     class="favorite-carousel"
   >
     <Slide v-for="(recipe, slide) in props.recipeList" :key="slide">
@@ -87,8 +86,8 @@
         <v-divider class="mx-4 mb-1"></v-divider>
 
         <v-card-actions>
-          <button @click="prev">prev</button>
-          <button @click="next">next</button>
+          <button @click="prevpage">prev</button>
+          <button @click="nextpage">next</button>
           <v-btn color="" variant="text"> Start </v-btn>
           <v-btn @click="nowRecipe()"> 현재 슬라이드 정보</v-btn>
         </v-card-actions>
@@ -110,6 +109,7 @@ const props = defineProps({
   prevtab: Function,
   tab: Number,
   favoriteList: Array,
+  tabIdx:Number,
 });
 const motionStore = useMotionStore();
 // const favoriteStore = useFavoriteStore();
@@ -129,11 +129,11 @@ const nowRecipe = () => {
     .recipe_id;
 };
 
-const next = () => {
+const nextpage = () => {
   fCarousel.value.next();
 };
 
-const prev = () => {
+const prevpage = () => {
   fCarousel.value.prev();
 };
 
@@ -156,15 +156,16 @@ watchEffect(() => {
   if (motionStore.motion_data.swipe !== null) {
     if (motionStore.motion_data.swipe == "SwipeUp") {
       // 다음 멤버로
-      props.nexttab();
+      props.prevtab();
     } else if (motionStore.motion_data.swipe == "SwipeDown") {
       // 이전 멤버로
-      props.prevtab();
+      props.nexttab();
     } else if (motionStore.motion_data.swipe == "SwipeLeft") {
-      next(); // 다음 레시피
+      nextpage(); // 다음 레시피
     } else if (motionStore.motion_data.swipe == "SwipeRight") {
-      prev(); // 이전 레시피
+      prevpage(); // 이전 레시피
     }
+    motionStore.motion_data.swipe = null
   } else if (motionStore.motion_data.page !== null) {
     if (motionStore.motion_data.page == "PageIn") {
       router.push({
@@ -174,6 +175,7 @@ watchEffect(() => {
     } else if (motionStore.motion_data.page == "PageOut") {
       router.push({ name: "home" });
     }
+    motionStore.motion_data.page = null
   }
 });
 </script>
