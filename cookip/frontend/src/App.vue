@@ -5,14 +5,14 @@
       <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
       <RouterLink :to="{ name: 'member' }">member</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
+      <!-- <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
     </div>
     <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'main' }">main</RouterLink> |
       <RouterLink :to="{ name: 'home' }">home</RouterLink> |
       <RouterLink :to="{ name: 'recipe-detail' }">recipe_detail</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
+      <!-- <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
     </div>
     <div class="screen">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
