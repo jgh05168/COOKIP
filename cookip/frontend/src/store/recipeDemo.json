@@ -326,84 +326,70 @@
     "tag": ["이탈리아", "파스타", "계란", "달걀", "고소한", "정통"],
     "ingredients": [
       {
-        "id": 1,
+        "id": 29,
         "name": "스파게티면",
         "unit": "g",
         "quantity": 100,
         "image": "@/assets/image/ingredient/item_spaghetti.jpg"
       },
       {
-        "id": 2,
+        "id": 9,
         "name": "양파",
         "unit": "g",
         "quantity": 30,
         "image": "@/assets/image/ingredient/item_onion.jpg"
       },
       {
-        "id": 3,
+        "id": 18,
         "name": "마늘",
         "unit": "개",
         "quantity": 1,
         "image": "@/assets/image/ingredient/item_garlic.jpg"
       },
       {
-        "id": 4,
+        "id": 31,
         "name": "베이컨",
         "unit": "g",
         "quantity": 70,
         "image": "@/assets/image/ingredient/item_bacon.jpg"
       },
       {
-        "id": 5,
+        "id": 30,
         "name": "치킨스톡",
         "unit": "ml",
         "quantity": 200,
         "image": "@/assets/image/ingredient/item_chickenstock.jpg"
       },
       {
-        "id": 6,
+        "id": 32,
         "name": "파슬리",
         "unit": "약간",
         "quantity": 0,
         "image": "@/assets/image/ingredient/item_parsley.jpg"
       },
       {
-        "id": 7,
+        "id": 33,
         "name": "달걀",
         "unit": "개",
         "quantity": 2,
         "image": "@/assets/image/ingredient/item_egg.jpg"
       },
       {
-        "id": 8,
-        "name": "꽃소금",
-        "unit": "약간",
-        "quantity": 0,
-        "image": "@/assets/image/ingredient/item_flowersalt.jpg"
-      },
-      {
-        "id": 9,
-        "name": "소금",
-        "unit": "약간",
-        "quantity": 0,
-        "image": "@/assets/image/ingredient/item_salt.jpg"
-      },
-      {
-        "id": 10,
-        "name": "후춧가루",
+        "id": 21,
+        "name": "통후추",
         "unit": "약간",
         "quantity": 0,
         "image": "@/assets/image/ingredient/item_blackpepper.jpg"
       },
       {
-        "id": 11,
-        "name": "그라나파다노 치즈",
+        "id": 35,
+        "name": "파르미지아노 레지아노 치즈",
         "unit": "약간",
         "quantity": 0,
         "image": "@/assets/image/ingredient/item_granapadanocheese.jpg"
       },
       {
-        "id": 12,
+        "id": 36,
         "name": "올리브유",
         "unit": "큰술",
         "quantity": 1,
@@ -413,48 +399,28 @@
     "utencils": [
       {
         "id": 1,
-        "name": "칼",
-        "image": "@/assets/image/utencil/item_kitchenknife.jpg"
-      },
-      {
-        "id": 2,
         "name": "도마",
         "image": "@/assets/image/utencil/item_cuttingboard.jpg"
       },
       {
-        "id": 3,
-        "name": "냄비",
-        "image": "@/assets/image/utencil/item_pot.jpg"
+        "id": 2,
+        "name": "칼",
+        "image": "@/assets/image/utencil/item_kitchenknife.jpg"
       },
       {
-        "id": 4,
+        "id": 3,
         "name": "팬",
         "image": "@/assets/image/utencil/item_pan.jpg"
       },
       {
-        "id": 5,
-        "name": "키친 타올",
-        "image": "@/assets/image/utencil/item_kitchentowel.jpg"
-      },
-      {
-        "id": 6,
-        "name": "치즈 그라인더",
-        "image": "@/assets/image/utencil/item_cheesegrinder.jpg"
-      },
-      {
-        "id": 7,
-        "name": "요리용 젓가락",
-        "image": "@/assets/image/utencil/item_cookingchopstick.jpg"
-      },
-      {
-        "id": 8,
-        "name": "요리용 보울",
-        "image": "@/assets/image/utencil/item_cookingbowl.jpg"
-      },
-      {
-        "id": 9,
+        "id": 4,
         "name": "화구",
         "image": "@/assets/image/utencil/item_pottery.jpg"
+      },
+      {
+        "id": 5,
+        "name": "요리용 젓가락",
+        "image": "@/assets/image/utencil/item_cookingchopstick.jpg"
       }
     ],
     "guide": [
@@ -463,8 +429,8 @@
         "title": "재료 확인하기",
         "description": "모든 재료를 그림과 같이 놔주세요.",
         "step_image": "@/assets/image/recipe/2/step0.jpg",
-        "step_ingredients": [1,2,3,4,5,6,7,8,9,10,11, 12],
-        "step_utencils": [1, 2, 3, 4, 5,6, 7,8, 9],
+        "step_ingredients": [9, 18, 56, 31, 30, 29, 36, 33, 35, 32, 21],
+        "step_utencils": [1, 2, 3, 4, 5],
         "steps_of_step": [
         ]
 
@@ -472,110 +438,92 @@
       {
         "step": 1,
         "title": "재료 준비하기",
-        "description": "냄비에 꽃소금을 한 줌과 치킨스톡을 넣고 물을 끓인 후 스파게티 면을 5분간 삶아주세요. 양파와 마늘은 곱게 다지고 베이컨을 1cm 크기로 썬 뒤 팬에 올리브유를 둘러 베이컨을 바삭하게 볶은 후 키친타올에 빼두세요.",
-        "step_image": "@/assets/image/recipe/2/step1.jpg",
-        "step_ingredients": [8, 1, 2, 3, 4, 12],
-        "step_utencils": [1, 2, 3, 4, 5, 7, 9],
+        "description": "양파와 마늘을 썰어주고 페퍼론치노를 준비해주세요. 베이컨은 잘게 썰어주세요.",
+        "step_ingredients": [18, 56, 9, 31],
+        "step_utencils": [1, 2],
         "steps_of_step": [
+                    {
+            "title": "재료 손질하기 - 마늘",
+            "description": "다음과 같이 편썰어주세요.",
+            "image": "@/assets/image/28-1-1.gif",
+            "ingredient": [18],
+            "utencil": [1, 2]
+          },
           {
-            "title": "파스타 삻는 방법",
-            "description": "면을 삶을 때 치킨 스톡을 함께 넣고 삶으면 면에 간이 베어들어 추후 간을 조절할 때 좋습니다.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
+            "title": "재료 손질하기 - 페퍼론치노",
+            "description": "다음과 같이 편썰어주세요.",
+            "image": "@/assets/image/28-1-2.gif",
+            "ingredient": [56],
+            "utencil": [1, 2]
           },
           {
             "title": "재료 손질하기 - 양파",
-            "description": "양파는 채썰어주세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
-          },
-          {
-            "title": "재료 손질하기 - 마늘",
-            "description": "편마늘을 만들어주세요. 마늘의 양은 취향껏 조절해주세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
+            "description": "다음과 같이 편썰어주세요.",
+            "image": "@/assets/image/28-1-3.gif",
+            "ingredient": [9],
+            "utencil": [1, 2]
           },
           {
             "title": "재료 손질하기 - 베이컨",
-            "description": "베이컨을 1cm 크기로 썬 뒤 팬에 올리브유를 둘러 베이컨을 바삭하게 볶은 후 키친타올에 빼두세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
+            "description": "다음과 같이 편썰어주세요.",
+            "image": "@/assets/image/28-1-4.gif",
+            "ingredient": [31],
+            "utencil": [1, 2]
           }
         ]
       },
       {
         "step": 2,
-        "title": "재료 준비하기",
-        "description": "달걀은 흰자와 노른자를 분리하고 노른자는 풀어서 준비해 주세요.",
-        "step_image": "@/assets/image/recipe/2/step2.jpg",
-        "step_ingredients": [7],
-        "step_utencils": [7, 8],
+        "title": "조리 준비하기",
+        "description": "팬에 치킨스톡을 넣고 물을 끓인 후 스파게티 면을 5분간 삶아주세요.",
+        "step_ingredients": [29, 30],
+        "step_utencils": [3, 4, 5],
         "steps_of_step": [
           {
-            "title": "노른자 분리 꿀팁",
-            "description": "도구를 사용해도 좋지만 계란 껍질을 이용해서 다음과 같이 분리해주세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
+            "title": "조리 준비하기",
+            "description": "면을 삶을 때 치킨 스톡을 함께 넣고 삶으면 면에 간이 베어들어 추후 간을 조절할 때 좋습니다.",
+            "image": "@/assets/image/28-2-1.gif",
+            "ingredient": [29, 30],
+            "utencil": [3, 4, 5]
           }
         ]
       },
       {
         "step": 3,
-        "title": "조리 시작하기",
-        "description": "올리브유를 충분히 두른 팬에 양파와 마늘을 볶아주세요.",
-        "step_image": "@/assets/image/recipe/2/step3.jpg",
-        "step_ingredients": [2, 3, 4, 12],
-        "step_utencils": [4, 7],
+        "title": "조리하기",
+        "description": "올리브유를 충분히 두른 팬에 베이컨과 양파와 마늘을 볶아주세요. 양파와 마늘을 볶은 팬에 면수와 면을 넣고 면수의 양이 반으로 줄어들 때까지 계속 비벼주세요.",
+        "step_ingredients": [36, 9, 18, 29],
+        "step_utencils": [3, 4, 5],
         "steps_of_step": [
           {
-            "title": "마늘 볶기",
-            "description": "올리브유는 가열점이 낮아 금방 타버리니 저온에서 마늘을 서서히 익혀주세요. 마늘은 타지 않게 주의해주세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
+            "title": "조리하기 (1)",
+            "description": "올리브유는 가열점이 낮아 금방 타버리니 저온에서 마늘을 서서히 익혀주세요. 어느정도 마늘이 익으면 양파를 넣어주세요. 양파는 투명해질 때까지 볶아주세요.",
+            "image": "@/assets/image/28-3-1.gif",
+            "ingredient": [36, 9, 18],
+            "utencil": [3, 4, 5]
           },
           {
-            "title": "양파 볶기",
-            "description": "어느정도 마늘이 익으면 양파를 넣어주세요. 양파는 투명해질 때까지 볶아주세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
+            "title": "조리하기 (2)",
+            "description": "면을 삶으면서 나오는 전분은 만테까레할 때 사용합니다. 면을 삶은 후 면수를 버리지 않고 따로 담아두세요.",
+            "image": "@/assets/image/28-3-2.gif",
+            "ingredient": [29],
+            "utencil": [3, 4, 5]
           }
         ]
       },
       {
         "step": 4,
         "title": "조리 마무리하기",
-        "description": "양파와 마늘을 볶은 팬에 면수와 면을 넣고 면수의 양이 반으로 줄어들 때까지 계속 비벼주세요. 불을 끄고 달걀을 넣어 면과 잘 비빈 후 그라나 파다노 치즈, 파슬리, 후추, 볶아 둔 베이컨을 올려 마무리합니다.",
-        "step_image": "@/assets/image/recipe/2/step4.jpg",
-        "step_ingredients": [1, 6, 7, 10, 11],
-        "step_utencils": [4, 6, 7],
+        "description": "불을 끄고 달걀을 넣어 면과 잘 비빈 후 그라나 파다노 치즈, 파슬리, 후추를 올려 마무리합니다.",
+        "step_ingredients": [33, 29, 35, 32, 21],
+        "step_utencils": [3, 4, 5],
         "steps_of_step": [
           {
-            "title": "면수 넣는 이유",
-            "description": "면을 삶으면서 나오는 전분은 만테까레할 때 사용합니다. 면수를 넣어주세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
-          },
-          {
-            "title": "파스타의 꽃, 만테까레",
-            "description": "만테까레는 유화시키는 일련의 방법들을 지칭합니다. 면을 삶을 때 부터 이는 시작됐습니다. 파스타가 어느정도 완성이 되면 불을 끄고 팬을 던져주며 내용물들로 하여금 공기와 마찰을 발생 시킵니다. 만약 어렵다면 팬 안에서 돌려주며 면을 들었다 내려주세요.  소스를 유화시키는 과정에서 전분이 유화를 돕고 섞는 동안 공기와 접촉을 시켜 크림쳐럼 부드러워진 소스로 변화할 수 있습니다.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
-          },
-          {
-            "title": "달걀과 치즈 넣는 방법",
-            "description": "달걀 노른자와 치즈는 가열하게 되면 익어버리게 됩니다. 파스타에 잘 어우러지게 불을 끄고 넣어주세요.",
-            "image": "@/assets/image",
-            "ingredient": [],
-            "utencil": []
+            "title": "조리 마무리하기",
+            "description": "달걀 노른자와 치즈는 가열하게 되면 익어버리게 됩니다. 파스타에 잘 어우러지게 불을 끄고 팬을 던져주며 내용물들로 하여금 공기와 마찰을 발생 시킵니다.",
+            "image": "@/assets/image/28-4-1.gif",
+            "ingredient": [33, 29, 35, 32, 21],
+            "utencil": [3, 4, 5]
           }
         ]
       }
