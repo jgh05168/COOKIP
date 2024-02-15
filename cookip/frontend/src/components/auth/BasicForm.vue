@@ -12,9 +12,7 @@
           <div class="div">
             <div class="div-2">
               <div class="div-3">
-                <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
-                    @mouseover="handleMouseOver"
-                    @mouseleave="handleMouseLeave"/>
+                <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" />
                 <div class="basic-details">Basic details</div>
               </div>
               <div class="to-sign-up-you-need">Lorem ipsum dolor sit amet, adipiscing elit, 

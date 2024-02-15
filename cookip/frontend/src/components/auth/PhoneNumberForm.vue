@@ -21,8 +21,6 @@
                 class="color"
                 alt="Color"
                 src="../../assets/login_icon/call.png"
-                @mouseover="handleMouseOver"
-                @mouseleave="handleMouseLeave"
               />
               <div class="basic-details">Your phone number</div>
             </div>
