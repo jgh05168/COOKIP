@@ -10,7 +10,15 @@ export const useAuthStore = defineStore('auth', () => {
   const userProfileList = ref([]);
   const login_info = ref(null)
   const profileImage = ref([])
-  const cur_user_info = ref(null)
+  const cur_profile = ref({
+    profile_face:null,
+    profile_id:null,
+    profile_img:null,
+    profile_name:null,
+    profile_nickname:null,
+    user_id:null
+  })
+  
   const img = ref();
 
   const Islogin = computed(() => {
@@ -37,8 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
-      const userProfileResponse = await axios.get(urlUserProfile);
-
+      const userProfileResponse = await axios.get(`${urlUserProfile}/${userResponse.user.user_id}`);
       memberList.value = userResponse.data;
       userProfileList.value = userProfileResponse.data;
     } catch (error) {
@@ -58,7 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
     signup,
     profile,
     profileImage,
-    cur_user_info, 
+    cur_profile, 
     Islogin,
     img
   };

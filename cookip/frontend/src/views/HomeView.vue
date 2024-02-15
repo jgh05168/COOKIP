@@ -15,7 +15,7 @@
         </div></RouterLink
       >
     </div>
-    <div class="user-info">안녕하세요! 레시피님</div>
+    <div class="user-info">안녕하세요! {{ useAuthStore.cur_profile.profile_nickname}}님</div>
     <div class="divide"></div>
     <div class="recommand">
       <RecommendCategory />
@@ -36,6 +36,7 @@
 import { RouterLink } from "vue-router";
 import RecommendCategory from "@/components/home/RecommendCategory.vue";
 import { onMounted } from "vue";
+import { useAuthStore } from "@/store/auth";
 
 onMounted(async () => {});
 </script>

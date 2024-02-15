@@ -70,11 +70,20 @@ const sendAuthInfoToServer = async (e) => {
     // console.log(useAuthStore.profile)
     // 만약 데이터가 서버에서 클라이언트로 전송된다면
     if (e !== null && e !== undefined) {
-      console.log(e.data);
+      console.log("받은데이터", e.data);
       const result = await JSON.parse(e.data);
-      useAuthStore.cur_user_info = [result["User"], result["Profile"]];
-    } else {
-      const jsonData = JSON.stringify(useAuthStore.profile);
+      useAuthStore.cur_user_info = [result["User"], result["Profile"]]
+    }
+    else {
+      const extractedData = useAuthStore.profile.profile.map((item) => {
+        return {
+          profile_face: item.profile_face,
+          profile_id: item.profile_id,
+          user_id: item.user_id,
+        };
+      });
+      console.log("보낼대에터", extractedData)
+      const jsonData = JSON.stringify(extractedData);
       if (socket && socket.readyState === WebSocket.OPEN && jsonData) {
         socket.send(jsonData);
         console.log(
@@ -100,12 +109,24 @@ onMounted(async () => {
   // 웹소켓 연결 설정
   socket.onopen = () => {
     console.log("웹소켓(얼굴 인식) 연결이 열렸습니다.");
-    sendAuthInfoToServer(); // 연결이 열리면 데이터를 서버로 전송
+    sendAuthInfoToServer(null); // 연결이 열리면 데이터를 서버로 전송
   };
 
   // 에러가 발생했을 때의 처리
   socket.onerror = (e) => {
     console.error("웹소켓(얼굴 인식) 에러:", e);
+  };
+
+  socket.onmessage = (event) => {
+    const receivedData = JSON.parse(event.data);
+    console.log("서버에서 받은 데이터:", receivedData);
+    // 받은 데이터에 따라 필요한 처리 수행
+    const findProfileById = (profileId) => {
+      return useAuthStore.profile.profile.find(profile => profile.profile_id === profileId);
+    };
+    localStorage.setItem("cur_profile", JSON.stringify(findProfileById(receivedData.Profile)));      // 로컬스토리지에 현재 프로필 저장
+    useAuthStore.cur_profile = findProfileById(receivedData.Profile)              // pinia 저장
+    router.push({ name: "home", params: {}, query: {} }); // homeview로 라우터 푸시
   };
 
   setTimeout(() => {
@@ -131,7 +152,6 @@ watchEffect(() => {
     // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
   }
 
-  sendAuthInfoToServer();
 });
 </script>
 

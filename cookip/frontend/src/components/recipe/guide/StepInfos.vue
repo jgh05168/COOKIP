@@ -45,7 +45,7 @@ onMounted(() => {
   console.log("스텝인포스 진입", props.recipe)
   console.log("샘플입니다",  props.recipe.ingredients[props.step.step_ingredients[0]].name);
 })
-console.log("props");
+
 const cookingTip = ref(""); // Define a reactive variable to capture the textarea input
 </script>
 
