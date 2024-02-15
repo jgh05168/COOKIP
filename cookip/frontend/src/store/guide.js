@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import recipeStepsData from "./recipeDemo.json";
 
 export const useGuideStore = defineStore(
     "guiderecipe",
@@ -23,8 +22,6 @@ export const useGuideStore = defineStore(
         // 현재 레시피 전체 도구 정보, 객체로 바로 찾으면 됨
         const now_recipe_utencils = ref({});
 
-        const recipe_steps = ref(recipeStepsData);
-
         return {
             now_recipe_id,
             now_recipe_info,
@@ -32,7 +29,6 @@ export const useGuideStore = defineStore(
             now_recipe_ingredients,
             now_recipe_stepofstep,
             now_recipe_utencils,
-            recipe_steps,
         };
     },
     { persist: true }

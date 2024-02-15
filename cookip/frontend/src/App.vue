@@ -6,7 +6,7 @@
       <RouterLink :to="{ name: 'member' }">member</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
       <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
-    
+
     <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'main' }">main</RouterLink> |
       <RouterLink :to="{ name: 'home' }">home</RouterLink> |
@@ -27,7 +27,7 @@
 
 <script setup>
 import { RouterView } from "vue-router";
-import {onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
@@ -66,6 +66,28 @@ const get_all_ingredients = async () => {
     error.value = err.message;
   }
 };
+
+//레시피랑 재료 같이 있는 테이블
+const get_match_recipe_ingredient = async () => {
+  try {
+    const all_ingredients = await accountService.getUserrecipe_ingredient();
+    recipestore.user_recipe_ingredient = all_ingredients;
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+//보유식자재
+const get_user_recipe_match_ingredients = async () => {
+  try {
+    const all_ingredients = await accountService.getUserigredient_availble();
+    recipestore.user_ingredient_availble = all_ingredients;
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
 
 const get_all_category = async () => {
   try {
@@ -252,6 +274,8 @@ onMounted(async () => {
     await get_Favorite_category(),
     await get_Favorite_ingredient(),
     await get_Favorite_recipe();
+    await get_match_recipe_ingredient();
+    await get_user_recipe_match_ingredients();
 
   // 컴포넌트가 마운트된 후 실행되는 로직
   console.log("App Mount");
@@ -269,13 +293,12 @@ onMounted(async () => {
     console.error("웹소켓(모션 인식) 에러:", e);
   };
 });
-
 </script>
 
 <style scoped>
 .screen {
-  width: 360px;
- 
+  width: 1920px;
+  height: 1080px;
 }
 
 .slide-up-enter-from {

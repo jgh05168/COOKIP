@@ -1,14 +1,13 @@
 <template>
   <div class="recipe-guide-container">
-    <v-stepper v-model="selectedStep">
+    <v-stepper class="guide-stepper" v-model="selectedStep">
       <!-- stepper 헤더 -->
       <v-stepper-header class="grid grid-cols-3">
         <v-stepper-item
-          v-for="(guide, index) in recipe_steps.guide"
-          :key="index"
-          :title="index"
-          :value="index"
-          :complete="guide.method <= selectedStep"
+          v-for="(step, idx) in GS.now_recipe_step"
+          :key="idx"
+          :title="idx"
+          :value="idx"
         >
         </v-stepper-item>
       </v-stepper-header>
@@ -17,24 +16,22 @@
       <v-stepper-content>
         <div
           class="recipe-guide"
-          v-for="(guide, index) in recipe_steps.guide"
-          :key="index"
+          v-for="(step, idx) in GS.now_recipe_step"
+          :key="idx"
         >
           <!-- 각 스텝의 가이드 별 헤더 -->
           <GuideHeaderVue
             class="recipe-guide-header"
-            :recipe="recipe_steps"
-            :guide="guide"
-            :now_step="index + 1"
-            v-if="index + 1 === selectedStep"
+            :step="step"
+            :now-step="idx"
+            v-if="idx === selectedStep"
           />
           <!-- 각 스텝의 가이드 별 내용 -->
           <GuideStepperVue
             class="recipe-guide-body"
-            :recipe="recipe_steps"
-            :guide="guide"
-            :now_step="index + 1"
-            v-if="index + 1 === selectedStep"
+            :step="step"
+            :now-step="idx"
+            v-if="idx === selectedStep"
           />
         </div>
       </v-stepper-content>
@@ -50,7 +47,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onBeforeMount } from "vue";
 import { useGuideStore } from "@/store/guide";
 // import accountService from "@/store/mvpApi";
 import recipeData from "@/store/recipeDemo.json";
@@ -66,27 +63,26 @@ const now_recipe_id = ref({});
 
 // const recipe_steps = ref(recipeStepsData[0]);
 
-const selectedStep = ref(1);
+const selectedStep = ref(0);
 
-const guideStore = useGuideStore();
-const recipe_steps = ref({});
+const GS = useGuideStore();
 
-onMounted(async () => {
+onBeforeMount(async () => {
   // 디테일 페이지로 들어올 때 사용하는 recipe_id 값을 params 값을 이용해서 받기
 
-  guideStore.now_recipe_id = router.currentRoute.value.params.recipe_id;
+  GS.now_recipe_id = router.currentRoute.value.params.recipe_id;
   // console.log(now_recipe_id.value);
-  now_recipe_id.value = guideStore.now_recipe_id;
+  now_recipe_id.value = GS.now_recipe_id;
 
   // // 레시피 step 가져오기
-  // guideStore.now_recipe_guide = await accountService.getUserStep_recipeId(
+  // GS.now_recipe_guide = await accountService.getUserStep_recipeId(
   //   now_recipe_id.value
   // );
   console.log(recipeData[1]);
-  guideStore.now_recipe_step = recipeData[1].guide;
+  GS.now_recipe_step = recipeData[1].guide;
 
   // // 레시피 재료 가져오기
-  // guideStore.now_recipe_ingredients =
+  // GS.now_recipe_ingredients =
   //   await accountService.getUserrecipe_ingredient_RecipeId(now_recipe_id.value);
 
   // 재료 정보  객체화 하기
@@ -96,46 +92,41 @@ onMounted(async () => {
     ingredientObject[ingredient.id] = ingredient;
   }
   console.log(ingredientObject);
-  guideStore.now_recipe_ingredients = ingredientObject
+  GS.now_recipe_ingredients = ingredientObject;
   // 도구 재료 정보화 하기
   let utencilsObject = {};
 
   for (const utencil of recipeData[1].utencils) {
     utencilsObject[utencil.id] = utencil;
   }
-  guideStore.now_recipe_utencils = utencilsObject
-  
+  GS.now_recipe_utencils = utencilsObject;
+
   // // 레시피 스텝 오브 스텝 가져오기
-  // guideStore.now_recipe_stepofstep =
+  // GS.now_recipe_stepofstep =
   //   await accountService.getUserstepofstep_RecipeId(now_recipe_id.value);
-  guideStore.now_recipe_info.name = recipeData[1].name;
-  guideStore.now_recipe_info.image = recipeData[1].image;
-  guideStore.now_recipe_info.level = recipeData[1].level;
-  guideStore.now_recipe_info.time = recipeData[1].time;
-  guideStore.now_recipe_info.description = recipeData[1].description;
-
-  recipe_steps.value = guideStore.now;
-
-  console.log("나는가이드", guideStore.now); // 레시피 스텝
-  console.log("나는 레시피 스텝", recipe_steps.value);
+  GS.now_recipe_info.name = recipeData[1].name;
+  GS.now_recipe_info.image = recipeData[1].image;
+  GS.now_recipe_info.level = recipeData[1].level;
+  GS.now_recipe_info.time = recipeData[1].time;
+  GS.now_recipe_info.description = recipeData[1].description;
 });
 
 const disabled = () => {
   return selectedStep.value === 1
     ? "prev"
-    : selectedStep.value === recipe_steps.value.guide.length
+    : selectedStep.value === GS.now_recipe_step.length
     ? "next"
     : undefined;
 };
 
 const prev = () => {
-  if (selectedStep.value > 1) {
+  if (selectedStep.value > 0) {
     selectedStep.value -= 1;
   }
 };
 
 const next = () => {
-  if (selectedStep.value < recipe_steps.value.guide.length) {
+  if (selectedStep.value < GS.now_recipe_step.length) {
     selectedStep.value += 1;
   }
 };
@@ -154,6 +145,11 @@ const next = () => {
   gap: 30px;
   padding: 20px;
   background: #534645;
+}
+
+.guide-stepper {
+  width: 100%;
+  height: 100%;
 }
 
 .recipe-guide-header {
