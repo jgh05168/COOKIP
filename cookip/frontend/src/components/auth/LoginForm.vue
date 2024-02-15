@@ -76,6 +76,8 @@ const login = async function(){
     // const profile = await accountService.getUserProfile(localStorage.getItem("user_id"))
     router.push({ name:'get-start'})
     localStorage.setItem("profile", JSON.stringify(profile))
+    localStorage.setItem("profile_id", profile.profile.length)
+    // localStorage.setItem("profile_id", JSON.stringify(profile).profile.length)
   }
 }
 

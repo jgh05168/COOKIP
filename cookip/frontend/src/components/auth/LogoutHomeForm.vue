@@ -62,6 +62,7 @@ const goLogout = function() {
     localStorage.setItem("Islogin", 0)
     localStorage.setItem("user_id", 0)
     localStorage.setItem("profile", 0)
+    localStorage.setItem("profile_id", 0)
     window.location.reload();
     useAuthStore.token = null
 }
