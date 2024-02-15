@@ -52,7 +52,7 @@
             flex-wrap: wrap;
           "
         >
-          <v-chip
+          <!-- <v-chip
             v-for="n in [1, 2, 3, 4]"
             :key="n"
             color="#A1887F"
@@ -60,16 +60,19 @@
             size="xs"
           >
             # {{ n }} 번
-          </v-chip>
+          </v-chip> -->
         </div>
       </v-card-item>
     </div>
-    <v-img 
-      aspect-ratio="3 / 4"
-      :src="`${props.recipeFront.thumbnail}`" alt="">
-    ></v-img>
-    
-    
+    <v-img
+      style="width: 300px; height: 225px"
+      aspect-ratio="3/4"
+      :src="`${props.recipeFront.thumbnail}`"
+      alt=""
+    >
+      ></v-img
+    >
+
     <!-- <v-card-actions>
       <v-btn color="orange"> Share </v-btn>
 

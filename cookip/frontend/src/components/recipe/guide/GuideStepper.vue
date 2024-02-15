@@ -3,7 +3,6 @@
   <div class="stepper-content">
     <Carousel
       ref="stepCarousel"
-      :itemsToShow="1"
       v-model="currentSlide"
       :transition="400"
       class="vertical-carousel"
@@ -52,27 +51,29 @@ const prevstep = () => {
 </script>
 <style scoped>
 .vertical-carousel {
-  transform: rotate(0.25turn);
-  width: 1080px;
-  height: 100%;
-  margin: auto auto;
+  width: 1800px;
+  height: 750px;
+  margin: 0;
 }
 
 .vertical-carousel-slide {
   /* transform: rotate(-0.25turn); */
   width: 100%;
-  height: 1080px;
+  height: 100%;
 }
 
 .carousel__viewport {
-  height: 1080px;
+  width: 100%;
+  height: 100%;
 }
 
 .vertical-carousel-slide {
-  width: 360px !important;
+  width: 100%;
+  height: 100%;
 }
 
 .step-of-step {
-  transform: rotate(-0.25turn);
+  width: 1800px;
+  height: 750px;
 }
 </style>

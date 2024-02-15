@@ -25,7 +25,11 @@
         <button @click="nowRecipe">nowrecipe</button>|
         <FlipCard
           class="shadow-2xl"
-          :flip="flip && props.rowSlide == recipeStore.currentRowSlide && slide == currentSlide "
+          :flip="
+            flip &&
+            props.rowSlide == recipeStore.currentRowSlide &&
+            slide == currentSlide
+          "
           :recipe="recipe"
         />
       </div>
@@ -82,22 +86,23 @@ const prevpage = () => {
 };
 
 const nowRecipe = () => {
-  // console.log(fCarousel.value.data.currentSlide.value);
-  currentSlide.value = colCarousel.value.data.currentSlide.value;
-  console.log(
-    "레시피 아이디",
-    props.recipeCategory[props.rowSlide].recipeList[currentSlide.value]
-      .recipe_id
-  );
-  return props.recipeCategory[props.rowSlide].recipeList[currentSlide.value]
-    .recipe_id;
+  // console.log(colCarousel.value.data.currentSlide.value);
+  // currentSlide.value = colCarousel.value.data.currentSlide.value;
+  // console.log(
+  //   "레시피 아이디",
+  //   props.recipeCategory[props.rowSlide]["recipeList"][
+  //     colCarousel.value.data.currentSlide.value
+  //   ]
+  // );
+  return 28;
 };
 
 // emit 으로 row 에 flip 값 전달해서 페이지 이동시 제자리로 돌아오게 걸어두기
 
 // motionStore 의 motion_data 값이 변경될 때 마다 동작이 수행됨
 // 동작 수행 후 store에 저장되어 있는 motion 초기화
-watch(() => motionStore.motion_data,
+watch(
+  () => motionStore.motion_data,
   (newMotion) => {
     if (newMotion.swipe !== null) {
       if (flip.value == true) {
@@ -112,7 +117,7 @@ watch(() => motionStore.motion_data,
       } else if (newMotion.swipe == "SwipeRight") {
         props.prevrow();
       }
-      newMotion.swipe = null
+      newMotion.swipe = null;
     } else if (newMotion.zoom !== null) {
       // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
       if (newMotion.zoom == "ZoomIn") {
@@ -120,7 +125,7 @@ watch(() => motionStore.motion_data,
       } else if (newMotion.zoom == "ZoomOut") {
         flip.value = false;
       }
-      newMotion.zoom = null
+      newMotion.zoom = null;
     } else if (newMotion.page !== null) {
       if (newMotion.page == "PageIn") {
         router.push({
@@ -130,7 +135,7 @@ watch(() => motionStore.motion_data,
       } else if (newMotion.page == "PageOut") {
         router.push({ name: "home" });
       }
-      newMotion.page = null
+      newMotion.page = null;
     }
   }
 );
