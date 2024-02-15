@@ -22,6 +22,7 @@
       }"
     >
       <ColCarousel
+        :recipe-category="recipe_category"
         :recipe-list="recipe_col"
         :row-slide="slide"
         :nextrow="nextrow"

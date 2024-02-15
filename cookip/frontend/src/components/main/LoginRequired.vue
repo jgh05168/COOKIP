@@ -19,7 +19,11 @@
           <span v-if="timeout" class="arrow-prev"></span>
           <span v-if="timeout" class="arrow-prev"></span>
           <span v-if="timeout" class="arrow-prev"></span>
-          <h2><strong>{{ timeout ? '밀어서 프로필 생성' : '사용자 인증 진행중 ...' }}</strong></h2>
+          <h2>
+            <strong>{{
+              timeout ? "밀어서 프로필 생성" : "사용자 인증 진행중 ..."
+            }}</strong>
+          </h2>
         </div>
       </transition>
     </footer>
@@ -52,8 +56,9 @@ const get_user_profile = async () => {
     useAuthStore.profile = await accountService.getUserProfile(
       useAuthStore.login_info[0]["user_id"]
     );
-    console.log(useAuthStore.profile);
+    console.log("프로필 로컬저장 확인", useAuthStore.profile);
     localStorage.setItem("profile", JSON.stringify(useAuthStore.profile));
+    console.log("프로필 저장 완료");
   } catch (err) {
     error.value = err.message;
     console.error("Error in get_user_profile:", err);
@@ -85,13 +90,6 @@ const sendAuthInfoToServer = async (e) => {
 
 const loginTimeOver = () => {
   timeout.value = true;
-  motionStore.motion_data = {
-    swipe: null,
-    page: null,
-    rating: null,
-    zoom: null,
-    flip: null,
-  };
 };
 
 onMounted(async () => {
@@ -131,14 +129,6 @@ watchEffect(() => {
       router.push({ name: "create-profile", params: {}, query: {} });
     }
     // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
-    motionStore.motion_data = {
-      swipe: null,
-      page: null,
-      rating: null,
-      zoom: null,
-      flip: null,
-    };
-    // console.log(motionStore.motion_data)
   }
 
   sendAuthInfoToServer();
