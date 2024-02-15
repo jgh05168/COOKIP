@@ -67,6 +67,28 @@ const get_all_ingredients = async () => {
   }
 };
 
+//레시피랑 재료 같이 있는 테이블
+const get_match_recipe_ingredient = async () => {
+  try {
+    const all_ingredients = await accountService.getUserrecipe_ingredient();
+    recipestore.user_recipe_ingredient = all_ingredients;
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
+//보유식자재
+const get_user_recipe_match_ingredients = async () => {
+  try {
+    const all_ingredients = await accountService.getUserigredient_availble();
+    recipestore.user_ingredient_availble = all_ingredients;
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+
+
 const get_all_category = async () => {
   try {
     const categoryData = await accountService.getUsercategory();
@@ -252,6 +274,8 @@ onMounted(async () => {
     await get_Favorite_category(),
     await get_Favorite_ingredient(),
     await get_Favorite_recipe();
+    await get_match_recipe_ingredient();
+    await get_user_recipe_match_ingredients();
 
   // 컴포넌트가 마운트된 후 실행되는 로직
   console.log("App Mount");

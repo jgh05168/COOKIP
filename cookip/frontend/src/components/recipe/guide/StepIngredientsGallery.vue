@@ -19,8 +19,6 @@ const props = defineProps({
 });
 
 const GS = useGuideStore();
-
-
 </script>
 
 <style scoped>
