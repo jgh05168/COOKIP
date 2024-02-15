@@ -5,7 +5,6 @@
       ref="stepCarousel"
       :itemsToShow="1"
       v-model="currentSlide"
-      :wrap-around="true"
       :transition="400"
       class="vertical-carousel"
     >

@@ -33,10 +33,13 @@
     </v-sheet>
     <v-sheet border class="cooking-tip">
       <v-img
-        v-for="utencil in props.stepofstep.utencil"
-        :key="utencil"
-        :src="require(GS.now_recipe_utencils[utencil.id].image)"
-      ></v-img>
+        v-for="utencil_id in props.stepofstep.utencil"
+        :key="utencil_id"
+        :aspect-ratio="1 / 1"
+        :src="GS.now_recipe_utencils[utencil_id].image"
+      >
+        {{ GS.now_recipe_utencils[utencil_id] }}</v-img
+      >
     </v-sheet>
   </div>
 </template>
@@ -54,7 +57,6 @@ const props = defineProps({
 const GS = useGuideStore();
 
 // console.log("재료 출력 확인", GS.now_recipe_ingredients[5]);
-
 </script>
 
 <style scoped>
