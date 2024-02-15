@@ -69,6 +69,7 @@
 import { ref, onMounted, defineProps } from "vue";
 import { useAuthStore } from "@/store/auth";
 import router from "@/router";
+import axios from 'axios'
 const store = useAuthStore()
 const uploadimageurl = ref([]);
 
@@ -127,7 +128,18 @@ const onImageChange = (event) => {
     
     reader.readAsDataURL(file); // Use readAsDataURL with each file
   }
-  store.profile.picture = formData
+  axios({
+        url: "http://127.0.0.1:5000/content/imagesave/",	// 이미지 저장을 위해 back서버와 통신
+        method: "POST",
+        headers: {'Content-Type': 'multipart/form-data'},	// 이걸 써줘야 formdata 형식 전송가능
+        data: formData,
+      }).then(res => {
+        console.log(res.data.message);
+        console.log(formData)
+      }).catch(err => {
+        console.log(err)
+        console.log("!!!!!!!!!!!")
+      });
 };
 
 const clearImage = () => {
