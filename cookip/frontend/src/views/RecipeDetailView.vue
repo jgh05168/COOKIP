@@ -49,26 +49,39 @@ import accountService from "@/store/mvpApi";
 // import recipeStepsData from "@/store/recipeDemo.json";
 import GuideHeaderVue from "@/components/recipe/guide/GuideHeader.vue";
 import GuideStepperVue from "@/components/recipe/guide/GuideStepper.vue";
+import { useRouter } from "vue-router";
+
+// useRouter를 사용하여 라우터 인스턴스를 가져옴
+const router = useRouter();
+
+// 현재 레시피 정보 저장
+const now_recipe_id = ref({});
+
 // const recipe_steps = ref(recipeStepsData[0]);
+
 const selectedStep = ref(1);
 
 const guideStore = useGuideStore();
-const recipe_steps = ref({})
-
+const recipe_steps = ref({});
 
 onMounted(async () => {
-  guideStore.now_recipe_info = await accountService.getUserRecipe_RecipeId(
-    guideStore.now_recipe_id
-  );
+  // 디테일 페이지로 들어올 때 사용하는 recipe_id 값을 params 값을 이용해서 받기
+  now_recipe_id.value = router.currentRoute.value.params.recipe_id;
+  guideStore.now_recipe_id = now_recipe_id.value;
+
+  // 레시피 step 가져오기
   guideStore.now_recipe_guide = await accountService.getUserStep_recipeId(
-    guideStore.now_recipe_id
-    );
-    guideStore.now_recipe_ingredients =
+    now_recipe_id.value
+  );
+
+  // 레시피 재료 가져오기
+  guideStore.now_recipe_ingredients =
     await accountService.getUserrecipe_ingredient_RecipeId(
-      guideStore.now_recipe_id
-      );
+      now_recipe_id.value
+    );
+  // 레시피 스텝 오브 스텝 가져오기
   guideStore.now_recipe_stepofstep =
-    await accountService.getUserstepofstep_RecipeId(guideStore.now_recipe_id);
+    await accountService.getUserstepofstep_RecipeId(now_recipe_id.value);
 
   guideStore.now.id = guideStore.now_recipe_id;
   guideStore.now.name = guideStore.now_recipe_info[0].name;
