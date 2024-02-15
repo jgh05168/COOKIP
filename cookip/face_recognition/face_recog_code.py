@@ -7,11 +7,10 @@ import websockets
 import matplotlib.pyplot as plt
 
 # 미리 알려진 얼굴들의 인코딩 생성
-known_person_list = []
-print(cv2.imread("C:/Users/SSAFY/Pictures/jgh.jpg").shape)
-known_person_list.append(fr.load_image_file("C:/Users/SSAFY/Pictures/jgh.jpg"))
-
-known_face_list = [fr.face_encodings(person)[0] for person in known_person_list]
+# known_person_list = []
+# # known_person_list.append(fr.load_image_file("C:\Users\SSAFY\Desktop\realhackylife\common_pjt\S10P12C101\cookip\frontend\public\jgh.jpg"))
+# # print(known_person_list)
+# known_face_list = [fr.face_encodings(person)[0] for person in known_person_list]
 
 # data = [{"type": "buffer", "data": [172, 128, 128, 53, 108, 233, 13, 156, 0, 1, 2, 4, 8, 16, 168, 37, 
 # 240, 255, 1, 177, 178, 80, 68, 98, 245, 231, 68, 0, 0, 0, 0, 73, 69, 78, 68, 174, 66, 96, 130]}]
@@ -46,28 +45,24 @@ known_face_list = [fr.face_encodings(person)[0] for person in known_person_list]
 
 
 
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 
 async def handle_client(websocket, path):
     print(f"클라이언트(얼굴 인식)가 연결되었습니다.")
     try:
         async for message in websocket:
-            known_person_list = json.loads(message)
-            flattened_data_list = []
-            for i in range(len(known_person_list)):
-                if not known_person_list[i]["profile_face"]:
+            json_list = json.loads(message)
+            known_face_list = []
+            profile_list = []
+            print(json_list)
+            for i in range(len(json_list)):
+                if not json_list[i]['profile_face']:
                     continue
-                tmp_img = base64.decodestring(known_person_list[i]["profile_face"]["data"])
-                flattened_data_list.append(known_person_list[i]["profile_face"]["data"])
-                print(known_person_list[i]["profile_face"]["data"])
-            # # image_data_list = [np.reshape(flattened_data_list[i], (64, 64, 4)) for i in range(len(flattened_data_list))]
-            # # known_face_list = [fr.face_encodings(person)[0] for person in image_data_list]
-            # target_shape = (480, 640, 3)
-            # resized_buffers = [resize_buffer(buffer, target_shape) for buffer in flattened_data_list]
-            
-
-
+                known_person = fr.load_image_file(json_list[i]['profile_face'])
+                known_face_list.append(fr.face_encodings(known_person)[0])
+                profile_list.append((json_list[i]['user_id'], json_list[i]['profile_id']))
+            print(known_face_list)
 
             tmp_data = {        # 전송할 json 형식 데이터
                 "User": None,
@@ -104,9 +99,8 @@ async def handle_client(websocket, path):
                         # 판단 결과 출력
                         if distance[min_distance_index] < 0.5:  # 예시 값, 필요에 따라 조절 가능
                             print("인식된 얼굴:", f"Person {min_distance_index + 1}")
-                            tmp_data["User"] = known_person_list[min_distance_index]["user_id"]
-                            tmp_data["Profile"] = known_person_list[min_distance_index]["profile_id"]
-
+                            tmp_data["User"] = profile_list[min_distance_index][0]
+                            tmp_data["Profile"] = profile_list[min_distance_index][1]
                             flag = 1
                         else:
                             print("인식 실패: 알려진 얼굴과 일치하지 않음")
