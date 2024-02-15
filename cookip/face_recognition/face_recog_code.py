@@ -4,13 +4,14 @@ import numpy as np
 import json
 import asyncio
 import websockets
+import matplotlib.pyplot as plt
 
-# # 미리 알려진 얼굴들의 인코딩 생성
-# known_person_list = []
-# known_person_list.append(fr.load_image_file("C:/Users/SSAFY/Desktop/realhackylife/common_pjt/S10P12C101/cookip/face_recognition/jgh.jpg"))
+# 미리 알려진 얼굴들의 인코딩 생성
+known_person_list = []
+print(cv2.imread("C:/Users/SSAFY/Pictures/jgh.jpg").shape)
+known_person_list.append(fr.load_image_file("C:/Users/SSAFY/Pictures/jgh.jpg"))
 
-# print(type(known_person_list[0]))
-# known_face_list = [fr.face_encodings(person)[0] for person in known_person_list]
+known_face_list = [fr.face_encodings(person)[0] for person in known_person_list]
 
 # data = [{"type": "buffer", "data": [172, 128, 128, 53, 108, 233, 13, 156, 0, 1, 2, 4, 8, 16, 168, 37, 
 # 240, 255, 1, 177, 178, 80, 68, 98, 245, 231, 68, 0, 0, 0, 0, 73, 69, 78, 68, 174, 66, 96, 130]}]
@@ -19,7 +20,33 @@ import websockets
 # print(flattened_data)
 
 # 웹캠 열기
-video_capture = cv2.VideoCapture(1)
+############### 내일 디코더 인코더 방식으로 다시 해보기 ;;;;;
+
+# def resize_buffer(buffer, target_shape):
+#     # buffer를 1차원 배열로 변환
+#     flattened_data = np.array(buffer)
+    
+#     # 버퍼의 크기를 목표 크기에 맞게 수정
+#     flattened_data = np.resize(flattened_data, np.prod(target_shape))
+    
+#     # 크기 조절 및 reshape
+#     resized_array = flattened_data.reshape(target_shape)
+    
+#     # 이미지 보간 및 색 보정
+#     resized_image = cv2.resize(resized_array.astype(np.uint8), (target_shape[1], target_shape[0]), interpolation=cv2.INTER_LINEAR)
+#     resized_image = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
+    
+#     return resized_image
+
+
+
+# 예시 사용
+# images_buffer: 크기가 다른 이미지 버퍼 배열
+# target_size: 목표 크기 (가로, 세로)
+
+
+
+video_capture = cv2.VideoCapture(0)
 
 
 async def handle_client(websocket, path):
@@ -29,12 +56,19 @@ async def handle_client(websocket, path):
             known_person_list = json.loads(message)
             flattened_data_list = []
             for i in range(len(known_person_list)):
-                if not known_person_list["profile"][i]["profile_face"]["data"]:
+                if not known_person_list[i]["profile_face"]:
                     continue
-                flattened_data_list.append(known_person_list["profile"][i]["profile_face"]["data"])
-            image_data_list = [np.reshape(flattened_data_list[i], (64, 64, 4)) for i in range(len(flattened_data_list))]
-            known_face_list = [fr.face_encodings(person)[0] for person in image_data_list]
+                tmp_img = base64.decodestring(known_person_list[i]["profile_face"]["data"])
+                flattened_data_list.append(known_person_list[i]["profile_face"]["data"])
+                print(known_person_list[i]["profile_face"]["data"])
+            # # image_data_list = [np.reshape(flattened_data_list[i], (64, 64, 4)) for i in range(len(flattened_data_list))]
+            # # known_face_list = [fr.face_encodings(person)[0] for person in image_data_list]
+            # target_shape = (480, 640, 3)
+            # resized_buffers = [resize_buffer(buffer, target_shape) for buffer in flattened_data_list]
             
+
+
+
             tmp_data = {        # 전송할 json 형식 데이터
                 "User": None,
                 "Profile": None
@@ -70,8 +104,8 @@ async def handle_client(websocket, path):
                         # 판단 결과 출력
                         if distance[min_distance_index] < 0.5:  # 예시 값, 필요에 따라 조절 가능
                             print("인식된 얼굴:", f"Person {min_distance_index + 1}")
-                            tmp_data["User"] = known_person_list["profile"][min_distance_index]["user_id"]
-                            tmp_data["Profile"] = known_person_list["profile"][min_distance_index]["profile_id"]
+                            tmp_data["User"] = known_person_list[min_distance_index]["user_id"]
+                            tmp_data["Profile"] = known_person_list[min_distance_index]["profile_id"]
 
                             flag = 1
                         else:
