@@ -13,18 +13,24 @@
         <div class = "recipe_description">
           레시피 설명: {{ props.recipeBack.description }}
         </div>
+
         <div style="height: 140px; border: 1px dashed #8d6e63"></div>
+
         <!-- 재료 -->
         <div class="recipe-ingredients">
-          재료리스트 반복문 돌면서 재료 사진 보여주기
+          <!-- 재료리스트 반복문 돌면서 재료 사진 보여주기 -->
           <div
             v-for="ingredient_id in props.recipeBack.ingredient"
             :key="ingredient_id"
           >
             <v-img aspect-ratio="1/1" :src="`/image/ingredient/item_${ingredient_id}.jpg`" alt=""
-              >{{ ingredient_id }} 사진
+              >
+              <!-- {{ ingredient_id }} -->
             </v-img>
-            <span>재료명</span>
+            <span>
+              <!-- 재료명 -->
+              {{ingredient_name[ingredient_id].ingredient_name}}
+            </span>
           </div>
         </div>
       </div>
@@ -34,6 +40,12 @@
 
 <script setup>
 import { defineProps } from "vue";
+import { useRecipeStore } from "@/store/recipe";
+
+const recipeSotre = useRecipeStore();
+
+const ingredient_name = recipeSotre.ingredient_servey;
+console.log("from_table_naming",ingredient_name);
 
 const props = defineProps({
   recipeBack: Object,
