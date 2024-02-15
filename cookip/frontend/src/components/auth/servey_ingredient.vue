@@ -1,11 +1,7 @@
 <template>
   <div class="survey-container">
-    <h1 class="survey-title">선호 재료 조사</h1>
-    <!-- 검색창 추가 -->
-    <div class="search-container">
-      <input type="text" v-model="searchQuery" placeholder="재료를 검색하세요..." class="search-input">
-      <button @click="addSelectedIngredient" class="add-button" v-show="searchQuery">Add</button>
-    </div>
+    <h1 class="survey-title">선호하는 재료를 여러개 선택해주세요.</h1>
+    
 
     <!-- 6개씩 5줄로 알러지 정보 표시 -->
     <div v-for="(row, rowIndex) in allergRows" :key="rowIndex" class="survey-row">
@@ -17,6 +13,12 @@
           {{ item }}
         </button>
       </div>
+    </div>
+    
+    <!-- 검색창 추가 -->
+    <div class="search-container">
+      <input type="text" v-model="searchQuery" placeholder="재료를 검색하세요..." class="search-input">
+      <button @click="addSelectedIngredient" class="add-button" v-show="searchQuery">Add</button>
     </div>
 
     <!-- RouterLink를 버튼으로 스타일링 -->
@@ -66,48 +68,37 @@ const addSelectedIngredient = () => {
   }
 };
 
-const user_id = 1;
-const profile_id = 1;
 const submitSurvey = () => {
-    // 검색창으로 추가한 재료와 버튼으로 추가한 재료를 모두 선택된 재료 목록에 포함시킴
-    const allSelectedIngredients = [...selectedChoices.value, ...allergens.filter((item, index) => selectedItems.value[index])];
-    
-    // 만약 모든 재료가 null이거나 빈 문자열이면 요청을 보내지 않음
-    if (allSelectedIngredients.every(ingredient => !ingredient)) {
-        console.log('선택된 재료가 없습니다. 요청을 보내지 않습니다.');
-        return;
-    }
+  // 검색창으로 추가한 재료와 버튼으로 추가한 재료를 모두 선택된 재료 목록에 포함시킴
+  const allSelectedIngredients = [...selectedChoices.value, ...allergens.filter((item, index) => selectedItems.value[index])];
+  
 
-    const selectedIngredientIds = allSelectedIngredients.map(choice => {
-        const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
-        return ingredient ? ingredient.ingredient_id : null;
-    });
+  const selectedIngredientIds = allSelectedIngredients.map(choice => {
+    const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+    return ingredient ? ingredient.ingredient_id : null;
+  });
 
-    // 이미 선택된 항목인지 확인
-    const existingFavoriteIngredients = recipeStore.Favorite_ingredient.filter(favoriteIngredient => {
-        return selectedIngredientIds.includes(favoriteIngredient.ingredient_id);
-    });
+  // 이미 선택된 항목인지 확인
+  const existingFavoriteIngredients = recipeStore.Favorite_ingredient.filter(favoriteIngredient => {
+    return selectedIngredientIds.includes(favoriteIngredient.ingredient_id);
+  });
 
-    // 이미 선택된 항목 제거
-    const newSelectedIngredientIds = selectedIngredientIds.filter(ingredientId => {
-        return !existingFavoriteIngredients.some(favoriteIngredient => favoriteIngredient.ingredient_id === ingredientId);
-    }).filter(Boolean); // null 또는 빈 문자열 제거
+  // 이미 선택된 항목 제거
+  const newSelectedIngredientIds = selectedIngredientIds.filter(ingredientId => {
+    return !existingFavoriteIngredients.some(favoriteIngredient => favoriteIngredient.ingredient_id === ingredientId);
+  });
 
-    axios.post('http://i10c101.p.ssafy.io:3001/user/ingredientFollow', {
-        user_id: user_id,
-        profile_id: profile_id,
-        ingredient_id: newSelectedIngredientIds
-    })
-    .then(response => {
-        console.log('서버 응답:', response.data);
-        alert("선호도 조사 완료");
-    })
-    .catch(error => {
-        console.error('POST 요청 오류:', error);
-    });
+  axios.post('http://localhost:5000/user/ingredientFollow', {
+      ingredient_id: newSelectedIngredientIds
+  })
+  .then(response => {
+      console.log('서버 응답:', response.data);
+      alert("선호도 조사 완료");
+  })
+  .catch(error => {
+      console.error('POST 요청 오류:', error);
+  });
 };
-
-
 
 </script>
 
@@ -116,26 +107,28 @@ const submitSurvey = () => {
 body {
   margin: 0;
   padding: 0; /* 기본 padding도 제거합니다. */
+  font-family: Arial, sans-serif;
 }
 
 .survey-container {
-  width: 100%; /* 전체 화면을 사용합니다. */
+  width: 25%; 
   height: 100vh; /* 화면의 높이를 100%로 설정합니다. */
   display: flex;
   flex-direction: column; /* 내부 컨텐츠를 세로로 정렬합니다. */
   align-items: center; /* 가운데 정렬합니다. */
   justify-content: center; /* 가운데 정렬합니다. */
   text-align: center;
-  padding: 20px;
+  padding: 2rm;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  background-color: #D7CCC8;
+  border: 0;
 }
   
   .survey-title {
-    color: #333;
-    font-size: 60px; /* 28px의 3배 */
-    margin-bottom: 40px; /* 20px의 3배 */
+    color: #040404;
+    font-size: 0.7rem; 
+    margin-bottom: 0.5px; 
   }
   
   /* 알러지 정보를 나타내는 행 */
@@ -151,28 +144,28 @@ body {
   }
   
   button {
-    width: 250px; /* 버튼 너비를 늘림 */
-    padding: 15px; /* 버튼 내부 여백 조정 */
-    font-size: 23px;
-    background-color: #fff;
-    color: #555;
-    border: 2px solid #555;
+    width: 250px; 
+    padding: 15px; 
+    font-size: 1.5rem;
+    background-color: #EFEBE9;
+    color: #1f1d1d;
+    border: 2px solid #1f1d1d;
     border-radius: 14px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
   }
   
   button.active {
-    background-color: #335fe2;
+    background-color: #795548;
     color: #fff;
-    border-color: #335fe2;
+    border-color: #795548;
   }
   
   .submit-button {
-    width: 500px; /* 250px의 3배 */
-    padding: 20px; /* 10px의 3배 */
-    font-size: 50px; /* 25px의 3배 */
-    background-color: #335fe2;
+    width: 400px;
+    padding: 20px;
+    font-size: 50px;
+    background-color: #3E2723;
     color: #fff;
     border: none;
     border-radius: 14px;
@@ -183,10 +176,13 @@ body {
 }
   
   .submit-button:hover {
-    background-color: #1b1bdd;
+    background-color: #3E2723;
   }
 .search-container {
   margin-bottom: 20px;
+  background-color: #8D6E63;
+  border-radius: 14px;
+  border: 1px solid #ccc;
 }
 
 .search-input {
@@ -197,7 +193,7 @@ body {
   border-radius: 14px;
 }
 .add-button{
-  background-color: #1b1bdd;
+  background-color: #4E342E;
   border-radius: 14px;
   color: white;
 }

@@ -1,45 +1,45 @@
 <template>
     <div class="frame">
       <div class="div-wrapper">
-          <div class="icon">
-            <v-img @click="goback()" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
+        <div class="icon">
+          <v-img
+            @click="goback()"
+            class="color"
+            alt="Color"
+            src="../../assets/login_icon/Start Button.png"
             @mouseover="handleMouseOver"
-            @mouseleave="handleMouseLeave"/>
-          </div>
+            @mouseleave="handleMouseLeave"
+          />
+        </div>
       </div>
       <div class="div-wrapper">
         <div class="frame-wrapper">
           <div class="div">
             <div class="div-2">
               <div class="div-3">
-                <v-img class="color" alt="Color" src="../../assets/login_icon/email.png" />
-                <div class="basic-details">Get going with email</div>
+                <v-icon>mdi-face-man</v-icon>
+                <div class="basic-details">Your real face</div>
               </div>
-              <div class="to-sign-up-you-need">It’s helpful to provide a good reason for why the email address is required.</div>
+              <div class="to-sign-up-you-need">
+                Upload a photo for facial recognition
+              </div>
             </div>
             <v-form @submit.prevent class="div-4">
-                
-                <v-text-field
-        v-model="email"
-        :rules="rules"
-        label="Email" style="width: 100%;"
-      ></v-text-field>
-
-        <v-checkbox
-        v-model="checkbox"
-        :label="`Stay up to date with the latest news and resources delivered directly to your inbox : ${checkbox.toString()}`"
-        ></v-checkbox>
-
-
-              <div style="width: 100%;">
+                <v-file-input
+      v-model="profilePicture"
+      label="Profile Picture"
+      accept="image/*"
+      @change="handleFileChange"
+    ></v-file-input>
+              <div style="width: 100%">
                 <v-btn
-                @click="goname"
-              class="continue"
-              color="#007aff"
-              dark
-              elevation="2"
-              >Continue</v-btn
-            >
+                  @click="goLogin"
+                  class="continue"
+                  color="#007aff"
+                  dark
+                  elevation="2"
+                  >Continue</v-btn
+                >
               </div>
             </v-form>
           </div>
@@ -50,40 +50,69 @@
   
   <script setup>
   import { ref, onMounted, defineProps } from "vue";
-import { useAuthStore } from '@/store/auth'
-const store = useAuthStore()
+  import { useAuthStore } from "@/store/auth";
 
+  const props = defineProps({
+    showNext: Function,
+    showBack: Function,
+  });
+  
+  const profilePicture = ref(null);
+  
+  const goLogin = () => {
+    props.showNext()
+    console.log(profilePicture.value)
 
-const props = defineProps({
-  showNext: Function,
-  showBack: Function
-});
-const email = ref();
+  }
+  const handleFileChange = async (value) => {
+  // 'value' 매개변수에서 선택한 파일에 액세스합니다.
+  const selectedFile = value;
 
-const goname = () => {
-  props.showNext()
-  store.signup.email = email.value
-}
-const colorElement = ref(null);
-const handleMouseOver = () => {
-  // 이미지에 마우스 호버 시 크기를 확대
-  document.querySelector('.color').style.transform = 'scale(2)';
+    // 파일을 base64로 인코딩하기 위해 FileReader를 사용합니다.
+    const base64String = await readFileAsBase64(selectedFile);
+    console.log('Base64로 인코딩된 이미지:', base64String);
+    // 이제 'base64String'을 추가적인 처리에 사용할 수 있습니다.
+    useAuthStore.img = base64String
+  
 };
 
-const handleMouseLeave = () => {
-  // 마우스를 뗄 때 이미지 크기를 원래 크기로 되돌림
-  document.querySelector('.color').style.transform = 'scale(1)';
+  const colorElement = ref(null);
+  const handleMouseOver = () => {
+    // 이미지에 마우스 호버 시 크기를 확대
+    document.querySelector(".color").style.transform = "scale(2)";
+  };
+  
+  const handleMouseLeave = () => {
+    // 마우스를 뗄 때 이미지 크기를 원래 크기로 되돌림
+    document.querySelector(".color").style.transform = "scale(1)";
+  };
+  
+  onMounted(() => {
+    colorElement.value = document.querySelector(".color");
+  });
+  
+  const goback = function(){
+    props.showBack()
+  }
+
+  const readFileAsBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    // 파일을 Blob으로 변환 후 읽기
+    const blob = new Blob([file]);
+    console.log(blob)
+    reader.readAsDataURL(blob);
+  });
 };
-
-onMounted(() => {
-  colorElement.value = document.querySelector('.color');
-});
-
-const checkbox = ref(true);
-
-const goback = function(){
-  props.showBack()
-}
   </script>
   
   <style>
@@ -127,9 +156,9 @@ const goback = function(){
   }
   
   .color {
-  transition: transform 0.3s ease-in-out; /* 부드러운 전환을 위한 CSS 속성 */
-}
-
+    transition: transform 0.3s ease-in-out; /* 부드러운 전환을 위한 CSS 속성 */
+  }
+  
   .frame .frame-wrapper {
     align-items: flex-start;
     align-self: stretch;
@@ -321,7 +350,7 @@ const goback = function(){
   .continue {
     height: 50px;
     border-radius: 14px;
-    color:  #007aff;
+    color: #007aff;
     font-family: "Roboto-SemiBold", Helvetica;
     font-size: 16px;
     font-weight: 600;
@@ -332,3 +361,4 @@ const goback = function(){
     width: 100%;
   }
   </style>
+  

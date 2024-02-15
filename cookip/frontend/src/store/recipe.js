@@ -17,7 +17,21 @@ export const useRecipeStore = defineStore('recipe', () => {
   const Favorite_ingredient = ref([]);
   const favorite_recipe = ref([]);
   //const expiration = ref([]); // 유통기한
-  //console.log("user_category",recipes);
+  console.log("user_category",recipes);
+
+  // 레시피 전체 데이터 객체
+  const recipes_object  = computed(() => {
+    const recipesById = {};
+  
+    // recipes 배열을 순회하면서 각 객체의 recipe_id를 키로 가지는 객체를 생성합니다.
+    recipes.value.forEach(recipe => {
+      recipesById[recipe.recipe_id] = recipe;
+    });
+  
+    // 만들어진 객체를 반환합니다.
+    return recipesById;
+  });
+
   //servey에 필요한 재료목록 정의
   // 선호재료
   const ingredient_servey = computed(() => {
@@ -28,11 +42,12 @@ export const useRecipeStore = defineStore('recipe', () => {
   });
 
 
+
   // 추천 카테고리
   const recommend_category = ref([
     {id:1, title:"오늘의 추천", img:require("@/assets/image/today_2.png")}, // 랜덤
     {id:2, title:"실시간 인기 음식" , img:require("@/assets/image/popularity_2.png")}, // 실시간 인기 음식(좋아요 순)
-    {id:3, title:"냉장고에 있는 재료맞춤" , img:require("@/assets/image/refrigerator_2.avif")}, // 지금 냉장고에 있는 재료로
+    {id:3, title:"냉장고 재료 맞춤" , img:require("@/assets/image/refrigerator_2.avif")}, // 지금 냉장고에 있는 재료로
     {id:4, title:"사용자 맞춤" , img:require("@/assets/image/profile_2.png")}, // 선호설문결과로  
   ])
 
@@ -272,6 +287,7 @@ export const useRecipeStore = defineStore('recipe', () => {
   const currentRowSlide = ref(0)
   
   return { recipes, ingredients, user_ingredients,useIngredient_recipe,score,Allergy,Follow,Favorite_category,Favorite_ingredient,recommend_category, 
-    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,currentRowSlide,recommend_list,filteredFavorites,category_1,category_2,category_3,category_4 }
-  }, { persist: true })
+    selected_category,ingredient_servey,user_category,favorite_recipe,user_ingredient_availble,user_recipe_ingredient,currentRowSlide,filteredFavorites,category_1,category_2,category_3,category_4 
+  , recipes_object,recommend_list}
+  })
   

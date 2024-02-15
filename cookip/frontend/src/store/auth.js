@@ -1,20 +1,17 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { ref, onMounted, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
-const urlUser = 'http://localhost:5000/User';
-const urlUserProfile = 'http://localhost:5000/profile';
+const urlUser = 'http://i10c101.p.ssafy.io:3002/User';
+const urlUserProfile = 'http://i10c101.p.ssafy.io:3002/Users_Profile';
 
 export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);
   const userProfileList = ref([]);
   const login_info = ref(null)
-  // const token = ref(null)
-  const profile = ref([])
   const profileImage = ref([])
   const cur_user_info = ref(null)
-  
-  console.log("profile",profile);
+  const img = ref();
 
   const Islogin = computed(() => {
     const isLogin = !localStorage.getItem('Islogin');
@@ -31,7 +28,12 @@ export const useAuthStore = defineStore('auth', () => {
     lastname:'',
     birthday:'',
   })
-
+  
+  const profile = ref({
+    nickname: '',
+    firstname: '',
+    lastname: '',
+  })
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
@@ -43,6 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
+  
   onMounted(() => {
     fetchUserData();
   });
@@ -51,10 +54,11 @@ export const useAuthStore = defineStore('auth', () => {
     memberList,
     userProfileList,
     login_info,
-    profile,
     signup,
+    profile,
     profileImage,
     cur_user_info, 
-    Islogin
+    Islogin,
+    img
   };
 }, { persist: true });

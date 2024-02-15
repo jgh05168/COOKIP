@@ -1,47 +1,41 @@
 <template>
     <div class="frame">
       <div class="div-wrapper">
-          <div class="icon">
-            <v-img @click="goback()" class="color" alt="Color" src="../../assets/login_icon/Start Button.png" 
+        <div class="icon">
+          <v-img
+            @click="goback()"
+            class="color"
+            alt="Color"
+            src="../../assets/login_icon/Start Button.png"
             @mouseover="handleMouseOver"
-            @mouseleave="handleMouseLeave"/>
-          </div>
+            @mouseleave="handleMouseLeave"
+          />
+        </div>
       </div>
       <div class="div-wrapper">
         <div class="frame-wrapper">
           <div class="div">
             <div class="div-2">
               <div class="div-3">
-                <v-img class="color" alt="Color" src="../../assets/login_icon/email.png" />
-                <div class="basic-details">Get going with email</div>
+                <v-icon>mdi-food-steak-off</v-icon>
+                <div class="basic-details">Allergy</div>
               </div>
-              <div class="to-sign-up-you-need">It’s helpful to provide a good reason for why the email address is required.</div>
+              <div class="to-sign-up-you-need">
+                Choose your Allergy ingredient
+              </div>
             </div>
-            <v-form @submit.prevent class="div-4">
-                
-                <v-text-field
-        v-model="email"
-        :rules="rules"
-        label="Email" style="width: 100%;"
-      ></v-text-field>
-
-        <v-checkbox
-        v-model="checkbox"
-        :label="`Stay up to date with the latest news and resources delivered directly to your inbox : ${checkbox.toString()}`"
-        ></v-checkbox>
-
-
-              <div style="width: 100%;">
-                <v-btn
-                @click="goname"
-              class="continue"
-              color="#007aff"
-              dark
-              elevation="2"
-              >Continue</v-btn
-            >
-              </div>
-            </v-form>
+            <div class="search-container">
+      <input style="width: 250px;" type="text" v-model="searchQuery" placeholder="알러지가 있는 재료를 검색하세요..." class="search-input">
+      <v-btn color="#A1887F" @click="addSelectedIngredient" class="add-button">추가</v-btn>
+    </div>
+    <v-btn
+                  @click="goLogin"
+                  class="continue"
+                  color="#007aff"
+                  dark
+                  elevation="2"
+                  >Make Profile</v-btn
+                >
           </div>
         </div>
       </div>
@@ -49,41 +43,39 @@
   </template>
   
   <script setup>
-  import { ref, onMounted, defineProps } from "vue";
-import { useAuthStore } from '@/store/auth'
-const store = useAuthStore()
+  import router from "@/router";
+import { ref, onMounted, defineProps } from "vue";
 
 
-const props = defineProps({
-  showNext: Function,
-  showBack: Function
-});
-const email = ref();
+  const props = defineProps({
+    showBack: Function,
+  });
+  
 
-const goname = () => {
-  props.showNext()
-  store.signup.email = email.value
-}
-const colorElement = ref(null);
-const handleMouseOver = () => {
-  // 이미지에 마우스 호버 시 크기를 확대
-  document.querySelector('.color').style.transform = 'scale(2)';
-};
+  
+  const goLogin = () => {
+    router.push({name:'my-profile'})
+  }
 
-const handleMouseLeave = () => {
-  // 마우스를 뗄 때 이미지 크기를 원래 크기로 되돌림
-  document.querySelector('.color').style.transform = 'scale(1)';
-};
+  const colorElement = ref(null);
+  const handleMouseOver = () => {
+    // 이미지에 마우스 호버 시 크기를 확대
+    document.querySelector(".color").style.transform = "scale(2)";
+  };
+  
+  const handleMouseLeave = () => {
+    // 마우스를 뗄 때 이미지 크기를 원래 크기로 되돌림
+    document.querySelector(".color").style.transform = "scale(1)";
+  };
+  
+  onMounted(() => {
+    colorElement.value = document.querySelector(".color");
+  });
+  
+  const goback = function(){
+    props.showBack()
+  }
 
-onMounted(() => {
-  colorElement.value = document.querySelector('.color');
-});
-
-const checkbox = ref(true);
-
-const goback = function(){
-  props.showBack()
-}
   </script>
   
   <style>
@@ -127,9 +119,9 @@ const goback = function(){
   }
   
   .color {
-  transition: transform 0.3s ease-in-out; /* 부드러운 전환을 위한 CSS 속성 */
-}
-
+    transition: transform 0.3s ease-in-out; /* 부드러운 전환을 위한 CSS 속성 */
+  }
+  
   .frame .frame-wrapper {
     align-items: flex-start;
     align-self: stretch;
@@ -321,7 +313,7 @@ const goback = function(){
   .continue {
     height: 50px;
     border-radius: 14px;
-    color:  #007aff;
+    color: #007aff;
     font-family: "Roboto-SemiBold", Helvetica;
     font-size: 16px;
     font-weight: 600;
@@ -332,3 +324,4 @@ const goback = function(){
     width: 100%;
   }
   </style>
+  

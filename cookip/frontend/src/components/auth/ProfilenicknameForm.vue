@@ -12,33 +12,34 @@
           <div class="div">
             <div class="div-2">
               <div class="div-3">
-                <v-img class="color" alt="Color" src="../../assets/login_icon/email.png" />
-                <div class="basic-details">Get going with email</div>
+                <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
+                    @mouseover="handleMouseOver"
+                    @mouseleave="handleMouseLeave"/>
+                <div class="basic-details">Basic details</div>
               </div>
-              <div class="to-sign-up-you-need">It’s helpful to provide a good reason for why the email address is required.</div>
+              <div class="to-sign-up-you-need">Lorem ipsum dolor sit amet, adipiscing elit, 
+sed eiusmod tempor incididunt.</div>
             </div>
             <v-form @submit.prevent class="div-4">
                 
                 <v-text-field
-        v-model="email"
+        v-model="first_name"
         :rules="rules"
-        label="Email" style="width: 100%;"
+        label="First name" style="width: 100%;"
       ></v-text-field>
-
-        <v-checkbox
-        v-model="checkbox"
-        :label="`Stay up to date with the latest news and resources delivered directly to your inbox : ${checkbox.toString()}`"
-        ></v-checkbox>
-
-
+      <v-text-field
+        v-model="last_name"
+        :rules="rules"
+        label="Last name" style="width: 100%;"
+      ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
-                @click="goname"
+                @click="gonext()"
               class="continue"
               color="#007aff"
               dark
               elevation="2"
-              >Continue</v-btn
+              >continue</v-btn
             >
               </div>
             </v-form>
@@ -51,19 +52,18 @@
   <script setup>
   import { ref, onMounted, defineProps } from "vue";
 import { useAuthStore } from '@/store/auth'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const store = useAuthStore()
 
 
 const props = defineProps({
-  showNext: Function,
-  showBack: Function
+  showNext: Function
 });
-const email = ref();
+const first_name = ref();
+const last_name = ref();
 
-const goname = () => {
-  props.showNext()
-  store.signup.email = email.value
-}
+
 const colorElement = ref(null);
 const handleMouseOver = () => {
   // 이미지에 마우스 호버 시 크기를 확대
@@ -79,10 +79,16 @@ onMounted(() => {
   colorElement.value = document.querySelector('.color');
 });
 
-const checkbox = ref(true);
-
 const goback = function(){
-  props.showBack()
+  router.go(-1)
+}
+
+const gonext = function(){
+  store.profile.firstname = first_name.value
+  store.profile.lastname = last_name.value
+  console.log(store.profile.firstname)
+  console.log(store.profile.lastname)
+  props.showNext()
 }
   </script>
   

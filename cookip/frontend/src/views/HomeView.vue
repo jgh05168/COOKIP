@@ -7,11 +7,13 @@
     </h2> -->
     <div class="go-favorite">
       아래로 스와이프
-      <RouterLink :to="{ name: 'my-favorite' }">      
+      <RouterLink :to="{ name: 'my-favorite' }">
         <div class="link-container">
-        <span class="link-text">즐겨찾기 보러 가기</span>
-        <i class="fas fa-bookmark"></i> <!-- Font Awesome 아이콘 사용 -->
-      </div></RouterLink>
+          <span class="link-text">즐겨찾기 보러 가기</span>
+          <i class="fas fa-bookmark"></i>
+          <!-- Font Awesome 아이콘 사용 -->
+        </div></RouterLink
+      >
     </div>
     <div class="user-info">안녕하세요! 레시피님</div>
     <div class="divide"></div>
@@ -21,16 +23,26 @@
     <div class="go-recommand">
       <RouterLink :to="{ name: 'recipe' }">
         <div class="link-container">
-        <span class="link-text">위로 스와이프 추천 리스트 전체 보기</span>
-        <i class="fas fa-utensils"></i> <!-- Font Awesome 아이콘 사용 -->
-      </div></RouterLink>
+          <span class="link-text">위로 스와이프 추천 리스트 전체 보기</span>
+          <i class="fas fa-utensils"></i>
+          <!-- Font Awesome 아이콘 사용 -->
+        </div></RouterLink
+      >
     </div>
   </div>
 </template>
 
 <script setup>
+
 import { RouterLink } from "vue-router";
 import RecommendCategory from "@/components/home/RecommendCategory.vue";
+import { onMounted } from "vue";
+
+
+
+onMounted(async () => {
+  
+});
 </script>
 
 <style scoped>
@@ -100,6 +112,5 @@ import RecommendCategory from "@/components/home/RecommendCategory.vue";
 }
 
 /* Font Awesome 아이콘을 사용하기 위해 CDN 링크를 추가하고 해당 아이콘에 대한 스타일링 */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 </style>

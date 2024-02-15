@@ -1,10 +1,7 @@
 <template>
     <div class="survey-container">
-      <h1 class="survey-title">알러지 정보 조사</h1>
-      <div class="search-container">
-      <input type="text" v-model="searchQuery" placeholder="재료를 검색하세요..." class="search-input">
-      <button @click="addSelectedIngredient" class="add-button" v-show="searchQuery">Add</button>
-      </div>
+      <h1 class="survey-title">보유한 알러지를 모두 선택 및 입력해주세요.</h1>
+      
 
       <div v-for="(item, index) in items" :key="index" class="survey-item">
         <button
@@ -13,11 +10,18 @@
         >
           {{ item }}
         </button>
-        </div>
-    <!-- RouterLink를 버튼으로 스타일링 -->
-        <router-link :to="{ name: 'servey_ingredient' }">
-            <button @click="submitSurvey" class="submit-button">Coutinue</button>
-        </router-link>
+      </div>
+
+      <!-- 검색창 -->
+      <div class="search-container">
+        <input type="text" v-model="searchQuery" placeholder="재료를 검색하세요..." class="search-input">
+        <button @click="addSelectedIngredient" class="add-button" v-show="searchQuery">Add</button>
+      </div>
+
+      <!-- RouterLink를 버튼으로 스타일링 -->
+      <router-link :to="{ name: 'servey_ingredient' }">
+        <button @click="submitSurvey" class="submit-button">Coutinue</button>
+      </router-link>
     </div>
   </template>
   
@@ -52,9 +56,8 @@
     searchQuery.value = '';
   }
 };
+//console.log("4444444444444444",selectedItems);
 
-const user_id = 1;
-const profile_id = 1;
 const submitSurvey = () => {
     // 선택된 설문 항목 (재료 이름)
     const selectedIngredients = items.filter((item, index) => selectedItems.value[index]);
@@ -75,16 +78,8 @@ const submitSurvey = () => {
         return !existingAllergies.some(allergy => allergy.ingredient_id === id);
     });
 
-    // ingredients가 null 또는 빈 배열인 경우 요청을 보내지 않음
-    if (newCategoryIds.length === 0) {
-        console.log('선택된 재료가 없습니다. 요청을 보내지 않습니다.');
-        return;
-    }
-
     // Axios를 사용하여 POST 요청 보내기
-    axios.post('http://i10c101.p.ssafy.io:3001/user/allergy', {
-        user_id: user_id,
-        profile_id: profile_id,
+    axios.post('http://localhost:5000/user/allergy', {
         ingredients: newCategoryIds.map(ingredient_id => ({
             ingredient_id,
             allergy_name: selectedIngredients.find((choice) => {
@@ -113,17 +108,17 @@ const submitSurvey = () => {
 
 
 
-
   </script>
   
   <style scoped>
 body {
   margin: 0;
   padding: 0; /* 기본 padding도 제거합니다. */
+  font-family: Arial, sans-serif;
 }
 
 .survey-container {
-  width: 100%; /* 전체 화면을 사용합니다. */
+  width: 25%; 
   height: 100vh; /* 화면의 높이를 100%로 설정합니다. */
   display: flex;
   flex-direction: column; /* 내부 컨텐츠를 세로로 정렬합니다. */
@@ -132,14 +127,16 @@ body {
   text-align: center;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  background-color: #D7CCC8;
+  border: 0;
 }
   
   .survey-title {
-    color: #333;
-    font-size: 60px; /* 28px의 3배 */
-    margin-bottom: 40px; /* 20px의 3배 */
+    color: #040404;
+    font-size: 0.7rem; 
+    margin-bottom: 0.5px; 
+    /* padding-bottom: 100px; */
   }
   
   .survey-item {
@@ -147,28 +144,28 @@ body {
   }
   
   button {
-    width: 400px; /* 200px의 3배 */
-    padding: 20px; /* 10px의 3배 */
-    font-size: 40px; /* 20px의 3배 */
-    background-color: #fff;
-    color: #555;
-    border: 2px solid #555;
+    width: 250px; 
+    padding: 20px; 
+    font-size: 1.5rem; 
+    background-color: #EFEBE9;
+    color: #1f1d1d;
+    border: 2px solid #1f1d1d;
     border-radius: 14px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
   }
   
   button.active {
-    background-color: #335fe2;
+    background-color: #795548;
     color: #fff;
-    border-color: #335fe2;
+    border-color: #795548;
   }
   
   .submit-button {
-    width: 500px; /* 250px의 3배 */
-    padding: 20px; /* 10px의 3배 */
-    font-size: 50px; /* 25px의 3배 */
-    background-color: #335fe2;
+    width: 400px;
+    padding: 20px;
+    font-size: 50px; 
+    background-color: #3E2723;
     color: #fff;
     border: none;
     border-radius: 14px;
@@ -179,11 +176,14 @@ body {
 }
   
   .submit-button:hover {
-    background-color: #1b1bdd;
+    background-color: #3E2723;
   }
 
   .search-container {
   margin-bottom: 20px;
+  background-color: #8D6E63;
+  border-radius: 14px;
+  border: 1px solid #ccc;
 }
 
 .search-input {
@@ -192,11 +192,9 @@ body {
   font-size: 18px;
   border: 1px solid #ccc;
   border-radius: 14px;
-}
+  }
 .add-button{
-  width: calc(300px * 2 / 3); /* 현재 크기의 3/2로 조정 */
-  padding: calc(10px * 2 / 3);
-  background-color: #1b1bdd;
+  background-color: #4E342E;
   border-radius: 14px;
   color: white;
 }

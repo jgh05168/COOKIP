@@ -12,9 +12,7 @@
           <div class="div">
             <div class="div-2">
               <div class="div-3">
-                <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
-                    @mouseover="handleMouseOver"
-                    @mouseleave="handleMouseLeave"/>
+                <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" />
                 <div class="basic-details">Basic details</div>
               </div>
               <div class="to-sign-up-you-need">Lorem ipsum dolor sit amet, adipiscing elit, 
@@ -75,7 +73,7 @@ const userpost = () => {
   store.signup.lastname = last_name.value
   store.signup.birthday = birthday.value
   // console.log(store.signup)
-  axios.post('http://localhost:5000/user/insertUser', {
+  axios.post('http://i10c101.p.ssafy.io:3001/user/insertUser', {
       User_loginData:store.signup
     })
     .then(response => {
