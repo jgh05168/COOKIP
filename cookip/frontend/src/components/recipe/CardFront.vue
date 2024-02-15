@@ -64,10 +64,12 @@
         </div>
       </v-card-item>
     </div>
-    <v-img
-      :aspect-ratio="4 / 3"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+    <v-img 
+      aspect-ratio="3 / 4"
+      :src="`${props.recipeFront.thumbnail}`" alt="">
     ></v-img>
+    
+    
     <!-- <v-card-actions>
       <v-btn color="orange"> Share </v-btn>
 
@@ -106,7 +108,7 @@ const set_color = (level) => {
 //   return null;
 // };
 
-
+console.log(props.thumbnail);
 </script>
 
 <style scoped>
