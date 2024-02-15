@@ -83,25 +83,36 @@ onMounted(async () => {
   //   now_recipe_id.value
   // );
   console.log(recipeData[1]);
-  guideStore.now_recipe_guide = recipeData[1].guide;
+  guideStore.now_recipe_step = recipeData[1].guide;
 
   // // 레시피 재료 가져오기
   // guideStore.now_recipe_ingredients =
   //   await accountService.getUserrecipe_ingredient_RecipeId(now_recipe_id.value);
-  guideStore.now_recipe_ingredients = recipeData[1].ingredients;
 
+  // 재료 정보  객체화 하기
+  let ingredientObject = {};
+
+  for (const ingredient of recipeData[1].ingredients) {
+    ingredientObject[ingredient.id] = ingredient;
+  }
+  console.log(ingredientObject);
+  guideStore.now_recipe_ingredients = ingredientObject
+  // 도구 재료 정보화 하기
+  let utencilsObject = {};
+
+  for (const utencil of recipeData[1].utencils) {
+    utencilsObject[utencil.id] = utencil;
+  }
+  guideStore.now_recipe_utencils = utencilsObject
+  
   // // 레시피 스텝 오브 스텝 가져오기
   // guideStore.now_recipe_stepofstep =
   //   await accountService.getUserstepofstep_RecipeId(now_recipe_id.value);
-
-
-  guideStore.now.id = guideStore.now_recipe_id;
-  guideStore.now.name = guideStore.now_recipe_info[0].name;
-  guideStore.now.description = guideStore.now_recipe_info[0].description;
-  guideStore.now.time = guideStore.now_recipe_info[0].time;
-  guideStore.now.image = guideStore.now_recipe_info[0].thumbnail;
-  guideStore.now.ingredients = guideStore.now_recipe_ingredients;
-  guideStore.now.guide = guideStore.now_recipe_guide;
+  guideStore.now_recipe_info.name = recipeData[1].name;
+  guideStore.now_recipe_info.image = recipeData[1].image;
+  guideStore.now_recipe_info.level = recipeData[1].level;
+  guideStore.now_recipe_info.time = recipeData[1].time;
+  guideStore.now_recipe_info.description = recipeData[1].description;
 
   recipe_steps.value = guideStore.now;
 

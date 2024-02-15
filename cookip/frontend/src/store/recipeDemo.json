@@ -459,6 +459,17 @@
     ],
     "guide": [
       {
+        "step": 0,
+        "title": "재료 확인하기",
+        "description": "모든 재료를 그림과 같이 놔주세요.",
+        "step_image": "@/assets/image/recipe/2/step0.jpg",
+        "step_ingredients": [1,2,3,4,5,6,7,8,9,10,11, 12],
+        "step_utencils": [1, 2, 3, 4, 5,6, 7,8, 9],
+        "steps_of_step": [
+        ]
+
+      },
+      {
         "step": 1,
         "title": "재료 준비하기",
         "description": "냄비에 꽃소금을 한 줌과 치킨스톡을 넣고 물을 끓인 후 스파게티 면을 5분간 삶아주세요. 양파와 마늘은 곱게 다지고 베이컨을 1cm 크기로 썬 뒤 팬에 올리브유를 둘러 베이컨을 바삭하게 볶은 후 키친타올에 빼두세요.",
