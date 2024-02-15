@@ -6,7 +6,7 @@
       <RouterLink :to="{ name: 'member' }">member</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
       <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
-    
+
     <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'main' }">main</RouterLink> |
       <RouterLink :to="{ name: 'home' }">home</RouterLink> |
@@ -27,7 +27,7 @@
 
 <script setup>
 import { RouterView } from "vue-router";
-import {onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useMotionStore } from "@/store/motion";
 import { useSttStore } from "@/store/stt";
 import { useRecipeStore } from "@/store/recipe";
@@ -293,13 +293,12 @@ onMounted(async () => {
     console.error("웹소켓(모션 인식) 에러:", e);
   };
 });
-
 </script>
 
 <style scoped>
 .screen {
-  width: 360px;
- 
+  width: 1920px;
+  height: 1080px;
 }
 
 .slide-up-enter-from {

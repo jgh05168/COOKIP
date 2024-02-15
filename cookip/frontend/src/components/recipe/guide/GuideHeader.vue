@@ -6,8 +6,8 @@
       <v-img class="step-header-image" :src="require(`@/assets/image/KGO.png`)" />
       <!-- 레시피 가이드 스텝 정보 및 경과 시간 -->
       <div class="step-header-content">
-          <HeaderStepInfo :guide="props.guide" :step="props.now_step" />
-          <HeaderRecipeInfo :recipe="props.recipe" />
+          <HeaderStepInfo :step="props.step" :nowStep="props.nowStep" />
+          <HeaderRecipeInfo :info = "GS.now_recipe_info" />
       </div>
     </div>
   </div>
@@ -18,11 +18,14 @@ import { defineProps } from "vue";
 import HeaderStepInfo from "./HeaderStepInfo.vue";
 import HeaderRecipeInfo from "./HeaderRecipeInfo.vue";
 
+import { useGuideStore } from "@/store/guide";
+const GS = useGuideStore();
+
 const props = defineProps({
-  recipe: Object,
-  guide: Object,
-  now_step: Number
+  step: Object,
+  nowStep: Number,
 });
+
 </script>
 
 <style scoped>
