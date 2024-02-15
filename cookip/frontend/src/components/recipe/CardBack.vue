@@ -10,7 +10,9 @@
         "
       >
         <!-- 설명 -->
-        <div>레시피 설명 보여주기</div>
+        <div class = "recipe_description">
+          레시피 설명: {{ props.recipeBack.description }}
+        </div>
         <div style="height: 140px; border: 1px dashed #8d6e63"></div>
         <!-- 재료 -->
         <div class="recipe-ingredients">
@@ -19,7 +21,7 @@
             v-for="ingredient_id in props.recipeBack.ingredient"
             :key="ingredient_id"
           >
-            <v-img aspect-ratio="1/1" src="" alt=""
+            <v-img aspect-ratio="1/1" :src="`/image/ingredient/item_${ingredient_id}.jpg`" alt=""
               >{{ ingredient_id }} 사진
             </v-img>
             <span>재료명</span>

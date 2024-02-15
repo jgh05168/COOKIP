@@ -12,7 +12,7 @@
         v-for="index in 5"
         :key="index"
       >
-        <v-img src="@/assets/image/ingredient/item_greenonion.jpg" />
+        <!-- <v-img src="../public/image/ingredient/item_9.jpg" /> -->
       </Slide>
     </Carousel>
 

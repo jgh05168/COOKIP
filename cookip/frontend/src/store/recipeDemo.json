@@ -41,7 +41,7 @@
         "id": 5,
         "name": "애호박",
         "unit": "개",
-        "quantity": 0.3,
+        "quantity": 0.5,
         "image": "@/assets/image/ingredient/item_zucchini.jpg"
       },
       {
