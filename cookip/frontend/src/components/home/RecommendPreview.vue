@@ -10,7 +10,7 @@
       <p style="font-size: 20px; font-weight: bold; text-align: center">
         {{ item.name }}
       </p>
-      <img class="preview-img" :src="getBufferImage(item.thumbnail)" alt="" />
+      <img class="preview-img" :src="item.thumbnail" alt="" />
     </div>
   </div>
 </template>
@@ -49,15 +49,15 @@ watch(
   },
 );
 
-const getBufferImage = (buffer) => {
-  if (buffer && buffer.data instanceof Array) {
-    const uint8Array = new Uint8Array(buffer.data);
-    const blob = new Blob([uint8Array], { type: "image/jpeg" });
-    return URL.createObjectURL(blob);
-  }
-  // null 값인 경우 빈 문자열 반환
-  return null;
-};
+// const getBufferImage = (buffer) => {
+//   if (buffer && buffer.data instanceof Array) {
+//     const uint8Array = new Uint8Array(buffer.data);
+//     const blob = new Blob([uint8Array], { type: "image/jpeg" });
+//     return URL.createObjectURL(blob);
+//   }
+//   // null 값인 경우 빈 문자열 반환
+//   return null;
+// };
 </script>
 
 <style scoped>

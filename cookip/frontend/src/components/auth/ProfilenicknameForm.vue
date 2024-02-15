@@ -15,22 +15,16 @@
                 <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" 
                     @mouseover="handleMouseOver"
                     @mouseleave="handleMouseLeave"/>
-                <div class="basic-details">Basic details</div>
+                <div class="basic-details">Your Nickname</div>
               </div>
-              <div class="to-sign-up-you-need">Lorem ipsum dolor sit amet, adipiscing elit, 
-sed eiusmod tempor incididunt.</div>
+              <div class="to-sign-up-you-need">Choose the nickname you want to use on your profile</div>
             </div>
             <v-form @submit.prevent class="div-4">
                 
                 <v-text-field
-        v-model="first_name"
+        v-model="nickname"
         :rules="rules"
-        label="First name" style="width: 100%;"
-      ></v-text-field>
-      <v-text-field
-        v-model="last_name"
-        :rules="rules"
-        label="Last name" style="width: 100%;"
+        label="Nick Name" style="width: 100%;"
       ></v-text-field>
               <div style="width: 100%;">
                 <v-btn
@@ -60,8 +54,7 @@ const store = useAuthStore()
 const props = defineProps({
   showNext: Function
 });
-const first_name = ref();
-const last_name = ref();
+const nickname = ref();
 
 
 const colorElement = ref(null);
@@ -84,10 +77,7 @@ const goback = function(){
 }
 
 const gonext = function(){
-  store.profile.firstname = first_name.value
-  store.profile.lastname = last_name.value
-  console.log(store.profile.firstname)
-  console.log(store.profile.lastname)
+  store.profile.nickname = nickname.value
   props.showNext()
 }
   </script>

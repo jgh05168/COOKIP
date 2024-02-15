@@ -44,7 +44,10 @@
   
   <script setup>
   import router from "@/router";
-import { ref, onMounted, defineProps } from "vue";
+  import { ref, onMounted, defineProps } from "vue";
+  import { useRecipeStore } from "@/store/recipe";
+  import axios from 'axios'; // Axios 라이브러리 가져오기
+  const recipeStore = useRecipeStore();
 
 
   const props = defineProps({
@@ -54,6 +57,7 @@ import { ref, onMounted, defineProps } from "vue";
 
   
   const goLogin = () => {
+    submitSurvey()
     router.push({name:'my-profile'})
   }
 
@@ -76,6 +80,93 @@ import { ref, onMounted, defineProps } from "vue";
     props.showBack()
   }
 
+  const searchQuery = ref('');
+  const selectedChoices = ref([]);
+  
+  const addSelectedIngredient = () => {
+  if (searchQuery.value.trim() !== '') {
+    // 검색한 값이 ingredient_servey에 있는지 확인
+    const ingredientExists = recipeStore.ingredient_servey.some(item => item.ingredient_name === searchQuery.value.trim());
+    if (ingredientExists) {
+      selectedChoices.value.push(searchQuery.value.trim());
+      console.log(searchQuery.value);
+    } else {
+      console.log('검색한 재료가 존재하지 않습니다.');
+      // 혹은 사용자에게 알림을 표시할 수 있습니다.
+    }
+    searchQuery.value = '';
+  }
+};
+  
+
+
+  const user_id = 1;
+  const user_profile = 1;
+  
+  //post함수
+  const submitSurvey = () => {
+    const extractIngredientIds = () => {
+  // 선택된 카테고리들의 카테고리 ID와 이름을 저장할 배열
+  const ingredients = [];
+
+  // 선택된 카테고리들을 순회하면서 검사
+  selectedChoices.value.forEach(choice => {
+    // 선택된 카테고리가 recipeStore.ingredient_servey에 있는지 확인
+    const ingredient = recipeStore.ingredient_servey.find(item => item.ingredient_name === choice);
+    
+    // 선택된 카테고리가 존재하면 카테고리 ID와 이름을 객체로 만들어 배열에 추가
+    if (ingredient) {
+      ingredients.push({
+        ingredient_id: ingredient.ingredient_id,
+        ingredient_name: ingredient.ingredient_name
+      });
+    }
+  });
+
+  return ingredients;
+};
+
+const selectedIngredientIds = extractIngredientIds();
+//console.log("selectedCategoryIds",selectedCategoryIds);
+
+// 이미 선택된 항목인지 확인
+const existingFavorites = recipeStore.Allergy.filter(favorite => {
+    return (
+        favorite.user_id === user_id &&
+        favorite.profile_id === user_profile &&
+      
+        selectedIngredientIds.map(ingredient => ingredient.ingredient_id).includes(favorite.ingredient_id)
+    );
+});
+
+if (existingFavorites.length > 0) {
+    // 이미 선택된 항목 중 하나라도 존재하면 해당 항목만 추가
+    console.log("이미 선택된 항목이 있습니다.");
+    const existingCategoryIds = existingFavorites.map(favorite => favorite.ingredient_id);
+    const newCategoryIds = selectedIngredientIds.map(ingredient => ingredient.ingredient_id).filter(id => !existingCategoryIds.includes(id));
+    if (newCategoryIds.length === 0) {
+        // 이미 존재하는 항목만 선택한 경우
+        console.log("이미 존재하는 항목만 선택되었습니다.");
+        return;
+    }
+    // 이미 존재하는 항목 외의 항목을 추가
+    selectedIngredientIds.length = 0;
+    selectedIngredientIds.push(...newCategoryIds);
+  }
+
+    axios.post('http://localhost:3002/user/allergy', {
+        user_id: user_id,
+        profile_id: user_profile,
+        ingredients: selectedIngredientIds
+    })
+    .then(response => {
+        console.log('서버 응답:', response.data);
+        alert("선호도 조사 완료");
+    })
+    .catch(error => {
+        console.error('POST 요청 오류:', error);
+    });
+};
   </script>
   
   <style>

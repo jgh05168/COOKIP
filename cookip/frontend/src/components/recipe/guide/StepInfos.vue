@@ -13,10 +13,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(id, index) in props.step.step_ingredients" :key="index" >
-            <td>{{props.recipe.ingredients[id].name }}</td>
-            <td class="text-end">{{ props.recipe.ingredients[id].quantity }}</td>
-            <td class="text-end">{{ props.recipe.ingredients[id].unit }}</td>
+          <tr v-for="(id, index) in props.recipe.ingredients" :key="index" >
+            <td>{{id.name }}</td>
+            <td class="text-end">{{ id.quantity }}</td>
+            <td class="text-end">{{ id.unit }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -43,7 +43,7 @@ const props = defineProps({
 
 onMounted(() => {
   console.log("스텝인포스 진입", props.recipe)
-  console.log("샘플입니다",  props.recipe.ingredients[props.step.step_ingredients[0]].name);
+  console.log("샘플입니다",  props.recipe.ingredients[props.step.step_ingredients]);
 })
 
 const cookingTip = ref(""); // Define a reactive variable to capture the textarea input

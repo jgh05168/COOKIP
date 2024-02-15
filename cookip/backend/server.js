@@ -15,7 +15,8 @@ app.use(cors());
 
 
 
-
+const content = require('./routes/content');
+app.use('/content', content);
  
 const recipe = require("./routes/recipe");
 app.use("/recipe", recipe);
@@ -66,6 +67,6 @@ app.use("/profile", profile);
 const step_ingredient = require("./routes/step_ingredient");
 app.use("/step_ingredient", step_ingredient);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3002;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
