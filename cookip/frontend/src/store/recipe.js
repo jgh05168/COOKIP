@@ -17,7 +17,6 @@ export const useRecipeStore = defineStore('recipe', () => {
   const Favorite_ingredient = ref([]);
   const favorite_recipe = ref([]);
   //const expiration = ref([]); // 유통기한
-  console.log("user_category",recipes);
 
   // 레시피 전체 데이터 객체
   const recipes_object  = computed(() => {
@@ -132,6 +131,7 @@ export const useRecipeStore = defineStore('recipe', () => {
 
 
 
+
   //추천 보유식자재 정렬함수
   //보유 재료 추천 userid로 가져오기
   // 사용자의 보유 식자재와 user_recipe_ingredient 데이터 간의 공통 ingredient_id찾기
@@ -189,7 +189,7 @@ export const useRecipeStore = defineStore('recipe', () => {
     return sortedRecipeCounts.map(([id, { count, expiration_data }]) => ({ id, count, expiration_data }));
 });
 
-  //console.log("ingredient_match",ingredient_match(1));
+  //console.log("ingredient_match",ingredient_match(2,1));
 
   //보유식자재 기준 추천
   const category_3 = (userId,userPw)=> computed(() => {
@@ -210,7 +210,7 @@ export const useRecipeStore = defineStore('recipe', () => {
       }
     });
   });
-  //console.log("ingredientIds",category_3(1,1));
+  //console.log("ingredientIds",category_3(2,1));
 
 
   //선호 카테고리,선호 재료추천 알러지 있으면 제외
