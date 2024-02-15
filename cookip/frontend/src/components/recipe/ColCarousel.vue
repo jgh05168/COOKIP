@@ -19,9 +19,10 @@
       :key="slide"
     >
       <div class="flip-card">
-        <button @click="Flip_test">Flip_test</button>
-        <button @click="props.nextrow">nextrow</button>
-        <button @click="nextpage">nextcol</button>
+        <button @click="Flip_test">Flip_test</button>|
+        <button @click="props.nextrow">nextrow</button>|
+        <button @click="nextpage">nextcol</button>|
+        <button @click="nowRecipe">nowrecipe</button>|
         <FlipCard
           class="shadow-2xl"
           :flip="flip && slide == currentSlide"
@@ -49,6 +50,7 @@ const motionStore = useMotionStore();
 const recipeStore = useRecipeStore();
 
 const props = defineProps({
+  recipeCategory: Array,
   recipeList: Array,
   rowSlide: Number,
   nextrow: Function,
@@ -59,26 +61,37 @@ const currentSlide = ref(0);
 
 const colCarousel = ref(null);
 
-const nextpage = () => {
-  if (flip.value == true) {
-    flip.value = false;
-  }
-  colCarousel.value.next();
-};
-
-const prevpage = () => {
-  if (flip.value == true) {
-    flip.value = false;
-  }
-  colCarousel.value.prev();
-};
-
 const flip = ref(false);
 
 const Flip_test = () => {
   flip.value = !flip.value;
 };
 
+const nextpage = () => {
+  // if (flip.value == true) {
+  //   flip.value = false;
+  // }
+  colCarousel.value.next();
+};
+
+const prevpage = () => {
+  // if (flip.value == true) {
+  //   flip.value = false;
+  // }
+  colCarousel.value.prev();
+};
+
+const nowRecipe = () => {
+  // console.log(fCarousel.value.data.currentSlide.value);
+  currentSlide.value = colCarousel.value.data.currentSlide.value;
+  console.log(
+    "레시피 아이디",
+    props.recipeCategory[props.rowSlide].recipeList[currentSlide.value]
+      .recipe_id
+  );
+  return props.recipeCategory[props.rowSlide].recipeList[currentSlide.value]
+    .recipe_id;
+};
 
 // emit 으로 row 에 flip 값 전달해서 페이지 이동시 제자리로 돌아오게 걸어두기
 
@@ -88,6 +101,9 @@ watch(
   () => motionStore.motion_data,
   (newMotion) => {
     if (newMotion.swipe !== null) {
+      if (flip.value == true) {
+        flip.value = false;
+      }
       if (newMotion.swipe == "SwipeUp") {
         nextpage();
       } else if (newMotion.swipe == "SwipeDown") {
@@ -96,9 +112,6 @@ watch(
         props.nextrow();
       } else if (newMotion.swipe == "SwipeRight") {
         props.prevrow();
-      }
-      if (flip.value == true) {
-        flip.value = false;
       }
     } else if (newMotion.zoom !== null) {
       // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
@@ -111,20 +124,12 @@ watch(
       if (newMotion.page == "PageIn") {
         router.push({
           name: "recipe-detail",
-          params: { recipeid: props.recipeList[currentSlide.value] },
+          params: { recipeid: nowRecipe() },
         });
       } else if (newMotion.page == "PageOut") {
         router.push({ name: "home" });
       }
     }
-    // 초기화
-    motionStore.motion_data = {
-      swipe: null,
-      page: null,
-      rating: null,
-      zoom: null,
-      flip: null,
-    };
   }
 );
 </script>

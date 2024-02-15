@@ -33,17 +33,12 @@
 </template>
 
 <script setup>
-
 import { RouterLink } from "vue-router";
 import RecommendCategory from "@/components/home/RecommendCategory.vue";
 import { onMounted } from "vue";
 import { useAuthStore } from "@/store/auth";
 
-
-
-onMounted(async () => {
-  
-});
+onMounted(async () => {});
 </script>
 
 <style scoped>
@@ -51,6 +46,7 @@ onMounted(async () => {
   position: relative;
   width: 1920px;
   height: 1080px;
+  background-color: #2c1915;
 }
 
 .go-favorite {
@@ -69,7 +65,7 @@ onMounted(async () => {
 }
 .go-recommand {
   position: absolute;
-  width: 300px;
+  width: 350px;
   height: 30px;
   color: #efebe9;
   font-size: 17px;
@@ -106,9 +102,12 @@ onMounted(async () => {
 .link-container {
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
+  width: 340px;
 }
 
 .link-text {
+  width: 300px;
   margin-right: 10px;
 }
 

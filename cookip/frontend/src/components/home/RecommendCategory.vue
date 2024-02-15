@@ -27,7 +27,9 @@
       v-model="currentSlide"
       class="slide-input"
     />
-    <button @click="nextpage()" class="next-button button">Next</button>
+    <button @click="nextpage()" class="next-button button" style="">
+      Next
+    </button>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
   <div class="divide"></div>
@@ -45,30 +47,6 @@ import { watchEffect } from "vue";
 import router from "@/router";
 
 const motionStore = useMotionStore();
-
-watchEffect(() => {
-  if (motionStore.motion_data.swipe !== null) {
-    let value = motionStore.motion_data.swipe;
-    if (value == "SwipeLeft") {
-      nextpage();
-    } else if (value == "SwipeRight") {
-      prevpage();
-    } else if (value == "SwipeDown") {
-      motionStore.transition_dir = "slide-down";
-      router.push({ name: "recipe", params: {}, query: {} });
-    } else if (value == "SwipeUp") {
-      motionStore.transition_dir = "slide-up";
-      router.push({ name: "my-favorite", params: {}, query: {} });
-    }
-  }
-  motionStore.motion_data = {
-    swipe: null,
-    page: null,
-    rating: null,
-    zoom: null,
-    flip: null,
-  };
-});
 
 const currentSlide = ref(0);
 
@@ -98,6 +76,25 @@ const selectCategory = (slide) => {
   const selectedCategory = recommend_category[slide];
   console.log("Selected Category:", selectedCategory);
 };
+
+watchEffect(() => {
+  if (motionStore.motion_data.swipe !== null) {
+    let value = motionStore.motion_data.swipe;
+    if (value == "SwipeLeft") {
+      nextpage();
+    } else if (value == "SwipeRight") {
+      prevpage();
+    } else if (value == "SwipeDown") {
+      motionStore.transition_dir = "slide-down";
+      router.push({ name: "recipe", params: {}, query: {} });
+    } else if (value == "SwipeUp") {
+      motionStore.transition_dir = "slide-up";
+      router.push({ name: "my-favorite", params: {}, query: {} });
+    }
+  }
+});
+
+
 </script>
 
 <style scoped>
@@ -110,8 +107,7 @@ const selectCategory = (slide) => {
   height: 10px;
   opacity: 0.6;
   width: 90%;
-  margin: 0 auto;
-  margin-bottom: 50px;
+  margin: 15px auto;
 }
 
 .category {

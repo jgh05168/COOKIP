@@ -275,6 +275,7 @@ onMounted(async () => {
 <style scoped>
 .screen {
   width: 360px;
+ 
 }
 
 .slide-up-enter-from {
