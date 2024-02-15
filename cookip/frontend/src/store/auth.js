@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ref, onMounted, computed } from 'vue';
 
 const urlUser = 'http://localhost:5000/User';
-const urlUserProfile = 'http://localhost:5000/Users_Profile';
+const urlUserProfile = 'http://localhost:5000/profile';
 
 export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);
@@ -35,8 +35,7 @@ export const useAuthStore = defineStore('auth', () => {
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
-      const userProfileResponse = await axios.get(urlUserProfile);
-
+      const userProfileResponse = await axios.get(`${urlUserProfile}/${userResponse.user.user_id}`);
       memberList.value = userResponse.data;
       userProfileList.value = userProfileResponse.data;
     } catch (error) {

@@ -63,7 +63,6 @@ const get_user_profile = async () => {
 
 const sendAuthInfoToServer = async (e) => {
   try {
-    console.log(useAuthStore.profile)
     // 만약 데이터가 서버에서 클라이언트로 전송된다면
     if (e !== null && e !== undefined) {
         console.log(e.data)
@@ -71,7 +70,15 @@ const sendAuthInfoToServer = async (e) => {
       useAuthStore.cur_user_info = [result["User"], result["Profile"]]
     }
     else {
-      const jsonData = JSON.stringify(useAuthStore.profile);
+      const extractedData = useAuthStore.profile.profile.map((item) => {
+        return {
+          profile_face: item.profile_face,
+          profile_id: item.profile_id,
+          user_id: item.user_id,
+        };
+      });
+      console.log("보낼대에터", extractedData)
+      const jsonData = JSON.stringify(extractedData);
       if (socket && socket.readyState === WebSocket.OPEN && jsonData) {
         socket.send(jsonData);
         console.log("Auth info sent to the server:", useAuthStore.login_info[0]);
