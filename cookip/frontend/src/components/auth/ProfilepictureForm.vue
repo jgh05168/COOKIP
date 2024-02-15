@@ -24,41 +24,25 @@
               Upload an image for your profile image
             </div>
           </div>
-          <v-form @submit.prevent class="div-4">
-            <v-file-input
-              class="input"
-              type="file"
-              counter
-              show-size
-              label="이미지 제출"
-              outlined
-              dense
-              multiple
-              prepend-icon="mdi-camera"
-              style="width: 100%;"
-              @change="onImageChange"
-              @clear="clearImage"
-              clearable
-            />
-            <!-- Display only one uploaded image -->
-            <v-img
-              v-if="uploadimageurl.length > 0"
-              :src="uploadimageurl[0].url"
-              contain
-              height="150px"
-              style="border: 2px solid black; width: 100%;"
-            />
-
-            <div style="width: 100%">
-              <v-btn
-                @click="goLogin"
-                class="continue"
-                color="#007aff"
-                dark
-                elevation="2"
-              >Make profile</v-btn>
-            </div>
-          </v-form>
+          <v-form @submit.prevent="sendFile" enctype="multipart/form-data">
+    <v-container>
+      <v-row>
+        <v-col>
+          <v-alert v-if="message" :type="error ? 'error' : 'success'">{{ message }}</v-alert>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-file-input v-model="file" label="Choose a file" @change="selectFile"></v-file-input>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-btn @click="sendFile" class="mt-2" color="info">Send</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-form>
         </div>
       </div>
     </div>
@@ -67,22 +51,39 @@
 
 <script setup>
 import { ref, onMounted, defineProps } from "vue";
-import { useAuthStore } from "@/store/auth";
-import router from "@/router";
 import axios from 'axios'
-const store = useAuthStore()
-const uploadimageurl = ref([]);
+
 
 const props = defineProps({
   showNext: Function,
   showBack: Function,
 });
 
+const file = ref(null);
+const message = ref('');
+const error = ref(false);
 
-const goLogin = () => {
-  console.log(store.profile)
-  router.push({name:"my-profile"})
+const selectFile = () => {
+  error.value = false;
+  message.value = '';
 };
+
+const sendFile = async () => {
+  const formData = new FormData();
+  formData.append('file', file.value);
+
+  try {
+    await axios.post('http://localhost:5000/upload', formData);
+    message.value = 'File has been uploaded';
+    file.value = null;
+    error.value = false;
+  } catch (err) {
+    message.value = 'Something went wrong';
+    error.value = true;
+  }
+  props.showNext()
+};
+
 
 const colorElement = ref(null);
 
@@ -104,52 +105,7 @@ const goback = () => {
   props.showBack();
 };
 
-const onImageChange = (event) => {
-  const fileInput = event.target;
-  const files = fileInput.files;
 
-  if (!files.length) {
-    return;
-  }
-
-  const formData = new FormData();
-  uploadimageurl.value = [];
-
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    formData.append("filelist", file);
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const imageUrl = e.target.result;
-      console.log("Base64로 변환된 이미지 URL:", imageUrl);
-      uploadimageurl.value.push({ url: imageUrl });
-    };
-    
-    reader.readAsDataURL(file); // Use readAsDataURL with each file
-  }
-  axios({
-        url: "http://127.0.0.1:5000/content/imagesave/",	// 이미지 저장을 위해 back서버와 통신
-        method: "POST",
-        headers: {'Content-Type': 'multipart/form-data'},	// 이걸 써줘야 formdata 형식 전송가능
-        data: formData,
-      }).then(res => {
-        console.log(res.data.message);
-        console.log(formData)
-      }).catch(err => {
-        console.log(err)
-        console.log("!!!!!!!!!!!")
-      });
-};
-
-const clearImage = () => {
-  uploadimageurl.value = [];
-  // Clear the file input
-  const fileInput = document.querySelector(".input");
-  if (fileInput) {
-    fileInput.value = "";
-  }
-};
 </script>
   
   <style>

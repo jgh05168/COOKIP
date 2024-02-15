@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
-import { ref, computed, onMounted } from 'vue';
 
-const urlUser = 'http://localhost:5000/User';
-const urlUserProfile = 'http://localhost:5000/Users_Profile';
+import { ref, computed } from 'vue';
+
+
 
 export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);
@@ -43,21 +42,7 @@ export const useAuthStore = defineStore('auth', () => {
     picture:'',
   })
   
-  const fetchUserData = async () => {
-    try {
-      const userResponse = await axios.get(urlUser);
-      const userProfileResponse = await axios.get(`${urlUserProfile}/${userResponse.user.user_id}`);
-      memberList.value = userResponse.data;
-      userProfileList.value = userProfileResponse.data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
 
-  
-  onMounted(() => {
-    fetchUserData();
-  });
 
   return {
     memberList,

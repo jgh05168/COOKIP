@@ -1,4 +1,56 @@
 <template>
+  <v-form @submit.prevent="sendFile" enctype="multipart/form-data">
+    <v-container>
+      <v-row>
+        <v-col>
+          <v-alert v-if="message" :type="error ? 'error' : 'success'">{{ message }}</v-alert>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-file-input v-model="file" label="Choose a file" @change="selectFile"></v-file-input>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-btn @click="sendFile" class="mt-2" color="info">Send</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-form>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import axios from 'axios';
+
+const file = ref(null);
+const message = ref('');
+const error = ref(false);
+
+const selectFile = () => {
+  error.value = false;
+  message.value = '';
+};
+
+const sendFile = async () => {
+  const formData = new FormData();
+  formData.append('file', file.value);
+
+  try {
+    await axios.post('http://localhost:5000/upload', formData);
+    message.value = 'File has been uploaded';
+    file.value = null;
+    error.value = false;
+  } catch (err) {
+    message.value = 'Something went wrong';
+    error.value = true;
+  }
+};
+</script>
+
+
+<!-- <template>
     <div class="frame">
       <div class="div-wrapper">
           <div class="icon">
@@ -327,4 +379,4 @@ const gonext = function(){
     white-space: nowrap;
     width: 100%;
   }
-  </style>
+  </style> -->
