@@ -4,10 +4,11 @@
       {{ props.stepofstep.description }}
     </v-title>
     <v-img
+    :aspect-ratio="1/1"
       class="stepper-main-gallery"
-      src="@\assets\image\recipe\2\carbonara.jpg"
+      :src="props.stepofstep.image"
     />
-    <!-- :src="require(props.stepofstep.image)" -->
+
   </div>
 </template>
 

@@ -14,11 +14,12 @@
 
       <!-- 스텝 별 내용 -->
       <v-stepper-content>
-        <div
+        <div 
           class="recipe-guide"
           v-for="(step, idx) in GS.now_recipe_step"
           :key="idx"
         >
+
           <!-- 각 스텝의 가이드 별 헤더 -->
           <GuideHeaderVue
             class="recipe-guide-header"
