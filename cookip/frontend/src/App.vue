@@ -7,13 +7,13 @@
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
       <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
     
-    <div style="width: 360px; display: fixed">
+    <!-- <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'main' }">main</RouterLink> |
       <RouterLink :to="{ name: 'home' }">home</RouterLink> |
       <RouterLink :to="{ name: 'recipe-detail' }">recipe_detail</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
       <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
-    </div>
+    </div> -->
     <div class="screen">
       <!-- <div v-if="motionStore.motion_data=='SwipeUp'"> -->
       <transition :name="motionStore.transition_dir" mode="out-in">
@@ -273,10 +273,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.screen {
-  width: 360px;
- 
-}
+
 
 .slide-up-enter-from {
   transform: translateY(100%);

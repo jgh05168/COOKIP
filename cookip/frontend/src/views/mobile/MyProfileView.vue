@@ -21,11 +21,12 @@
         "
       >
         <v-img
-          :aspect-ratio="1 / 1"
-          :src="getBufferImage(profile.profile_img)"
+          aspect-ratio="1 / 1"
+          :src="require(`../../../public/profile/profile_icj.png`)"
           alt=""
           style="border-radius: 30%; width: 150px"
         ></v-img>
+        {{ profile.profile_img }}
       </div>
       <div
         class="ma-2"
@@ -84,14 +85,6 @@ const makeprofile = function () {
 
 const profile_list = JSON.parse(localStorage.getItem("profile")).profile;
 console.log(profile_list)
-const getBufferImage = (buffer) => {
-  if (buffer && buffer.data instanceof Array) {
-    const uint8Array = new Uint8Array(buffer.data);
-    const blob = new Blob([uint8Array], { type: "image/jpeg" });
-    return URL.createObjectURL(blob);
-  }
-  return null;
-};
 
 </script>
 
