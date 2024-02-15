@@ -7,10 +7,11 @@
       class="rounded overflow-hidden shadow-lg preview-item"
       style="color: #111111;+"
     >
-      <p style="font-size: 20px; font-weight: bold; text-align: center">
+
+      <img class="preview-img" :src="item.thumbnail" alt="" />
+      <p class =item-name style="font-size: 25px; font-weight: bold; text-align: center">
         {{ item.name }}
       </p>
-      <img class="preview-img" :src="item.thumbnail" alt="" />
     </div>
   </div>
 </template>
@@ -22,7 +23,7 @@ import { useRecipeStore } from "@/store/recipe";
 const recipeStore = useRecipeStore();
 
 
-const user_id = 1;
+const user_id = 2;
 const profile_id = 1;
 
 const results = [
@@ -83,18 +84,11 @@ watch(
   text-align: center;
   font-size: 45px;
   font-weight: bold;
-  color: #6d4c41;
+  color: #C2A38F;
   margin-bottom: 10px;
 }
 
-.recommand-title {
-  width: 1920px;
-  text-align: center;
-  font-size: 45px;
-  font-weight: bold;
-  color: #6d4c41;
-  margin-bottom: 10px;
-}
+
 
 .preview-list .preview-title {
   font-size: 1.2rem;
@@ -102,6 +96,9 @@ watch(
   margin-bottom: 10px;
 }
 
+.item-name{
+  color:#C2A38F;
+}
 
 
 /* .preview-list:nth-child(even) {
