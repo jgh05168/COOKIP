@@ -2,7 +2,7 @@
   <Carousel
     v-model="currentSlide"
     ref="fCarousel"
-    :itemsToShow="2"
+    :itemsToShow="3"
     :wrapAround="true"
     :transition="500"
     style="height: "
@@ -165,6 +165,7 @@ watchEffect(() => {
     } else if (motionStore.motion_data.swipe == "SwipeRight") {
       prev(); // 이전 레시피
     }
+    motionStore.motion_data.swipe = null;
   } else if (motionStore.motion_data.page !== null) {
     if (motionStore.motion_data.page == "PageIn") {
       router.push({
@@ -174,6 +175,7 @@ watchEffect(() => {
     } else if (motionStore.motion_data.page == "PageOut") {
       router.push({ name: "home" });
     }
+    motionStore.motion_data.page = null;
   }
 });
 </script>

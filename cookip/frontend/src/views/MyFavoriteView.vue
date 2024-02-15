@@ -88,6 +88,17 @@ const user_id = JSON.parse(localStorage.getItem("user_id"));
 // const my_profile_id = JSON.parse(localStorage.getItem("cur_profile")).profile_id;
 const my_profile_id = 2;
 
+// 주어진 배열에서 my_profile_id와 일치하는 객체가 가장 앞으로 오도록 정렬
+profile_list.sort(function (a, b) {
+  if (a.profile_id === my_profile_id) {
+    return -1; // a를 먼저 위치하도록 정렬
+  } else if (b.profile_id === my_profile_id) {
+    return 1; // b를 먼저 위치하도록 정렬
+  } else {
+    return 0; // 순서를 변경하지 않음
+  }
+});
+
 // console.log(JSON.parse(localStorage.getItem("user_id"))[0].user_id);
 favoriteStore.user_id = user_id;
 
@@ -115,16 +126,6 @@ const prevtab = () => {
 };
 // 탭 조작 함수 끝
 
-// 주어진 배열에서 my_profile_id와 일치하는 객체가 가장 앞으로 오도록 정렬
-profile_list.sort(function (a, b) {
-  if (a.profile_id === my_profile_id) {
-    return -1; // a를 먼저 위치하도록 정렬
-  } else if (b.profile_id === my_profile_id) {
-    return 1; // b를 먼저 위치하도록 정렬
-  } else {
-    return 0; // 순서를 변경하지 않음
-  }
-});
 
 console.log("프로필 리스트", profile_list);
 
@@ -290,30 +291,4 @@ const getBufferImage = (buffer) => {
   transition: transform 0.5s ease;
 }
 
-.move-next {
-  transition: transform 0.5s ease-in-out;
-}
-
-.move-prev {
-  transition: transform 0.5s ease-in-out;
-}
-.move-next-enter-active,
-.move-prev-enter-active {
-  transition: transform 0.5s ease-in-out;
-}
-
-.move-next-leave-active,
-.move-prev-leave-active {
-  transition: transform 0.5s ease-in-out;
-}
-
-.move-next-enter,
-.move-next-leave-to {
-  transform: translateY(100%);
-}
-
-.move-prev-enter,
-.move-prev-leave-to {
-  transform: translateY(-100%);
-}
 </style>
