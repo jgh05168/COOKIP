@@ -5,7 +5,7 @@
       <RouterLink :to="{ name: 'mobile-home' }">home</RouterLink> |
       <RouterLink :to="{ name: 'member' }">member</RouterLink> |
       <RouterLink :to="{ name: 'my-profile' }">my-profile</RouterLink> |
-      <RouterLink :to="{ name: 'create-member' }">servey</RouterLink>
+      <!-- <RouterLink :to="{ name: 'create-member' }">servey</RouterLink> -->
     </div>
     <div style="width: 360px; display: fixed">
       <RouterLink :to="{ name: 'main' }">main</RouterLink> |
