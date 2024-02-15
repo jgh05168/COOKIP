@@ -67,6 +67,6 @@ app.use("/profile", profile);
 const step_ingredient = require("./routes/step_ingredient");
 app.use("/step_ingredient", step_ingredient);
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
