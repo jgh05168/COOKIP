@@ -2,15 +2,23 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import { ref, computed, onMounted } from 'vue';
 
-const urlUser = 'http://localhost:3002/User';
-const urlUserProfile = 'http://localhost:3002/Users_Profile';
+const urlUser = 'http://localhost:5000/User';
+const urlUserProfile = 'http://localhost:5000/Users_Profile';
 
 export const useAuthStore = defineStore('auth', () => {
   const memberList = ref([1,2,3,4]);
   const userProfileList = ref([]);
   const login_info = ref(null)
   const profileImage = ref([])
-  const cur_user_info = ref(null)
+  const cur_profile = ref({
+    profile_face:null,
+    profile_id:null,
+    profile_img:null,
+    profile_name:null,
+    profile_nickname:null,
+    user_id:null
+  })
+  
   const img = ref();
 
   const Islogin = computed(() => {
@@ -57,7 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
     signup,
     profile,
     profileImage,
-    cur_user_info, 
+    cur_profile, 
     Islogin,
     img
   };

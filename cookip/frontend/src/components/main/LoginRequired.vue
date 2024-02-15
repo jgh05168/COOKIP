@@ -19,7 +19,11 @@
           <span v-if="timeout" class="arrow-prev"></span>
           <span v-if="timeout" class="arrow-prev"></span>
           <span v-if="timeout" class="arrow-prev"></span>
-          <h2><strong>{{ timeout ? '밀어서 프로필 생성' : '사용자 인증 진행중 ...' }}</strong></h2>
+          <h2>
+            <strong>{{
+              timeout ? "밀어서 프로필 생성" : "사용자 인증 진행중 ..."
+            }}</strong>
+          </h2>
         </div>
       </transition>
     </footer>
@@ -52,8 +56,9 @@ const get_user_profile = async () => {
     useAuthStore.profile = await accountService.getUserProfile(
       useAuthStore.login_info[0]["user_id"]
     );
-    console.log(useAuthStore.profile);
+    console.log("프로필 로컬저장 확인", useAuthStore.profile);
     localStorage.setItem("profile", JSON.stringify(useAuthStore.profile));
+    console.log("프로필 저장 완료");
   } catch (err) {
     error.value = err.message;
     console.error("Error in get_user_profile:", err);
@@ -65,7 +70,7 @@ const sendAuthInfoToServer = async (e) => {
     // console.log(useAuthStore.profile)
     // 만약 데이터가 서버에서 클라이언트로 전송된다면
     if (e !== null && e !== undefined) {
-      console.log(e.data);
+      console.log("받은데이터", e.data);
       const result = await JSON.parse(e.data);
       useAuthStore.cur_user_info = [result["User"], result["Profile"]]
     }
@@ -94,13 +99,6 @@ const sendAuthInfoToServer = async (e) => {
 
 const loginTimeOver = () => {
   timeout.value = true;
-  motionStore.motion_data = {
-    swipe: null,
-    page: null,
-    rating: null,
-    zoom: null,
-    flip: null,
-  };
 };
 
 onMounted(async () => {
@@ -111,12 +109,24 @@ onMounted(async () => {
   // 웹소켓 연결 설정
   socket.onopen = () => {
     console.log("웹소켓(얼굴 인식) 연결이 열렸습니다.");
-    sendAuthInfoToServer(); // 연결이 열리면 데이터를 서버로 전송
+    sendAuthInfoToServer(null); // 연결이 열리면 데이터를 서버로 전송
   };
 
   // 에러가 발생했을 때의 처리
   socket.onerror = (e) => {
     console.error("웹소켓(얼굴 인식) 에러:", e);
+  };
+
+  socket.onmessage = (event) => {
+    const receivedData = JSON.parse(event.data);
+    console.log("서버에서 받은 데이터:", receivedData);
+    // 받은 데이터에 따라 필요한 처리 수행
+    const findProfileById = (profileId) => {
+      return useAuthStore.profile.profile.find(profile => profile.profile_id === profileId);
+    };
+    localStorage.setItem("cur_profile", JSON.stringify(findProfileById(receivedData.Profile)));      // 로컬스토리지에 현재 프로필 저장
+    useAuthStore.cur_profile = findProfileById(receivedData.Profile)              // pinia 저장
+    router.push({ name: "home", params: {}, query: {} }); // homeview로 라우터 푸시
   };
 
   setTimeout(() => {
@@ -140,17 +150,8 @@ watchEffect(() => {
       router.push({ name: "create-profile", params: {}, query: {} });
     }
     // name:주소이름 ,params : {주소에 넣어야할 인자명 : 값}, query:{디이터명: 쿼리로 전달하고 싶은 데이터}
-    motionStore.motion_data = {
-      swipe: null,
-      page: null,
-      rating: null,
-      zoom: null,
-      flip: null,
-    };
-    // console.log(motionStore.motion_data)
   }
 
-  sendAuthInfoToServer();
 });
 </script>
 

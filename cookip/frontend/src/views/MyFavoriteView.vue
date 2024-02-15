@@ -39,19 +39,29 @@
         </v-tab>
       </v-tabs>
       <!-- 탭과 v-model 로 양방향 바인딩 해주고 -->
-      <v-window v-model="tab" style="width: 1600px; height: 800px">
+      <v-window
+        class="favorite-window"
+        v-model="tab"
+        style="width: 1600px; height: 100%"
+      >
         <!-- 멤버리스트별 레시피 목록들을 돌면서 탭의 멤버와 value로  -->
-        <div v-if="members_favorite_list.length > 0">
+        <div class="carousel-box" v-if="members_favorite_list.length > 0">
           <v-window-item
-            style="height: 100%"
+            style="height: 800px"
             v-for="(favorite, idx) in members_favorite_list"
             :key="favorite.profile_id"
             :value="idx"
+            class="window-item"
+            transition="slide-y-transition"
+            reverse-transition="slide-y-reverse-transition"
           >
             <!-- 멤버 리스트 별로 즐겨찾기 목록을 보여준다 -->
-            <FavoriteList :recipe-list="favorite.favorite_list"
-            :nexttab="nexttab"
-            :prevtab="prevtab"
+            <FavoriteList
+              :recipe-list="favorite.favorite_list"
+              :nexttab="nexttab"
+              :prevtab="prevtab"
+              :tab="tab"
+              :favorite-list="members_favorite_list"
             />
           </v-window-item>
         </div>
@@ -75,6 +85,7 @@ const tab = ref(0);
 const profile_list = JSON.parse(localStorage.getItem("profile")).profile;
 const user_id = JSON.parse(localStorage.getItem("user_id"));
 // 현재 사용자 프로필 아이디
+// const my_profile_id = JSON.parse(localStorage.getItem("cur_profile")).profile_id;
 const my_profile_id = 2;
 
 // console.log(JSON.parse(localStorage.getItem("user_id"))[0].user_id);
@@ -85,18 +96,22 @@ const canGoNextPage = computed(() => tab.value < profile_list.length);
 
 const canGoPreviousPage = computed(() => tab.value > 0);
 
+const arrow = ref("next");
+
 const nexttab = () => {
+  arrow.value = "next";
   if (canGoNextPage.value) {
     tab.value++;
   }
-  console.log(tab.value);
+  // console.log(tab.value);
 };
 
 const prevtab = () => {
+  arrow.value = "prev";
   if (canGoPreviousPage.value) {
     tab.value--;
   }
-  console.log(tab.value);
+  // console.log(tab.value);
 };
 // 탭 조작 함수 끝
 
@@ -116,10 +131,11 @@ console.log("프로필 리스트", profile_list);
 // 레시피 아이디 리스트를 가져오는 비동기 함수
 const get_Favorite_recipe_id = async (profile_id) => {
   try {
-    const Favorite_recipe_id = await accountService.getFavorite_recipe_userid(
-      user_id,
-      profile_id
-    );
+    const Favorite_recipe_id =
+      await accountService.getFavorite_recipe_userid_profileid(
+        user_id,
+        profile_id
+      );
     // console.log("즐겨찾기 레시피 정보", Favorite_recipe_id);
     return Favorite_recipe_id;
   } catch (err) {
@@ -148,6 +164,7 @@ watch(members_favorite_list, (newValue, oldValue) => {
   // oldValue: 이전 값
 
   // 예제: 변경된 값 콘솔에 출력
+
   console.log("members_favorite_list 변경:", oldValue, newValue);
 });
 
@@ -170,14 +187,17 @@ const fetchData = async () => {
       //   favorite_recipes.push(recipe_data);
       // }
       for (const recipe_id of favorite_recipes_id) {
-        console.log(
-          "레시피 데이터 객체로 뽑기",
-          recipe_id,
-          "ㄱ갳게",
-          recipeStore.recipes_object
-        );
-        // favorite_recipes.push(useRecipeStore.recipes_object[recipe_id]);
+        // console.log(
+        //   "레시피 데이터 객체로 뽑기",
+        //   recipeStore.recipes_object,
+        //   recipe_id
+        // );
+        let id = recipe_id.recipe_id;
+        // console.log("객체 접근 확인", recipeStore.recipes_object[id]);
+        favorite_recipes.push(recipeStore.recipes_object[id]);
       }
+
+      console.log(profile_id, "님의 즐겨찾기 목록 : ", favorite_recipes);
 
       // 프로필 아이디 저장
       profile_favorite["profile_id"] = profile_id;
@@ -231,6 +251,9 @@ const getBufferImage = (buffer) => {
   color: #fdf8ec;
 }
 
+.carousel-box {
+}
+
 .profile-thumbnail {
   border-radius: 50%;
   margin-right: 10px;
@@ -262,5 +285,35 @@ const getBufferImage = (buffer) => {
   color: #32231e;
   font-weight: bold;
   font-size: 40px;
+}
+.window-item {
+  transition: transform 0.5s ease;
+}
+
+.move-next {
+  transition: transform 0.5s ease-in-out;
+}
+
+.move-prev {
+  transition: transform 0.5s ease-in-out;
+}
+.move-next-enter-active,
+.move-prev-enter-active {
+  transition: transform 0.5s ease-in-out;
+}
+
+.move-next-leave-active,
+.move-prev-leave-active {
+  transition: transform 0.5s ease-in-out;
+}
+
+.move-next-enter,
+.move-next-leave-to {
+  transform: translateY(100%);
+}
+
+.move-prev-enter,
+.move-prev-leave-to {
+  transform: translateY(-100%);
 }
 </style>

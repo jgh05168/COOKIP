@@ -275,6 +275,7 @@ onMounted(async () => {
 <style scoped>
 .screen {
   width: 360px;
+ 
 }
 
 .slide-up-enter-from {
@@ -293,6 +294,6 @@ onMounted(async () => {
 .slide-down-enter-active,
 .slide-left-enter-active,
 .slide-right-enter-active {
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.7s ease-in-out;
 }
 </style>
