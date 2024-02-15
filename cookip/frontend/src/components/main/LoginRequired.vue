@@ -67,9 +67,18 @@ const sendAuthInfoToServer = async (e) => {
     if (e !== null && e !== undefined) {
       console.log(e.data);
       const result = await JSON.parse(e.data);
-      useAuthStore.cur_user_info = [result["User"], result["Profile"]];
-    } else {
-      const jsonData = JSON.stringify(useAuthStore.profile);
+      useAuthStore.cur_user_info = [result["User"], result["Profile"]]
+    }
+    else {
+      const extractedData = useAuthStore.profile.profile.map((item) => {
+        return {
+          profile_face: item.profile_face,
+          profile_id: item.profile_id,
+          user_id: item.user_id,
+        };
+      });
+      console.log("보낼대에터", extractedData)
+      const jsonData = JSON.stringify(extractedData);
       if (socket && socket.readyState === WebSocket.OPEN && jsonData) {
         socket.send(jsonData);
         console.log(

@@ -37,8 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
   const fetchUserData = async () => {
     try {
       const userResponse = await axios.get(urlUser);
-      const userProfileResponse = await axios.get(urlUserProfile);
-
+      const userProfileResponse = await axios.get(`${urlUserProfile}/${userResponse.user.user_id}`);
       memberList.value = userResponse.data;
       userProfileList.value = userProfileResponse.data;
     } catch (error) {
