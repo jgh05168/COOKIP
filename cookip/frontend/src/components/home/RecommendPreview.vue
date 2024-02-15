@@ -23,7 +23,7 @@ import { useRecipeStore } from "@/store/recipe";
 const recipeStore = useRecipeStore();
 
 
-const user_id = 1;
+const user_id = 2;
 const profile_id = 1;
 
 const results = [
