@@ -15,8 +15,7 @@
                 <v-img class="color" alt="Color" src="../../assets/login_icon/c1.png" />
                 <div class="basic-details">Basic details</div>
               </div>
-              <div class="to-sign-up-you-need">Lorem ipsum dolor sit amet, adipiscing elit, 
-sed eiusmod tempor incididunt.</div>
+              <div class="to-sign-up-you-need">Please write your name and date of birth</div>
             </div>
             <v-form @submit.prevent class="div-4">
                 

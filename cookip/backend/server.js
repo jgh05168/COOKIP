@@ -15,7 +15,8 @@ app.use(cors());
 
 
 
-
+const content = require('./routes/content');
+app.use('/content', content);
  
 const recipe = require("./routes/recipe");
 app.use("/recipe", recipe);
