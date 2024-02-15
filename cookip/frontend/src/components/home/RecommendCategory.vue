@@ -90,7 +90,7 @@ watchEffect(() => {
 }
 
 .divide {
-  background-color: #795548;
+  background-color: #C2A38F;
   height: 10px;
   opacity: 0.6;
   width: 90%;
@@ -101,7 +101,7 @@ watchEffect(() => {
   padding: 10px;
   width: 300px;
   height: 300px;
-  border: 7px solid #6d4c41;
+  border: 7px solid #C2A38F;
   display: flex;
   flex-direction: column;
   justify-content: center;

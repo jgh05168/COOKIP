@@ -88,7 +88,7 @@ onMounted(async () => {});
 }
 
 .divide {
-  background-color: #795548;
+  background-color: #C2A38F;
   height: 10px;
   opacity: 0.6;
   width: 90%;
