@@ -1,6 +1,6 @@
 local에서 클론 이후 빌드 하는 방법
 
-```
+```terminal
 cd S10P12C101/cookip/backend
 npm i
 node server.js
@@ -9,11 +9,11 @@ npm i
 npm run serve
 ```
 
-Visual Studio Code 2024 (1.86)
+Visual Studio Code 2024 (1.86)<br>
 DB 계정 및 프로퍼티는 S10P12C101/cookip/backend/database/dbConnection.js 에 존재
 
-nodejs 포트 3002 (server)
-vue 포트 8000    (front)
+nodejs 포트 3002 (server)<br>
+vue 포트 8000    (front)<br>
 nginx 포트 80
 
 시연시나리오
