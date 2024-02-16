@@ -297,8 +297,8 @@ onMounted(async () => {
 
 <style scoped>
 .screen {
-  width: 1920px;
-  height: 1080px;
+  width: 100vw; /* 100% 화면 너비로 설정 */
+  height: 100vh; /* 100% 화면 높이로 설정 */
 }
 
 .slide-up-enter-from {

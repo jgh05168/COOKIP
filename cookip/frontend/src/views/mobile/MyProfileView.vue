@@ -22,10 +22,11 @@
       >
         <v-img
           aspect-ratio="1 / 1"
-          :src="require(`../../../public/profile/profile_icj.png`)"
+          :src=profile.profile_img
           alt=""
           style="border-radius: 30%; width: 150px"
         ></v-img>
+        <v-img src="C:\Users\SSAFY\Desktop\last_project\S10P12C101\cookip\frontend\public\profile\profile_icj.png"></v-img>
         {{ profile.profile_img }}
       </div>
       <div
