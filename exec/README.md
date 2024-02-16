@@ -6,9 +6,18 @@ npm i
 node server.js
 cd ../frontend
 npm i
+npm run serve
 ```
 
-Visual Studio Code
+Visual Studio Code 2024 (1.86)
+DB 계정 및 프로퍼티는 S10P12C101/cookip/backend/database/dbConnection.js 에 존재
+
+nodejs 포트 3002 (server)
+vue 포트 8000    (front)
+nginx 포트 80
+
+시연시나리오
+http://i10c101.p.ssafy.io:8000/main
 
 ~~1.Gitlab 소스 클론 이후 빌드 및 배포할 수 있도록 정리한 문서 -> 사용한 JVM 웹서버, WAS 제품 등의 종류와 설정 값, 버전(IDE버전 포함) 기재 -> 빌드 시 사용되는 환경 변수 등의 내용 상세 기재 -> 배포 시 특이사항 기재 -> DB 접속 정보 등 프로젝트(ERD)에 활용되는 주요 계정 및 프로퍼티가 정의된 파일 목록~~
 
