@@ -75,7 +75,7 @@ const sendAuthInfoToServer = async (e) => {
       useAuthStore.cur_user_info = [result["User"], result["Profile"]]
     }
     else {
-      const extractedData = useAuthStore.profile.profile.map((item) => {
+      const extractedData = JSON.parse(localStorage.getItem("profile")).profile.map((item) => {
         return {
           profile_face: item.profile_face,
           profile_id: item.profile_id,
@@ -122,7 +122,7 @@ onMounted(async () => {
     console.log("서버에서 받은 데이터:", receivedData);
     // 받은 데이터에 따라 필요한 처리 수행
     const findProfileById = (profileId) => {
-      return useAuthStore.profile.profile.find(profile => profile.profile_id === profileId);
+      return JSON.parse(localStorage.getItem("profile")).profile.find(profile => profile.profile_id === profileId);
     };
     localStorage.setItem("cur_profile", JSON.stringify(findProfileById(receivedData.Profile)));      // 로컬스토리지에 현재 프로필 저장
     useAuthStore.cur_profile = findProfileById(receivedData.Profile)              // pinia 저장

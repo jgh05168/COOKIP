@@ -126,7 +126,7 @@ const get_useIngredient_recipe = async () => {
       }
     });
     recipestore.useIngredient_recipe = useIngredient_recipeData;
-    console.log(recipestore.useIngredient_recipe);
+    // console.log(recipestore.useIngredient_recipe);
   } catch (err) {
     error.value = err.message;
   }
@@ -141,7 +141,7 @@ const get_score = async () => {
       }
     });
     recipestore.score = score_Data;
-    console.log(recipestore.score);
+    // console.log(recipestore.score);
   } catch (err) {
     error.value = err.message;
   }
@@ -156,7 +156,7 @@ const get_Allergy = async () => {
       }
     });
     recipestore.Allergy = Allergy_Data;
-    console.log(recipestore.Allergy);
+    // console.log(recipestore.Allergy);
   } catch (err) {
     error.value = err.message;
   }
@@ -171,7 +171,7 @@ const get_Follow = async () => {
       }
     });
     recipestore.Follow = Follow_Data;
-    console.log(recipestore.Follow);
+    // console.log(recipestore.Follow);
   } catch (err) {
     error.value = err.message;
   }
@@ -181,7 +181,7 @@ const get_Favorite_category = async () => {
   try {
     const Favorite_category_Data = await accountService.getFavorite_category();
     recipestore.Favorite_category = Favorite_category_Data;
-    console.log(recipestore.Favorite_category);
+    // console.log(recipestore.Favorite_category);
   } catch (err) {
     error.value = err.message;
   }
@@ -223,8 +223,8 @@ const get_Favorite_recipe = async () => {
       }
     });
     Favoritestore.Favorite_recipe = Favorite_recipe_Data;
-    recipestore.Favorite_recipe = Favorite_recipe_Data;
-    console.log(recipestore.Favorite_recipe);
+    recipestore.Favorite_recipe = Favorite_recipe_Data;         // ?
+    console.log(recipestore.Favorite_recipe);     
   } catch (err) {
     error.value = err.message;
   }
@@ -263,19 +263,21 @@ const handleWebSocketMessage = async (e) => {
 };
 
 onMounted(async () => {
-  await get_all_ingredients(),
-    await get_all_recipes(),
-    await get_all_recipes_ingredients(),
-    await get_all_category(),
-    await get_useIngredient_recipe(),
-    await get_score(),
-    await get_Allergy(),
-    await get_Follow(),
-    await get_Favorite_category(),
-    await get_Favorite_ingredient(),
-    await get_Favorite_recipe();
-    await get_match_recipe_ingredient();
-    await get_user_recipe_match_ingredients();
+  await Promise.all([
+    get_all_ingredients(),
+    get_all_recipes(),
+    get_all_recipes_ingredients(),
+    get_all_category(),
+    get_useIngredient_recipe(),
+    get_score(),
+    get_Allergy(),
+    get_Follow(),
+    get_Favorite_category(),
+    get_Favorite_ingredient(),
+    get_Favorite_recipe(),
+    get_match_recipe_ingredient(),
+    get_user_recipe_match_ingredients(),
+])
 
   // 컴포넌트가 마운트된 후 실행되는 로직
   console.log("App Mount");
