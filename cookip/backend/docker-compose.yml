@@ -1,0 +1,22 @@
+version:  '3'
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - "3002:3001"
+    networks:
+      - compose-networks
+
+  # db:
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=
+  #   ports:
+  #     - "3002:3001"
+  #   networks:
+  #     - compose-networks
+
+networks:
+  compose-networks:

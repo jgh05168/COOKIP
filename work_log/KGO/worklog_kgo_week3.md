@@ -31,7 +31,7 @@
 
 |Todo List||
 |---|---|
-|:white_check_mark: |  |
+|:white_check_mark: ||
 
 <br>
 
@@ -39,81 +39,75 @@
 
 ### 금일 실시 사항
 
-- 오전 : 기능 명세서 마무리
+- 오전 : gerrit live 및 노션정리
 
-    - 해야하는 기능들 정리
-    - 노션 표 정리
+    - live 강의 gerrit 
+    - 노션 정리
 
-- 오후 : ERD 초기 구성
+- 오후 : ERD Table 수정 및 생성
 
-    - 데이터베이스 모델링 학습
-    - ERD 그리기
+    - ERD 에서 가독성쉽게 이름 수정 및 보기쉽게 그림 변경
+    - mysql에서 ERD SQL 코드 가져와서 Table 생성하기
+    - Coding Convention 정하기
 
 ### 문제 분석 및 해결
-
-- 현실적으로 가능한 기능들 정리하고 로직에 따라 DB 만들기
+||원인|해결|
+|---|---|---|
+|:white_check_mark:|DB Table의 이름과 Table 열의 이름이 헷갈려서 대문자, 소문자로 구분|
+|:white_check_mark:|DB Table의 자동삭제 만들기|
+|:white_check_mark:|use schema_name 대신 더블클릭으로 스키마 선택하기.|
 
 ### 익일 예정 사항
 
 |Todo List||
 |---|---|
-|:white_check_mark: | ERD DB 추가 기능 틀 잡기 |
+|:white_check_mark: |DB에 들어갈 데이터 sql문 만들기|
+|:white_check_mark: |jenkins, sonarqube 미팅|
 
 <br>
 
-## 01 / 17
+## 01 / 24
 
 ### 금일 실시 사항
 
-- 오전 : ERD 설계
- 
-    - 데이터베이스 모델링 학습
-    - ERD 구조 설계
-
-- 오후 : ERD, jira 관리
-
-    - ERD 구조 설계
-    - jira issue 등록
+- 오전 : erd 수정
+- 오후 : data insert
 
 ### 문제 분석 및 해결
 
 ||원인|해결|
 |---|---|---|
-|:white_check_mark:|Primary key 정보를 이용하면 데이터의 중복을 방지하고 데이터를 매우 빠르게 찾을 수 있다 *https://brunch.co.kr/@dan-kim/17|
-|:white_check_mark:|중복되는 데이터를 해결하기 위해 데이터를 나누고 Primary key, foreign key 를 나눈다 *https://brunch.co.kr/@dan-kim/26#comments|
-|:white_check_mark:|데이터모델링, ERD 표기법에 대해 학습하였다 https://inpa.tistory.com/entry/DB-%F0%9F%93%9A-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EB%8D%B8%EB%A7%81-1N-%EA%B4%80%EA%B3%84-%F0%9F%93%88-ERD-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8#erd_%ED%82%A4%EC%99%80_%EC%A0%9C%EC%95%BD_%EC%A1%B0%EA%B1%B4_%ED%91%9C%EA%B8%B0%EB%B2%95|
+|:white_check_mark:|coding convention|
 
 
 ### 익일 예정 사항
 
 |Todo List|
 |---|---|
-|:black_square_button: |ERD DB 설계 발표|
-|:black_square_button: |Ui 목업 마무리|
-|:black_square_button: |발표 ppt 작성|
+|:black_square_button: ||
 
 <br>
 
-## 01 / 18
+## 01 / 25
 
 ### 금일 실시 사항
 
-- 오전 : HW 회의, 기능명세서 작성, API 레시피 데이터 조사
+- 오전 : mysql module
  
-    - 
-    - 
+    - mysql module 을 이용해서 웹에 DB 값을 띄울 수 있다
+    - dependencies 을 이용해 자동화 설치가 가능하다
+    - mysql module의 query문을 이용해 query 명령문을 작성할 수 있다 
 
-- 오후 : ERD DB 설계 발표 및 PPT 작성
+- 오후 : express이해 검색 후 DB insert
 
-    - 
-    - 
-    - 
+    - express 라우터를 이용해서 웹에 접근할 수 있다
+    - ejs를 이용해서 웹의 구상을 객체지향적으로 구상할 수 있다 (Embedded web system)
+    - planetscale을 이용하면 DB server를 구축할 수 있다
 
 ### 문제 분석 및 해결
 
 ||원인|해결|
 |---|---|---|
-|:white_check_mark:||
 |:white_check_mark:||
 
 
@@ -121,20 +115,21 @@
 
 |Todo List||
 |---|---|
-|:black_square_button: | |
-|:black_square_button:| |
-|:black_square_button: | |
+|:black_square_button: |타팀,팀원 평가|
+|:black_square_button:|자소서 소스 뽑기, 구상|
+|:black_square_button: |https://www.youtube.com/watch?v=GDOACxOQAaY&t=4s 시청 후 노션 정리|
 
 <br>
 
-## 01 / 19
+## 01 / 26
 
 ### 금일 실시 사항
 
-- 오전 : 기능 변경사항 정리
+- 오전 : 팀평가 및 DB 데이터 불러오기
+    - planetscale 사용으로 DB 넣고 뺴기
  
-
-- 오후 : PPT 작성
+- 오후 : git 백업
+    - .md 파일 markdown 사용법
 
 ### 문제 분석 및 해결
 
