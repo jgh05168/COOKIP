@@ -14,12 +14,11 @@
 
       <!-- 스텝 별 내용 -->
       <v-stepper-content>
-        <div 
+        <div
           class="recipe-guide"
           v-for="(step, idx) in GS.now_recipe_step"
           :key="idx"
         >
-
           <!-- 각 스텝의 가이드 별 헤더 -->
           <GuideHeaderVue
             class="recipe-guide-header"
@@ -32,6 +31,8 @@
             class="recipe-guide-body"
             :step="step"
             :now-step="idx"
+            :next="next"
+            :prev="prev"
             v-if="idx === selectedStep"
           />
         </div>
@@ -163,13 +164,13 @@ const next = () => {
   width: 99%;
   padding: 20px;
   background: #fdf8ec;
-  border-radius: 50px 0px 0px 50px;
+  border-radius: 50px;
 }
 
 .recipe-guide-header {
   height: 165px;
 }
 .recipe-guide-body {
-  height: 750px;
+  height: 730px;
 }
 </style>

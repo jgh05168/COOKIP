@@ -13,7 +13,7 @@
           cover
           width="450"
           :aspectRatio="1 / 1"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+          :src="recipe.thumbnail"
         ></v-img>
 
         <v-card-item style="margin-top: 20px; height: 100px; padding-left: ">
@@ -109,7 +109,7 @@ const props = defineProps({
   prevtab: Function,
   tab: Number,
   favoriteList: Array,
-  tabIdx:Number,
+  tabIdx: Number,
 });
 const motionStore = useMotionStore();
 // const favoriteStore = useFavoriteStore();
@@ -130,11 +130,15 @@ const nowRecipe = () => {
 };
 
 const nextpage = () => {
-  fCarousel.value.next();
+  if (fCarousel.value !== null) {
+    fCarousel.value.next();
+  }
 };
 
 const prevpage = () => {
-  fCarousel.value.prev();
+  if (fCarousel.value !== null) {
+    fCarousel.value.prev();
+  }
 };
 
 const ratingToPercent = (score) => {
@@ -165,7 +169,7 @@ watchEffect(() => {
     } else if (motionStore.motion_data.swipe == "SwipeRight") {
       prevpage(); // 이전 레시피
     }
-    motionStore.motion_data.swipe = null
+    motionStore.motion_data.swipe = null;
   } else if (motionStore.motion_data.page !== null) {
     if (motionStore.motion_data.page == "PageIn") {
       router.push({
@@ -175,7 +179,7 @@ watchEffect(() => {
     } else if (motionStore.motion_data.page == "PageOut") {
       router.push({ name: "home" });
     }
-    motionStore.motion_data.page = null
+    motionStore.motion_data.page = null;
   }
 });
 </script>

@@ -6,7 +6,6 @@
       페이지
     </h2> -->
     <div class="go-favorite">
-      아래로 스와이프
       <RouterLink :to="{ name: 'my-favorite' }">
         <div class="link-container">
           <span class="link-text">즐겨찾기 보러 가기</span>
@@ -56,7 +55,7 @@ onMounted(async () => {});
   color: #efebe9;
   font-size: 17px;
   font-weight: bold;
-  text-align: center;
+  text-align: start;
   background-color: #8d6e63;
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
@@ -88,7 +87,7 @@ onMounted(async () => {});
 }
 
 .divide {
-  background-color: #C2A38F;
+  background-color: #c2a38f;
   height: 10px;
   opacity: 0.6;
   width: 90%;

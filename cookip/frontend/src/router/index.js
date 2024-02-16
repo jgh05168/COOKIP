@@ -28,7 +28,7 @@ import MobileHomeView from "@/views/mobile/MobileHomeView"
 
 const routes = [
   {
-    path: "/main",
+    path: "/",
     name: "main",
     component: MainView,
   },

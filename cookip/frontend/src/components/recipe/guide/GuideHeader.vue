@@ -3,11 +3,18 @@
   <div>
     <div class="recipe-guide-header">
       <!-- 레시피 가이드 스텝 메인 이미지 -->
-      <v-img class="step-header-image" :src="require(`@/assets/image/KGO.png`)" />
+      <v-img
+        :aspectRatio="1 / 1"
+        width="110px"
+        height="110px"
+        style="border-radius: 50%; scale: 1.2"
+        class="step-header-image"
+        :src="require(`@/assets/image/KGO.png`)"
+      />
       <!-- 레시피 가이드 스텝 정보 및 경과 시간 -->
       <div class="step-header-content">
-          <HeaderStepInfo :step="props.step" :nowStep="props.nowStep" />
-          <HeaderRecipeInfo :info = "GS.now_recipe_info" />
+        <HeaderRecipeInfo :info="GS.now_recipe_info" />
+        <HeaderStepInfo :step="props.step" :nowStep="props.nowStep" />
       </div>
     </div>
   </div>
@@ -25,7 +32,6 @@ const props = defineProps({
   step: Object,
   nowStep: Number,
 });
-
 </script>
 
 <style scoped>
@@ -35,6 +41,7 @@ const props = defineProps({
   gap: 20px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .step-header-image {
   width: 140px;
@@ -45,15 +52,13 @@ const props = defineProps({
 }
 
 .step-header-content {
-  width: 1000px;
-  height: 140px;
+  width: 1600px;
+  height: 130px;
   padding: 20px;
-  background: white;
+  background: rgba(255, 255, 255, 0.63);
   /* border-radius: 30px 0 0 30px; */
   overflow: hidden;
   gap: 10px;
-  display: flex;
-  flex-direction: row;
 }
 
 .step-info {
