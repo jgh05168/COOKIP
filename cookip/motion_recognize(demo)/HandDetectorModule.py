@@ -107,10 +107,10 @@ class handDetector():
     def findFingerUp(self):
         fingers = []
         # 엄지손가락
-        if self.get_distance(self.tipIds[0], 13) < self.get_distance(self.tipIds[0] - 1, 13):
-            fingers.append(0)
-        else:
+        if self.landmark_list[self.tipIds[0]][1] < self.landmark_list[self.tipIds[0] - 1][1]:
             fingers.append(1)
+        else:
+            fingers.append(0)
 
         # 나머지 손가락들
         for id in range(1, 5):

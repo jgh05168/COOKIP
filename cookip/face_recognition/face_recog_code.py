@@ -55,14 +55,14 @@ async def handle_client(websocket, path):
             json_list = json.loads(message)
             known_face_list = []
             profile_list = []
-            print(json_list)
+            # print(json_list)
             for i in range(len(json_list)):
                 if not json_list[i]['profile_face']:
                     continue
                 known_person = fr.load_image_file(json_list[i]['profile_face'])
                 known_face_list.append(fr.face_encodings(known_person)[0])
                 profile_list.append((json_list[i]['user_id'], json_list[i]['profile_id']))
-            print(known_face_list)
+            # print(known_face_list)
 
             tmp_data = {        # 전송할 json 형식 데이터
                 "User": None,

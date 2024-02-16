@@ -277,6 +277,7 @@ def mouse_click(landmark_list, frame):
 
     # 3. 어떤 손가락이 올라왔는지 체크하기
     fingers = detector.findFingerUp()
+    
     cv2.rectangle(frame, (frameR, frameR), (wCam - frameR, hCam - frameR),
                     (255, 0, 255), 2)
     
