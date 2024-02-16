@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <v-form @submit.prevent="sendFile" enctype="multipart/form-data">
     <v-container>
       <v-row>
@@ -47,10 +47,10 @@ const sendFile = async () => {
     error.value = true;
   }
 };
-</script>
+</script> -->
 
 
-<!-- <template>
+<template>
     <div class="frame">
       <div class="div-wrapper">
           <div class="icon">
@@ -379,4 +379,4 @@ const gonext = function(){
     white-space: nowrap;
     width: 100%;
   }
-  </style> -->
+  </style>
