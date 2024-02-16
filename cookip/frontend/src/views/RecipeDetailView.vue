@@ -31,6 +31,8 @@
             class="recipe-guide-body"
             :step="step"
             :now-step="idx"
+            :next="next"
+            :prev="prev"
             v-if="idx === selectedStep"
           />
         </div>

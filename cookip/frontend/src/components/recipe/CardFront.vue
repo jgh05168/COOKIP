@@ -2,7 +2,7 @@
   <v-card class="front-info rounded-xl" width="400">
     <div class="front-inner-info rouded-xl">
       <div class="front-inner-profile">
-        레시피 제공 : {{ props.recipeFront.profile_id }}
+        <!-- 레시피 제공 : {{ props.recipeFront.profile_id }} -->
       </div>
       <v-card-item class="front-inner-recipe" style="width: 150px">
         <!-- 별점 -->

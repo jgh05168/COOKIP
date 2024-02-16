@@ -18,7 +18,7 @@
       </div>
     </Slide>
   </Carousel>
-  
+
   <div class="divide"></div>
   <RecommendPreview :selected-slide="selectedSlide" />
 </template>
@@ -37,20 +37,24 @@ const motionStore = useMotionStore();
 
 const currentSlide = ref(0);
 
+const rowCarousel = ref(null);
+
 watch(currentSlide, (newVal) => {
   console.log("Current Slide Changed:", newVal);
   selectedSlide.value = newVal;
   recipeStore.selected_category = newVal;
 });
 
-const rowCarousel = ref(null);
-
 const nextpage = () => {
-  rowCarousel.value.next();
+  if (rowCarousel.value !== null) {
+    rowCarousel.value.next();
+  }
 };
 
 const prevpage = () => {
-  rowCarousel.value.prev();
+  if (rowCarousel.value !== null) {
+    rowCarousel.value.prev();
+  }
 };
 
 const recipeStore = useRecipeStore();
@@ -77,11 +81,9 @@ watchEffect(() => {
       motionStore.transition_dir = "slide-up";
       router.push({ name: "my-favorite", params: {}, query: {} });
     }
-    motionStore.motion_data.swipe = null
+    motionStore.motion_data.swipe = null;
   }
 });
-
-
 </script>
 
 <style scoped>
@@ -90,7 +92,7 @@ watchEffect(() => {
 }
 
 .divide {
-  background-color: #C2A38F;
+  background-color: #c2a38f;
   height: 10px;
   opacity: 0.6;
   width: 90%;
@@ -101,7 +103,7 @@ watchEffect(() => {
   padding: 10px;
   width: 300px;
   height: 300px;
-  border: 7px solid #C2A38F;
+  border: 7px solid #c2a38f;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,7 +111,7 @@ watchEffect(() => {
 }
 
 .category-title {
-  color: #6d4c41;
+  color: #eddbcf;
   font-size: 30px;
   font-weight: bold;
 }

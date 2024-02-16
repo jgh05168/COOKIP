@@ -1,13 +1,16 @@
 <!-- 레시피 가이드 해당 스텝 상세 컨텐츠, 액션을 포함하는 컴포넌트 -->
 <template>
-  <div class="stepper-content">
-    <StepInfos
-      :stepofstep="props.stepofstep"
-      :now-step="props.nowStep"
-      :now-stepofstep="props.nowStepofstep"
-    />
-
-    <StepItem :stepofstep="props.stepofstep" />
+  <div class="stepofstep">
+    <div>
+      <StepInfos
+        :stepofstep="props.stepofstep"
+        :now-step="props.nowStep"
+        :now-stepofstep="props.nowStepofstep"
+      />
+    </div>
+    <div>
+      <StepItem :stepofstep="props.stepofstep" />
+    </div>
 
     <!-- <StepIngredientsGallery :stepofstep="props.stepofstep" :now-step="props.nowStep" :now-stepofstep="props.nowStepofstep" /> -->
   </div>
@@ -27,7 +30,8 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.stepper-content {
+.stepofstep {
+  height: 750px;
   width: 100%;
   display: flex;
   flex-direction: row;

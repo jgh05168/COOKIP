@@ -18,12 +18,15 @@
       v-for="(recipe, slide) in props.recipeList"
       :key="slide"
     >
+      <!-- <button @click="props.prevrow">prev</button> -->
       <div class="flip-card">
-        <button @click="Flip_test">Flip_test</button>|
+        <!-- <button @click="Flip_test">Flip_test</button>|
         <button @click="props.nextrow">nextrow</button>|
         <button @click="nextpage">nextcol</button>|
-        <button @click="nowRecipe">nowrecipe</button>|
+        <button @click="nowRecipe">nowrecipe</button>| -->
+        <!-- <button @click="prevpage">up</button> -->
         <FlipCard
+          @click="go_detail()"
           class="shadow-2xl"
           :flip="
             flip &&
@@ -32,7 +35,9 @@
           "
           :recipe="recipe"
         />
+        <!-- <button @click="nextpage">down</button> -->
       </div>
+      <!-- <button @click="props.nextrow">next</button> -->
     </Slide>
   </Carousel>
 
@@ -67,9 +72,9 @@ const colCarousel = ref(null);
 
 const flip = ref(false);
 
-const Flip_test = () => {
-  flip.value = !flip.value;
-};
+// const Flip_test = () => {
+//   flip.value = !flip.value;
+// };
 
 const nextpage = () => {
   // if (flip.value == true) {
@@ -95,6 +100,13 @@ const nowRecipe = () => {
   //   ]
   // );
   return 28;
+};
+
+const go_detail = () => {
+  router.push({
+    name: "recipe-detail",
+    params: { recipeid: 28 },
+  });
 };
 
 // emit 으로 row 에 flip 값 전달해서 페이지 이동시 제자리로 돌아오게 걸어두기

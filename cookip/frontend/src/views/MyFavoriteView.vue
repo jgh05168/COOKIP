@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, watch, computed } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import { useFavoriteStore } from "@/store/favorite";
 import FavoriteList from "@/components/home/FavoriteList.vue";
 import accountService from "@/store/mvpApi";
@@ -126,7 +126,6 @@ const prevtab = () => {
   // console.log(tab.value);
 };
 // 탭 조작 함수 끝
-
 
 console.log("프로필 리스트", profile_list);
 
@@ -218,8 +217,8 @@ const fetchData = async () => {
   }
 };
 
-onBeforeMount(() => {
-  fetchData();
+onMounted(async () => {
+  await fetchData();
 });
 
 const getBufferImage = (buffer) => {
@@ -291,5 +290,4 @@ const getBufferImage = (buffer) => {
 .window-item {
   transition: transform 0.5s ease;
 }
-
 </style>
