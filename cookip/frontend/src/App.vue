@@ -36,7 +36,7 @@ import { useFavoriteStore } from "@/store/favorite";
 
 const Favoritestore = useFavoriteStore();
 const recipestore = useRecipeStore();
-const socket = new WebSocket("ws://localhost:8002");
+let socket = new WebSocket("ws://localhost:8002");
 const motionStore = useMotionStore();
 const sttStore = useSttStore();
 const error = ref("");
@@ -263,6 +263,23 @@ const handleWebSocketMessage = async (e) => {
 };
 
 onMounted(async () => {
+  // 컴포넌트가 마운트된 후 실행되는 로직
+  console.log("App Mount");
+  
+  socket = new WebSocket("ws://localhost:8002");
+  // 웹소켓 연결 설정
+  socket.onopen = () => {
+    console.log("웹소켓(모션 인식) 연결이 열렸습니다.");
+  };
+  
+  // 데이터를 수신 받았을 때의 처리
+  socket.onmessage = handleWebSocketMessage;
+  
+  // 에러가 발생했을 때의 처리
+  socket.onerror = (e) => {
+    console.error("웹소켓(모션 인식) 에러:", e);
+  };
+  
   await Promise.all([
     get_all_ingredients(),
     get_all_recipes(),
@@ -279,21 +296,6 @@ onMounted(async () => {
     get_user_recipe_match_ingredients(),
 ])
 
-  // 컴포넌트가 마운트된 후 실행되는 로직
-  console.log("App Mount");
-
-  // 웹소켓 연결 설정
-  socket.onopen = () => {
-    console.log("웹소켓(모션 인식) 연결이 열렸습니다.");
-  };
-
-  // 데이터를 수신 받았을 때의 처리
-  socket.onmessage = handleWebSocketMessage;
-
-  // 에러가 발생했을 때의 처리
-  socket.onerror = (e) => {
-    console.error("웹소켓(모션 인식) 에러:", e);
-  };
 });
 </script>
 
