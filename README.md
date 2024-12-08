@@ -93,10 +93,3 @@
 
 [화면 설계](https://www.figma.com/file/3gDewFhhCgFN9qokRDIFIU/Cookip-UI?type=design&node-id=1449%3A1489&mode=dev)
 
-## port manual
-
-nodejs 포트 3002
-vue 포트 8000
-nginx 포트 80
-
-http://i10c101.p.ssafy.io:8000/main
